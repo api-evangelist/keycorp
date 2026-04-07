@@ -1,7 +1,12 @@
 aid: keycorp
-url: https://raw.githubusercontent.com/api-evangelist/keycorp/refs/heads/main/apis.yml
+url: 
+  https://raw.githubusercontent.com/api-evangelist/keycorp/refs/heads/main/apis.yml
 modified: '2026-03-21'
 apis: []
 common:
   - type: Website
     url: https://www.keycorp.com
+description: >-
+  KeyCorp is one of the nation's largest bank-based financial services companies,
+  providing deposit, lending, cash management, and investment services to individuals,
+  small businesses, and middle-market companies.
