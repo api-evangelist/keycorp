@@ -1,0 +1,1120 @@
+{
+  "item": [
+    {
+      "id": "836dee9c-1527-4dbc-8707-2bed52170e2d",
+      "name": "Accounts",
+      "description": {
+        "content": "Commercial account information and transaction reporting.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dde13d1e-e00c-4046-b3f1-d6a448388ffa",
+          "name": "List commercial payment accounts",
+          "request": {
+            "name": "List commercial payment accounts",
+            "description": {},
+            "url": {
+              "path": [
+                "commercial",
+                "accounts",
+                "v1",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageKey",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "balanceAsOf",
+                  "value": "<date>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "Accept-Charset",
+                "value": "UTF-8",
+                "description": ""
+              },
+              {
+                "disabled": false,
+                "key": "User-Agent",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "disabled": false,
+                "description": "(Required) 36-character UUID identifying the API interaction for traceability.",
+                "key": "x-fapi-interaction-id",
+                "value": "<uuid>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6d6bec45-296d-400b-ba60-8f176718ab56",
+              "name": "A page of accounts.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "accounts",
+                    "v1",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "balanceAsOf",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept-Charset",
+                    "value": "UTF-8",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "User-Agent",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) 36-character UUID identifying the API interaction for traceability.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accounts\": [\n    {\n      \"accountId\": \"string\",\n      \"accountNumber\": \"string\",\n      \"accountType\": \"string\",\n      \"currency\": \"string\",\n      \"nickname\": \"string\",\n      \"balances\": {\n        \"ledger\": 2459.837374252689,\n        \"available\": 3612.990819048817,\n        \"asOf\": \"1948-08-01T14:29:50.726Z\"\n      }\n    },\n    {\n      \"accountId\": \"string\",\n      \"accountNumber\": \"string\",\n      \"accountType\": \"string\",\n      \"currency\": \"string\",\n      \"nickname\": \"string\",\n      \"balances\": {\n        \"ledger\": 4498.271639116789,\n        \"available\": 602.716209417522,\n        \"asOf\": \"1983-12-17T06:00:33.007Z\"\n      }\n    }\n  ],\n  \"pageKey\": \"string\",\n  \"totalCount\": 7680\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ac7337b-e61d-4fa4-9045-2c97a90a423d",
+              "name": "Missing or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "accounts",
+                    "v1",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "balanceAsOf",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept-Charset",
+                    "value": "UTF-8",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "User-Agent",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) 36-character UUID identifying the API interaction for traceability.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"error_description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "04cb66ab-9097-40fa-a500-3432a02f1db1",
+          "name": "Get full details about an account",
+          "request": {
+            "name": "Get full details about an account",
+            "description": {},
+            "url": {
+              "path": [
+                "commercial",
+                "accounts",
+                "v1",
+                ":accountId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "balanceAsOf",
+                  "value": "<date>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "Accept-Charset",
+                "value": "UTF-8",
+                "description": ""
+              },
+              {
+                "disabled": false,
+                "key": "User-Agent",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "disabled": false,
+                "description": "(Required) 36-character UUID identifying the API interaction for traceability.",
+                "key": "x-fapi-interaction-id",
+                "value": "<uuid>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bbbd6f7d-da83-4231-b1af-bffaddf26c8f",
+              "name": "Account details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "accounts",
+                    "v1",
+                    ":accountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "balanceAsOf",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept-Charset",
+                    "value": "UTF-8",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "User-Agent",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) 36-character UUID identifying the API interaction for traceability.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accountId\": \"string\",\n  \"accountNumber\": \"string\",\n  \"accountType\": \"string\",\n  \"currency\": \"string\",\n  \"nickname\": \"string\",\n  \"balances\": {\n    \"ledger\": 2235.1101041053666,\n    \"available\": 1709.1797332026815,\n    \"asOf\": \"1969-09-11T11:51:39.078Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "56e43311-43b9-4c17-908d-10f03c045707",
+              "name": "Missing or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "accounts",
+                    "v1",
+                    ":accountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "balanceAsOf",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept-Charset",
+                    "value": "UTF-8",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "User-Agent",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) 36-character UUID identifying the API interaction for traceability.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"error_description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f80c9629-3064-4ba3-89a6-3161cd73cd9a",
+              "name": "Account not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "accounts",
+                    "v1",
+                    ":accountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "balanceAsOf",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept-Charset",
+                    "value": "UTF-8",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "User-Agent",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) 36-character UUID identifying the API interaction for traceability.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<uuid>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d7114275-3d64-46c5-8679-344120c0cf2f",
+          "name": "Search historical transactions (up to 180 days)",
+          "request": {
+            "name": "Search historical transactions (up to 180 days)",
+            "description": {},
+            "url": {
+              "path": [
+                "commercial",
+                "accounts",
+                "v1",
+                ":accountId",
+                "transactions",
+                "previous"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<date>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<date>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageKey",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "Accept-Charset",
+                "value": "UTF-8",
+                "description": ""
+              },
+              {
+                "disabled": false,
+                "key": "User-Agent",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "disabled": false,
+                "description": "(Required) 36-character UUID identifying the API interaction for traceability.",
+                "key": "x-fapi-interaction-id",
+                "value": "<uuid>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ae7b84a8-b394-4895-a34f-3f544de89727",
+              "name": "A page of historical transactions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "accounts",
+                    "v1",
+                    ":accountId",
+                    "transactions",
+                    "previous"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept-Charset",
+                    "value": "UTF-8",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "User-Agent",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) 36-character UUID identifying the API interaction for traceability.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactions\": [\n    {\n      \"transactionId\": \"string\",\n      \"postedDate\": \"2019-11-19T00:36:13.049Z\",\n      \"amount\": 3775.289451415289,\n      \"currency\": \"string\",\n      \"description\": \"string\",\n      \"type\": \"string\",\n      \"debitCredit\": \"DEBIT\",\n      \"runningBalance\": 6756.786682177048\n    },\n    {\n      \"transactionId\": \"string\",\n      \"postedDate\": \"1975-05-11T18:12:39.919Z\",\n      \"amount\": 7607.477616350177,\n      \"currency\": \"string\",\n      \"description\": \"string\",\n      \"type\": \"string\",\n      \"debitCredit\": \"DEBIT\",\n      \"runningBalance\": 9183.66031372873\n    }\n  ],\n  \"pageKey\": \"string\",\n  \"totalCount\": 7473\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bbb88f0f-565a-4895-be5a-711c894a1903",
+              "name": "Missing or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "accounts",
+                    "v1",
+                    ":accountId",
+                    "transactions",
+                    "previous"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept-Charset",
+                    "value": "UTF-8",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "User-Agent",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) 36-character UUID identifying the API interaction for traceability.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"error_description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "22d86e7b-555d-4f21-a0bb-0b096c0fa7a5",
+          "name": "Search current-day transactions",
+          "request": {
+            "name": "Search current-day transactions",
+            "description": {},
+            "url": {
+              "path": [
+                "commercial",
+                "v1",
+                "accounts",
+                ":accountId",
+                "transactions",
+                "current"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageKey",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "Accept-Charset",
+                "value": "UTF-8",
+                "description": ""
+              },
+              {
+                "disabled": false,
+                "key": "User-Agent",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "disabled": false,
+                "description": "(Required) 36-character UUID identifying the API interaction for traceability.",
+                "key": "x-fapi-interaction-id",
+                "value": "<uuid>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "21920523-8653-48a3-962b-6d45d967389a",
+              "name": "A page of current-day transactions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "v1",
+                    "accounts",
+                    ":accountId",
+                    "transactions",
+                    "current"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept-Charset",
+                    "value": "UTF-8",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "User-Agent",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) 36-character UUID identifying the API interaction for traceability.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactions\": [\n    {\n      \"transactionId\": \"string\",\n      \"postedDate\": \"2019-11-19T00:36:13.049Z\",\n      \"amount\": 3775.289451415289,\n      \"currency\": \"string\",\n      \"description\": \"string\",\n      \"type\": \"string\",\n      \"debitCredit\": \"DEBIT\",\n      \"runningBalance\": 6756.786682177048\n    },\n    {\n      \"transactionId\": \"string\",\n      \"postedDate\": \"1975-05-11T18:12:39.919Z\",\n      \"amount\": 7607.477616350177,\n      \"currency\": \"string\",\n      \"description\": \"string\",\n      \"type\": \"string\",\n      \"debitCredit\": \"DEBIT\",\n      \"runningBalance\": 9183.66031372873\n    }\n  ],\n  \"pageKey\": \"string\",\n  \"totalCount\": 7473\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b30ac07-35ad-4cd3-b6c8-54fa20b61c04",
+              "name": "Missing or invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "v1",
+                    "accounts",
+                    ":accountId",
+                    "transactions",
+                    "current"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept-Charset",
+                    "value": "UTF-8",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "key": "User-Agent",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) 36-character UUID identifying the API interaction for traceability.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"error_description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://partner-api-qv.key.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "441f309d-7925-4b60-b377-516090446987",
+    "name": "KeyBank Commercial Banking APIs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST endpoints from the KeyBank Commercial APIs published on the KeyBank\nDeveloper Portal at https://developer.key.com/. Initial coverage focuses on\nthe Commercial Accounts Reporting API; additional product areas (ACH,\nwires, RTP, account validation) follow the same authentication and request\nconventions but require partner credentials and access.\n\n\nContact Support:\n Name: KeyBank Developer Portal",
+      "type": "text/plain"
+    }
+  }
+}

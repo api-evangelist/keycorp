@@ -1,0 +1,213 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "KeyBank Commercial Banking APIs",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List commercial payment accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://partner-api-qv.key.com/commercial/accounts/v1/list",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Accept-Charset",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageKey",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "balanceAsOf",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List commercial payment accounts"
+        },
+        {
+          "info": {
+            "name": "Get full details about an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://partner-api-qv.key.com/commercial/accounts/v1/:accountId",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Accept-Charset",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "balanceAsOf",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get full details about an account"
+        },
+        {
+          "info": {
+            "name": "Search historical transactions (up to 180 days)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://partner-api-qv.key.com/commercial/accounts/v1/:accountId/transactions/previous",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Accept-Charset",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageKey",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search historical transactions (up to 180 days)"
+        },
+        {
+          "info": {
+            "name": "Search current-day transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://partner-api-qv.key.com/commercial/v1/accounts/:accountId/transactions/current",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Accept-Charset",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageKey",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search current-day transactions"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
