@@ -168,9 +168,9 @@ common:
     url: https://www.linkedin.com/company/keybank
   - type: Website
     url: https://www.key.com/
-  - type: Developer Portal
+  - type: DeveloperPortal
     url: https://developer.key.com/
-  - type: Corporate Website
+  - type: Website
     url: https://www.keycorp.com/
 maintainers:
   - FN: Kin Lane
