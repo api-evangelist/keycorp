@@ -1,0 +1,35 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.key.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Nov 12 23:59:59 2026 GMT
+  hsts: null
+- host: www.keycorp.com
+  https: false
+- host: developer.key.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Aug  8 23:59:59 2026 GMT
+  hsts: null
+domains:
+- domain: key.com
+  dnssec: true
+  caa:
+  - 0 issuewild "amazon.com"
+  - 0 issue "amazon.com"
+  - 0 issue "pki.goog"
+  - 0 issuewild "digicert.com"
+  - 0 issuewild "pki.goog"
+  - 0 issue "digicert.com"
+  spf: true
+  dmarc: true
+  dmarc_policy: reject
+- domain: keycorp.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: reject

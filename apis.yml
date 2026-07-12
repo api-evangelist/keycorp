@@ -164,6 +164,10 @@ apis:
       - type: Documentation
         url: https://developer.key.com/
 common:
+  - type: DomainSecurity
+    url: security/keycorp-domain-security.yml
+  - type: Authentication
+    url: authentication/keycorp-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/keybank
   - type: Website

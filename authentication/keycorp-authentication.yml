@@ -1,0 +1,15 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/keycorp-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  description: |-
+    Bearer token issued by KeyBank's OAuth flow for partner applications.
+    Example: `Authorization: Bearer testZcKJDWnwDWmmf9qah6PJvPy8`.
+  sources:
+  - openapi/keycorp-openapi.yml
