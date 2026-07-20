@@ -10,6 +10,6 @@ schemes:
   scheme: bearer
   description: |-
     Bearer token issued by KeyBank's OAuth flow for partner applications.
-    Example: `Authorization: Bearer testZcKJDWnwDWmmf9qah6PJvPy8`.
+    Example: `Authorization: Bearer [example key]`.
   sources:
   - openapi/keycorp-openapi.yml
