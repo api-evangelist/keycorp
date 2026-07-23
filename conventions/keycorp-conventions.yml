@@ -1,0 +1,83 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/ (9 KeyBank commercial-banking specs)
+provider: keycorp
+authentication:
+  style: oauth2-bearer + mutual-TLS
+  header: 'Authorization: Bearer {jwt}'
+  transport: mutual-TLS client certificate required
+  ref: authentication/keycorp-authentication.yml
+idempotency:
+  supported: true
+  mechanisms:
+  - field: requestReference
+    scope: RTP and Wire payment initiation
+    max_length: 32
+    description: >-
+      Unique client-supplied API request identifier used for idempotency and safe
+      retries on payment initiation (documented verbatim in the RTP/Wire spec:
+      "Unique API request identifier for idempotency and retries").
+  - field: uuid
+    scope: ACH origination (batch + detail) and inquiry
+    description: >-
+      Client-supplied UUID stamped on every ACH batch and detail record; KeyBank
+      dedupes on this value so a retried origination does not double-post. The
+      same uuid is used to look up status and to undo/cancel a request.
+  note: >-
+    KeyBank does not use a generic `Idempotency-Key` header; idempotency is
+    carried in the request body as requestReference (payments) / uuid (ACH).
+pagination:
+  style: cursor
+  request_params:
+  - pageKey
+  - previousPageKey
+  - pageSize
+  response_fields:
+  - nextPageKey
+  - previousPageKey
+  max_page_size: 1000
+  note: >-
+    Reporting and inquiry list operations page with an opaque pageKey cursor;
+    pageSize is capped (server returns "pageSize must be less than or equal to
+    1000").
+tracing:
+  request_headers:
+  - name: x-fapi-interaction-id
+    format: UUID
+    required: true
+    description: FAPI-style client correlation id echoed on responses.
+  response_headers:
+  - name: X-CorrelationId
+    description: >-
+      Universal id to trace the transaction across all systems involved; returned
+      on both success and error responses.
+versioning:
+  scheme: uri-path
+  examples:
+  - /commercial/accounts/v1
+  - /ach/payments/v1
+  - /rtp/v1/payment
+  - /accounts/validations/v2
+  note: Version is pinned in the path segment; v1 across most products, v2 for Account Validation.
+error_envelope:
+  format: custom
+  media_type: application/json
+  fields:
+  - ErrorMessage
+  - TransactionId
+  - X-CorrelationId
+  - TransactionTime
+  - Api-Url
+  in_band_messages:
+  - errorMessages[] (code + moreInfo)
+  - informationMessages[] (code + moreInfo)
+  not_rfc9457: true
+  ref: errors/keycorp-error-codes.yml
+rate_limit_signaling:
+  throttled_status: 429
+  unavailable_status: 503
+  guidance: exponential backoff with jitter; honor Retry-After
+  ref: rate-limits/keycorp-rate-limits.yml
+health_check:
+  operation: healthCheck
+  note: Every product ships a bearer-protected health-check operation.

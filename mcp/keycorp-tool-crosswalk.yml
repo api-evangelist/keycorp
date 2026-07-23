@@ -1,0 +1,259 @@
+generated: '2026-06-20'
+method: derived
+note: "1:1 crosswalk \u2014 every candidate MCP tool binds directly to one backing\
+  \ OpenAPI operationId; no GraphQL surface and no hosted MCP server exist, so there\
+  \ are no mcp_only or graphql_only rows."
+surfaces:
+  openapi: openapi/ (9 KeyBank commercial/embedded-banking specs)
+  graphql: null
+  mcp:
+    url: null
+    status: candidate
+    gated: all operations require OAuth2 bearer + mutual-TLS
+crosswalk:
+- tool: healthCheck
+  category: HealthCheck
+  rest:
+  - healthCheck
+  binding: rest
+  confidence: high
+  note: GET /accounts/validations/v2/healthCheck
+- tool: verifyAccount
+  category: General
+  rest:
+  - verifyAccount
+  binding: rest
+  confidence: high
+  note: POST /accounts/validations/v2/verifyAccount
+- tool: healthCheck
+  category: HealthCheck
+  rest:
+  - healthCheck
+  binding: rest
+  confidence: high
+  note: GET /accounts/transactions/v1/healthCheck
+- tool: searchAchTransaction
+  category: ACH Transactions
+  rest:
+  - searchAchTransaction
+  binding: rest
+  confidence: high
+  note: GET /accounts/transactions/v1/ach/detail/{parNumber}
+- tool: searchAchTransactions
+  category: ACH Transactions
+  rest:
+  - searchAchTransactions
+  binding: rest
+  confidence: high
+  note: POST /accounts/transactions/v1/ach/list
+- tool: searchAchSettledTransactions
+  category: ACH Transactions
+  rest:
+  - searchAchSettledTransactions
+  binding: rest
+  confidence: high
+  note: GET /accounts/transactions/v1/ach/settled/{settlementTransactionId}
+- tool: healthCheck
+  category: HealthCheck
+  rest:
+  - healthCheck
+  binding: rest
+  confidence: high
+  note: GET /ach/payments/v1/healthCheck
+- tool: achPaymentStatus
+  category: ACH Payment Request Inquiry
+  rest:
+  - achPaymentStatus
+  binding: rest
+  confidence: high
+  note: POST /ach/payments/v1/status
+- tool: achPaymentAddendasStatus
+  category: ACH Payment Request Inquiry
+  rest:
+  - achPaymentAddendasStatus
+  binding: rest
+  confidence: high
+  note: POST /ach/payments/v1/status/addenda
+- tool: achPaymentCCD
+  category: ACH Payment Origination
+  rest:
+  - achPaymentCCD
+  binding: rest
+  confidence: high
+  note: POST /ach/payments/v1/ccd
+- tool: achPaymentCTX
+  category: ACH Payment Origination
+  rest:
+  - achPaymentCTX
+  binding: rest
+  confidence: high
+  note: POST /ach/payments/v1/ctx
+- tool: achPaymentPPD
+  category: ACH Payment Origination
+  rest:
+  - achPaymentPPD
+  binding: rest
+  confidence: high
+  note: POST /ach/payments/v1/ppd
+- tool: achPaymentTEL
+  category: ACH Payment Origination
+  rest:
+  - achPaymentTEL
+  binding: rest
+  confidence: high
+  note: POST /ach/payments/v1/tel
+- tool: achPaymentWEB
+  category: ACH Payment Origination
+  rest:
+  - achPaymentWEB
+  binding: rest
+  confidence: high
+  note: POST /ach/payments/v1/web
+- tool: achPaymentUndo
+  category: Undo ACH Payment Request
+  rest:
+  - achPaymentUndo
+  binding: rest
+  confidence: high
+  note: POST /ach/payments/v1/undo
+- tool: achPaymentAddenda
+  category: ACH Payment Origination
+  rest:
+  - achPaymentAddenda
+  binding: rest
+  confidence: high
+  note: POST /ach/payments/v1/addenda
+- tool: PlaceStopPayments
+  category: StopPayments
+  rest:
+  - PlaceStopPayments
+  binding: rest
+  confidence: high
+  note: POST /commercial/checks/v1/stops/place
+- tool: CheckImageListRequest
+  category: ImageCheck
+  rest:
+  - CheckImageListRequest
+  binding: rest
+  confidence: high
+  note: POST /commercial/checks/v1/images/list
+- tool: healthCheck
+  category: HealthCheck
+  rest:
+  - healthCheck
+  binding: rest
+  confidence: high
+  note: GET /commercial/checks/v1/healthCheck
+- tool: getAccount
+  category: Account Information
+  rest:
+  - getAccount
+  binding: rest
+  confidence: high
+  note: GET /commercial/accounts/v1/{accountId}
+- tool: searchForAccounts
+  category: Account Information
+  rest:
+  - searchForAccounts
+  binding: rest
+  confidence: high
+  note: GET /commercial/accounts/v1/list
+- tool: searchForPreviousDayAccountTransactionsV1
+  category: Account Transactions
+  rest:
+  - searchForPreviousDayAccountTransactionsV1
+  binding: rest
+  confidence: high
+  note: GET /commercial/accounts/v1/{accountId}/transactions/previous
+- tool: searchForCurrentDayAccountTransactionsV1
+  category: Account Transactions
+  rest:
+  - searchForCurrentDayAccountTransactionsV1
+  binding: rest
+  confidence: high
+  note: GET /commercial/accounts/v1/{accountId}/transactions/current
+- tool: healthCheck
+  category: HealthCheck
+  rest:
+  - healthCheck
+  binding: rest
+  confidence: high
+  note: GET /rtp/v1/healthCheck
+- tool: searchRtpTransactions
+  category: RTP
+  rest:
+  - searchRtpTransactions
+  binding: rest
+  confidence: high
+  note: POST /rtp/v1/transactions/list
+- tool: searchRtpTransaction
+  category: RTP
+  rest:
+  - searchRtpTransaction
+  binding: rest
+  confidence: high
+  note: GET /rtp/v1/transactions/detail/{transactionId}
+- tool: healthCheckv1
+  category: HealthCheck
+  rest:
+  - healthCheckv1
+  binding: rest
+  confidence: high
+  note: GET /rtp/v1/payment/healthCheck
+- tool: Payment-Initiate
+  category: Initiate
+  rest:
+  - Payment-Initiate
+  binding: rest
+  confidence: high
+  note: POST /rtp/v1/payment/initiate
+- tool: participantList
+  category: Participant
+  rest:
+  - participantList
+  binding: rest
+  confidence: high
+  note: GET /rtp/v1/payment/rtp/participant
+- tool: participant
+  category: Participant
+  rest:
+  - participant
+  binding: rest
+  confidence: high
+  note: GET /rtp/v1/payment/rtp/participant/{routingNumber}
+- tool: Payment-Validate
+  category: Validate
+  rest:
+  - Payment-Validate
+  binding: rest
+  confidence: high
+  note: POST /rtp/v1/payment/validate
+- tool: healthCheck
+  category: HealthCheck
+  rest:
+  - healthCheck
+  binding: rest
+  confidence: high
+  note: GET /wireInquiry/v1/healthCheck
+- tool: searchWireTransactions
+  category: Wire
+  rest:
+  - searchWireTransactions
+  binding: rest
+  confidence: high
+  note: POST /wireInquiry/v1/transactions/list
+- tool: searchWireTransaction
+  category: Wire
+  rest:
+  - searchWireTransaction
+  binding: rest
+  confidence: high
+  note: GET /wireInquiry/v1/transactions/detail/{transactionId}
+mcp_only: []
+rest_only: []
+coverage:
+  tools_named: 34
+  tools_bound: 34
+  mcp_only: 0
+  rest_ops_total: 34
+  rest_ops_with_tool: 34

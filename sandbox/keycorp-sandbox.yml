@@ -1,0 +1,43 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/ servers[] + published request/response examples
+provider: keycorp
+environments:
+- name: QV sandbox
+  host: https://partner-api-qv.key.com
+  purpose: Integration testing against KeyBank's QV (quality/validation) environment.
+- name: production
+  host: https://partner-api.key.com
+separation:
+  model: separate host + separate issued credentials
+  note: >-
+    Test and live are separated by host (partner-api-qv vs partner-api) and by the
+    OAuth client + mutual-TLS certificate KeyBank issues per environment. There is
+    no key-prefix convention; the certificate and token scope the environment.
+test_values:
+  note: >-
+    Values below are published verbatim in the KeyBank OpenAPI request/response
+    examples for use against the QV sandbox — not invented.
+  secondaryId:
+  - KeyCli03
+  ach_context:
+    point: APITEST1
+    collectionApplicationId:
+    - TEST
+    - QASTEST01
+    companyName: APITEST
+  sample_routing_numbers:
+  - '04100103'
+  - '06100001'
+  - '24107121'
+  uuid_examples:
+  - qas220602x-49eb-47664-b94rhd1-e52e2re11001
+  - daily001-qas230109-010300-005
+requirements:
+- A KeyBank-issued QV OAuth bearer token.
+- A KeyBank-issued QV mutual-TLS client certificate.
+- A valid x-fapi-interaction-id UUID on every request.
+notes: >-
+  Sandbox access is provisioned by KeyBank as part of partner onboarding; the QV
+  host, test identifiers, and example payloads are documented in the downloadable
+  OpenAPI definitions on developer.key.com.

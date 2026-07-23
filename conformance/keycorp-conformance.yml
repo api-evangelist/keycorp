@@ -1,0 +1,41 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/ (securitySchemes, headers, tags across 9 specs)
+provider: keycorp
+standards:
+- id: http-bearer
+  conforms: true
+  evidence: All specs declare an http/bearer securityScheme (bearerFormat JWT).
+- id: oauth2
+  conforms: partial
+  evidence: >-
+    Tokens are OAuth2 bearer JWTs issued via KeyBank's partner OAuth flow, but no
+    oauth2 securityScheme with flows/scopes is declared in the specs.
+- id: mutual-tls
+  conforms: true
+  evidence: KeyBank-issued client certificate required on partner-api.key.com (documented catalog-wide).
+- id: fapi
+  conforms: partial
+  evidence: >-
+    FAPI-style x-fapi-interaction-id correlation header is required on requests
+    and echoed on responses; full FAPI 1.0 Advanced security profile is not asserted.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors use a custom `exception` envelope (ErrorMessage/TransactionId/X-CorrelationId), not application/problem+json.
+- id: nacha-ach
+  conforms: true
+  evidence: ACH Origination implements NACHA Standard Entry Class codes (CCD, CTX, PPD, TEL, WEB).
+- id: tch-rtp
+  conforms: true
+  evidence: RTP Send Payment operates over The Clearing House Real-Time Payments network.
+- id: cursor-pagination
+  conforms: true
+  evidence: List operations page via opaque pageKey/nextPageKey cursor with a capped pageSize.
+- id: idempotency
+  conforms: true
+  evidence: requestReference (payments) / uuid (ACH) provide client-supplied idempotency for safe retries.
+notes: >-
+  No published third-party compliance certification (SOC 2 / ISO 27001 / PCI DSS)
+  was discoverable on the public developer surface, so no `Compliance` pointer is
+  emitted. KeyBank is an FDIC-insured national bank subject to US banking
+  regulation (OCC/Federal Reserve) at the enterprise level.

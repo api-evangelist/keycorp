@@ -1,0 +1,149 @@
+generated: '2026-06-20'
+method: derived
+status: candidate
+note: "Derived candidate tool list \u2014 one tool per OpenAPI operation. KeyBank\
+  \ publishes no hosted MCP server; these tools inherit their real inputSchema from\
+  \ the backing OpenAPI operation. All operations require OAuth2 bearer + mutual-TLS\
+  \ client certs."
+server:
+  name: keycorp
+  transport: http
+  url: null
+tools:
+- name: healthCheck
+  description: Health check
+  source_operation: openapi/keycorp-account-validation-openapi.yml#healthCheck
+  category: HealthCheck
+- name: verifyAccount
+  description: Verify an account
+  source_operation: openapi/keycorp-account-validation-openapi.yml#verifyAccount
+  category: General
+- name: healthCheck
+  description: Health check
+  source_operation: openapi/keycorp-ach-inquiry-openapi.yml#healthCheck
+  category: HealthCheck
+- name: searchAchTransaction
+  description: Get details about an ACH transaction with a parNumber.
+  source_operation: openapi/keycorp-ach-inquiry-openapi.yml#searchAchTransaction
+  category: ACH Transactions
+- name: searchAchTransactions
+  description: Advanced search for ACH transactions
+  source_operation: openapi/keycorp-ach-inquiry-openapi.yml#searchAchTransactions
+  category: ACH Transactions
+- name: searchAchSettledTransactions
+  description: Advanced search for settled ACH transactions
+  source_operation: openapi/keycorp-ach-inquiry-openapi.yml#searchAchSettledTransactions
+  category: ACH Transactions
+- name: healthCheck
+  description: Health check
+  source_operation: openapi/keycorp-ach-originations-openapi.yml#healthCheck
+  category: HealthCheck
+- name: achPaymentStatus
+  description: Check the status of a payment request
+  source_operation: openapi/keycorp-ach-originations-openapi.yml#achPaymentStatus
+  category: ACH Payment Request Inquiry
+- name: achPaymentAddendasStatus
+  description: Check the status of addenda records
+  source_operation: openapi/keycorp-ach-originations-openapi.yml#achPaymentAddendasStatus
+  category: ACH Payment Request Inquiry
+- name: achPaymentCCD
+  description: Send or collect a payment
+  source_operation: openapi/keycorp-ach-originations-openapi.yml#achPaymentCCD
+  category: ACH Payment Origination
+- name: achPaymentCTX
+  description: Make or collect payments to or from a corporate account with attached
+    records
+  source_operation: openapi/keycorp-ach-originations-openapi.yml#achPaymentCTX
+  category: ACH Payment Origination
+- name: achPaymentPPD
+  description: Make deposits and withdrawals to or from consumer accounts
+  source_operation: openapi/keycorp-ach-originations-openapi.yml#achPaymentPPD
+  category: ACH Payment Origination
+- name: achPaymentTEL
+  description: Send a payment over the phone
+  source_operation: openapi/keycorp-ach-originations-openapi.yml#achPaymentTEL
+  category: ACH Payment Origination
+- name: achPaymentWEB
+  description: Send an online payment
+  source_operation: openapi/keycorp-ach-originations-openapi.yml#achPaymentWEB
+  category: ACH Payment Origination
+- name: achPaymentUndo
+  description: Undo a payment request
+  source_operation: openapi/keycorp-ach-originations-openapi.yml#achPaymentUndo
+  category: Undo ACH Payment Request
+- name: achPaymentAddenda
+  description: Send additional addenda information
+  source_operation: openapi/keycorp-ach-originations-openapi.yml#achPaymentAddenda
+  category: ACH Payment Origination
+- name: PlaceStopPayments
+  description: Place a stop payment
+  source_operation: openapi/keycorp-check-services-openapi.yml#PlaceStopPayments
+  category: StopPayments
+- name: CheckImageListRequest
+  description: List of check images
+  source_operation: openapi/keycorp-check-services-openapi.yml#CheckImageListRequest
+  category: ImageCheck
+- name: healthCheck
+  description: Health check
+  source_operation: openapi/keycorp-check-services-openapi.yml#healthCheck
+  category: HealthCheck
+- name: getAccount
+  description: Retrieve account details
+  source_operation: openapi/keycorp-commercial-accounts-reporting-openapi.yml#getAccount
+  category: Account Information
+- name: searchForAccounts
+  description: Search for accounts
+  source_operation: openapi/keycorp-commercial-accounts-reporting-openapi.yml#searchForAccounts
+  category: Account Information
+- name: searchForPreviousDayAccountTransactionsV1
+  description: Search prior day account transactions
+  source_operation: openapi/keycorp-commercial-accounts-reporting-openapi.yml#searchForPreviousDayAccountTransactionsV1
+  category: Account Transactions
+- name: searchForCurrentDayAccountTransactionsV1
+  description: Search current day account transactions
+  source_operation: openapi/keycorp-commercial-accounts-reporting-openapi.yml#searchForCurrentDayAccountTransactionsV1
+  category: Account Transactions
+- name: healthCheck
+  description: Health check
+  source_operation: openapi/keycorp-rtp-inquiry-openapi.yml#healthCheck
+  category: HealthCheck
+- name: searchRtpTransactions
+  description: Search real time payment transactions
+  source_operation: openapi/keycorp-rtp-inquiry-openapi.yml#searchRtpTransactions
+  category: RTP
+- name: searchRtpTransaction
+  description: View the details of a RTP transaction by its ID
+  source_operation: openapi/keycorp-rtp-inquiry-openapi.yml#searchRtpTransaction
+  category: RTP
+- name: healthCheckv1
+  description: Health check
+  source_operation: openapi/keycorp-rtp-wire-payments-openapi.yml#healthCheckv1
+  category: HealthCheck
+- name: Payment-Initiate
+  description: Send a real-time payment or a wire transfer
+  source_operation: openapi/keycorp-rtp-wire-payments-openapi.yml#Payment-Initiate
+  category: Initiate
+- name: participantList
+  description: Get a list of RTP participants
+  source_operation: openapi/keycorp-rtp-wire-payments-openapi.yml#participantList
+  category: Participant
+- name: participant
+  description: Get information about one RTP participant
+  source_operation: openapi/keycorp-rtp-wire-payments-openapi.yml#participant
+  category: Participant
+- name: Payment-Validate
+  description: Perform validation checks
+  source_operation: openapi/keycorp-rtp-wire-payments-openapi.yml#Payment-Validate
+  category: Validate
+- name: healthCheck
+  description: Health check
+  source_operation: openapi/keycorp-wire-inquiry-openapi.yml#healthCheck
+  category: HealthCheck
+- name: searchWireTransactions
+  description: Search wire transfers
+  source_operation: openapi/keycorp-wire-inquiry-openapi.yml#searchWireTransactions
+  category: Wire
+- name: searchWireTransaction
+  description: View the details of a wire transfer by the transaction ID
+  source_operation: openapi/keycorp-wire-inquiry-openapi.yml#searchWireTransaction
+  category: Wire

@@ -273,6 +273,32 @@ common:
     url: security/keycorp-domain-security.yml
   - type: Authentication
     url: authentication/keycorp-authentication.yml
+  - type: Conventions
+    url: conventions/keycorp-conventions.yml
+  - type: Idempotency
+    url: conventions/keycorp-conventions.yml
+  - type: ErrorCatalog
+    url: errors/keycorp-error-codes.yml
+  - type: Conformance
+    url: conformance/keycorp-conformance.yml
+  - type: Lifecycle
+    url: lifecycle/keycorp-lifecycle.yml
+  - type: Sandbox
+    url: sandbox/keycorp-sandbox.yml
+  - type: DataModel
+    url: data-model/keycorp-data-model.yml
+  - type: Webhooks
+    url: asyncapi/keycorp-payment-alerts-webhooks.yml
+  - type: MCPServer
+    url: mcp/keycorp-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/keycorp-tool-crosswalk.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: Overlay
+    url: overlays/keycorp-ach-originations-overlay.yaml
+  - type: LLMsTxt
+    url: llms/keycorp-llms.txt
   - type: Website
     url: https://www.key.com/
   - type: Website

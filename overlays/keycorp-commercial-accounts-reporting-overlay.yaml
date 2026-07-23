@@ -1,0 +1,16 @@
+generated: '2026-06-20'
+method: generated
+source: openapi/keycorp-commercial-accounts-reporting-openapi.yml
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Commercial Accounts Reporting
+  version: 1.0.0
+extends: openapi/keycorp-commercial-accounts-reporting-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: '2026-06-20'
+    x-apievangelist-provider: keycorp
+    x-apievangelist-conventions: conventions/keycorp-conventions.yml
+    x-apievangelist-errors: errors/keycorp-error-codes.yml
+    x-apievangelist-authentication: authentication/keycorp-authentication.yml

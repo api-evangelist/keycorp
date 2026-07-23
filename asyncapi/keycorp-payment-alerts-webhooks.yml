@@ -1,0 +1,39 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/keycorp-webhooks-openapi.yml + https://developer.key.com/docs/webhooks
+spec_type: Webhooks
+provider: keycorp
+transport: client-hosted HTTPS callback (POST) invoked by KeyBank
+security: Same OAuth2 bearer + mutual-TLS posture as the rest of the KeyBank API catalog.
+delivery: KeyBank POSTs the alert notification to a client-registered callback URL; client returns 200/202.
+events:
+- alert_code: AL00906
+  domain: ACH
+  summary: ACH alerts event notification.
+  payload_schema: alertNotificationAL00906Request
+  callback: Client-hosted URL for ACH alerts.
+- alert_code: AL00907
+  domain: Wire/RTP
+  version: v2
+  summary: Wire/RTP alerts event notification (current).
+  payload_schema: alertNotificationAL00907Request
+  callback: Client-hosted URL for Wire/RTP alerts.
+- alert_code: AL00901
+  domain: Wire/RTP
+  version: v1
+  status: legacy
+  summary: Wire/RTP alerts event notification. Legacy — superseded by AL00907.
+  payload_schema: alertNotificationAL00901Request
+  callback: Client-hosted URL for AL00901.
+client_responses:
+  '200': OK
+  '202': Accepted
+  '400': Invalid Input (alertInvalidInputResponse)
+  '401': Authentication Error
+  '403': Authorization Error
+  '500': Internal Error (alertFailureResponse)
+notes: >-
+  KeyBank publishes the webhook surface as an OpenAPI 3.0.2 "Webhooks" document
+  describing the client-hosted callback endpoints it invokes for payment
+  lifecycle alerts across ACH, Wire, and RTP. No AsyncAPI document is published;
+  this artifact captures the webhook catalog (type: Webhooks).

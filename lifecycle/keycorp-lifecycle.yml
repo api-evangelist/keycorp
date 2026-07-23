@@ -1,0 +1,29 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/ + developer.key.com
+provider: keycorp
+versioning:
+  scheme: uri-path
+  current:
+  - product: Commercial Accounts Reporting
+    version: v1
+  - product: ACH Origination
+    version: v1
+  - product: RTP and Wire Payments
+    version: v1
+  - product: Account Validation
+    version: v2
+  note: Version pinned in the URL path segment; new major versions ship as a new path (v1 → v2).
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No public deprecation/sunset policy (RFC 8594) was discoverable on the developer portal.
+sla:
+  url: null
+  note: SLA is negotiated within the underlying treasury / cash-management agreement, not published.
+status_page: null
+deprecated_operations: []
+notes: >-
+  KeyBank versions per product in the URL path. No public status page, SLA, or
+  deprecation policy was found on the anonymous developer surface, so no
+  StatusPage or Deprecation pointers are emitted (absence recorded honestly).

@@ -1,15 +1,59 @@
-generated: '2026-07-11'
+generated: '2026-06-20'
 method: derived
-source: openapi/keycorp-openapi.yml
+source: openapi/ (KeyBank commercial-banking specs) + developer.key.com
 summary:
   types:
   - http
+  - mutualTLS
+  http_schemes:
+  - bearer
+  bearer_formats:
+  - JWT
+  transport_security:
+  - mutual-TLS (client certificate)
+  additional_headers:
+  - x-fapi-interaction-id
 schemes:
-- name: BearerAuth
+- name: bearerAuth
   type: http
   scheme: bearer
-  description: |-
-    Bearer token issued by KeyBank's OAuth flow for partner applications.
-    Example: `Authorization: Bearer [example key]`.
+  bearerFormat: JWT
+  description: >-
+    OAuth2-issued access token supplied in the `Authorization` header using the
+    `Bearer` scheme (e.g. `Authorization: Bearer {token}`). Tokens are minted
+    through KeyBank's partner OAuth flow (F5 APM); every commercial/embedded
+    banking operation requires a valid bearer token.
   sources:
-  - openapi/keycorp-openapi.yml
+  - openapi/keycorp-account-validation-openapi.yml
+  - openapi/keycorp-ach-inquiry-openapi.yml
+  - openapi/keycorp-ach-originations-openapi.yml
+  - openapi/keycorp-check-services-openapi.yml
+  - openapi/keycorp-rtp-inquiry-openapi.yml
+  - openapi/keycorp-rtp-wire-payments-openapi.yml
+  - openapi/keycorp-wire-inquiry-openapi.yml
+- name: mutualTLS
+  type: mutualTLS
+  description: >-
+    In addition to the bearer token, all calls to https://partner-api.key.com
+    (and the QV sandbox at https://partner-api-qv.key.com) are transport-secured
+    with a KeyBank-issued mutual-TLS client certificate. Documented as a hard
+    requirement across the KeyBank Developer Portal API catalog.
+  sources:
+  - https://developer.key.com/
+extra:
+  interaction_id:
+    header: x-fapi-interaction-id
+    format: UUID
+    description: >-
+      FAPI-style client-supplied correlation UUID required on request and echoed
+      back on responses for end-to-end traceability. A malformed value returns
+      "Required header 'x-fapi-interaction-id' is not valid."
+  account_context:
+    header: secondaryId
+    description: >-
+      KeyBank-issued secondary identifier required by Account Validation and
+      certain reporting operations to scope the caller to a client relationship.
+notes: >-
+  No OAuth2 securityScheme with scopes is declared in the specs — tokens are
+  opaque-to-consumer bearer JWTs issued out of band, so there is no public OAuth
+  scope surface to catalog (scopes/ is correctly skipped for this provider).

@@ -1,0 +1,20 @@
+generated: '2026-06-20'
+method: generated
+source: openapi/ (operationIds verified against specs) + conventions/errors artifacts
+skills:
+- file: keycorp-originate-ach-payment.md
+  name: Originate and track an ACH payment
+  api: openapi/keycorp-ach-originations-openapi.yml
+  operations: [healthCheck, achPaymentCCD, achPaymentPPD, achPaymentCTX, achPaymentTEL, achPaymentWEB, achPaymentStatus, achPaymentAddendasStatus, achPaymentUndo]
+- file: keycorp-send-rtp-or-wire-payment.md
+  name: Send an RTP or Wire payment
+  api: openapi/keycorp-rtp-wire-payments-openapi.yml
+  operations: [healthCheck, participant, participantList, Payment-Validate, Payment-Initiate]
+- file: keycorp-validate-account.md
+  name: Validate an account before payment
+  api: openapi/keycorp-account-validation-openapi.yml
+  operations: [healthCheck, verifyAccount]
+- file: keycorp-report-account-activity.md
+  name: Report on commercial account activity
+  api: openapi/keycorp-commercial-accounts-reporting-openapi.yml
+  operations: [searchForAccounts, getAccount, searchForPreviousDayAccountTransactionsV1, searchForCurrentDayAccountTransactionsV1]

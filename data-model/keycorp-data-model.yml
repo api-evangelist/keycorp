@@ -1,0 +1,73 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/ (components.schemas $ref + id-reference fields)
+provider: keycorp
+entities:
+- name: Account
+  spec: openapi/keycorp-commercial-accounts-reporting-openapi.yml
+  description: A client-authorized commercial KeyBank account with details and balances.
+  key_fields: [accountId, accountCategory, balances]
+- name: Transaction
+  spec: openapi/keycorp-commercial-accounts-reporting-openapi.yml
+  description: A prior-day or current-day posted transaction on an account.
+  key_fields: [transactionId, amount, status]
+- name: AchPayment
+  spec: openapi/keycorp-ach-originations-openapi.yml
+  description: An ACH origination batch/detail request (CCD/CTX/PPD/TEL/WEB) with addenda.
+  key_fields: [uuid, secCode, traceNumber, effectiveDate]
+- name: PaymentTransaction
+  spec: openapi/keycorp-rtp-wire-payments-openapi.yml
+  description: An RTP or Wire payment initiation with validation and status.
+  key_fields: [requestReference, paymentType, paymentStatus]
+- name: Participant
+  spec: openapi/keycorp-rtp-wire-payments-openapi.yml
+  description: An RTP/Wire network participant resolved by routing number.
+  key_fields: [routingNumber, participantName]
+- name: AccountValidation
+  spec: openapi/keycorp-account-validation-openapi.yml
+  description: An account/owner verification result against the National Shared Database Resource.
+  key_fields: [accountNumber, acctStatus, acctOwner]
+- name: WireTransaction
+  spec: openapi/keycorp-wire-inquiry-openapi.yml
+  key_fields: [transactionId, status]
+- name: RtpTransaction
+  spec: openapi/keycorp-rtp-inquiry-openapi.yml
+  key_fields: [transactionId, status]
+- name: AchTransaction
+  spec: openapi/keycorp-ach-inquiry-openapi.yml
+  key_fields: [parNumber, settlementTransactionId, status]
+- name: CheckImage
+  spec: openapi/keycorp-check-services-openapi.yml
+  key_fields: [checkNumber, stopPayment]
+relationships:
+- from: Transaction
+  to: Account
+  type: belongs_to
+  via: accountId
+- from: AchPayment
+  to: AchTransaction
+  type: has_many
+  via: uuid/traceNumber
+  note: An originated ACH payment is later observed via ACH Inquiry by PAR / settlement id.
+- from: PaymentTransaction
+  to: Participant
+  type: has_one
+  via: routingNumber
+  note: RTP/Wire initiation validates the counterparty via participant lookup.
+- from: PaymentTransaction
+  to: WireTransaction
+  type: has_many
+  via: transactionId
+- from: PaymentTransaction
+  to: RtpTransaction
+  type: has_many
+  via: transactionId
+- from: AccountValidation
+  to: Account
+  type: references
+  via: accountNumber
+notes: >-
+  KeyBank's commercial-banking domain is a payment-origination core (ACH / RTP /
+  Wire) surrounded by inquiry/reporting projections and pre-flight validation.
+  Correlation across origination and inquiry is by client-supplied uuid /
+  traceNumber rather than a shared server-issued resource id.

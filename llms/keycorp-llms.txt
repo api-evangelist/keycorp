@@ -1,0 +1,37 @@
+# KeyBank (KeyCorp) Commercial & Embedded Banking APIs
+
+> KeyCorp (KeyBank) is a super-regional commercial bank whose Developer Portal at developer.key.com publishes a self-service catalog of commercial and embedded-banking APIs: account information reporting, ACH origination, RTP and Wire payments, account validation, ACH/Wire/RTP inquiry, check services, and payment-event webhooks. Every product ships a downloadable OpenAPI definition and is secured with OAuth2 bearer tokens, mutual-TLS client certificates, and a FAPI-style x-fapi-interaction-id header. Production host is https://partner-api.key.com with a QV sandbox at https://partner-api-qv.key.com.
+
+## APIs
+- [Account Information API](https://developer.key.com/docs/commercial/accounts): Real-time and historical commercial account details, balances, and prior/current-day transactions.
+- [ACH Origination API](https://developer.key.com/docs/ach): Originate ACH credits/debits across SEC codes CCD, CTX, PPD, TEL, WEB, with addenda, undo, and status inquiry.
+- [Wire Transfer API](https://developer.key.com/docs/wireTransfer): Initiate and validate high-value domestic wire payments; look up network participants by routing number.
+- [RTP Send Payment API](https://developer.key.com/docs/rtp): Initiate instant, irrevocable payments over The Clearing House RTP network with pre-send validation.
+- [Account Validation API](https://developer.key.com/docs/actval/v2): Verify account details/ownership against the National Shared Database Resource before payment.
+- [ACH Inquiry API](https://developer.key.com/docs/achinquiry): List and retrieve ACH transaction status by PAR / settlement id.
+- [Wire Inquiry API](https://developer.key.com/docs/wireinquiry): Track status and delivery of wire transfers.
+- [RTP Inquiry API](https://developer.key.com/docs/rtpinquiry): Confirm delivery and status of Real-Time Payments.
+- [Check Services API](https://developer.key.com/docs/check-services): Place stop payments and retrieve check images.
+- [Webhooks](https://developer.key.com/docs/webhooks): Payment-event alert callbacks for ACH (AL00906) and Wire/RTP (AL00907, legacy AL00901).
+
+## Specs
+- openapi/keycorp-commercial-accounts-reporting-openapi.yml
+- openapi/keycorp-ach-originations-openapi.yml
+- openapi/keycorp-rtp-wire-payments-openapi.yml
+- openapi/keycorp-account-validation-openapi.yml
+- openapi/keycorp-ach-inquiry-openapi.yml
+- openapi/keycorp-wire-inquiry-openapi.yml
+- openapi/keycorp-rtp-inquiry-openapi.yml
+- openapi/keycorp-check-services-openapi.yml
+- openapi/keycorp-webhooks-openapi.yml
+
+## Conventions
+- Authentication: OAuth2 bearer (JWT) + mutual-TLS client certificate — authentication/keycorp-authentication.yml
+- Idempotency: requestReference (payments) / uuid (ACH) — conventions/keycorp-conventions.yml
+- Errors: custom exception envelope (ErrorMessage/TransactionId/X-CorrelationId) — errors/keycorp-error-codes.yml
+- Pagination: opaque pageKey/nextPageKey cursor, pageSize ≤ 1000
+- Tracing: required x-fapi-interaction-id (UUID), X-CorrelationId echoed on responses
+
+## Docs
+- [Developer Portal](https://developer.key.com/)
+- [Support](https://developer.key.com/support)

@@ -1,0 +1,72 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/ (4xx/5xx responses + exception schema across 9 specs)
+provider: keycorp
+format: custom
+not_rfc9457: true
+envelope:
+  media_type: application/json
+  schema: exception
+  fields:
+    ErrorMessage: Human-readable description of the failure.
+    TransactionId: Gateway transaction id (rrt-… form) for support correlation.
+    X-CorrelationId: Universal id to trace the transaction across all systems.
+    TransactionTime: ISO-8601 timestamp of the failure.
+    Api-Url: The API path that produced the error.
+    ServiceError: Optional nested downstream ConnectError detail (5xx only).
+http_errors:
+- status: 400
+  title: Missing mandatory information
+  meaning: Required fields were not provided or failed validation.
+  remediation: Verify the request body/headers (including a valid x-fapi-interaction-id) and resubmit.
+- status: 401
+  title: Unauthorized request
+  meaning: Missing or invalid bearer token / credentials.
+  remediation: Obtain a fresh OAuth bearer token and present the mutual-TLS client certificate.
+- status: 403
+  title: Forbidden request access
+  meaning: The token is valid but not entitled to the requested resource.
+  remediation: Confirm the application's product entitlements with KeyBank.
+- status: 404
+  title: Resource not found
+  meaning: The requested resource (or lookup id) does not exist.
+  remediation: Verify the resource identifier and resubmit.
+- status: 405
+  title: Invalid request method
+  meaning: HTTP method not allowed for the resource.
+  remediation: Use the documented method for the operation.
+- status: 415
+  title: Invalid request type
+  meaning: Unsupported media type.
+  remediation: Send application/json.
+- status: 429
+  title: Request threshold reached
+  meaning: Rate limit / throttling threshold exceeded.
+  remediation: Back off with jitter and resubmit after a delay.
+- status: 500
+  title: Unknown error
+  meaning: Unhandled runtime error in the service.
+  remediation: Contact application support before resubmitting.
+- status: 502
+  title: Bad gateway
+  meaning: Connectivity error with a downstream service (Unexpected EOF at target).
+  remediation: Retry; if persistent, contact application support.
+- status: 503
+  title: Unavailable service
+  meaning: Service currently unavailable (NoActiveTargets).
+  remediation: Retry with backoff; honor Retry-After.
+- status: 504
+  title: Unable to process request
+  meaning: Gateway timeout — request could not be processed in time.
+  remediation: Re-verify the payment status UUID and resend.
+in_band_message_codes:
+  note: >-
+    Beyond HTTP status, ACH responses carry structured errorMessages[] and
+    informationMessages[] with KeyBank message codes (code + moreInfo).
+  examples:
+  - code: 1006040-65I
+    kind: information
+    moreInfo: Effective date assigned.
+  - code: 1002040-50I
+    kind: information
+    moreInfo: All addenda have been received.
