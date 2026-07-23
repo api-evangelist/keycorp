@@ -1,168 +1,271 @@
 aid: keycorp
 name: KeyCorp
-description: >-
-  KeyCorp is one of the nation's largest bank-based financial services
-  companies, providing deposit, lending, cash management, and investment
-  services to individuals, small businesses, and middle-market companies. The
-  KeyBank Developer Portal exposes commercial banking APIs for account
-  information, payments, inquiry, and check services.
+kind: company
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+description: >-
+  KeyCorp (KeyBank) is one of the nation's largest bank-based financial services
+  companies and a super-regional commercial bank headquartered in Cleveland,
+  Ohio, providing deposit, lending, cash management, treasury, and investment
+  services to individuals, small businesses, and middle-market companies. The
+  KeyBank Developer Portal at developer.key.com publishes a self-service catalog
+  of commercial and embedded-banking APIs covering account information reporting,
+  ACH origination, RTP and wire payments, account validation, ACH/wire/RTP
+  inquiry, check services, and payment event webhooks. Each product ships a
+  downloadable OpenAPI 3.1 definition and is secured with OAuth2 bearer tokens,
+  mutual TLS client certificates, and FAPI-style interaction-id headers.
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/keycorp.png
 tags:
   - Banking
   - Commercial Banking
   - Financial Services
   - Fortune 500
   - Payments
+  - United States
+  - Super-Regional Bank
+  - Treasury Management
+  - Embedded Banking
+  - ACH
+  - Real-Time Payments
+  - Wire Transfer
 url: https://raw.githubusercontent.com/api-evangelist/keycorp/refs/heads/main/apis.yml
 created: '2026-03-21'
-modified: '2026-04-28'
+modified: '2026-07-23'
 specificationVersion: '0.19'
 apis:
-  - aid: keycorp:account-information-api
-    name: KeyBank Account Information API
-    description: >-
-      Provides real-time account insights and transaction details for
-      commercial KeyBank accounts.
-    humanURL: https://developer.key.com/
-    tags:
-      - Account Information
-      - Commercial Banking
-    properties:
-      - type: Documentation
-        url: https://developer.key.com/
-  - aid: keycorp:ach-origination-api
-    name: KeyBank ACH Origination API
-    description: >-
-      Enables secure, automated ACH fund transfers from commercial KeyBank
-      accounts.
-    humanURL: https://developer.key.com/
-    tags:
-      - ACH
-      - Payments
-    properties:
-      - type: Documentation
-        url: https://developer.key.com/
-  - aid: keycorp:wire-transfer-api
-    name: KeyBank Wire Transfer API
-    description: >-
-      Facilitates high-value wire transfer payments through KeyBank's
-      commercial payments platform.
-    humanURL: https://developer.key.com/
-    tags:
-      - Payments
-      - Wire Transfer
-    properties:
-      - type: Documentation
-        url: https://developer.key.com/
-  - aid: keycorp:rtp-send-payment-api
-    name: KeyBank RTP Send Payment API
-    description: >-
-      Initiates instant payments over the Real-Time Payments network from
-      commercial KeyBank accounts.
-    humanURL: https://developer.key.com/
-    tags:
-      - Payments
-      - Real-Time Payments
-    properties:
-      - type: Documentation
-        url: https://developer.key.com/
-  - aid: keycorp:account-validation-api
-    name: KeyBank Account Validation API
-    description: >-
-      Verifies account details and ownership before initiating commercial
-      payments and transfers.
-    humanURL: https://developer.key.com/
-    tags:
-      - Account Validation
-      - Payments
-    properties:
-      - type: Documentation
-        url: https://developer.key.com/
-  - aid: keycorp:ach-inquiry-api
-    name: KeyBank ACH Inquiry API
-    description: >-
-      Checks the status of ACH transactions originated through the KeyBank
-      Developer Portal.
-    humanURL: https://developer.key.com/
-    tags:
-      - ACH
-      - Inquiry
-    properties:
-      - type: Documentation
-        url: https://developer.key.com/
-  - aid: keycorp:wire-inquiry-api
-    name: KeyBank Wire Inquiry API
-    description: >-
-      Tracks the status and delivery of wire transfers initiated through
-      KeyBank.
-    humanURL: https://developer.key.com/
-    tags:
-      - Inquiry
-      - Wire Transfer
-    properties:
-      - type: Documentation
-        url: https://developer.key.com/
-  - aid: keycorp:rtp-inquiry-api
-    name: KeyBank RTP Inquiry API
-    description: >-
-      Confirms delivery and status of Real-Time Payments sent through
-      KeyBank.
-    humanURL: https://developer.key.com/
-    tags:
-      - Inquiry
-      - Real-Time Payments
-    properties:
-      - type: Documentation
-        url: https://developer.key.com/
-  - aid: keycorp:previous-day-api
-    name: KeyBank Previous Day API
-    description: >-
-      Reviews prior-day financial activity and reporting for commercial
-      KeyBank accounts.
-    humanURL: https://developer.key.com/
-    tags:
-      - Account Information
-      - Reporting
-    properties:
-      - type: Documentation
-        url: https://developer.key.com/
-  - aid: keycorp:intraday-api
-    name: KeyBank Intraday API
-    description: >-
-      Monitors same-day transaction updates and intraday activity across
-      commercial KeyBank accounts.
-    humanURL: https://developer.key.com/
-    tags:
-      - Account Information
-      - Reporting
-    properties:
-      - type: Documentation
-        url: https://developer.key.com/
-  - aid: keycorp:check-services-api
-    name: KeyBank Check Services API
-    description: >-
-      Manages check stops, retrieval, and related check services for
-      commercial KeyBank accounts.
-    humanURL: https://developer.key.com/
-    tags:
-      - Check Services
-      - Commercial Banking
-    properties:
-      - type: Documentation
-        url: https://developer.key.com/
-  - aid: keycorp:webhooks
-    name: KeyBank Webhooks
-    description: >-
-      Delivers real-time payment event notifications to subscribed consumer
-      applications.
-    humanURL: https://developer.key.com/
-    tags:
-      - Events
-      - Webhooks
-    properties:
-      - type: Documentation
-        url: https://developer.key.com/
+- aid: keycorp:account-information-api
+  name: KeyBank Account Information API
+  description: >-
+    The Commercial Accounts Reporting API delivers real-time and historical
+    account-level information for client-authorized commercial KeyBank accounts.
+    It exposes operations to retrieve full account details and balances, search
+    the list of accessible payment accounts, and query both prior-day (up to 180
+    days) and current-day transaction activity with paging. Requests require
+    OAuth2 bearer tokens, client certificates, and an x-fapi-interaction-id UUID
+    for traceability. Base host is https://partner-api.key.com with a QV sandbox
+    at https://partner-api-qv.key.com.
+  humanURL: https://developer.key.com/docs/commercial/accounts
+  baseURL: https://partner-api.key.com/commercial/accounts/v1
+  tags:
+  - Account Information
+  - Commercial Banking
+  - Reporting
+  - United States
+  properties:
+  - type: OpenAPI
+    url: openapi/keycorp-commercial-accounts-reporting-openapi.yml
+  - type: Documentation
+    url: https://developer.key.com/docs/commercial/accounts
+- aid: keycorp:ach-origination-api
+  name: KeyBank ACH Origination API
+  description: >-
+    The ACH Origination API initiates secure, automated ACH fund transfers from
+    commercial KeyBank accounts across the full range of Standard Entry Class
+    codes — CCD, CTX, PPD, TEL, and WEB — for both send (credit) and collect
+    (debit) transactions. It supports addenda records, payment undo/cancellation,
+    payment status and status-addenda inquiry, and a health check operation.
+    Secured with OAuth2 bearer tokens and client certificates over the
+    https://partner-api.key.com host, with a QV sandbox environment for testing.
+  humanURL: https://developer.key.com/docs/ach
+  baseURL: https://partner-api.key.com/ach/payments/v1
+  tags:
+  - ACH
+  - Payments
+  - Commercial Banking
+  - United States
+  properties:
+  - type: OpenAPI
+    url: openapi/keycorp-ach-originations-openapi.yml
+  - type: Documentation
+    url: https://developer.key.com/docs/ach
+- aid: keycorp:wire-transfer-api
+  name: KeyBank Wire Transfer API
+  description: >-
+    The Wire Transfer API, delivered through KeyBank's combined RTP and Wire
+    Payments service, facilitates high-value domestic wire payments from
+    commercial accounts. It provides operations to initiate a payment, validate
+    payment details before submission, and look up RTP/wire network participants
+    by routing number. Requests are authenticated with OAuth2 bearer tokens and
+    mutual TLS client certificates and carry an x-fapi-interaction-id header;
+    production runs on https://partner-api.key.com with a QV sandbox.
+  humanURL: https://developer.key.com/docs/wireTransfer
+  baseURL: https://partner-api.key.com/rtp/v1/payment
+  tags:
+  - Payments
+  - Wire Transfer
+  - Commercial Banking
+  - United States
+  properties:
+  - type: OpenAPI
+    url: openapi/keycorp-rtp-wire-payments-openapi.yml
+  - type: Documentation
+    url: https://developer.key.com/docs/wireTransfer
+- aid: keycorp:rtp-send-payment-api
+  name: KeyBank RTP Send Payment API
+  description: >-
+    The RTP Send Payment API initiates instant, irrevocable payments over The
+    Clearing House Real-Time Payments (RTP) network from commercial KeyBank
+    accounts. Sharing KeyBank's combined RTP and Wire Payments service, it
+    supports payment initiation, pre-submission validation, and RTP participant
+    directory lookups by routing number so senders can confirm reachability
+    before dispatch. Secured with OAuth2 bearer tokens and client certificates
+    over https://partner-api.key.com, with a QV sandbox for integration testing.
+  humanURL: https://developer.key.com/docs/rtp
+  baseURL: https://partner-api.key.com/rtp/v1/payment
+  tags:
+  - Payments
+  - Real-Time Payments
+  - Commercial Banking
+  - United States
+  properties:
+  - type: OpenAPI
+    url: openapi/keycorp-rtp-wire-payments-openapi.yml
+  - type: Documentation
+    url: https://developer.key.com/docs/rtp
+- aid: keycorp:account-validation-api
+  name: KeyBank Account Validation API
+  description: >-
+    The Account Validation v2 API verifies account details and ownership before
+    commercial payments and transfers are initiated, matching the supplied
+    account and owner information against the National Shared Database Resource,
+    the financial industry's collaborative source of account status data. It
+    exposes a verifyAccount operation plus a health check, and requires a
+    KeyBank-issued secondaryId in addition to OAuth2 bearer tokens and client
+    certificates. Base host is https://partner-api.key.com with a QV sandbox.
+  humanURL: https://developer.key.com/docs/actval/v2
+  baseURL: https://partner-api.key.com/accounts/validations/v2
+  tags:
+  - Account Validation
+  - Payments
+  - Fraud Prevention
+  - United States
+  properties:
+  - type: OpenAPI
+    url: openapi/keycorp-account-validation-openapi.yml
+  - type: Documentation
+    url: https://developer.key.com/docs/actval/v2
+- aid: keycorp:ach-inquiry-api
+  name: KeyBank ACH Inquiry API
+  description: >-
+    The ACH Inquiry API lets commercial clients check the current status and
+    detail of ACH transactions posted to their KeyBank accounts. It provides
+    operations to list ACH transactions, retrieve full detail by PAR number,
+    look up settled items by settlement transaction id, and a health check,
+    supporting reconciliation and exception handling workflows. Secured with
+    OAuth2 bearer tokens and client certificates over https://partner-api.key.com
+    with a QV sandbox environment for testing.
+  humanURL: https://developer.key.com/docs/achinquiry
+  baseURL: https://partner-api.key.com/accounts/transactions/v1
+  tags:
+  - ACH
+  - Inquiry
+  - Reporting
+  - United States
+  properties:
+  - type: OpenAPI
+    url: openapi/keycorp-ach-inquiry-openapi.yml
+  - type: Documentation
+    url: https://developer.key.com/docs/achinquiry
+- aid: keycorp:wire-inquiry-api
+  name: KeyBank Wire Inquiry API
+  description: >-
+    The Wire Inquiry API tracks the status and delivery of wire transfers
+    associated with commercial KeyBank accounts. It exposes operations to list
+    wire transactions, retrieve detailed information for a specific wire by
+    transaction id, and a health check, giving treasury teams real-time
+    visibility into outbound and inbound wire activity for reconciliation.
+    Authenticated with OAuth2 bearer tokens and mutual TLS client certificates
+    over https://partner-api.key.com, with a QV sandbox for integration testing.
+  humanURL: https://developer.key.com/docs/wireinquiry
+  baseURL: https://partner-api.key.com/wireInquiry/v1
+  tags:
+  - Inquiry
+  - Wire Transfer
+  - Reporting
+  - United States
+  properties:
+  - type: OpenAPI
+    url: openapi/keycorp-wire-inquiry-openapi.yml
+  - type: Documentation
+    url: https://developer.key.com/docs/wireinquiry
+- aid: keycorp:rtp-inquiry-api
+  name: KeyBank RTP Inquiry API
+  description: >-
+    The RTP Inquiry API confirms the delivery and status of Real-Time Payments
+    sent through KeyBank on The Clearing House RTP network. It provides
+    operations to list RTP transactions, retrieve full detail for a single
+    transaction by id, and a health check, supporting immediate confirmation and
+    reconciliation of instant payment flows. Secured with OAuth2 bearer tokens
+    and client certificates over the https://partner-api.key.com host, with a QV
+    sandbox environment available for integration testing.
+  humanURL: https://developer.key.com/docs/rtpinquiry
+  baseURL: https://partner-api.key.com/rtp/v1
+  tags:
+  - Inquiry
+  - Real-Time Payments
+  - Reporting
+  - United States
+  properties:
+  - type: OpenAPI
+    url: openapi/keycorp-rtp-inquiry-openapi.yml
+  - type: Documentation
+    url: https://developer.key.com/docs/rtpinquiry
+- aid: keycorp:check-services-api
+  name: KeyBank Check Services API
+  description: >-
+    The Check Services API manages stop payments and check image retrieval for
+    commercial KeyBank accounts. It exposes operations to place a stop payment,
+    list and retrieve check images, and a health check, letting treasury and
+    accounts-payable teams control and audit paper and electronic check activity
+    programmatically. Authenticated with OAuth2 bearer tokens and mutual TLS
+    client certificates over https://partner-api.key.com, with a QV sandbox
+    environment for integration testing.
+  humanURL: https://developer.key.com/docs/check-services
+  baseURL: https://partner-api.key.com/commercial/checks/v1
+  tags:
+  - Check Services
+  - Commercial Banking
+  - Payments
+  - United States
+  properties:
+  - type: OpenAPI
+    url: openapi/keycorp-check-services-openapi.yml
+  - type: Documentation
+    url: https://developer.key.com/docs/check-services
+- aid: keycorp:webhooks
+  name: KeyBank Webhooks
+  description: >-
+    The KeyBank Webhooks service delivers real-time payment event notifications
+    to subscribed commercial client applications for ACH, Wire, and RTP alerts.
+    It defines client-hosted callback endpoints (alert codes such as AL00901,
+    AL00906, and AL00907) that KeyBank invokes to push status and settlement
+    events, allowing consuming systems to react to payment lifecycle changes
+    without polling the inquiry APIs. Callback delivery follows the same OAuth2
+    and certificate-based security posture as the rest of the KeyBank API
+    catalog.
+  humanURL: https://developer.key.com/docs/webhooks
+  tags:
+  - Events
+  - Webhooks
+  - Payments
+  - United States
+  properties:
+  - type: OpenAPI
+    url: openapi/keycorp-webhooks-openapi.yml
+  - type: Documentation
+    url: https://developer.key.com/docs/webhooks
 common:
   - type: AgenticAccess
     url: agentic-access/keycorp-agentic-access.yml
@@ -170,14 +273,18 @@ common:
     url: security/keycorp-domain-security.yml
   - type: Authentication
     url: authentication/keycorp-authentication.yml
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/keybank
   - type: Website
     url: https://www.key.com/
-  - type: DeveloperPortal
-    url: https://developer.key.com/
   - type: Website
     url: https://www.keycorp.com/
+  - type: DeveloperPortal
+    url: https://developer.key.com/
+  - type: Documentation
+    url: https://developer.key.com/docs/commercial/accounts
+  - type: Support
+    url: https://developer.key.com/support
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/keybank
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

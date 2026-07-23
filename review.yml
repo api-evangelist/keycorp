@@ -1,0 +1,113 @@
+reviewer: API Evangelist
+date: '2026-07-23'
+provider: keycorp
+institution: KeyBank (KeyCorp)
+tier: super-regional
+domain: key.com
+summary: >-
+  KeyBank operates a real, self-service first-party developer portal at
+  developer.key.com with a well-documented catalog of commercial and
+  embedded-banking APIs. Ten API products are published, and every one ships a
+  downloadable OpenAPI 3.1 definition — a materially stronger public surface than
+  most US super-regional banks, which are typically HTML-only or aggregator-only.
+  All nine distinct specs were harvested verbatim into openapi/. Access is
+  partner-gated (credentials, certificates, and onboarding required) but the
+  documentation and specs are fully public.
+
+developer_portal: https://developer.key.com/
+support: https://developer.key.com/support
+
+api_products:
+  - name: Account Information API (Commercial Accounts Reporting)
+    docs: https://developer.key.com/docs/commercial/accounts
+    spec: openapi/keycorp-commercial-accounts-reporting-openapi.yml
+  - name: ACH Origination API
+    docs: https://developer.key.com/docs/ach
+    spec: openapi/keycorp-ach-originations-openapi.yml
+  - name: Wire Transfer API (RTP & Wire Payments)
+    docs: https://developer.key.com/docs/wireTransfer
+    spec: openapi/keycorp-rtp-wire-payments-openapi.yml
+  - name: RTP Send Payment API (RTP & Wire Payments)
+    docs: https://developer.key.com/docs/rtp
+    spec: openapi/keycorp-rtp-wire-payments-openapi.yml
+  - name: Account Validation v2 API
+    docs: https://developer.key.com/docs/actval/v2
+    spec: openapi/keycorp-account-validation-openapi.yml
+  - name: ACH Inquiry API
+    docs: https://developer.key.com/docs/achinquiry
+    spec: openapi/keycorp-ach-inquiry-openapi.yml
+  - name: Wire Inquiry API
+    docs: https://developer.key.com/docs/wireinquiry
+    spec: openapi/keycorp-wire-inquiry-openapi.yml
+  - name: RTP Inquiry API
+    docs: https://developer.key.com/docs/rtpinquiry
+    spec: openapi/keycorp-rtp-inquiry-openapi.yml
+  - name: Check Services API
+    docs: https://developer.key.com/docs/check-services
+    spec: openapi/keycorp-check-services-openapi.yml
+  - name: Webhooks
+    docs: https://developer.key.com/docs/webhooks
+    spec: openapi/keycorp-webhooks-openapi.yml
+
+downloadable_specs:
+  available: true
+  format: OpenAPI 3.1 (YAML)
+  count: 9
+  provenance: >-
+    Harvested verbatim from the KeyBank Developer Portal public spec directory at
+    https://developer.key.com/sites/default/files/public/api-docs/ (all HTTP 200,
+    2026-07-23). Source filenames and versions: ECA-CommercialAccountsReporting_19
+    (v1.0.3), ACH-Originations_20 (v1.3.4), ExternalRTPandWirePayments_65/66
+    (v1.3.3, shared by the Wire Transfer and RTP Send products),
+    Verification Services V2_7 (v2.0.4), ACHInquiry_32 (v2.1.2), Wires Api_25
+    (Wire Inquiry v1.3.6), RTPInquiryExternal_23 (v1.2.3), ECA-CheckService_2
+    (v1.1.1), eap-webhook-external_5 (Webhooks v3.1.0). Nine distinct files stored;
+    the Wire Transfer and RTP Send products both reference the shared RTP & Wire
+    Payments spec.
+  no_postman_collection_published: true
+
+authentication:
+  model: OAuth2 bearer token + mutual TLS client certificate
+  details: >-
+    Documented securitySchemes are HTTP bearer (OAuth2-issued access token). The
+    getting-started guidance states all KeyBank APIs require client certificates,
+    user credentials, and provisioned permissions. Requests carry a mandatory
+    x-fapi-interaction-id UUID header (FAPI-aligned traceability). The Account
+    Validation API additionally requires a KeyBank-issued secondaryId. Sandbox
+    (QV, partner-api-qv.key.com) and production (partner-api.key.com) hosts are
+    separated by issued credentials.
+  fapi_aligned: true
+
+open_finance_posture:
+  fdx_participation: not_documented
+  cfpb_1033_posture: >-
+    No public statement of a CFPB 1033 / personal-data-rights consumer data
+    access program was found on the developer portal. The published APIs are
+    commercial/embedded-banking (partner-gated) rather than a consumer
+    open-banking data-sharing surface.
+  aggregator_access: >-
+    Consumer account data is generally reachable via third-party aggregators
+    (Plaid, MX, Finicity, Akoya) rather than a first-party consumer data API. No
+    first-party FDX consumer data endpoint is published on developer.key.com; the
+    first-party surface is the commercial payments and reporting catalog captured
+    here.
+  base_hosts:
+    production: https://partner-api.key.com
+    sandbox: https://partner-api-qv.key.com
+
+verified_links:
+  website: https://www.key.com/
+  corporate: https://www.keycorp.com/
+  developer_portal: https://developer.key.com/
+  support: https://developer.key.com/support
+  linkedin: https://www.linkedin.com/company/keybank
+  github_org: not_found
+
+notes: >-
+  Deepened from a thin HTML-only representation to a fully spec-backed catalog:
+  10 documented API products, 9 verbatim OpenAPI 3.1 specs harvested with recorded
+  provenance and versions. The previously listed "Previous Day" and "Intraday"
+  entries were operations within the Commercial Accounts Reporting API, not
+  separate products, so they were folded into the Account Information API. A
+  synthetic/derived accounts spec that predated this pass was removed in favor of
+  the real harvested Commercial Accounts Reporting definition.

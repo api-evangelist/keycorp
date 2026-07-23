@@ -1,0 +1,1060 @@
+openapi: 3.1.0
+info:
+#---------------------------------------------------
+# Information to contact the API provider
+#---------------------------------------------------
+  title: Check Services
+  description: Use the Check Services API to place a stop payment on commercial checking accounts or retrieve check details with the option to include check image. 
+  contact:
+    name: KeyBank Developer Support
+    email: embedded_banking_support@keybank.com
+  version: 1.1.1
+servers:
+#---------------------------------------------------
+# List of environments for the API
+#---------------------------------------------------
+# Non-Production environment URL (QV)
+- url: https://partner-api-qv.key.com
+# Production and Simulator environment URL
+- url: https://partner-api.key.com
+tags:
+- name: StopPayments
+  description: Place new stop payments
+- name: ImageCheck
+  description: List check images
+- name: HealthCheck       
+  description: Verify you can connect to the API service.
+paths:
+#---------------------------------------------------
+# List of API flows
+#---------------------------------------------------
+  /commercial/checks/v1/stops/place:
+    post:
+      tags:
+      - StopPayments
+      summary: Place a stop payment
+      operationId: PlaceStopPayments
+      description: Places a stop payment for an account using  an account number and check number. You can only stop a payment between the hours of 06:00 a.m. and 11:59 p.m. EST.
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: X-CorrelationId
+        in: header
+        schema:
+          type: string
+        required: false
+        description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+      requestBody:
+        required: true
+        description: Request parameters to place stop payment requests.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopPaymentPlaceRequest'
+            examples:
+              StopPlacedSingleCheck:
+                summary: Stop Place Request Single Check
+                value:
+                  accountNumber: '12345678910'
+                  checkAmount: 12.12
+                  issueDate: '2026-02-14'
+                  checkNumberStart: 8940
+                  description: Stop payment for issued check number
+              StopPlacedCheckRange:
+                summary: Stop Place Request Check Range
+                value:
+                  accountNumber: '12345678910'
+                  checkAmount: 12.12
+                  issueDate: '2026-02-14'
+                  checkNumberStart: 8940
+                  checkNumberEnd: 8963
+                  description: Stop payment for issued check range
+      responses:
+        '200':
+          description: Successful response with stop payment records
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopPaymentPlaceResponse'
+              examples:
+                StopPlaced:
+                  summary: Successful Stop Placed Response
+                  value:
+                    stopPayments:
+                      accountNumber: '12345678910'
+                      checkNumberStart: 8940
+                      checkNumberEnd: 8963
+                      checkAmount: 12.1
+                      expirationDate: '2026-09-14'
+                      description: Stop payment for issued check range
+                      placedDate: '2026-03-14'
+                      issueDate: '2026-02-14'
+        '202':
+          description: The stop payment request was accepted and submitted for processing, but final confirmation was not available before the response timeout. Do not assume the request failed and there is not a need to immediately resubmit the same stop payment request. The original request may still complete successfully. If the same request is submitted again after processing completes, the API will return a 409 Duplicate Stop response indicating the first request completed successfully.  Retain the X-CorrelationId for tracking or support.
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/ResponseMetadata'
+              example:
+                metadata:
+                  messages:
+                  - code: STOP-Place-202-processing
+                    message: Your request for placing a stop is accepted and is still being processed.
+        '400':
+          description: Validation failure on request payload
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                ErrorMessage: Error received from backend service
+                TransactionId: 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /commercial/checks/v1/stops/place
+                ServiceError:
+                  metadata:
+                    messages:
+                    - code: STOP-Place-400-accountNumber
+                      message: accountNumber must be numeric
+        '401':
+          description: Unauthorized request
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations. 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                ErrorMessage: Received request is unauthorized, please provide valid
+                  credentials
+                TransactionId: 0635f201-8fbb-418f-b93a-138d5103e2b91348
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /commercial/checks/v1/stops/place
+        '403':
+          description: Entitlements validation failed
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                ErrorMessage: Error received from backend service
+                TransactionId: 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /commercial/checks/v1/stops/place
+                ServiceError:
+                  metadata:
+                    messages:
+                    - code: Forbidden
+                      message: Entitlements Validation Failed
+        '404':
+          description: Resource not found
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations. 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                ErrorMessage: Error received from backend service
+                TransactionId: 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /commercial/checks/v1/stops/place
+                ServiceError:
+                  metadata:
+                    messages:
+                    - code: STOP-Place-404-Not-Found
+                      message: No static resource v1/stops/place
+        '405':
+          description: Requested method denied
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations. 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                ErrorMessage: Error received from backend service
+                TransactionId: 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /commercial/checks/v1/stops/place
+                ServiceError:
+                  metadata:
+                    messages:
+                    - code: STOP-Place-405-Method-Not-Allowed
+                      message: Method 'Get' is not supported.
+        '409':
+          description: Duplicate stop
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations. 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                ErrorMessage: Error received from backend service
+                TransactionId: 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /commercial/checks/v1/stops/place
+                ServiceError:
+                  metadata:
+                    messages:
+                    - code: STOP-Place-409-duplicate
+                      message: A Stop Payment already exists for the requested check(s)
+        '412':
+          description: Precondition failed
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations. 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                ErrorMessage: Error received from backend service
+                TransactionId: 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /commercial/checks/v1/stops/place
+                ServiceError:
+                  metadata:
+                    messages:
+                    - code: STOP-Place-412-accountNumber
+                      message: Invalid Account
+        '415':
+          description: Media type not supported
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations. 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                ErrorMessage: Error received from backend service
+                TransactionId: 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /commercial/checks/v1/stops/place
+                ServiceError:
+                  metadata:
+                    messages:
+                    - code: STOP-Place-415-Unsupported-Media-Type
+                      message: Content-Type 'X' is not supported.
+        '422':
+          description: Unexpected backend server error
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that
+                remains with the transaction through the chain of API operations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                ErrorMessage: Error received from backend service
+                TransactionId: 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /commercial/checks/v1/stops/place
+                ServiceError:
+                  metadata:
+                    messages:
+                    - code: STOP-Place-422-error
+                      message: Unable to place the requested Stop Payment.
+        '429':
+          description: Too many requests
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations. 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                ErrorMessage: Number requests threshold reached, please resubmit the
+                  request after sometime
+                TransactionId: 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /commercial/checks/v1/stops/place
+        '500':
+          description: Unexpected server error
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations. 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                ErrorMessage: Error received from backend
+                TransactionId: 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                Api-Url: /commercial/checks/v1/stops/place
+                ServiceError:
+                  metadata:
+                    messages:
+                    - code: STOP-Place-500-error
+                      message: Unable to place the requested Stop Payment.
+        '502':
+          description: Bad gateway
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations. 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                ErrorMessage: Error received from backend
+                TransactionId: 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                Api-Url: /commercial/checks/v1/stops/place
+                ServiceError:
+                  ConnectError: Connectivity error occurred with the downstream service
+                    (Unexpected EOF at target), please check with application support
+                    team before resubmitting the request
+        '503':
+          description: Service unavailable
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations. 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              examples:
+                SystemDown:
+                  summary: Service unavailable
+                  value:
+                    ErrorMessage: Error received from backend
+                    TransactionId: 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+                    X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                    TransactionTime: '2021-06-11T16:31:34.041Z'
+                    Api-Url: /commercial/checks/v1/stops/place
+                    ServiceError:
+                      ConnectError: Service is currently unavailable (NoActiveTargets), please check with application support before resubmitting the request.
+                SystemDownBatch:
+                  summary: Scheduled System Outage
+                  value:
+                    ErrorMessage: Error received from backend
+                    TransactionId: 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+                    X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                    TransactionTime: '2021-06-11T16:31:34.041Z'
+                    Api-Url: /commercial/checks/v1/stops/place
+                    ServiceError:
+                      metadata:
+                        messages:
+                        - code: STOP-Place-503-error
+                          message: Stop Payment API is unavailable.  Please retry
+                            later.
+        '504':
+          description: Gateway timeout
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations. 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                ErrorMessage: Error received from backend
+                TransactionId: 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /commercial/checks/v1/stops/place
+                ServiceError:
+                  ConnectError: Request could not be processed on time (GatewayTimeout), please wait a moment and resubmit the request.
+  /commercial/checks/v1/images/list:
+    post:
+      tags:
+      - ImageCheck
+      summary: List of check images
+      operationId: CheckImageListRequest
+      description: Get check data with an account number and check number. To return a check image, define the image format in the request. 
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: X-CorrelationId
+        in: header
+        schema:
+          type: string
+        required: false
+        description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+      requestBody:
+        required: true
+        description: Check image list request parameters
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckImageListRequest'
+            examples:
+              CheckListWithImage:
+                summary: Check List Search with Image retrieval
+                value:
+                  accountNumber: '12345678910'
+                  checkNumber: 123
+                  checkAmount: 111.11
+                  checkProcessDate: '2026-01-27'
+                  imageFormat: PNG
+              CheckListWithoutImage:
+                summary: Check List Search without Image retrieval
+                value:
+                  accountNumber: '12345678910'
+                  checkNumber: 123
+                  checkAmount: 111.11
+                  checkProcessDate: '2026-01-27'
+      responses:
+        '200':
+          description: Successful response
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckImageListResponse'
+              examples:
+                CheckListWithImage:
+                  summary: Check List Search with Image retrieval
+                  value:
+                    checkImages:
+                      accountNumber: '12345678910'
+                      checkNumber: 123
+                      checkAmount: 111.11
+                      checkProcessDate: '2026-01-27'
+                      sequenceNumber: 1
+                      transactionType: DEBIT
+                      checkRoutingNumber: '04120704'
+                      checkFrontImage: lUwXMGBwTm4dy/5pe8GwlRZULmMfPkzL8yZKfDxRTU7HFMW/b7DYqjBq0vyC85PxMObQ2UxtcbVe78MWsdgIBkKY7pCB4eE7GQr9QOcFRW2O7FQshj8ExEy0bmCV8cQFyxzKh04XPWIDxp71PIw/BFWy2GG+R3b1SFP/Mbj0Hdppoxn+rUxAz7Red+39BodSSz1xZteU8hu6fYvvNmbqasZmkVAEE6hS2H+3uVKqaMmnpHJ2oIie0rtowueFradOWhNGvV5pRuEhEd6j93X/7mt=
+                      checkRearImage: 73mfoZbjXF4Gr9XuIYSieWR0o3NV2bvMcwiurzvU8Dyvy2CG+1DYdw3IyHHZRdY6CKiarVFK7mG+IgJKVaDwqA2Ma7YxopwgEIJ5oc8gS/O8BzX7zms/6hmRn9wrcZj3ZhaSUmAdOtSc3qOzp6JPLoYyJg2hQwnEtJyormF8GT5ajF8ADV6XQD+d3Ym8bKsR6rHWwGB0bmiKu+9r+33mR8QZmzmmCPIUZXzj6CXaLr0dNA4+xXszgMbWAHI00ZGhTsSfzyWp8FHYZx24fbEOkS9ApuVBRihL+Eb14ldJayOgAXI3OjLJgo2pB4EUvbQmhwu=
+                CheckListWithoutImage:
+                  summary: Check List Search without Image retrieval
+                  value:
+                    checkImages:
+                      accountNumber: '12345678910'
+                      checkNumber: 123
+                      checkAmount: 111.11
+                      checkProcessDate: '2026-01-27'
+                      sequenceNumber: 1
+                      transactionType: DEBIT
+                      checkRoutingNumber: '04120704'
+        '400':
+          description: Validation failure on request payload
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                ErrorMessage: Error received from backend service
+                TransactionId: 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /commercial/checks/v1/images/list
+                ServiceError:
+                  metadata:
+                    messages:
+                    - code: IMAGE-Check-400-accountNumber
+                      message: accountNumber must be numeric
+        '401':
+          description: Unauthorized request
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations. 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                ErrorMessage: Received request is unauthorized, please provide valid
+                  credentials
+                TransactionId: 0635f201-8fbb-418f-b93a-138d5103e2b91348
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /commercial/checks/v1/images/list
+        '403':
+          description: Entitlements validation failed
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                ErrorMessage: Error received from backend service
+                TransactionId: 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /commercial/checks/v1/images/list
+                ServiceError:
+                  metadata:
+                    messages:
+                    - code: Forbidden
+                      message: Entitlements Validation Failed
+        '404':
+          description: Resource not found
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations. 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                ErrorMessage: Error received from backend service
+                TransactionId: 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /commercial/checks/v1/images/list
+                ServiceError:
+                  metadata:
+                    messages:
+                    - code: IMAGE-Check-404-Not-Found
+                      message: No static resource v1/images/list
+        '405':
+          description: Requested method denied
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations. 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                ErrorMessage: Error received from backend service
+                TransactionId: 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /commercial/checks/v1/images/list
+                ServiceError:
+                  metadata:
+                    messages:
+                    - code: IMAGE-Check-405-Method-Not-Allowed
+                      message: Method 'Get' is not supported.
+        '415':
+          description: Media type not supported
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations. 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                ErrorMessage: Error received from backend service
+                TransactionId: 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /commercial/checks/v1/images/list
+                ServiceError:
+                  metadata:
+                    messages:
+                    - code: IMAGE-Check-415-Unsupported-Media-Type
+                      message: Content-Type 'X' is not supported.
+        '429':
+          description: Too many requests
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations. 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                ErrorMessage: Number requests threshold reached, please resubmit the
+                  request after sometime
+                TransactionId: 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /commercial/checks/v1/stops/place
+        '500':
+          description: Unexpected server error
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations. 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                ErrorMessage: Error received from backend
+                TransactionId: 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                Api-Url: /commercial/checks/v1/images/list
+                ServiceError:
+                  metadata:
+                    messages:
+                    - code: IMAGE-Check-500-error
+                      message: Unable to process the request.
+        '502':
+          description: Bad gateway
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                ErrorMessage: Error received from backend
+                TransactionId: 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                Api-Url: /commercial/checks/v1/images/list
+                ServiceError:
+                  ConnectError: Connectivity error occurred with the downstream service
+                    (Unexpected EOF at target), please check with application support
+                    team before resubmitting the request
+        '503':
+          description: Service unavailable
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations. 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              examples:
+                SystemDown:
+                  summary: Service unavailable
+                  value:
+                    ErrorMessage: Error received from backend
+                    TransactionId: 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+                    X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                    TransactionTime: '2021-06-11T16:31:34.041Z'
+                    Api-Url: /commercial/checks/v1/images/list
+                    ServiceError:
+                      ConnectError: Service is currently unavailable (NoActiveTargets),
+                        please check with application support before resubmitting
+                        the request.
+        '504':
+          description: Gateway timeout
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations. 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                ErrorMessage: Error received from backend
+                TransactionId: 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /commercial/checks/v1/images/list
+                ServiceError:
+                  ConnectError: Request could not be processed on time (GatewayTimeout), please wait a moment and resubmit the request.
+  /commercial/checks/v1/healthCheck:
+    get:
+      tags: 
+        - HealthCheck       
+      summary: Health check
+      operationId: healthCheck
+      description: Verify you can connect to the API service. A bearer token is required.
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+              example:
+                Status: Ok
+                Source: Roundtrip
+                Timestamp: '2022-09-15T04:49:03'
+                ClientIp: 192.0.2.1
+                X-Forwarded-For: '[192.0.2.1]'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Access token supplied in the `Authorization` header using the `Bearer` scheme (e.g. `Authorization: Bearer {token}`).'
+  schemas:
+    HealthResponse:
+      type: object
+      title: healthResponse
+      properties:
+        Status:
+          type: string
+          description: Status of the health check response.
+          examples:
+          - Ok
+        Source:
+          type: string
+          description: Origin of the system response can be 'Gateway' or 'Roundtrip'. Roundtrip returns a response from the farthest system involved.
+          examples:
+          - Gateway
+          - Roundtrip
+        Timestamp:
+          type: string
+          description: Date (YYYY-MM-DD) and time (HH:MM:SS) of response from the API service.
+          pattern: '^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$'
+          examples:
+          - '2022-09-15T04:49:03'
+        ClientIp:
+          type: string
+          description: Client IP address the gateway receives from the request.
+          examples:
+          - '192.0.2.1'
+        X-Forwarded-For:
+          type: string
+          description: Sequence of IP addresses for systems between the client and the gateway.
+          examples:
+          - '[192.0.2.1]'
+    StopPaymentPlaceRequest:
+      type: object
+      description: Request to place a stop payment on an account.
+      required:
+      - accountNumber
+      - checkNumberStart
+      properties:
+        accountNumber:
+          type: string
+          description: The account number to place the stop payment. This is a numeric ID and should not exceed 16 characters.
+          maxLength: 16
+          pattern: ^\d+$
+        checkAmount:
+          type: number
+          format: double
+          description: The amount of the check to stop. Must be a valid monetary value with no more than two decimal places.
+          examples:
+          - 12.1
+          - 1224234
+          - 0.57
+        issueDate:
+          type: string
+          description: 'The original check issue date. This must be a valid calendar date in the correct format. Format: YYYY-MM-DD'
+          pattern: ^\d{4}\-(0?[1-9]|1[0-2])\-(0?[1-9]|[1-2][0-9]|3[0-1])$
+          format: date
+        checkNumberStart:
+          type: integer
+          format: int64
+          description: The starting (lowest) check number in the range for which a stop payment is requested.
+          minimum: 1
+          maximum: 99999999999
+        checkNumberEnd:
+          type: integer
+          format: int64
+          description: The last (hightest) check number in the range for which a stop payment is requested. If the number is not specified, it will default to the same value as checkNumberStart.
+          minimum: 1
+          maximum: 99999999999
+        description:
+          type: string
+          maxLength: 30
+          description: A custom text field to provide a brief explanation of the stop payment request.
+    CheckImageListRequest:
+      type: object
+      description: Request to retrieve check image records for an account.
+      required:
+      - accountNumber
+      - checkNumber
+      - checkProcessDate
+      properties:
+        accountNumber:
+          type: string
+          description: Account number related to the check holder. This is a numeric ID and should not exceed 16 characters.
+          maxLength: 16
+          examples:
+          - '1234567890'
+        checkNumber:
+          type: integer
+          format: int64
+          description: The number of the check to retrieve. This is a numeric ID. 
+          examples:
+          - 8675309
+        checkAmount:
+          type: number
+          format: double
+          description: The amount of the check. Must be a valid monetary value with no more than two decimal places.
+          examples: 
+            - "111.11"
+        checkProcessDate:
+          type: string
+          description: 'The date the check was processed. Format: YYYY-MM-DD'
+          examples: 
+            - "2026-02-14"
+        imageFormat:
+          type: string
+          enum:
+          - TIFF
+          - TIF
+          - PNG
+          - BMP
+          - JPEG
+          - TIFG_4
+          description: "Indicates the output format of the check images. If no format is defined, no image is returned. Valid values: BMP, JPEG, PNG, TIF, TIFF, TIFG_4"
+    StopPaymentPlaceResponse:
+      type: object
+      description: Successful response to place a stop payment.
+      properties:
+        stopPayments:
+          $ref: '#/components/schemas/StopPayments'
+    CheckImageListResponse:
+      type: object
+      description: Check Image list response.
+      properties:
+        checkImages:
+          $ref: '#/components/schemas/CheckImage'
+    ResponseMetadata:
+      type: object
+      description: Error metadata including validation or service messages.
+      properties:
+        messages:
+          type: array
+          maxItems: 100
+          description: List of messages describing validation errors or other informational
+            messages.
+          items:
+            $ref: '#/components/schemas/Message'
+    Message:
+      type: object
+      description: Field-level error or informational message.
+      properties:
+        code:
+          type: string
+          description: Machine-readable code.
+          examples:
+          - IMAGE-Check-200-Success
+        message:
+          type: string
+          description: Human-readable message associated with the code.
+          examples:
+          - Successfully retrieved records.
+    StopPayments:
+      type: object
+      description: Stop payment record.
+      properties:
+        accountNumber:
+          type: string
+          description: The account number to place the stop payment.
+          maxLength: 16
+          pattern: ^\d+$
+        checkNumberStart:
+          type: integer
+          format: int64
+          description: The starting (lowest) check number in the range for which a stop payment is requested.
+          minimum: 1
+          maximum: 99999999999
+        checkNumberEnd:
+          type: integer
+          format: int64
+          description: The last (hightest) check number in the range for which a stop payment is requested. If the number is not specified, it will default to the same value as checkNumberStart.
+          minimum: 1
+          maximum: 99999999999
+        checkAmount:
+          type: number
+          format: double
+          description: The amount of the check to stop.
+          examples:
+          - 12.1
+          - 1224234
+          - 0.57
+        expirationDate:
+          type: string
+          description: 'Stop payment expiration date. Format: YYYY-MM-DD'
+          pattern: ^\d{4}\-(0?[1-9]|1[0-2])\-(0?[1-9]|[1-2][0-9]|3[0-1])$
+          format: date
+        description:
+          type: string
+          maxLength: 30
+          description: A custom text field to provide a brief explanation of the stop
+            payment request.
+        placedDate:
+          type: string
+          description: 'Stop payment placed or effective date. Format: YYYY-MM-DD'
+          pattern: ^\d{4}\-(0?[1-9]|1[0-2])\-(0?[1-9]|[1-2][0-9]|3[0-1])$
+          format: date
+        issueDate:
+          type: string
+          description: 'Original check issue date. Format: YYYY-MM-DD'
+          pattern: ^\d{4}\-(0?[1-9]|1[0-2])\-(0?[1-9]|[1-2][0-9]|3[0-1])$
+          format: date
+    CheckImage:
+      type: object
+      description: Check image record.
+      properties:
+        accountNumber:
+          type: string
+          description: Account number related to the check holder.
+          examples:
+          - '1234567890'
+        checkNumber:
+          type: integer
+          description: Check number associated with the check image.
+          minimum: 1
+          maximum: 99999999999
+          examples:
+          - 123
+        checkAmount:
+          type: number
+          format: double
+          description: Amount of the check provided.
+          examples:
+          - 12.1
+          - 1224234
+          - 0.57
+        checkProcessDate:
+          type: string
+          format: date
+          description: Check process date (YYYY-MM-DD).
+        sequenceNumber:
+          type: integer
+          description: System generated sequence number.
+          examples:
+          - 1
+        transactionType:
+          type: string
+          description: Type of transaction for the check.
+          examples:
+          - DEBIT
+        checkRoutingNumber:
+          type: string
+          description: Routing number on the check.
+          examples:
+          - '04120704'
+        checkFrontImage:
+          type: string
+          description: The Base64 encoded string for the front image of the check.
+          examples:
+          - lUwXMGBwTm4dy/5pe8GwlRZULmMfPkzL8yZKfDxRTU7HFMW/b7DYqjBq0vyC85PxMObQ2UxtcbVe78MWsdgIBkKY7pCB4eE7GQr9QOcFRW2O7FQshj8ExEy0bmCV8cQFyxzKh04XPWIDxp71PIw/BFWy2GG+R3b1SFP/Mbj0Hdppoxn+rUxAz7Red+39BodSSz1xZteU8hu6fYvvNmbqasZmkVAEE6hS2H+3uVKqaMmnpHJ2oIie0rtowueFradOWhNGvV5pRuEhEd6j93X/7mt=
+        checkRearImage:
+          type: string
+          description: The Base64 encoded string for the back image of the check.
+          examples:
+          - 73mfoZbjXF4Gr9XuIYSieWR0o3NV2bvMcwiurzvU8Dyvy2CG+1DYdw3IyHHZRdY6CKiarVFK7mG+IgJKVaDwqA2Ma7YxopwgEIJ5oc8gS/O8BzX7zms/6hmRn9wrcZj3ZhaSUmAdOtSc3qOzp6JPLoYyJg2hQwnEtJyormF8GT5ajF8ADV6XQD+d3Ym8bKsR6rHWwGB0bmiKu+9r+33mR8QZmzmmCPIUZXzj6CXaLr0dNA4+xXszgMbWAHI00ZGhTsSfzyWp8FHYZx24fbEOkS9ApuVBRihL+Eb14ldJayOgAXI3OjLJgo2pB4EUvbQmhwu=
+    Exception:
+      type: object
+      description: Contains information about errors related to the request.
+      title: exceptionSchema
+      properties:
+        ErrorMessage:
+          type: string
+          description: A human-readable message that describes the type or source of the error.
+        TransactionId:
+          type: string
+          description: A unique transaction ID returned with the response, useful
+            for traceability.
+        X-CorrelationId:
+          type: string
+          description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+        TransactionTime:
+          type: string
+          format: date-time
+          description: Date and time the error occurred.
+        Api-Url:
+          type: string
+          description: The API URL path of the call that generated the response.
+        ServiceError:
+          type: object
+          title: ServiceError
+          description: Detailed service-level error details, if available.
+          oneOf:
+          - $ref: '#/components/schemas/ServiceErrorData'
+          - $ref: '#/components/schemas/ConnectError'
+    ServiceErrorData:
+      type: object
+      title: serviceErrorData
+      description: Detailed service-level error information, if available.
+      properties:
+        metadata:
+          $ref: '#/components/schemas/ResponseMetadata'
+    ConnectError:
+      type: object
+      properties:
+        ConnectError:
+          type: string
+          description: API connectivity error information, if available.
+security:
+  - bearerAuth: []

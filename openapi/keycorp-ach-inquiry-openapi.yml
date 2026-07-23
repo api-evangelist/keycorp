@@ -1,0 +1,1248 @@
+openapi: 3.1.0
+info:
+  title: ACH Inquiry
+  version: 2.1.2
+  description: Use the ACH Inquiry API to get the status on ACH transactions based on your query criteria.
+  contact:
+    name: KeyBank Developer Support
+    email: embedded_banking_support@keybank.com
+
+servers:
+  - url: https://partner-api-qv.key.com
+    description: Non-Production environment (QV)
+  - url: https://partner-api.key.com
+    description: Production and Simulator environment
+
+tags:
+  - name: HealthCheck
+    description: Verify you can connect to the API service.
+  - name: ACH Transactions
+    description: ACH Inquiry functions to list and retrieve ACH transaction details
+
+security:
+  - bearerAuth: []
+
+paths:
+  /accounts/transactions/v1/healthCheck:
+    get:
+      tags:
+        - HealthCheck
+      summary: Health check
+      description: Verify you can connect to the API service. A bearer token is required.
+      operationId: healthCheck
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          headers:
+            X-CorrelationId:
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+              example:
+                Status: Ok
+                Source: Roundtrip
+                Timestamp: '2022-09-15T04:49:03'
+                ClientIp: 192.0.2.1
+                X-Forwarded-For: '[192.0.2.1]'
+
+  /accounts/transactions/v1/ach/detail/{parNumber}:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - ACH Transactions
+      summary: Get details about an ACH transaction with a parNumber.
+      operationId: searchAchTransaction
+      description: Use the parNumber to retrieve information about an ACH transaction. The parNumber can be obtained from the ACH List endpoint.
+      parameters:
+        - name: X-CorrelationId
+          in: header
+          schema:
+            type: string
+          required: false
+          description: Universal ID to trace the transaction across all systems involved.
+        - name: parNumber
+          in: path
+          required: true
+          description: The unique parNumber assigned to the transaction by the ACH processor.
+          schema:
+            type: string
+            maxLength: 50
+          example: 22018007665985
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AchDetailTransaction'
+              example:
+                transactionStatus: COLLECTED
+                traceNumber: '043000090716192'
+                parNumber: '22018007665985'
+                transactionAmount: 10.01
+                settlementDate: '2021-03-08'
+                collectionDate: '2021-03-07'
+                transactionCode: '22'
+                transactionDescription: DEPOSIT
+                authorizedCustomerName: TEST CUSTOMER1
+                standardEntryClassCode: CCD
+                receivingAccount:
+                  accountNumber: '123456789012'
+                  routingNumber: '123456789'
+                  bankNumber: '0000'
+                receivingParty:
+                  customerIdentificationNumber: '099999999'
+                  companyName: MERCHANT
+                  customerName: TEST MERCHANT
+                originatingAccount:
+                  accountNumber: '3123456789'
+                  routingNumber: '1234567890'
+                  bankNumber: '0000'
+                originatingParty:
+                  customerIdentificationNumber: '1234567'
+                  companyName: COMPANY NAME 1
+                  customerName: CUSTOMER NAME 1
+                returnReasonCode: R02
+                returnReasonDescription: Account Closed
+                returnDate: '2024-02-01'
+                addendaCount: 1
+                notificationOfChangeAddendaCount: 0
+                internationalAddendaCount: 0
+                settlementAmount: 123.45
+                settlementTransactionId: '23218003015954'
+                customData: merchant:status
+                checkSerialNumber: '4345'
+                transactionDirection: Receiving Item
+                standardEntryClassDescription: Cash Concentration or Disbursement
+                transactionCodeDescription: Automated Deposit
+                addenda:
+                  - sequenceNumber: 1
+                    entryDetailSequenceNumber: '188'
+                    paymentRelatedInformation: 'Addenda Record (Applies to CCD, CTX, PPD, and WEB entries)'
+                notificationOfChange:
+                  - changeCode: C02
+                    changeDescription: 'Incorrect transit/routing number'
+                    correctedData: '1234567890'
+        '404':
+          description: No ACH transaction was found with the provided parNumber
+          headers:
+            X-CorrelationId:
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                ErrorMessage: Error received from backend service
+                TransactionId: 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: https://partner-api-qv.key.com/accounts/transactions/v1/ach/detail/22018007665985
+                ServiceError:
+                  metadata:
+                    messages:
+                      - code: AI-Detail-404-no-records-100
+                        message: Record Not Found
+        '500':
+          description: Unexpected server error
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations. 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                ErrorMessage: Error received from backend
+                TransactionId: 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                Api-Url: https://partner-api-qv.key.com/accounts/transactions/v1/ach/detail/22018007665985
+                ServiceError:
+                  metadata:
+                    messages:
+                    - code: 500-InternalServerError
+                      message: An unexpected error occurred.  Please try again later or contact support if the problem persists.
+
+  /accounts/transactions/v1/ach/list:
+    post:
+      operationId: searchAchTransactions
+      security:
+        - bearerAuth: []
+      tags:
+        - ACH Transactions
+      summary: Advanced search for ACH transactions
+      description: Search for ACH transactions by passing certain search parameters.
+      parameters:
+        - name: X-CorrelationId
+          in: header
+          schema:
+            type: string
+          required: false
+          description: Universal ID to trace the transaction across all systems involved.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - accountNumber
+                - fromDate
+                - toDate
+              properties:
+                accountNumber:
+                  type: string
+                  description: The bank account number. This field cannot exceed 16 characters.
+                  minLength: 1
+                  maxLength: 16
+                  examples:
+                    - '3123456789'
+                fromDate:
+                  type: string
+                  format: date
+                  description: 'Start date for the date range. This date must be the current date or prior to the current date. Cannot be earlier than 180 days prior to the current date. Format: YYYY-MM-DD'
+                  examples:
+                    - '2024-02-01'
+                toDate:
+                  type: string
+                  format: date
+                  description: 'End date for the date range. This date can be the current day or a later date from the start date (fromDate). The date range should not be longer than 31 days. Format: YYYY-MM-DD'
+                  examples:
+                    - '2024-02-01'
+                minimumAmount:
+                  type: number
+                  format: double
+                  description: The minimum dollar amount of the transaction. This amount must be less than or equal to the maximum amount. Leave blank or enter zero for no minimum amount.
+                  minimum: 0
+                  maximum: 1000000000
+                  examples:
+                    - 100.00
+                maximumAmount:
+                  type: number
+                  format: double
+                  description: The maximum dollar amount of the transaction. This amount must be greater than or equal to the minimum amount. Leave blank to retrieve all amounts. This amount cannot exceed one billion dollars.
+                  minimum: 0
+                  maximum: 1000000000
+                  examples:
+                    - 75020.50
+                traceNumber:
+                  type: string
+                  description: The traceNumber for the transaction provided by the originator.
+                  minLength: 1
+                  maxLength: 16
+                  examples:
+                    - '043000090716192'
+                pageNumber:
+                  type: integer
+                  description: The number of the page being viewed. This number must be greater than or equal to 1.
+                  examples:
+                    - 1
+                pageSize:
+                  type: integer
+                  description: The number of records per page. Must be between 1 and 1000.
+                  examples:
+                    - 500
+            example:
+              accountNumber: '3123456789'
+              fromDate: '2024-02-01'
+              toDate: '2024-02-01'
+              minimumAmount: 100.00
+              maximumAmount: 75020.50
+              traceNumber: '043000090716192'
+              pageNumber: 1
+              pageSize: 150
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transactions:
+                    type: array
+                    maxItems: 1000
+                    description: List of transactions from search criteria.
+                    items:
+                      $ref: '#/components/schemas/AchListTransaction'
+                  metadata:
+                    allOf:
+                      - $ref: '#/components/schemas/PageMetadata'
+                    description: Information about the data pages returned.
+              example:
+                transactions:
+                  - parNumber: '22018007665985'
+                    transactionStatus: COLLECTED
+                    traceNumber: '043000090716192'
+                    transactionAmount: 10.01
+                    collectionDate: '2021-03-07'
+                    settlementDate: '2021-03-08'
+                    transactionCode: '22'
+                    transactionDescription: DEPOSIT
+                    authorizedCustomerName: TEST CUSTOMER1
+                    standardEntryClassCode: CCD
+                    receivingAccount:
+                      accountNumber: '123456789012'
+                    receivingParty:
+                      customerIdentificationNumber: '099999999'
+                      companyName: MERCHANT
+                    originatingAccount:
+                      accountNumber: '3123456789'
+                    originatingParty:
+                      customerIdentificationNumber: '1234567'
+                      companyName: COMPANY NAME 1
+                    returnDate: '2024-02-01'
+                    returnReasonCode: R02
+                    returnReasonDescription: Account Closed
+                    addendaCount: 1
+                    notificationOfChangeAddendaCount: 0
+                    internationalAddendaCount: 0
+                    settlementAmount: 123.45
+                    settlementTransactionId: '23218003015954'
+                metadata:
+                  page:
+                    pageNumber: 1
+                    pageSize: 25
+                    totalPages: 3
+                    totalRecords: 75
+                    lastPage: false
+        '400':
+          description: Bad input parameter
+          headers:
+            X-CorrelationId:
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    allOf:
+                      - $ref: '#/components/schemas/Exception'
+              example:
+                ErrorMessage: Error received from backend service
+                TransactionId: 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: https://partner-api-qv.key.com/accounts/transactions/v1/ach/list
+                ServiceError:
+                  metadata:
+                    messages:
+                      - code: AI-List-400-fromDate-105
+                        message: fromDate format must be YYYY-MM-DD
+                      - code: AI-List-400-fromDate-117
+                        message: fromDate must be a valid date
+        '403':
+          description: Entitlements validation failed
+          headers:
+            X-CorrelationId:
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                ErrorMessage: Error received from backend service
+                TransactionId: 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: https://partner-api-qv.key.com/accounts/transactions/v1/ach/list
+                ServiceError:
+                  metadata:
+                    messages:
+                      - code: 403-Forbidden
+                        message: Entitlements Validation Failed
+        '500':
+          description: Unexpected server error
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations. 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                ErrorMessage: Error received from backend
+                TransactionId: 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                Api-Url: https://partner-api-qv.key.com/accounts/transactions/v1/ach/list
+                ServiceError:
+                  metadata:
+                    messages:
+                    - code: 500-InternalServerError
+                      message: An unexpected error occurred.  Please try again later or contact support if the problem persists.
+
+  /accounts/transactions/v1/ach/settled/{settlementTransactionId}:
+    get:
+      operationId: searchAchSettledTransactions
+      security:
+        - bearerAuth: []
+      tags:
+        - ACH Transactions
+      summary: Advanced search for settled ACH transactions
+      description: Search for ACH batch details of transactions that have posted to the KeyBank account where the status is settled or returned.
+      parameters:
+        - name: X-CorrelationId
+          in: header
+          schema:
+            type: string
+          required: false
+          description: Universal ID to trace the transaction across all systems involved.
+        - name: settlementTransactionId
+          in: path
+          required: true
+          description: The transaction ID that is assigned during settlement. This can be obtained from the Commercial Accounting API.
+          schema:
+            type: string
+            maxLength: 50
+          example: 23218003015954
+        - name: pageNumber
+          in: query
+          description: The number of the page being viewed. This number must be greater than or equal to 1.
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+          example: 1
+        - name: pageSize
+          in: query
+          description: The number of records per page. Must be between 1 and 1000.
+          schema:
+            type: integer
+            default: 1000
+            minimum: 1
+            maximum: 1000
+          example: 150
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transactions:
+                    type: array
+                    maxItems: 1000
+                    description: List of transactions from search criteria.
+                    items:
+                      $ref: '#/components/schemas/AchSettledTransaction'
+                  metadata:
+                    allOf:
+                      - $ref: '#/components/schemas/PageMetadata'
+                    description: Information about the data pages returned.
+              examples:
+                settled:
+                  summary: Settled Transaction
+                  value:
+                    transactions:
+                      - parNumber: '22018007665985'
+                        transactionStatus: SETTLED
+                        traceNumber: '043000090716192'
+                        transactionAmount: 10.01
+                        collectionDate: '2021-03-07'
+                        settlementDate: '2021-03-08'
+                        transactionCode: '22'
+                        transactionDescription: DEPOSIT
+                        authorizedCustomerName: TEST CUSTOMER1
+                        standardEntryClassCode: CCD
+                        receivingAccount:
+                          accountNumber: '123456789012'
+                        receivingParty:
+                          customerIdentificationNumber: '099999999'
+                          companyName: 'MERCHANT'
+                        originatingAccount:
+                          accountNumber: '3123456789'
+                        originatingParty:
+                          customerIdentificationNumber: '1234567'
+                          companyName: COMPANY NAME 1
+                        settlementAmount: 123.45
+                        settlementTransactionId: '23218003015954'
+                    metadata:
+                      page:
+                        pageNumber: 1
+                        pageSize: 10
+                        totalPages: 3
+                        totalRecords: 28
+                        lastPage: false
+                returned:
+                  summary: Returned Transaction
+                  value:
+                    transactions:
+                      - parNumber: '22018007665985'
+                        transactionStatus: RETURNED
+                        traceNumber: '043000090716192'
+                        transactionAmount: 50.00
+                        collectionDate: '2021-03-07'
+                        settlementDate: '2021-03-08'
+                        transactionCode: '26'
+                        transactionDescription: CUST TRANS
+                        authorizedCustomerName: TEST CUSTOMER2
+                        standardEntryClassCode: CCD
+                        receivingAccount:
+                          accountNumber: '987654321098'
+                        receivingParty:
+                          customerIdentificationNumber: '088888888'
+                          companyName: VENDOR
+                        originatingAccount:
+                          accountNumber: '3123456789'
+                        originatingParty:
+                          customerIdentificationNumber: '1234567'
+                          companyName: COMPANY NAME 1
+                        returnDate: '2021-03-08'
+                        returnReasonCode: R01
+                        returnReasonDescription: Insufficient Funds
+                        settlementAmount: 50.00
+                        settlementTransactionId: '23218003015954'
+                    metadata:
+                      page:
+                        pageNumber: 3
+                        pageSize: 10
+                        totalPages: 3
+                        totalRecords: 28
+                        lastPage: true
+        '400':
+          description: Bad input parameter
+          headers:
+            X-CorrelationId:
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    allOf:
+                      - $ref: '#/components/schemas/Exception'
+              example:
+                ErrorMessage: Error received from backend service
+                TransactionId: 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: https://partner-api-qv.key.com/accounts/transactions/v1/ach/settled/22018007665985
+                ServiceError:
+                  metadata:
+                    messages:
+                      - code: AI-Settled-400-pageSize-115
+                        message: pageSize must be less than or equal to 1000
+        '404':
+          description: No ACH transaction was found with the provided settlementTransactionId
+          headers:
+            X-CorrelationId:
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                ErrorMessage: Error received from backend service
+                TransactionId: 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: https://partner-api-qv.key.com/accounts/transactions/v1/ach/settled/22018007665985
+                ServiceError:
+                  metadata:
+                    messages:
+                      - code: AI-Settled-404-no-records-100
+                        message: Record Not Found
+        '500':
+          description: Unexpected server error
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations. 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exception'
+              example:
+                ErrorMessage: Error received from backend
+                TransactionId: 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                Api-Url: https://partner-api-qv.key.com/accounts/transactions/v1/ach/settled/22018007665985
+                ServiceError:
+                  metadata:
+                    messages:
+                    - code: 500-InternalServerError
+                      message: An unexpected error occurred.  Please try again later or contact support if the problem persists.
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Access token supplied in the `Authorization` header using the `Bearer` scheme (e.g. `Authorization: Bearer {token}`).'
+  schemas:
+    AccountList:
+      type: object
+      description: Contains details about the account like account number.
+      properties:
+        accountNumber:
+          type: string
+          description: Bank account number.
+          examples:
+            - '3123456789'
+
+    AccountDetail:
+      type: object
+      description: Contains details about the account like number, bank number, and routing number.
+      properties:
+        accountNumber:
+          type: string
+          description: Bank account number of the ACH originator or receiver.
+          examples:
+            - '3123456789'
+        bankNumber:
+          type: string
+          description: Bank number associated with the account number.
+          examples:
+            - '0000'
+        routingNumber:
+          type: string
+          description: Nine-digit routing number for the account provided in the original request.
+          examples:
+            - '123456789'
+
+    AchDetailTransaction:
+      type: object
+      description: Contains transaction details associated with the queried parNumber.
+      properties:
+        parNumber:
+          type: string
+          description: The unique parNumber assigned to the transaction by the ACH processor.
+          examples:
+            - '22018007665985'
+        transactionStatus:
+          type: string
+          description: 'The status of the ACH transaction. Valid values: COLLECTED, RETURNED, SETTLED'
+          examples:
+            - 'COLLECTED'
+            - 'RETURNED'
+            - 'SETTLED'
+        traceNumber:
+          type: string
+          description: The trace number provided in the detail record of the originators Nacha file.
+          examples:
+            - '043000090716192'
+        transactionAmount:
+          type: number
+          format: double
+          description: The dollar amount of the transaction.
+          examples:
+            - 10.01
+        collectionDate:
+          type: string
+          format: date
+          description: 'The date the transaction collection occurred. Format: YYYY-MM-DD'
+          examples:
+            - '2024-02-11'
+        settlementDate:
+          type: string
+          format: date
+          description: 'The date the transaction settlement occurred. Format: YYYY-MM-DD'
+          examples:
+            - '2024-02-01'
+        transactionCode:
+          type: string
+          description: Two-digit code identifying the account type at the receiving financial institution.  Defined by Nacha rules to indicate the type of transaction  based on the account.
+          examples:
+            - '22'
+        transactionCodeDescription:
+          type: string
+          description: Description for the transaction code.
+          examples:
+            - 'Automated Deposit'
+        transactionDescription:
+          type: string
+          description: Company Entry Description provided by the originator.  Defined by Nacha specifications as a batch level description.
+          examples:
+            - 'DEPOSIT'
+        authorizedCustomerName:
+          type: string
+          description: Authorized customer name
+          examples:
+            - 'TEST CUSTOMER1'
+        standardEntryClassCode:
+          type: string
+          description: The three-digit Standard Entry Class code based on Nacha rules.
+          examples:
+            - 'CCD'
+        standardEntryClassDescription:
+          type: string
+          description: The description for the Nacha SEC code.
+          examples:
+            - 'Cash Concentration or Disbursement'
+        receivingAccount:
+          allOf:
+            - $ref: '#/components/schemas/AccountDetail'
+          description: Details about the account receiving the funds.
+        receivingParty:
+          allOf:
+            - $ref: '#/components/schemas/PartyDetail'
+          description: Details about the party receiving the funds.
+        originatingAccount:
+          allOf:
+            - $ref: '#/components/schemas/AccountDetail'
+          description: Details about the originating account.
+        originatingParty:
+          allOf:
+            - $ref: '#/components/schemas/PartyDetail'
+          description: Details about the originating party.
+        returnDate:
+          type: string
+          format: date
+          description: 'Date of the returned transaction to the ACH system. Format: YYYY-MM-DD'
+          examples:
+            - '2024-02-01'
+        returnReasonCode:
+          type: string
+          description: 'The code associated with the reason for returning the ACH transaction. The code is the letter ''R'' for reason followed by a two-digit numeric code. Format: R00'
+          examples:
+            - 'R02'
+        returnReasonDescription:
+          type: string
+          description: Description as to why the ACH transaction is returned.
+          examples:
+            - 'Account Closed'
+        addendaCount:
+          type: integer
+          description: Count of addenda records.
+          examples:
+            - 1
+        notificationOfChangeAddendaCount:
+          type: integer
+          description: Count of change notifications records.
+          examples:
+            - 0
+        internationalAddendaCount:
+          type: integer
+          description: Count of international addenda records.
+          examples:
+            - 0
+        customData:
+          type: string
+          description: >
+            The values for custom data is defined by the client. This free-form text field
+            can contain up to 500 alphanumeric characters. Custom information stays with
+            the transaction through its lifecycle.
+          examples:
+            - merchant:status
+        checkSerialNumber:
+          type: string
+          description: Serial number for the check converted to an ACH transaction.
+          examples:
+            - '4345'
+        transactionDirection:
+          type: string
+          description: 'Indicates the direction of the transaction. Valid values: ORIGINATING ITEM, RECEIVING ITEM'
+          examples:
+            - 'ORIGINATING ITEM'
+        settlementAmount:
+          type: number
+          format: double
+          description: The dollar amount of the settlement.
+          examples:
+            - 123.45
+        settlementTransactionId:
+          type: string
+          description: The unique settlementTransactionId of the settled batch tied to the transaction.
+          examples:
+            - '23218003015954'
+        addenda:
+          type: array
+          maxItems: 1000
+          description: List of addenda records
+          items:
+            $ref: '#/components/schemas/Addendum'
+        notificationOfChange:
+          type: array
+          maxItems: 1000
+          description: Applicable change notifications associated with the ACH transaction.
+          items:
+            $ref: '#/components/schemas/NotificationOfChange'
+
+    AchListTransaction:
+      type: object
+      description: Results from ACH transaction account search.
+      properties:
+        parNumber:
+          type: string
+          description: The unique parNumber assigned to the transaction by the ACH processor.
+          examples:
+            - '22018007665985'
+        transactionStatus:
+          type: string
+          description: 'The status of the ACH transaction. Valid values: COLLECTED, RETURNED, SETTLED'
+          examples:
+            - 'COLLECTED'
+            - 'RETURNED'
+            - 'SETTLED'
+        traceNumber:
+          type: string
+          description: The trace number provided in the detail record of the originators Nacha file.
+          examples:
+            - '043000090716192'
+        transactionAmount:
+          type: number
+          format: double
+          description: The dollar amount of the transaction.
+          examples:
+            - 10.01
+        collectionDate:
+          type: string
+          format: date
+          description: 'The date the transaction collection occurred. Format: YYYY-MM-DD'
+          examples:
+            - '2024-02-11'
+        settlementDate:
+          type: string
+          format: date
+          description: 'The date the transaction settlement occurred. Format: YYYY-MM-DD'
+          examples:
+            - '2024-02-01'
+        transactionCode:
+          type: string
+          description: Two-digit code identifying the account type at the receiving financial institution.  Defined by Nacha rules to indicate the type of transaction  based on the account.
+          examples:
+            - '22'
+        transactionDescription:
+          type: string
+          description: Company Entry Description provided by the originator.  Defined by Nacha specifications as a batch level description.
+          examples:
+            - 'DEPOSIT'
+        authorizedCustomerName:
+          type: string
+          description: Authorized customer name
+          examples:
+            - 'TEST CUSTOMER1'
+        standardEntryClassCode:
+          type: string
+          description: The three-digit Standard Entry Class code based on Nacha rules.
+          examples:
+            - 'CCD'
+        receivingAccount:
+          allOf:
+            - $ref: '#/components/schemas/AccountList'
+          description: Details about the account receiving the funds.
+        receivingParty:
+          allOf:
+            - $ref: '#/components/schemas/PartyList'
+          description: Details about the party receiving the funds.
+        originatingAccount:
+          allOf:
+            - $ref: '#/components/schemas/AccountList'
+          description: Details about the originating account.
+        originatingParty:
+          allOf:
+            - $ref: '#/components/schemas/PartyList'
+          description: Details about the originating party.
+        returnDate:
+          type: string
+          format: date
+          description: 'Date of the returned transaction to the ACH system. Format: YYYY-MM-DD'
+          examples:
+            - '2024-02-01'
+        returnReasonCode:
+          type: string
+          description: 'The code associated with the reason for returning the ACH transaction. The code is the letter ''R'' for reason followed by a two-digit numeric code. Format: R00'
+          examples:
+            - 'R02'
+        returnReasonDescription:
+          type: string
+          description: Description as to why the ACH transaction is returned.
+          examples:
+            - 'Account Closed'
+        addendaCount:
+          type: integer
+          description: Count of addenda records.
+          examples:
+            - 1
+        notificationOfChangeAddendaCount:
+          type: integer
+          description: Count of change notifications records.
+          examples:
+            - 0
+        internationalAddendaCount:
+          type: integer
+          description: Count of international addenda records.
+          examples:
+            - 0
+        settlementAmount:
+          type: number
+          format: double
+          description: The dollar amount of the settlement.
+          examples:
+            - 123.45
+        settlementTransactionId:
+          type: string
+          description: The unique parNumber of the settlement batch tied to the transaction.
+          examples:
+            - '23218003015954'
+
+    AchSettledTransaction:
+      type: object
+      description: 'Results from ACH transaction where the status is "SETTLED" or "RETURNED".'
+      properties:
+        parNumber:
+          type: string
+          description: The unique parNumber assigned to the transaction by the ACH processor.
+          examples:
+            - '22018007665985'
+        transactionStatus:
+          type: string
+          description: 'The status of the ACH transaction. Valid values: RETURNED, SETTLED'
+          examples:
+            - 'RETURNED'
+            - 'SETTLED'
+        traceNumber:
+          type: string
+          description: The trace number provided in the detail record of the originators Nacha file.
+          examples:
+            - '043000090716192'
+        transactionAmount:
+          type: number
+          format: double
+          description: The dollar amount of the transaction.
+          examples:
+            - 50.00
+        collectionDate:
+          type: string
+          format: date
+          description: 'The date the transaction collection occurred. Format: YYYY-MM-DD'
+          examples:
+            - '2024-02-11'
+        settlementDate:
+          type: string
+          format: date
+          description: 'The date the transaction settlement occurred. Format: YYYY-MM-DD'
+          examples:
+            - '2024-02-01'
+        transactionCode:
+          type: string
+          description: Two-digit code identifying the account type at the receiving financial institution.  Defined by Nacha rules to indicate the type of transaction  based on the account.
+          examples:
+            - '26'
+        transactionDescription:
+          type: string
+          description: Company Entry Description provided by the originator.  Defined by Nacha specifications as a batch level description.
+          examples:
+            - 'CUST TRANS'
+        authorizedCustomerName:
+          type: string
+          description: Authorized customer name
+          examples:
+            - 'TEST CUSTOMER2'
+        standardEntryClassCode:
+          type: string
+          description: The three-digit Standard Entry Class code based on Nacha rules.
+          examples:
+            - 'CCD'
+        receivingAccount:
+          allOf:
+            - $ref: '#/components/schemas/AccountList'
+          description: Details about the account receiving the funds.
+        receivingParty:
+          allOf:
+            - $ref: '#/components/schemas/PartyList'
+          description: Details about the party receiving the funds.
+        originatingAccount:
+          allOf:
+            - $ref: '#/components/schemas/AccountList'
+          description: Details about the originating account.
+        originatingParty:
+          allOf:
+            - $ref: '#/components/schemas/PartyList'
+          description: Details about the originating party.
+        returnDate:
+          type: string
+          format: date
+          description: 'Date of the returned transaction to the ACH system. Format: YYYY-MM-DD'
+          examples:
+            - '2024-02-01'
+        returnReasonCode:
+          type: string
+          description: 'The code associated with the reason for returning the ACH transaction. The code is the letter ''R'' for reason followed by a two-digit numeric code. Format: R00'
+          examples:
+            - 'R01'
+        returnReasonDescription:
+          type: string
+          description: Description as to why the ACH transaction is returned.
+          examples:
+            - 'Insufficient Funds'
+        settlementAmount:
+          type: number
+          format: double
+          description: The dollar amount of the settlement.
+          examples:
+            - 50.00
+        settlementTransactionId:
+          type: string
+          description: The unique parNumber of the settlement batch tied to the transaction.
+          examples:
+            - '23218003015954'
+
+    Addendum:
+      type: object
+      description: Contains addenda record information.
+      properties:
+        sequenceNumber:
+          type: integer
+          description: The addenda record item number in order of sequence. Number cannot exceed 4 digits.
+          maximum: 9999
+          examples:
+            - 1
+        entryDetailSequenceNumber:
+          type: string
+          description: The entry number in order of sequence. Number cannot exceed 7 digits.
+          maxLength: 7
+          examples:
+            - '188'
+        paymentRelatedInformation:
+          type: string
+          description: The related payment information from the addenda records. The maximum character limit is 255.
+          maxLength: 255
+          examples:
+            - 'Addenda Record (Applies to CCD, CTX, PPD, and WEB entries)'
+
+    PartyList:
+      type: object
+      description: Contains the customer identification number and company name.
+      properties:
+        customerIdentificationNumber:
+          type: string
+          description: The unique identification number associated with the customer.
+          examples:
+            - '099999999'
+        companyName:
+          type: string
+          description: The name of the corporation or institution making the request.
+          examples:
+            - 'VENDOR'
+
+    PartyDetail:
+      type: object
+      description: Contains details about the party like ID number, company name, and the customer name.
+      properties:
+        customerIdentificationNumber:
+          type: string
+          description: The unique identification number associated with the customer.
+          examples:
+            - '1234567'
+        companyName:
+          type: string
+          description: The name of the corporation or institution making the request.
+          examples:
+            - 'COMPANY NAME 1'
+        customerName:
+          type: string
+          description: The name of the customer.
+          examples:
+            - 'TEST CUSTOMER1'
+
+    NotificationOfChange:
+      type: object
+      description: Contains change details and corrected data.
+      properties:
+        changeCode:
+          type: string
+          description: The three-character change code begins with the letter 'C'. This code is applied to all NOCs to indicate the information that is being changed.
+          maxLength: 50
+          examples:
+            - C02
+        changeDescription:
+          type: string
+          description: The description associated with the change code.
+          maxLength: 255
+          examples:
+            - 'Incorrect transit/routing number'
+        correctedData:
+          type: string
+          description: The corrected data per the correction change code.
+          maxLength: 50
+          examples:
+            - '1234567890'
+
+    HealthResponse:
+      type: object
+      title: healthResponse
+      properties:
+        Status:
+          type: string
+          description: Status of the health check response.
+          examples:
+            - Ok
+        Source:
+          type: string
+          description: Origin of the system response can be 'Gateway' or 'Roundtrip'. Roundtrip returns a response from the farthest system involved.
+          examples:
+            - Gateway
+            - Roundtrip
+        Timestamp:
+          type: string
+          description: Date (YYYY-MM-DD) and time (HH:MM:SS) of response from the API service.
+          pattern: '^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$'
+          examples:
+            - '2022-09-15T04:49:03'
+        ClientIp:
+          type: string
+          description: Client IP address the gateway receives from the request.
+          examples:
+            - 192.0.2.1
+        X-Forwarded-For:
+          type: string
+          description: Sequence of IP addresses for systems between the client and the gateway.
+          examples:
+            - '[192.0.2.1]'
+
+    Message:
+      type: object
+      description: Informational code and message from the server.
+      properties:
+        code:
+          type: string
+          description: Static code assigned by the network or payment system.
+          examples:
+            - Wire-List-400-toDate
+        message:
+          type: string
+          description: A human-readable message associated with the code.
+          examples:
+            - toDate format must be YYYY-MM-DD
+
+    Page:
+      type: object
+      description: Page information returned from the server.
+      properties:
+        pageNumber:
+          type: integer
+          format: int32
+          minimum: 1
+          description: The number of the page being viewed.
+          examples:
+            - 1
+        pageSize:
+          type: integer
+          format: int32
+          minimum: 1
+          description: The number of records per page.
+          examples:
+            - 500
+        totalPages:
+          type: integer
+          format: int32
+          minimum: 0
+          description: The total number of pages available.
+          examples:
+            - 3
+        totalRecords:
+          type: integer
+          format: int32
+          minimum: 0
+          description: The total number of transactions (records) available in the result set.
+          examples:
+            - 500
+        lastPage:
+          type: boolean
+          description: Indicates the last page of the total pages.
+          examples:
+            - false
+            - true
+
+    PageMetadata:
+      type: object
+      description: Data information returned as a message or page information retrieved from the server. 
+      properties:
+        page:
+          $ref: '#/components/schemas/Page'
+
+    Exception:
+      type: object
+      description: Contains information about errors related to the request.
+      title: exceptionSchema
+      properties:
+        ErrorMessage:
+          type: string
+          description: A human-readable message that describes the type or source of the error.
+          examples:
+            - Error received from backend service
+        TransactionId:
+          type: string
+          description: A unique transaction ID returned with the response, useful for traceability.
+          examples:
+            - 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+        X-CorrelationId:
+          type: string
+          description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          examples:
+            - 929618f2-6163-bf73-51b0-6c54a8533c74
+        TransactionTime:
+          type: string
+          format: date-time
+          description: Date and time the error occurred.
+          examples:
+            - '2021-06-11T16:31:34.041Z'
+        Api-Url:
+          type: string
+          description: The API URL path of the call that generated the response.
+          examples:
+            - /wireInquiry/v1/transactions/list
+        ServiceError:
+          type: object
+          title: ServiceError
+          description: Detailed service-level error details, if available.
+          oneOf:
+            - $ref: '#/components/schemas/ServiceErrorData'
+            - $ref: '#/components/schemas/ConnectError'
+
+    ServiceErrorData:
+      type: object
+      title: serviceErrorData
+      description: Detailed service-level error information, if available.
+      properties:
+        metadata:
+          $ref: '#/components/schemas/ErrorMetadata'
+
+    ConnectError:
+      type: object
+      properties:
+        ConnectError:
+          type: string
+          description: API connectivity error information, if available.
+          examples:
+            - Request could not be processed on time (GatewayTimeout), please wait a moment and resubmit the request.
+
+    ErrorMetadata:
+      type: object
+      description: Error metadata including validation or service messages.
+      properties:
+        messages:
+          type: array
+          maxItems: 100
+          description: List of messages describing validation errors or other informational messages.
+          items:
+            $ref: '#/components/schemas/Message'
