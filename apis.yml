@@ -271,7 +271,7 @@ common:
     url: https://developer.key.com/tos
   - type: GettingStarted
     url: https://developer.key.com/guides/getting-started
-  - type: SignUp
+  - type: Signup
     url: https://developer.key.com/secure/signup
   - type: AgenticAccess
     url: agentic-access/keycorp-agentic-access.yml
@@ -299,7 +299,7 @@ common:
     url: mcp/keycorp-mcp.yml
   - type: ToolCrosswalk
     url: mcp/keycorp-tool-crosswalk.yml
-  - type: AgentSkill
+  - type: AgentSkills
     url: skills/_index.yml
   - type: Overlay
     url: overlays/keycorp-ach-originations-overlay.yaml
