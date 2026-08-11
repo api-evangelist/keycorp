@@ -267,6 +267,12 @@ apis:
   - type: Documentation
     url: https://developer.key.com/docs/webhooks
 common:
+  - type: TermsOfService
+    url: https://developer.key.com/tos
+  - type: GettingStarted
+    url: https://developer.key.com/guides/getting-started
+  - type: SignUp
+    url: https://developer.key.com/secure/signup
   - type: AgenticAccess
     url: agentic-access/keycorp-agentic-access.yml
   - type: DomainSecurity
