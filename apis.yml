@@ -13,6 +13,18 @@ description: >-
   inquiry, check services, and payment event webhooks. Each product ships a
   downloadable OpenAPI 3.1 definition and is secured with OAuth2 bearer tokens,
   mutual TLS client certificates, and FAPI-style interaction-id headers.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-11'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
@@ -267,6 +279,8 @@ apis:
   - type: Documentation
     url: https://developer.key.com/docs/webhooks
 common:
+  - type: AgentSkill
+    url: skills/keycorp-originate-ach-payment.md
   - type: TermsOfService
     url: https://developer.key.com/tos
   - type: GettingStarted
