@@ -55,7 +55,7 @@ tags:
 url: https://raw.githubusercontent.com/api-evangelist/keycorp/refs/heads/main/apis.yml
 created: '2026-03-21'
 modified: '2026-07-23'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: keycorp:account-information-api
   name: KeyBank Account Information API
