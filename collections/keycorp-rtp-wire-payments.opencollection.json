@@ -1,0 +1,171 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "RTP and Wire Payments API",
+    "version": "1.3.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "HealthCheck",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Health check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://partner-api-qv.key.com/rtp/v1/payment/healthCheck",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Verify you can connect to the API service. A bearer token is required."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Initiate",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send a real-time payment or a wire transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://partner-api-qv.key.com/rtp/v1/payment/initiate",
+            "headers": [
+              {
+                "name": "KeyClientId",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Initiate a RTP payment or send a wire transfer. Use the requestedService parameter to define the transaction as RTP or Wire. With the party object, you can define the receiver as an individual, corporation, or financial institution in the payment chain."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Participant",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a list of RTP participants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://partner-api-qv.key.com/rtp/v1/payment/rtp/participant",
+            "headers": [
+              {
+                "name": "KeyClientId",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Pagination parameter that indicates the maximum number of records to return in the response."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination parameter that indicates the number of records skipped before generating the output."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve a list of active, online RTP banks. Use the limit and offset fields to control how many records to return and what records to skip."
+        },
+        {
+          "info": {
+            "name": "Get information about one RTP participant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://partner-api-qv.key.com/rtp/v1/payment/rtp/participant/:routingNumber",
+            "headers": [
+              {
+                "name": "KeyClientId",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "routingNumber",
+                "value": "",
+                "type": "path",
+                "description": "Routing number of the participating RTP bank."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This call returns information about a single RTP participant. Use the routing number of the financial institution to search for the RTP participant."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Validate",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Perform validation checks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://partner-api-qv.key.com/rtp/v1/payment/validate",
+            "headers": [
+              {
+                "name": "KeyClientId",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This call performs all the validation checks needed to initiate a payment without creating a payment."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

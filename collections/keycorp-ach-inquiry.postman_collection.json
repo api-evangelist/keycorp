@@ -1,0 +1,1115 @@
+{
+  "item": [
+    {
+      "id": "d99f956e-fd26-4787-a8b4-90e9269fdc3f",
+      "name": "HealthCheck",
+      "description": {
+        "content": "Verify you can connect to the API service.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7475a2c6-6821-4d67-9545-9eba42b7f5e5",
+          "name": "Health check",
+          "request": {
+            "name": "Health check",
+            "description": {
+              "content": "Verify you can connect to the API service. A bearer token is required.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                "transactions",
+                "v1",
+                "healthCheck"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b4e9921e-524f-46c3-88cb-4ad4b0b8077e",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "transactions",
+                    "v1",
+                    "healthCheck"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"Ok\",\n  \"Source\": \"Roundtrip\",\n  \"Timestamp\": \"2022-09-15T04:49:03\",\n  \"ClientIp\": \"192.0.2.1\",\n  \"X-Forwarded-For\": \"[192.0.2.1]\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "1a847f11-0997-47b8-b672-f943a3ecc553",
+      "name": "ACH Transactions",
+      "description": {
+        "content": "ACH Inquiry functions to list and retrieve ACH transaction details",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6a2ad1e1-1bad-4ebd-9a83-6aba937d838c",
+          "name": "Get details about an ACH transaction with a parNumber.",
+          "request": {
+            "name": "Get details about an ACH transaction with a parNumber.",
+            "description": {
+              "content": "Use the parNumber to retrieve information about an ACH transaction. The parNumber can be obtained from the ACH List endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                "transactions",
+                "v1",
+                "ach",
+                "detail",
+                ":parNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "parNumber",
+                  "description": "(Required) The unique parNumber assigned to the transaction by the ACH processor."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Universal ID to trace the transaction across all systems involved.",
+                "key": "X-CorrelationId",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "13fd4c45-879c-4ac8-aea6-7fd5ba0faacc",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "transactions",
+                    "v1",
+                    "ach",
+                    "detail",
+                    ":parNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "parNumber",
+                      "description": "(Required) The unique parNumber assigned to the transaction by the ACH processor."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Universal ID to trace the transaction across all systems involved.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionStatus\": \"COLLECTED\",\n  \"traceNumber\": \"043000090716192\",\n  \"parNumber\": \"22018007665985\",\n  \"transactionAmount\": 10.01,\n  \"settlementDate\": \"2021-03-08\",\n  \"collectionDate\": \"2021-03-07\",\n  \"transactionCode\": \"22\",\n  \"transactionDescription\": \"DEPOSIT\",\n  \"authorizedCustomerName\": \"TEST CUSTOMER1\",\n  \"standardEntryClassCode\": \"CCD\",\n  \"receivingAccount\": {\n    \"accountNumber\": \"123456789012\",\n    \"routingNumber\": \"123456789\",\n    \"bankNumber\": \"0000\"\n  },\n  \"receivingParty\": {\n    \"customerIdentificationNumber\": \"099999999\",\n    \"companyName\": \"MERCHANT\",\n    \"customerName\": \"TEST MERCHANT\"\n  },\n  \"originatingAccount\": {\n    \"accountNumber\": \"3123456789\",\n    \"routingNumber\": \"1234567890\",\n    \"bankNumber\": \"0000\"\n  },\n  \"originatingParty\": {\n    \"customerIdentificationNumber\": \"1234567\",\n    \"companyName\": \"COMPANY NAME 1\",\n    \"customerName\": \"CUSTOMER NAME 1\"\n  },\n  \"returnReasonCode\": \"R02\",\n  \"returnReasonDescription\": \"Account Closed\",\n  \"returnDate\": \"2024-02-01\",\n  \"addendaCount\": 1,\n  \"notificationOfChangeAddendaCount\": 0,\n  \"internationalAddendaCount\": 0,\n  \"settlementAmount\": 123.45,\n  \"settlementTransactionId\": \"23218003015954\",\n  \"customData\": \"merchant:status\",\n  \"checkSerialNumber\": \"4345\",\n  \"transactionDirection\": \"Receiving Item\",\n  \"standardEntryClassDescription\": \"Cash Concentration or Disbursement\",\n  \"transactionCodeDescription\": \"Automated Deposit\",\n  \"addenda\": [\n    {\n      \"sequenceNumber\": 1,\n      \"entryDetailSequenceNumber\": \"188\",\n      \"paymentRelatedInformation\": \"Addenda Record (Applies to CCD, CTX, PPD, and WEB entries)\"\n    }\n  ],\n  \"notificationOfChange\": [\n    {\n      \"changeCode\": \"C02\",\n      \"changeDescription\": \"Incorrect transit/routing number\",\n      \"correctedData\": \"1234567890\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff0b249d-86d1-4851-8b7e-fcc44501783c",
+              "name": "No ACH transaction was found with the provided parNumber",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "transactions",
+                    "v1",
+                    "ach",
+                    "detail",
+                    ":parNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "parNumber",
+                      "description": "(Required) The unique parNumber assigned to the transaction by the ACH processor."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Universal ID to trace the transaction across all systems involved.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"https://partner-api-qv.key.com/accounts/transactions/v1/ach/detail/22018007665985\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"AI-Detail-404-no-records-100\",\n          \"message\": \"Record Not Found\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c0f35510-0302-4484-b19f-b34a6e17c32a",
+              "name": "Unexpected server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "transactions",
+                    "v1",
+                    "ach",
+                    "detail",
+                    ":parNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "parNumber",
+                      "description": "(Required) The unique parNumber assigned to the transaction by the ACH processor."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Universal ID to trace the transaction across all systems involved.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"Api-Url\": \"https://partner-api-qv.key.com/accounts/transactions/v1/ach/detail/22018007665985\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"500-InternalServerError\",\n          \"message\": \"An unexpected error occurred.  Please try again later or contact support if the problem persists.\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6f936ccb-d44b-4263-a550-7ec3a25a3505",
+          "name": "Advanced search for ACH transactions",
+          "request": {
+            "name": "Advanced search for ACH transactions",
+            "description": {
+              "content": "Search for ACH transactions by passing certain search parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                "transactions",
+                "v1",
+                "ach",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Universal ID to trace the transaction across all systems involved.",
+                "key": "X-CorrelationId",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountNumber\": \"<string>\",\n  \"fromDate\": \"<date>\",\n  \"toDate\": \"<date>\",\n  \"minimumAmount\": \"<double>\",\n  \"maximumAmount\": \"<double>\",\n  \"traceNumber\": \"<string>\",\n  \"pageNumber\": \"<integer>\",\n  \"pageSize\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "58c94fbe-633e-4c5a-ad8d-abf2128b5f0c",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "transactions",
+                    "v1",
+                    "ach",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Universal ID to trace the transaction across all systems involved.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"3123456789\",\n  \"fromDate\": \"2024-02-01\",\n  \"toDate\": \"2024-02-01\",\n  \"minimumAmount\": 100,\n  \"maximumAmount\": 75020.5,\n  \"traceNumber\": \"043000090716192\",\n  \"pageNumber\": 1,\n  \"pageSize\": 150\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactions\": [\n    {\n      \"parNumber\": \"22018007665985\",\n      \"transactionStatus\": \"COLLECTED\",\n      \"traceNumber\": \"043000090716192\",\n      \"transactionAmount\": 10.01,\n      \"collectionDate\": \"2021-03-07\",\n      \"settlementDate\": \"2021-03-08\",\n      \"transactionCode\": \"22\",\n      \"transactionDescription\": \"DEPOSIT\",\n      \"authorizedCustomerName\": \"TEST CUSTOMER1\",\n      \"standardEntryClassCode\": \"CCD\",\n      \"receivingAccount\": {\n        \"accountNumber\": \"123456789012\"\n      },\n      \"receivingParty\": {\n        \"customerIdentificationNumber\": \"099999999\",\n        \"companyName\": \"MERCHANT\"\n      },\n      \"originatingAccount\": {\n        \"accountNumber\": \"3123456789\"\n      },\n      \"originatingParty\": {\n        \"customerIdentificationNumber\": \"1234567\",\n        \"companyName\": \"COMPANY NAME 1\"\n      },\n      \"returnDate\": \"2024-02-01\",\n      \"returnReasonCode\": \"R02\",\n      \"returnReasonDescription\": \"Account Closed\",\n      \"addendaCount\": 1,\n      \"notificationOfChangeAddendaCount\": 0,\n      \"internationalAddendaCount\": 0,\n      \"settlementAmount\": 123.45,\n      \"settlementTransactionId\": \"23218003015954\"\n    }\n  ],\n  \"metadata\": {\n    \"page\": {\n      \"pageNumber\": 1,\n      \"pageSize\": 25,\n      \"totalPages\": 3,\n      \"totalRecords\": 75,\n      \"lastPage\": false\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "134c3509-7c27-4b24-be6d-1d42e1dfe426",
+              "name": "Bad input parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "transactions",
+                    "v1",
+                    "ach",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Universal ID to trace the transaction across all systems involved.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"3123456789\",\n  \"fromDate\": \"2024-02-01\",\n  \"toDate\": \"2024-02-01\",\n  \"minimumAmount\": 100,\n  \"maximumAmount\": 75020.5,\n  \"traceNumber\": \"043000090716192\",\n  \"pageNumber\": 1,\n  \"pageSize\": 150\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"https://partner-api-qv.key.com/accounts/transactions/v1/ach/list\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"AI-List-400-fromDate-105\",\n          \"message\": \"fromDate format must be YYYY-MM-DD\"\n        },\n        {\n          \"code\": \"AI-List-400-fromDate-117\",\n          \"message\": \"fromDate must be a valid date\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5fdcec4c-e6bc-4de5-9a5a-d7284eb10ca1",
+              "name": "Entitlements validation failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "transactions",
+                    "v1",
+                    "ach",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Universal ID to trace the transaction across all systems involved.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"3123456789\",\n  \"fromDate\": \"2024-02-01\",\n  \"toDate\": \"2024-02-01\",\n  \"minimumAmount\": 100,\n  \"maximumAmount\": 75020.5,\n  \"traceNumber\": \"043000090716192\",\n  \"pageNumber\": 1,\n  \"pageSize\": 150\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"https://partner-api-qv.key.com/accounts/transactions/v1/ach/list\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"403-Forbidden\",\n          \"message\": \"Entitlements Validation Failed\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "769d477a-a8e7-4660-8c87-b58b9ef696c8",
+              "name": "Unexpected server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "transactions",
+                    "v1",
+                    "ach",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Universal ID to trace the transaction across all systems involved.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"3123456789\",\n  \"fromDate\": \"2024-02-01\",\n  \"toDate\": \"2024-02-01\",\n  \"minimumAmount\": 100,\n  \"maximumAmount\": 75020.5,\n  \"traceNumber\": \"043000090716192\",\n  \"pageNumber\": 1,\n  \"pageSize\": 150\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"Api-Url\": \"https://partner-api-qv.key.com/accounts/transactions/v1/ach/list\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"500-InternalServerError\",\n          \"message\": \"An unexpected error occurred.  Please try again later or contact support if the problem persists.\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "864dbe8d-3c3f-4d23-aacf-d3afd1188bd6",
+          "name": "Advanced search for settled ACH transactions",
+          "request": {
+            "name": "Advanced search for settled ACH transactions",
+            "description": {
+              "content": "Search for ACH batch details of transactions that have posted to the KeyBank account where the status is settled or returned.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                "transactions",
+                "v1",
+                "ach",
+                "settled",
+                ":settlementTransactionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageNumber",
+                  "value": "1",
+                  "description": "The number of the page being viewed. This number must be greater than or equal to 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "1000",
+                  "description": "The number of records per page. Must be between 1 and 1000."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "settlementTransactionId",
+                  "description": "(Required) The transaction ID that is assigned during settlement. This can be obtained from the Commercial Accounting API."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Universal ID to trace the transaction across all systems involved.",
+                "key": "X-CorrelationId",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "22e96ccd-2178-4dd3-a9ec-90f8f4000e7b",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "transactions",
+                    "v1",
+                    "ach",
+                    "settled",
+                    ":settlementTransactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "150"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlementTransactionId",
+                      "description": "(Required) The transaction ID that is assigned during settlement. This can be obtained from the Commercial Accounting API."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Universal ID to trace the transaction across all systems involved.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactions\": [\n    {\n      \"parNumber\": \"22018007665985\",\n      \"transactionStatus\": \"SETTLED\",\n      \"traceNumber\": \"043000090716192\",\n      \"transactionAmount\": 10.01,\n      \"collectionDate\": \"2021-03-07\",\n      \"settlementDate\": \"2021-03-08\",\n      \"transactionCode\": \"22\",\n      \"transactionDescription\": \"DEPOSIT\",\n      \"authorizedCustomerName\": \"TEST CUSTOMER1\",\n      \"standardEntryClassCode\": \"CCD\",\n      \"receivingAccount\": {\n        \"accountNumber\": \"123456789012\"\n      },\n      \"receivingParty\": {\n        \"customerIdentificationNumber\": \"099999999\",\n        \"companyName\": \"MERCHANT\"\n      },\n      \"originatingAccount\": {\n        \"accountNumber\": \"3123456789\"\n      },\n      \"originatingParty\": {\n        \"customerIdentificationNumber\": \"1234567\",\n        \"companyName\": \"COMPANY NAME 1\"\n      },\n      \"settlementAmount\": 123.45,\n      \"settlementTransactionId\": \"23218003015954\"\n    }\n  ],\n  \"metadata\": {\n    \"page\": {\n      \"pageNumber\": 1,\n      \"pageSize\": 10,\n      \"totalPages\": 3,\n      \"totalRecords\": 28,\n      \"lastPage\": false\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "be05dbba-f56a-46f7-88b8-294ac09758cb",
+              "name": "Bad input parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "transactions",
+                    "v1",
+                    "ach",
+                    "settled",
+                    ":settlementTransactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "150"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlementTransactionId",
+                      "description": "(Required) The transaction ID that is assigned during settlement. This can be obtained from the Commercial Accounting API."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Universal ID to trace the transaction across all systems involved.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"https://partner-api-qv.key.com/accounts/transactions/v1/ach/settled/22018007665985\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"AI-Settled-400-pageSize-115\",\n          \"message\": \"pageSize must be less than or equal to 1000\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9cf4e0e-07e8-4801-a28d-3a151b1516be",
+              "name": "No ACH transaction was found with the provided settlementTransactionId",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "transactions",
+                    "v1",
+                    "ach",
+                    "settled",
+                    ":settlementTransactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "150"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlementTransactionId",
+                      "description": "(Required) The transaction ID that is assigned during settlement. This can be obtained from the Commercial Accounting API."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Universal ID to trace the transaction across all systems involved.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"https://partner-api-qv.key.com/accounts/transactions/v1/ach/settled/22018007665985\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"AI-Settled-404-no-records-100\",\n          \"message\": \"Record Not Found\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8e2d661-e241-4baa-90e4-aae51464f290",
+              "name": "Unexpected server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "transactions",
+                    "v1",
+                    "ach",
+                    "settled",
+                    ":settlementTransactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "150"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "settlementTransactionId",
+                      "description": "(Required) The transaction ID that is assigned during settlement. This can be obtained from the Commercial Accounting API."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Universal ID to trace the transaction across all systems involved.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"Api-Url\": \"https://partner-api-qv.key.com/accounts/transactions/v1/ach/settled/22018007665985\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"500-InternalServerError\",\n          \"message\": \"An unexpected error occurred.  Please try again later or contact support if the problem persists.\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://partner-api-qv.key.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "cd531573-21da-46bd-ae80-200cb920d1a6",
+    "name": "ACH Inquiry",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Use the ACH Inquiry API to get the status on ACH transactions based on your query criteria.\n\nContact Support:\n Name: KeyBank Developer Support\n Email: embedded_banking_support@keybank.com",
+      "type": "text/plain"
+    }
+  }
+}

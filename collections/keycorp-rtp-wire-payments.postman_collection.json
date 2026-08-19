@@ -1,0 +1,3613 @@
+{
+  "item": [
+    {
+      "id": "982817ac-8894-4c33-893f-a8f929a9b50a",
+      "name": "Initiate",
+      "description": {
+        "content": "Send a payment.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a9d39c2d-c560-4c08-94b9-d876ace56c0d",
+          "name": "Send a real-time payment or a wire transfer",
+          "request": {
+            "name": "Send a real-time payment or a wire transfer",
+            "description": {
+              "content": "Initiate a RTP payment or send a wire transfer. Use the requestedService parameter to define the transaction as RTP or Wire. With the party object, you can define the receiver as an individual, corporation, or financial institution in the payment chain.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rtp",
+                "v1",
+                "payment",
+                "initiate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                "key": "KeyClientId",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestedService\": \"<string>\",\n  \"requestReference\": \"<string>\",\n  \"type\": \"<string>\",\n  \"requestedValueDate\": \"<string>\",\n  \"sendersReference\": \"<string>\",\n  \"debitParty\": {\n    \"name\": \"<string>\",\n    \"accountNumber\": \"<string>\",\n    \"aba\": \"<string>\",\n    \"bic\": \"<string>\",\n    \"txid\": \"<string>\",\n    \"foreignBankSystemId\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\"\n    },\n    \"postalAddress\": {\n      \"adrTp\": \"<string>\",\n      \"dept\": \"<string>\",\n      \"subDept\": \"<string>\",\n      \"strtNm\": \"<string>\",\n      \"bldgNb\": \"<string>\",\n      \"pstCd\": \"<string>\",\n      \"twnNm\": \"<string>\",\n      \"ctrySubDvsn\": \"<string>\",\n      \"ctry\": \"<string>\",\n      \"adrLine\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"creditPartyBank\": {\n    \"name\": \"<string>\",\n    \"accountNumber\": \"<string>\",\n    \"aba\": \"<string>\",\n    \"bic\": \"<string>\",\n    \"txid\": \"<string>\",\n    \"foreignBankSystemId\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\"\n    },\n    \"postalAddress\": {\n      \"adrTp\": \"<string>\",\n      \"dept\": \"<string>\",\n      \"subDept\": \"<string>\",\n      \"strtNm\": \"<string>\",\n      \"bldgNb\": \"<string>\",\n      \"pstCd\": \"<string>\",\n      \"twnNm\": \"<string>\",\n      \"ctrySubDvsn\": \"<string>\",\n      \"ctry\": \"<string>\",\n      \"adrLine\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"creditParty\": {\n    \"name\": \"<string>\",\n    \"accountNumber\": \"<string>\",\n    \"aba\": \"<string>\",\n    \"bic\": \"<string>\",\n    \"txid\": \"<string>\",\n    \"foreignBankSystemId\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\"\n    },\n    \"postalAddress\": {\n      \"adrTp\": \"<string>\",\n      \"dept\": \"<string>\",\n      \"subDept\": \"<string>\",\n      \"strtNm\": \"<string>\",\n      \"bldgNb\": \"<string>\",\n      \"pstCd\": \"<string>\",\n      \"twnNm\": \"<string>\",\n      \"ctrySubDvsn\": \"<string>\",\n      \"ctry\": \"<string>\",\n      \"adrLine\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"transferAmount\": \"<double>\",\n  \"transferCurrency\": \"<string>\",\n  \"originatorReference\": \"<string>\",\n  \"receiversReference\": \"<string>\",\n  \"bankToBankInstructions\": \"<string>\",\n  \"ultimateDebitParty\": {\n    \"name\": \"<string>\"\n  },\n  \"debitPartyBank\": {\n    \"name\": \"<string>\",\n    \"accountNumber\": \"<string>\",\n    \"aba\": \"<string>\",\n    \"bic\": \"<string>\",\n    \"txid\": \"<string>\",\n    \"foreignBankSystemId\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\"\n    },\n    \"postalAddress\": {\n      \"adrTp\": \"<string>\",\n      \"dept\": \"<string>\",\n      \"subDept\": \"<string>\",\n      \"strtNm\": \"<string>\",\n      \"bldgNb\": \"<string>\",\n      \"pstCd\": \"<string>\",\n      \"twnNm\": \"<string>\",\n      \"ctrySubDvsn\": \"<string>\",\n      \"ctry\": \"<string>\",\n      \"adrLine\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"debitPartyInstructions\": {},\n  \"intermediaryBank1\": {\n    \"name\": \"<string>\",\n    \"accountNumber\": \"<string>\",\n    \"aba\": \"<string>\",\n    \"bic\": \"<string>\",\n    \"txid\": \"<string>\",\n    \"foreignBankSystemId\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\"\n    },\n    \"postalAddress\": {\n      \"adrTp\": \"<string>\",\n      \"dept\": \"<string>\",\n      \"subDept\": \"<string>\",\n      \"strtNm\": \"<string>\",\n      \"bldgNb\": \"<string>\",\n      \"pstCd\": \"<string>\",\n      \"twnNm\": \"<string>\",\n      \"ctrySubDvsn\": \"<string>\",\n      \"ctry\": \"<string>\",\n      \"adrLine\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"intermediaryBank2\": {\n    \"name\": \"<string>\",\n    \"accountNumber\": \"<string>\",\n    \"aba\": \"<string>\",\n    \"bic\": \"<string>\",\n    \"txid\": \"<string>\",\n    \"foreignBankSystemId\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\"\n    },\n    \"postalAddress\": {\n      \"adrTp\": \"<string>\",\n      \"dept\": \"<string>\",\n      \"subDept\": \"<string>\",\n      \"strtNm\": \"<string>\",\n      \"bldgNb\": \"<string>\",\n      \"pstCd\": \"<string>\",\n      \"twnNm\": \"<string>\",\n      \"ctrySubDvsn\": \"<string>\",\n      \"ctry\": \"<string>\",\n      \"adrLine\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"intermediaryBank3\": {\n    \"name\": \"<string>\",\n    \"accountNumber\": \"<string>\",\n    \"aba\": \"<string>\",\n    \"bic\": \"<string>\",\n    \"txid\": \"<string>\",\n    \"foreignBankSystemId\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\"\n    },\n    \"postalAddress\": {\n      \"adrTp\": \"<string>\",\n      \"dept\": \"<string>\",\n      \"subDept\": \"<string>\",\n      \"strtNm\": \"<string>\",\n      \"bldgNb\": \"<string>\",\n      \"pstCd\": \"<string>\",\n      \"twnNm\": \"<string>\",\n      \"ctrySubDvsn\": \"<string>\",\n      \"ctry\": \"<string>\",\n      \"adrLine\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"externalTemplateName\": \"<string>\",\n  \"customData\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6fa73376-19ae-44a4-8f3b-c65824949002",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "initiate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestedService\": \"RTP\",\n  \"requestReference\": \"AZX01234567891011\",\n  \"type\": \"PAYMENT\",\n  \"sendersReference\": \"INVC0012345\",\n  \"receiversReference\": \"INVC0054321\",\n  \"requestedValueDate\": \"2025-12-15\",\n  \"debitParty\": {\n    \"name\": \"CLARK GABLE\",\n    \"accountNumber\": \"001122334455\"\n  },\n  \"creditPartyBank\": {\n    \"name\": \"CARY GRANT'S BANK\",\n    \"aba\": \"123456789\"\n  },\n  \"creditParty\": {\n    \"name\": \"CARY GRANT\",\n    \"accountNumber\": \"987654321\",\n    \"postalAddress\": {\n      \"dept\": \"Test Dept\",\n      \"subDept\": \"Test Sub Dept\",\n      \"strtNm\": \"Main Street\",\n      \"bldgNb\": 123,\n      \"pstCd\": 12345,\n      \"twnNm\": \"Central Town\",\n      \"ctrySubDvsn\": \"OH\",\n      \"ctry\": \"US\"\n    }\n  },\n  \"transferAmount\": 10,\n  \"transferCurrency\": \"USD\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"IN_PROCESS\",\n  \"transactionId\": \"US23050800214592\",\n  \"requestReference\": \"AZX01234567891011\",\n  \"sendersReference\": \"INVC0012345\",\n  \"receiversReference\": \"INVC0054321\",\n  \"debitAccountNumber\": \"001122334455\",\n  \"creditAccountNumber\": \"987654321\",\n  \"valueDate\": \"2023-05-08\",\n  \"transferAmount\": 10,\n  \"transferCurrency\": \"USD\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8bb78bb-3dba-4e09-b8b7-941e805aece3",
+              "name": "Missing data in the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "initiate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestedService\": \"RTP\",\n  \"requestReference\": \"AZX01234567891011\",\n  \"type\": \"PAYMENT\",\n  \"sendersReference\": \"INVC0012345\",\n  \"receiversReference\": \"INVC0054321\",\n  \"requestedValueDate\": \"2025-12-15\",\n  \"debitParty\": {\n    \"name\": \"CLARK GABLE\",\n    \"accountNumber\": \"001122334455\"\n  },\n  \"creditPartyBank\": {\n    \"name\": \"CARY GRANT'S BANK\",\n    \"aba\": \"123456789\"\n  },\n  \"creditParty\": {\n    \"name\": \"CARY GRANT\",\n    \"accountNumber\": \"987654321\",\n    \"postalAddress\": {\n      \"dept\": \"Test Dept\",\n      \"subDept\": \"Test Sub Dept\",\n      \"strtNm\": \"Main Street\",\n      \"bldgNb\": 123,\n      \"pstCd\": 12345,\n      \"twnNm\": \"Central Town\",\n      \"ctrySubDvsn\": \"OH\",\n      \"ctry\": \"US\"\n    }\n  },\n  \"transferAmount\": 10,\n  \"transferCurrency\": \"USD\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"US21052400000000\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/initiate\",\n  \"ServiceError\": {\n    \"status\": \"FAILED\",\n    \"transactionId\": \"rrt-770941720727587-2383364-1\",\n    \"requestReference\": \"RR-220818-01\",\n    \"sendersReference\": \"SR-220818-01\",\n    \"valueDate\": \"2023-05-10\",\n    \"error\": {\n      \"code\": \"KEY-1006\",\n      \"title\": \"Required field missing\",\n      \"description\": \"The object creditPartyBank is required in the request.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9aee92d9-1796-4b6a-b03e-a82f94af47f5",
+              "name": "Received request is unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "initiate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestedService\": \"RTP\",\n  \"requestReference\": \"AZX01234567891011\",\n  \"type\": \"PAYMENT\",\n  \"sendersReference\": \"INVC0012345\",\n  \"receiversReference\": \"INVC0054321\",\n  \"requestedValueDate\": \"2025-12-15\",\n  \"debitParty\": {\n    \"name\": \"CLARK GABLE\",\n    \"accountNumber\": \"001122334455\"\n  },\n  \"creditPartyBank\": {\n    \"name\": \"CARY GRANT'S BANK\",\n    \"aba\": \"123456789\"\n  },\n  \"creditParty\": {\n    \"name\": \"CARY GRANT\",\n    \"accountNumber\": \"987654321\",\n    \"postalAddress\": {\n      \"dept\": \"Test Dept\",\n      \"subDept\": \"Test Sub Dept\",\n      \"strtNm\": \"Main Street\",\n      \"bldgNb\": 123,\n      \"pstCd\": 12345,\n      \"twnNm\": \"Central Town\",\n      \"ctrySubDvsn\": \"OH\",\n      \"ctry\": \"US\"\n    }\n  },\n  \"transferAmount\": 10,\n  \"transferCurrency\": \"USD\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations. The ID is unique to each request.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service.\",\n  \"TransactionId\": \"rrt-621075741872460927-c-gce-9129-15867185-4\",\n  \"X-CorrelationId\": \"80457bcb-2c3b-8c55-8cd6-3520c3157e8f\",\n  \"TransactionTime\": \"2022-04-04T11:41:13.754Z\",\n  \"Api-Url\": \"/rtp/v1/payment/initiate\",\n  \"ServiceError\": {\n    \"status\": \"ERROR\",\n    \"transactionId\": \"rrt-621075741872460927\",\n    \"requestReference\": \"REQUEST-REF-220314.1\",\n    \"sendersReference\": \"SENDER-REF-220314.1\",\n    \"valueDate\": \"06-10-2023\",\n    \"error\": {\n      \"code\": \"KEY-0006\",\n      \"title\": \"Not authorized for requested service\",\n      \"description\": \"Check your credentials.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "34faa7f5-c2f0-4225-9f76-26cdc1e73523",
+              "name": "Request is forbidden to access the resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "initiate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestedService\": \"RTP\",\n  \"requestReference\": \"AZX01234567891011\",\n  \"type\": \"PAYMENT\",\n  \"sendersReference\": \"INVC0012345\",\n  \"receiversReference\": \"INVC0054321\",\n  \"requestedValueDate\": \"2025-12-15\",\n  \"debitParty\": {\n    \"name\": \"CLARK GABLE\",\n    \"accountNumber\": \"001122334455\"\n  },\n  \"creditPartyBank\": {\n    \"name\": \"CARY GRANT'S BANK\",\n    \"aba\": \"123456789\"\n  },\n  \"creditParty\": {\n    \"name\": \"CARY GRANT\",\n    \"accountNumber\": \"987654321\",\n    \"postalAddress\": {\n      \"dept\": \"Test Dept\",\n      \"subDept\": \"Test Sub Dept\",\n      \"strtNm\": \"Main Street\",\n      \"bldgNb\": 123,\n      \"pstCd\": 12345,\n      \"twnNm\": \"Central Town\",\n      \"ctrySubDvsn\": \"OH\",\n      \"ctry\": \"US\"\n    }\n  },\n  \"transferAmount\": 10,\n  \"transferCurrency\": \"USD\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Access to requested resource is forbidden.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/initiate\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb6d512d-ae2d-40e1-a3c9-fefbb6f7290d",
+              "name": "Requested resource is not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "initiate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestedService\": \"RTP\",\n  \"requestReference\": \"AZX01234567891011\",\n  \"type\": \"PAYMENT\",\n  \"sendersReference\": \"INVC0012345\",\n  \"receiversReference\": \"INVC0054321\",\n  \"requestedValueDate\": \"2025-12-15\",\n  \"debitParty\": {\n    \"name\": \"CLARK GABLE\",\n    \"accountNumber\": \"001122334455\"\n  },\n  \"creditPartyBank\": {\n    \"name\": \"CARY GRANT'S BANK\",\n    \"aba\": \"123456789\"\n  },\n  \"creditParty\": {\n    \"name\": \"CARY GRANT\",\n    \"accountNumber\": \"987654321\",\n    \"postalAddress\": {\n      \"dept\": \"Test Dept\",\n      \"subDept\": \"Test Sub Dept\",\n      \"strtNm\": \"Main Street\",\n      \"bldgNb\": 123,\n      \"pstCd\": 12345,\n      \"twnNm\": \"Central Town\",\n      \"ctrySubDvsn\": \"OH\",\n      \"ctry\": \"US\"\n    }\n  },\n  \"transferAmount\": 10,\n  \"transferCurrency\": \"USD\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Requested resource is not found, please verify the resource and resubmit the request.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/initiate\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0351e188-92db-41e1-af16-6fc698433c1c",
+              "name": "Requested method is not allowed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "initiate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestedService\": \"RTP\",\n  \"requestReference\": \"AZX01234567891011\",\n  \"type\": \"PAYMENT\",\n  \"sendersReference\": \"INVC0012345\",\n  \"receiversReference\": \"INVC0054321\",\n  \"requestedValueDate\": \"2025-12-15\",\n  \"debitParty\": {\n    \"name\": \"CLARK GABLE\",\n    \"accountNumber\": \"001122334455\"\n  },\n  \"creditPartyBank\": {\n    \"name\": \"CARY GRANT'S BANK\",\n    \"aba\": \"123456789\"\n  },\n  \"creditParty\": {\n    \"name\": \"CARY GRANT\",\n    \"accountNumber\": \"987654321\",\n    \"postalAddress\": {\n      \"dept\": \"Test Dept\",\n      \"subDept\": \"Test Sub Dept\",\n      \"strtNm\": \"Main Street\",\n      \"bldgNb\": 123,\n      \"pstCd\": 12345,\n      \"twnNm\": \"Central Town\",\n      \"ctrySubDvsn\": \"OH\",\n      \"ctry\": \"US\"\n    }\n  },\n  \"transferAmount\": 10,\n  \"transferCurrency\": \"USD\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Requested method is not allowed, please verify the method and resubmit the request.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/initiate\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "440c8c2f-3c1b-4a08-a097-66ef6bfcf35b",
+              "name": "Requested unsupported media type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "initiate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestedService\": \"RTP\",\n  \"requestReference\": \"AZX01234567891011\",\n  \"type\": \"PAYMENT\",\n  \"sendersReference\": \"INVC0012345\",\n  \"receiversReference\": \"INVC0054321\",\n  \"requestedValueDate\": \"2025-12-15\",\n  \"debitParty\": {\n    \"name\": \"CLARK GABLE\",\n    \"accountNumber\": \"001122334455\"\n  },\n  \"creditPartyBank\": {\n    \"name\": \"CARY GRANT'S BANK\",\n    \"aba\": \"123456789\"\n  },\n  \"creditParty\": {\n    \"name\": \"CARY GRANT\",\n    \"accountNumber\": \"987654321\",\n    \"postalAddress\": {\n      \"dept\": \"Test Dept\",\n      \"subDept\": \"Test Sub Dept\",\n      \"strtNm\": \"Main Street\",\n      \"bldgNb\": 123,\n      \"pstCd\": 12345,\n      \"twnNm\": \"Central Town\",\n      \"ctrySubDvsn\": \"OH\",\n      \"ctry\": \"US\"\n    }\n  },\n  \"transferAmount\": 10,\n  \"transferCurrency\": \"USD\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Requested media type is not allowed, please verify the media type and resubmit the request.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/initiate\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5927d00f-0d26-47d1-b36a-b27d20890ade",
+              "name": "Too many requests received",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "initiate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestedService\": \"RTP\",\n  \"requestReference\": \"AZX01234567891011\",\n  \"type\": \"PAYMENT\",\n  \"sendersReference\": \"INVC0012345\",\n  \"receiversReference\": \"INVC0054321\",\n  \"requestedValueDate\": \"2025-12-15\",\n  \"debitParty\": {\n    \"name\": \"CLARK GABLE\",\n    \"accountNumber\": \"001122334455\"\n  },\n  \"creditPartyBank\": {\n    \"name\": \"CARY GRANT'S BANK\",\n    \"aba\": \"123456789\"\n  },\n  \"creditParty\": {\n    \"name\": \"CARY GRANT\",\n    \"accountNumber\": \"987654321\",\n    \"postalAddress\": {\n      \"dept\": \"Test Dept\",\n      \"subDept\": \"Test Sub Dept\",\n      \"strtNm\": \"Main Street\",\n      \"bldgNb\": 123,\n      \"pstCd\": 12345,\n      \"twnNm\": \"Central Town\",\n      \"ctrySubDvsn\": \"OH\",\n      \"ctry\": \"US\"\n    }\n  },\n  \"transferAmount\": 10,\n  \"transferCurrency\": \"USD\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Number requests threshold reached, please resubmit the request after sometime.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/initiate\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d20267f4-dc6e-4753-a90c-b1ba51f90cfc",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "initiate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestedService\": \"RTP\",\n  \"requestReference\": \"AZX01234567891011\",\n  \"type\": \"PAYMENT\",\n  \"sendersReference\": \"INVC0012345\",\n  \"receiversReference\": \"INVC0054321\",\n  \"requestedValueDate\": \"2025-12-15\",\n  \"debitParty\": {\n    \"name\": \"CLARK GABLE\",\n    \"accountNumber\": \"001122334455\"\n  },\n  \"creditPartyBank\": {\n    \"name\": \"CARY GRANT'S BANK\",\n    \"aba\": \"123456789\"\n  },\n  \"creditParty\": {\n    \"name\": \"CARY GRANT\",\n    \"accountNumber\": \"987654321\",\n    \"postalAddress\": {\n      \"dept\": \"Test Dept\",\n      \"subDept\": \"Test Sub Dept\",\n      \"strtNm\": \"Main Street\",\n      \"bldgNb\": 123,\n      \"pstCd\": 12345,\n      \"twnNm\": \"Central Town\",\n      \"ctrySubDvsn\": \"OH\",\n      \"ctry\": \"US\"\n    }\n  },\n  \"transferAmount\": 10,\n  \"transferCurrency\": \"USD\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service.\",\n  \"TransactionId\": \"359681587523_SR-RMC-210729-11081\",\n  \"X-CorrelationId\": \"7ad7fdfb-2ade-a3ab-b97c-523dc5312688\",\n  \"TransactionTime\": \"2022-04-05T07:59:15.422Z\",\n  \"Api-Url\": \"/rtp/v1/payment/initiate\",\n  \"ServiceError\": {\n    \"status\": \"ERROR\",\n    \"transactionId\": \"rrt-621075741872460927\",\n    \"requestReference\": \"RR-RMC-210720-0123458981\",\n    \"sendersReference\": \"SR-RMC-210729-11081\",\n    \"valueDate\": \"06-10-2023\",\n    \"error\": {\n      \"code\": \"KEY-9999\",\n      \"title\": \"Unknown error\",\n      \"description\": \"Payment Initiation ServiceException: AUTHENTICATION_FAILURE Unable to logon with the supplied credentials.\"\n    },\n    \"doddFrank\": \"NO\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9f2dc85-5adb-43a1-a731-7fd87d2f0567",
+              "name": "Bad Gateway",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "initiate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestedService\": \"RTP\",\n  \"requestReference\": \"AZX01234567891011\",\n  \"type\": \"PAYMENT\",\n  \"sendersReference\": \"INVC0012345\",\n  \"receiversReference\": \"INVC0054321\",\n  \"requestedValueDate\": \"2025-12-15\",\n  \"debitParty\": {\n    \"name\": \"CLARK GABLE\",\n    \"accountNumber\": \"001122334455\"\n  },\n  \"creditPartyBank\": {\n    \"name\": \"CARY GRANT'S BANK\",\n    \"aba\": \"123456789\"\n  },\n  \"creditParty\": {\n    \"name\": \"CARY GRANT\",\n    \"accountNumber\": \"987654321\",\n    \"postalAddress\": {\n      \"dept\": \"Test Dept\",\n      \"subDept\": \"Test Sub Dept\",\n      \"strtNm\": \"Main Street\",\n      \"bldgNb\": 123,\n      \"pstCd\": 12345,\n      \"twnNm\": \"Central Town\",\n      \"ctrySubDvsn\": \"OH\",\n      \"ctry\": \"US\"\n    }\n  },\n  \"transferAmount\": 10,\n  \"transferCurrency\": \"USD\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/initiate\",\n  \"ServiceError\": {\n    \"ConnectError\": \"Connectivity error occurred with the downstream service (unexpected EOF at target). Please check with application support team before resubmitting the request\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3da1bba8-7e6f-42fe-8c1d-0b859673460a",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "initiate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestedService\": \"RTP\",\n  \"requestReference\": \"AZX01234567891011\",\n  \"type\": \"PAYMENT\",\n  \"sendersReference\": \"INVC0012345\",\n  \"receiversReference\": \"INVC0054321\",\n  \"requestedValueDate\": \"2025-12-15\",\n  \"debitParty\": {\n    \"name\": \"CLARK GABLE\",\n    \"accountNumber\": \"001122334455\"\n  },\n  \"creditPartyBank\": {\n    \"name\": \"CARY GRANT'S BANK\",\n    \"aba\": \"123456789\"\n  },\n  \"creditParty\": {\n    \"name\": \"CARY GRANT\",\n    \"accountNumber\": \"987654321\",\n    \"postalAddress\": {\n      \"dept\": \"Test Dept\",\n      \"subDept\": \"Test Sub Dept\",\n      \"strtNm\": \"Main Street\",\n      \"bldgNb\": 123,\n      \"pstCd\": 12345,\n      \"twnNm\": \"Central Town\",\n      \"ctrySubDvsn\": \"OH\",\n      \"ctry\": \"US\"\n    }\n  },\n  \"transferAmount\": 10,\n  \"transferCurrency\": \"USD\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/initiate\",\n  \"ServiceError\": {\n    \"ConnectError\": \"Service is currently unavailable (NoActiveTargets), please check with application support before resubmitting the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ba2a936-0329-4452-9965-970241c490f4",
+              "name": "Gateway timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "initiate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestedService\": \"RTP\",\n  \"requestReference\": \"AZX01234567891011\",\n  \"type\": \"PAYMENT\",\n  \"sendersReference\": \"INVC0012345\",\n  \"receiversReference\": \"INVC0054321\",\n  \"requestedValueDate\": \"2025-12-15\",\n  \"debitParty\": {\n    \"name\": \"CLARK GABLE\",\n    \"accountNumber\": \"001122334455\"\n  },\n  \"creditPartyBank\": {\n    \"name\": \"CARY GRANT'S BANK\",\n    \"aba\": \"123456789\"\n  },\n  \"creditParty\": {\n    \"name\": \"CARY GRANT\",\n    \"accountNumber\": \"987654321\",\n    \"postalAddress\": {\n      \"dept\": \"Test Dept\",\n      \"subDept\": \"Test Sub Dept\",\n      \"strtNm\": \"Main Street\",\n      \"bldgNb\": 123,\n      \"pstCd\": 12345,\n      \"twnNm\": \"Central Town\",\n      \"ctrySubDvsn\": \"OH\",\n      \"ctry\": \"US\"\n    }\n  },\n  \"transferAmount\": 10,\n  \"transferCurrency\": \"USD\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/initiate\",\n  \"ServiceError\": {\n    \"ConnectError\": \"Request could not be processed on time (gateway timeout). Please wait a moment and resubmit the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "8ab45115-8a9f-4691-a0e6-74c12215b3b7",
+      "name": "Validate",
+      "description": {
+        "content": "Perform validation checks for a payment transaction.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0aa7c920-fc98-4a53-8996-2045ec3e6d35",
+          "name": "Perform validation checks",
+          "request": {
+            "name": "Perform validation checks",
+            "description": {
+              "content": "This call performs all the validation checks needed to initiate a payment without creating a payment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rtp",
+                "v1",
+                "payment",
+                "validate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                "key": "KeyClientId",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestedService\": \"<string>\",\n  \"requestReference\": \"<string>\",\n  \"type\": \"<string>\",\n  \"requestedValueDate\": \"<string>\",\n  \"sendersReference\": \"<string>\",\n  \"debitParty\": {\n    \"name\": \"<string>\",\n    \"accountNumber\": \"<string>\",\n    \"aba\": \"<string>\",\n    \"bic\": \"<string>\",\n    \"txid\": \"<string>\",\n    \"foreignBankSystemId\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\"\n    },\n    \"postalAddress\": {\n      \"adrTp\": \"<string>\",\n      \"dept\": \"<string>\",\n      \"subDept\": \"<string>\",\n      \"strtNm\": \"<string>\",\n      \"bldgNb\": \"<string>\",\n      \"pstCd\": \"<string>\",\n      \"twnNm\": \"<string>\",\n      \"ctrySubDvsn\": \"<string>\",\n      \"ctry\": \"<string>\",\n      \"adrLine\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"creditPartyBank\": {\n    \"name\": \"<string>\",\n    \"accountNumber\": \"<string>\",\n    \"aba\": \"<string>\",\n    \"bic\": \"<string>\",\n    \"txid\": \"<string>\",\n    \"foreignBankSystemId\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\"\n    },\n    \"postalAddress\": {\n      \"adrTp\": \"<string>\",\n      \"dept\": \"<string>\",\n      \"subDept\": \"<string>\",\n      \"strtNm\": \"<string>\",\n      \"bldgNb\": \"<string>\",\n      \"pstCd\": \"<string>\",\n      \"twnNm\": \"<string>\",\n      \"ctrySubDvsn\": \"<string>\",\n      \"ctry\": \"<string>\",\n      \"adrLine\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"creditParty\": {\n    \"name\": \"<string>\",\n    \"accountNumber\": \"<string>\",\n    \"aba\": \"<string>\",\n    \"bic\": \"<string>\",\n    \"txid\": \"<string>\",\n    \"foreignBankSystemId\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\"\n    },\n    \"postalAddress\": {\n      \"adrTp\": \"<string>\",\n      \"dept\": \"<string>\",\n      \"subDept\": \"<string>\",\n      \"strtNm\": \"<string>\",\n      \"bldgNb\": \"<string>\",\n      \"pstCd\": \"<string>\",\n      \"twnNm\": \"<string>\",\n      \"ctrySubDvsn\": \"<string>\",\n      \"ctry\": \"<string>\",\n      \"adrLine\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"transferAmount\": \"<double>\",\n  \"transferCurrency\": \"<string>\",\n  \"originatorReference\": \"<string>\",\n  \"receiversReference\": \"<string>\",\n  \"bankToBankInstructions\": \"<string>\",\n  \"ultimateDebitParty\": {\n    \"name\": \"<string>\"\n  },\n  \"debitPartyBank\": {\n    \"name\": \"<string>\",\n    \"accountNumber\": \"<string>\",\n    \"aba\": \"<string>\",\n    \"bic\": \"<string>\",\n    \"txid\": \"<string>\",\n    \"foreignBankSystemId\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\"\n    },\n    \"postalAddress\": {\n      \"adrTp\": \"<string>\",\n      \"dept\": \"<string>\",\n      \"subDept\": \"<string>\",\n      \"strtNm\": \"<string>\",\n      \"bldgNb\": \"<string>\",\n      \"pstCd\": \"<string>\",\n      \"twnNm\": \"<string>\",\n      \"ctrySubDvsn\": \"<string>\",\n      \"ctry\": \"<string>\",\n      \"adrLine\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"debitPartyInstructions\": {},\n  \"intermediaryBank1\": {\n    \"name\": \"<string>\",\n    \"accountNumber\": \"<string>\",\n    \"aba\": \"<string>\",\n    \"bic\": \"<string>\",\n    \"txid\": \"<string>\",\n    \"foreignBankSystemId\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\"\n    },\n    \"postalAddress\": {\n      \"adrTp\": \"<string>\",\n      \"dept\": \"<string>\",\n      \"subDept\": \"<string>\",\n      \"strtNm\": \"<string>\",\n      \"bldgNb\": \"<string>\",\n      \"pstCd\": \"<string>\",\n      \"twnNm\": \"<string>\",\n      \"ctrySubDvsn\": \"<string>\",\n      \"ctry\": \"<string>\",\n      \"adrLine\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"intermediaryBank2\": {\n    \"name\": \"<string>\",\n    \"accountNumber\": \"<string>\",\n    \"aba\": \"<string>\",\n    \"bic\": \"<string>\",\n    \"txid\": \"<string>\",\n    \"foreignBankSystemId\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\"\n    },\n    \"postalAddress\": {\n      \"adrTp\": \"<string>\",\n      \"dept\": \"<string>\",\n      \"subDept\": \"<string>\",\n      \"strtNm\": \"<string>\",\n      \"bldgNb\": \"<string>\",\n      \"pstCd\": \"<string>\",\n      \"twnNm\": \"<string>\",\n      \"ctrySubDvsn\": \"<string>\",\n      \"ctry\": \"<string>\",\n      \"adrLine\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"intermediaryBank3\": {\n    \"name\": \"<string>\",\n    \"accountNumber\": \"<string>\",\n    \"aba\": \"<string>\",\n    \"bic\": \"<string>\",\n    \"txid\": \"<string>\",\n    \"foreignBankSystemId\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\"\n    },\n    \"postalAddress\": {\n      \"adrTp\": \"<string>\",\n      \"dept\": \"<string>\",\n      \"subDept\": \"<string>\",\n      \"strtNm\": \"<string>\",\n      \"bldgNb\": \"<string>\",\n      \"pstCd\": \"<string>\",\n      \"twnNm\": \"<string>\",\n      \"ctrySubDvsn\": \"<string>\",\n      \"ctry\": \"<string>\",\n      \"adrLine\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"externalTemplateName\": \"<string>\",\n  \"customData\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a0a9ae56-a9f4-4abb-8cdb-98664a4ca897",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestedService\": \"RTP\",\n  \"requestReference\": \"AZX01234567891011\",\n  \"type\": \"PAYMENT\",\n  \"requestedValueDate\": \"2025-12-15\",\n  \"originatorReference\": null,\n  \"sendersReference\": \"INVC0012345\",\n  \"receiversReference\": \"INVC0054321\",\n  \"ultimateDebitParty\": {\n    \"name\": \"CLARK GABLE\"\n  },\n  \"debitParty\": {\n    \"name\": \"CLARK GABLE\",\n    \"accountNumber\": \"001122334455\"\n  },\n  \"creditPartyBank\": {\n    \"name\": \"CARY GRANT'S BANK\",\n    \"aba\": 123456789\n  },\n  \"creditParty\": {\n    \"name\": \"CARY GRANT\",\n    \"accountNumber\": 987654321,\n    \"postalAddress\": {\n      \"adrTp\": \"HOME\",\n      \"dept\": \"Test Dept\",\n      \"subDept\": \"Test Sub Dept\",\n      \"strtNm\": \"Main Street\",\n      \"bldgNb\": 123,\n      \"pstCd\": 12345,\n      \"twnNm\": \"Central Town\",\n      \"ctrySubDvsn\": \"OH\",\n      \"ctry\": \"US\"\n    }\n  },\n  \"transferAmount\": 10,\n  \"transferCurrency\": \"USD\",\n  \"customData\": \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"VALID\",\n  \"transactionId\": \"XZ23050714000000\",\n  \"requestReference\": \"testWBB25889710252\",\n  \"sendersReference\": \"INVC0012345\",\n  \"receiversReference\": \"INVC0054321\",\n  \"debitAccountNumber\": \"12345\",\n  \"creditAccountNumber\": \"987654321\",\n  \"transferAmount\": 10,\n  \"transferCurrency\": \"USD\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "45e82460-aad5-47ae-9576-5dc563a0f858",
+              "name": "Missing data in the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestedService\": \"RTP\",\n  \"requestReference\": \"AZX01234567891011\",\n  \"type\": \"PAYMENT\",\n  \"requestedValueDate\": \"2025-12-15\",\n  \"originatorReference\": null,\n  \"sendersReference\": \"INVC0012345\",\n  \"receiversReference\": \"INVC0054321\",\n  \"ultimateDebitParty\": {\n    \"name\": \"CLARK GABLE\"\n  },\n  \"debitParty\": {\n    \"name\": \"CLARK GABLE\",\n    \"accountNumber\": \"001122334455\"\n  },\n  \"creditPartyBank\": {\n    \"name\": \"CARY GRANT'S BANK\",\n    \"aba\": 123456789\n  },\n  \"creditParty\": {\n    \"name\": \"CARY GRANT\",\n    \"accountNumber\": 987654321,\n    \"postalAddress\": {\n      \"adrTp\": \"HOME\",\n      \"dept\": \"Test Dept\",\n      \"subDept\": \"Test Sub Dept\",\n      \"strtNm\": \"Main Street\",\n      \"bldgNb\": 123,\n      \"pstCd\": 12345,\n      \"twnNm\": \"Central Town\",\n      \"ctrySubDvsn\": \"OH\",\n      \"ctry\": \"US\"\n    }\n  },\n  \"transferAmount\": 10,\n  \"transferCurrency\": \"USD\",\n  \"customData\": \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"US21052400000000\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/validate\",\n  \"ServiceError\": {\n    \"status\": \"FAILED\",\n    \"transactionId\": \"rrt-770941720727587-2383364-1\",\n    \"requestReference\": \"RR-220818-01\",\n    \"sendersReference\": \"SR-220818-01\",\n    \"valueDate\": \"2023-05-10\",\n    \"error\": {\n      \"code\": \"KEY-1006\",\n      \"title\": \"Required field missing\",\n      \"description\": \"The object creditPartyBank is required in the request.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "198b9b81-9754-492e-8776-d4a7c7177d34",
+              "name": "Received request is unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestedService\": \"RTP\",\n  \"requestReference\": \"AZX01234567891011\",\n  \"type\": \"PAYMENT\",\n  \"requestedValueDate\": \"2025-12-15\",\n  \"originatorReference\": null,\n  \"sendersReference\": \"INVC0012345\",\n  \"receiversReference\": \"INVC0054321\",\n  \"ultimateDebitParty\": {\n    \"name\": \"CLARK GABLE\"\n  },\n  \"debitParty\": {\n    \"name\": \"CLARK GABLE\",\n    \"accountNumber\": \"001122334455\"\n  },\n  \"creditPartyBank\": {\n    \"name\": \"CARY GRANT'S BANK\",\n    \"aba\": 123456789\n  },\n  \"creditParty\": {\n    \"name\": \"CARY GRANT\",\n    \"accountNumber\": 987654321,\n    \"postalAddress\": {\n      \"adrTp\": \"HOME\",\n      \"dept\": \"Test Dept\",\n      \"subDept\": \"Test Sub Dept\",\n      \"strtNm\": \"Main Street\",\n      \"bldgNb\": 123,\n      \"pstCd\": 12345,\n      \"twnNm\": \"Central Town\",\n      \"ctrySubDvsn\": \"OH\",\n      \"ctry\": \"US\"\n    }\n  },\n  \"transferAmount\": 10,\n  \"transferCurrency\": \"USD\",\n  \"customData\": \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations. The ID is unique to each request.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service.\",\n  \"TransactionId\": \"rrt-621075741872460927-c-gce-9129-15867185-4\",\n  \"X-CorrelationId\": \"80457bcb-2c3b-8c55-8cd6-3520c3157e8f\",\n  \"TransactionTime\": \"2022-04-04T11:41:13.754Z\",\n  \"Api-Url\": \"/rtp/v1/payment/validate\",\n  \"ServiceError\": {\n    \"status\": \"ERROR\",\n    \"transactionId\": \"rrt-621075741872460927\",\n    \"requestReference\": \"REQUEST-REF-220314.1\",\n    \"sendersReference\": \"SENDER-REF-220314.1\",\n    \"valueDate\": \"06-10-2023\",\n    \"error\": {\n      \"code\": \"KEY-0006\",\n      \"title\": \"Not authorized for requested service\",\n      \"description\": \"Check your credentials.\"\n    },\n    \"doddFrank\": \"NO\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b77c059-22bc-4373-b414-82ad1eac4978",
+              "name": "Request is forbidden to access the resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestedService\": \"RTP\",\n  \"requestReference\": \"AZX01234567891011\",\n  \"type\": \"PAYMENT\",\n  \"requestedValueDate\": \"2025-12-15\",\n  \"originatorReference\": null,\n  \"sendersReference\": \"INVC0012345\",\n  \"receiversReference\": \"INVC0054321\",\n  \"ultimateDebitParty\": {\n    \"name\": \"CLARK GABLE\"\n  },\n  \"debitParty\": {\n    \"name\": \"CLARK GABLE\",\n    \"accountNumber\": \"001122334455\"\n  },\n  \"creditPartyBank\": {\n    \"name\": \"CARY GRANT'S BANK\",\n    \"aba\": 123456789\n  },\n  \"creditParty\": {\n    \"name\": \"CARY GRANT\",\n    \"accountNumber\": 987654321,\n    \"postalAddress\": {\n      \"adrTp\": \"HOME\",\n      \"dept\": \"Test Dept\",\n      \"subDept\": \"Test Sub Dept\",\n      \"strtNm\": \"Main Street\",\n      \"bldgNb\": 123,\n      \"pstCd\": 12345,\n      \"twnNm\": \"Central Town\",\n      \"ctrySubDvsn\": \"OH\",\n      \"ctry\": \"US\"\n    }\n  },\n  \"transferAmount\": 10,\n  \"transferCurrency\": \"USD\",\n  \"customData\": \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Access to requested resource is forbidden.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/validate\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "146a0f75-82d1-44b9-ab25-229034250b74",
+              "name": "Requested resource is not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestedService\": \"RTP\",\n  \"requestReference\": \"AZX01234567891011\",\n  \"type\": \"PAYMENT\",\n  \"requestedValueDate\": \"2025-12-15\",\n  \"originatorReference\": null,\n  \"sendersReference\": \"INVC0012345\",\n  \"receiversReference\": \"INVC0054321\",\n  \"ultimateDebitParty\": {\n    \"name\": \"CLARK GABLE\"\n  },\n  \"debitParty\": {\n    \"name\": \"CLARK GABLE\",\n    \"accountNumber\": \"001122334455\"\n  },\n  \"creditPartyBank\": {\n    \"name\": \"CARY GRANT'S BANK\",\n    \"aba\": 123456789\n  },\n  \"creditParty\": {\n    \"name\": \"CARY GRANT\",\n    \"accountNumber\": 987654321,\n    \"postalAddress\": {\n      \"adrTp\": \"HOME\",\n      \"dept\": \"Test Dept\",\n      \"subDept\": \"Test Sub Dept\",\n      \"strtNm\": \"Main Street\",\n      \"bldgNb\": 123,\n      \"pstCd\": 12345,\n      \"twnNm\": \"Central Town\",\n      \"ctrySubDvsn\": \"OH\",\n      \"ctry\": \"US\"\n    }\n  },\n  \"transferAmount\": 10,\n  \"transferCurrency\": \"USD\",\n  \"customData\": \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Requested resource is not found, please verify the resource and resubmit the request.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/validate\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fef09393-9478-4c1b-9f04-ce5c9043c7cb",
+              "name": "Requested method is not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestedService\": \"RTP\",\n  \"requestReference\": \"AZX01234567891011\",\n  \"type\": \"PAYMENT\",\n  \"requestedValueDate\": \"2025-12-15\",\n  \"originatorReference\": null,\n  \"sendersReference\": \"INVC0012345\",\n  \"receiversReference\": \"INVC0054321\",\n  \"ultimateDebitParty\": {\n    \"name\": \"CLARK GABLE\"\n  },\n  \"debitParty\": {\n    \"name\": \"CLARK GABLE\",\n    \"accountNumber\": \"001122334455\"\n  },\n  \"creditPartyBank\": {\n    \"name\": \"CARY GRANT'S BANK\",\n    \"aba\": 123456789\n  },\n  \"creditParty\": {\n    \"name\": \"CARY GRANT\",\n    \"accountNumber\": 987654321,\n    \"postalAddress\": {\n      \"adrTp\": \"HOME\",\n      \"dept\": \"Test Dept\",\n      \"subDept\": \"Test Sub Dept\",\n      \"strtNm\": \"Main Street\",\n      \"bldgNb\": 123,\n      \"pstCd\": 12345,\n      \"twnNm\": \"Central Town\",\n      \"ctrySubDvsn\": \"OH\",\n      \"ctry\": \"US\"\n    }\n  },\n  \"transferAmount\": 10,\n  \"transferCurrency\": \"USD\",\n  \"customData\": \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Requested method is not allowed, please verify the method and resubmit the request.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/validate\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d671c4f2-46fa-4ed0-9bf6-61008e743371",
+              "name": "Requested unsupported media type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestedService\": \"RTP\",\n  \"requestReference\": \"AZX01234567891011\",\n  \"type\": \"PAYMENT\",\n  \"requestedValueDate\": \"2025-12-15\",\n  \"originatorReference\": null,\n  \"sendersReference\": \"INVC0012345\",\n  \"receiversReference\": \"INVC0054321\",\n  \"ultimateDebitParty\": {\n    \"name\": \"CLARK GABLE\"\n  },\n  \"debitParty\": {\n    \"name\": \"CLARK GABLE\",\n    \"accountNumber\": \"001122334455\"\n  },\n  \"creditPartyBank\": {\n    \"name\": \"CARY GRANT'S BANK\",\n    \"aba\": 123456789\n  },\n  \"creditParty\": {\n    \"name\": \"CARY GRANT\",\n    \"accountNumber\": 987654321,\n    \"postalAddress\": {\n      \"adrTp\": \"HOME\",\n      \"dept\": \"Test Dept\",\n      \"subDept\": \"Test Sub Dept\",\n      \"strtNm\": \"Main Street\",\n      \"bldgNb\": 123,\n      \"pstCd\": 12345,\n      \"twnNm\": \"Central Town\",\n      \"ctrySubDvsn\": \"OH\",\n      \"ctry\": \"US\"\n    }\n  },\n  \"transferAmount\": 10,\n  \"transferCurrency\": \"USD\",\n  \"customData\": \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Requested media type is not allowed, please verify the media type and resubmit the request.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/validate\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7742a77d-9c7e-4871-8488-04739d30c902",
+              "name": "Too many requests received",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestedService\": \"RTP\",\n  \"requestReference\": \"AZX01234567891011\",\n  \"type\": \"PAYMENT\",\n  \"requestedValueDate\": \"2025-12-15\",\n  \"originatorReference\": null,\n  \"sendersReference\": \"INVC0012345\",\n  \"receiversReference\": \"INVC0054321\",\n  \"ultimateDebitParty\": {\n    \"name\": \"CLARK GABLE\"\n  },\n  \"debitParty\": {\n    \"name\": \"CLARK GABLE\",\n    \"accountNumber\": \"001122334455\"\n  },\n  \"creditPartyBank\": {\n    \"name\": \"CARY GRANT'S BANK\",\n    \"aba\": 123456789\n  },\n  \"creditParty\": {\n    \"name\": \"CARY GRANT\",\n    \"accountNumber\": 987654321,\n    \"postalAddress\": {\n      \"adrTp\": \"HOME\",\n      \"dept\": \"Test Dept\",\n      \"subDept\": \"Test Sub Dept\",\n      \"strtNm\": \"Main Street\",\n      \"bldgNb\": 123,\n      \"pstCd\": 12345,\n      \"twnNm\": \"Central Town\",\n      \"ctrySubDvsn\": \"OH\",\n      \"ctry\": \"US\"\n    }\n  },\n  \"transferAmount\": 10,\n  \"transferCurrency\": \"USD\",\n  \"customData\": \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Number requests threshold reached, please resubmit the request after sometime.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/validate\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e0f68e8e-e876-42aa-9a5d-d2dfcb195fcf",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestedService\": \"RTP\",\n  \"requestReference\": \"AZX01234567891011\",\n  \"type\": \"PAYMENT\",\n  \"requestedValueDate\": \"2025-12-15\",\n  \"originatorReference\": null,\n  \"sendersReference\": \"INVC0012345\",\n  \"receiversReference\": \"INVC0054321\",\n  \"ultimateDebitParty\": {\n    \"name\": \"CLARK GABLE\"\n  },\n  \"debitParty\": {\n    \"name\": \"CLARK GABLE\",\n    \"accountNumber\": \"001122334455\"\n  },\n  \"creditPartyBank\": {\n    \"name\": \"CARY GRANT'S BANK\",\n    \"aba\": 123456789\n  },\n  \"creditParty\": {\n    \"name\": \"CARY GRANT\",\n    \"accountNumber\": 987654321,\n    \"postalAddress\": {\n      \"adrTp\": \"HOME\",\n      \"dept\": \"Test Dept\",\n      \"subDept\": \"Test Sub Dept\",\n      \"strtNm\": \"Main Street\",\n      \"bldgNb\": 123,\n      \"pstCd\": 12345,\n      \"twnNm\": \"Central Town\",\n      \"ctrySubDvsn\": \"OH\",\n      \"ctry\": \"US\"\n    }\n  },\n  \"transferAmount\": 10,\n  \"transferCurrency\": \"USD\",\n  \"customData\": \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service.\",\n  \"TransactionId\": \"359681587523_SR-RMC-210729-11081\",\n  \"X-CorrelationId\": \"7ad7fdfb-2ade-a3ab-b97c-523dc5312688\",\n  \"TransactionTime\": \"2022-04-05T07:59:15.422Z\",\n  \"Api-Url\": \"/rtp/v1/payment/validate\",\n  \"ServiceError\": {\n    \"status\": \"ERROR\",\n    \"transactionId\": \"rrt-621075741872460927\",\n    \"requestReference\": \"REQUEST-REF-220314.1\",\n    \"sendersReference\": \"SENDER-REF-220314.1\",\n    \"valueDate\": \"06-10-2023\",\n    \"error\": {\n      \"code\": \"KEY-9999\",\n      \"title\": \"Unknown error\",\n      \"description\": \"Payment Initiation ServiceException: AUTHENTICATION_FAILURE Unable to logon with the supplied credentials.\",\n      \"detail\": {\n        \"code\": \"KEY-1005\",\n        \"title\": \"Error\",\n        \"description\": \"Additional information about error code.\"\n      }\n    },\n    \"doddFrank\": \"NO\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0cd6e068-fe8a-403a-98e6-50f8900cb3e2",
+              "name": "Bad Gateway",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestedService\": \"RTP\",\n  \"requestReference\": \"AZX01234567891011\",\n  \"type\": \"PAYMENT\",\n  \"requestedValueDate\": \"2025-12-15\",\n  \"originatorReference\": null,\n  \"sendersReference\": \"INVC0012345\",\n  \"receiversReference\": \"INVC0054321\",\n  \"ultimateDebitParty\": {\n    \"name\": \"CLARK GABLE\"\n  },\n  \"debitParty\": {\n    \"name\": \"CLARK GABLE\",\n    \"accountNumber\": \"001122334455\"\n  },\n  \"creditPartyBank\": {\n    \"name\": \"CARY GRANT'S BANK\",\n    \"aba\": 123456789\n  },\n  \"creditParty\": {\n    \"name\": \"CARY GRANT\",\n    \"accountNumber\": 987654321,\n    \"postalAddress\": {\n      \"adrTp\": \"HOME\",\n      \"dept\": \"Test Dept\",\n      \"subDept\": \"Test Sub Dept\",\n      \"strtNm\": \"Main Street\",\n      \"bldgNb\": 123,\n      \"pstCd\": 12345,\n      \"twnNm\": \"Central Town\",\n      \"ctrySubDvsn\": \"OH\",\n      \"ctry\": \"US\"\n    }\n  },\n  \"transferAmount\": 10,\n  \"transferCurrency\": \"USD\",\n  \"customData\": \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/validate\",\n  \"ServiceError\": {\n    \"ConnectError\": \"Connectivity error occurred with the downstream service (unexpected EOF at target). Please check with application support team before resubmitting the request\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f21ffba4-d42b-4d57-94f4-a167ed14ad11",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestedService\": \"RTP\",\n  \"requestReference\": \"AZX01234567891011\",\n  \"type\": \"PAYMENT\",\n  \"requestedValueDate\": \"2025-12-15\",\n  \"originatorReference\": null,\n  \"sendersReference\": \"INVC0012345\",\n  \"receiversReference\": \"INVC0054321\",\n  \"ultimateDebitParty\": {\n    \"name\": \"CLARK GABLE\"\n  },\n  \"debitParty\": {\n    \"name\": \"CLARK GABLE\",\n    \"accountNumber\": \"001122334455\"\n  },\n  \"creditPartyBank\": {\n    \"name\": \"CARY GRANT'S BANK\",\n    \"aba\": 123456789\n  },\n  \"creditParty\": {\n    \"name\": \"CARY GRANT\",\n    \"accountNumber\": 987654321,\n    \"postalAddress\": {\n      \"adrTp\": \"HOME\",\n      \"dept\": \"Test Dept\",\n      \"subDept\": \"Test Sub Dept\",\n      \"strtNm\": \"Main Street\",\n      \"bldgNb\": 123,\n      \"pstCd\": 12345,\n      \"twnNm\": \"Central Town\",\n      \"ctrySubDvsn\": \"OH\",\n      \"ctry\": \"US\"\n    }\n  },\n  \"transferAmount\": 10,\n  \"transferCurrency\": \"USD\",\n  \"customData\": \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/validate\",\n  \"ServiceError\": {\n    \"ConnectError\": \"Service is currently unavailable (NoActiveTargets), please check with application support before resubmitting the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d51a362-9bf9-4e79-ad43-0e27143cfc53",
+              "name": "Gateway timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestedService\": \"RTP\",\n  \"requestReference\": \"AZX01234567891011\",\n  \"type\": \"PAYMENT\",\n  \"requestedValueDate\": \"2025-12-15\",\n  \"originatorReference\": null,\n  \"sendersReference\": \"INVC0012345\",\n  \"receiversReference\": \"INVC0054321\",\n  \"ultimateDebitParty\": {\n    \"name\": \"CLARK GABLE\"\n  },\n  \"debitParty\": {\n    \"name\": \"CLARK GABLE\",\n    \"accountNumber\": \"001122334455\"\n  },\n  \"creditPartyBank\": {\n    \"name\": \"CARY GRANT'S BANK\",\n    \"aba\": 123456789\n  },\n  \"creditParty\": {\n    \"name\": \"CARY GRANT\",\n    \"accountNumber\": 987654321,\n    \"postalAddress\": {\n      \"adrTp\": \"HOME\",\n      \"dept\": \"Test Dept\",\n      \"subDept\": \"Test Sub Dept\",\n      \"strtNm\": \"Main Street\",\n      \"bldgNb\": 123,\n      \"pstCd\": 12345,\n      \"twnNm\": \"Central Town\",\n      \"ctrySubDvsn\": \"OH\",\n      \"ctry\": \"US\"\n    }\n  },\n  \"transferAmount\": 10,\n  \"transferCurrency\": \"USD\",\n  \"customData\": \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Your request took too long to process. Please try again.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/validate\",\n  \"ServiceError\": {\n    \"ConnectError\": \"Request could not be processed on time (gateway timeout). Please wait a moment and resubmit the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "af8b43f4-71d6-4310-9be5-5ba90e8be1c8",
+      "name": "Participant",
+      "description": {
+        "content": "Look up a RTP participating banks.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "87598611-39fe-4cd9-a517-c9211d5a1da3",
+          "name": "Get a list of RTP participants",
+          "request": {
+            "name": "Get a list of RTP participants",
+            "description": {
+              "content": "Retrieve a list of active, online RTP banks. Use the limit and offset fields to control how many records to return and what records to skip.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rtp",
+                "v1",
+                "payment",
+                "rtp",
+                "participant"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "(Required) Pagination parameter that indicates the maximum number of records to return in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "(Required) Pagination parameter that indicates the number of records skipped before generating the output."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                "key": "KeyClientId",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b20d7768-1ac6-4fac-8a2e-02c72685ab75",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "rtp",
+                    "participant"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": \"65\",\n  \"limit\": 10,\n  \"offset\": 0,\n  \"parties\": {\n    \"name\": \"CITIZENS BANK, NA\",\n    \"accountNumber\": \"102258001\",\n    \"aba\": \"100001995\",\n    \"bic\": \"CITZUSL2XXX\",\n    \"txid\": \"fa1354bkg3153kj13b4h34\",\n    \"foreignBankSystemId\": {\n      \"type\": \"USABA\"\n    },\n    \"postalAddress\": {\n      \"adrLine\": [\n        \"BENEFICIARY ADDRESS LINE 1\",\n        \"BENEFICIARY ADDRESS LINE 2\"\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e556949-019f-41ea-9f61-e0a0a059449e",
+              "name": "Missing data in the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "rtp",
+                    "participant"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"US21052400000000\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/rtp/participant\",\n  \"ServiceError\": {\n    \"status\": \"FAILED\",\n    \"transactionId\": \"rrt-770941720727587-2383364-1\",\n    \"requestReference\": \"RR-220818-01\",\n    \"sendersReference\": \"SR-220818-01\",\n    \"valueDate\": \"2023-05-10\",\n    \"error\": {\n      \"code\": \"KEY-1006\",\n      \"title\": \"Required field missing\",\n      \"description\": \"The object creditPartyBank is required in the request.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f9a4b64-ce45-4bad-8e34-c315e4095c7c",
+              "name": "Received request is unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "rtp",
+                    "participant"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations. The ID is unique to each request.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service.\",\n  \"TransactionId\": \"rrt-621075741872460927-c-gce-9129-15867185-4\",\n  \"X-CorrelationId\": \"80457bcb-2c3b-8c55-8cd6-3520c3157e8f\",\n  \"TransactionTime\": \"2022-04-04T11:41:13.754Z\",\n  \"Api-Url\": \"/rtp/v1/payment/rtp/participant\",\n  \"ServiceError\": {\n    \"status\": \"ERROR\",\n    \"transactionId\": \"rrt-621075741872460927\",\n    \"requestReference\": \"REQUEST-REF-220314.1\",\n    \"sendersReference\": \"SENDER-REF-220314.1\",\n    \"valueDate\": \"06-10-2023\",\n    \"error\": {\n      \"code\": \"KEY-0006\",\n      \"title\": \"Not authorized for requested service\",\n      \"description\": \"Check your credentials.\"\n    },\n    \"doddFrank\": \"NO\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4545c919-14ba-42a1-a2c1-7d34d509f708",
+              "name": "Request is forbidden to access the resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "rtp",
+                    "participant"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Access to requested resource is forbidden.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/rtp/participant\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5632e34-485a-41c5-b5b2-3c1615e16416",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "rtp",
+                    "participant"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Requested resource is not found, please verify the resource and resubmit the request.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/rtp/participant\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bf11152c-14cb-4c56-9a03-d9c914341bed",
+              "name": "Requested method is not allowed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "rtp",
+                    "participant"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Requested method is not allowed, please verify the method and resubmit the request.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/rtp/participant\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5940475c-a3ba-46f5-aa16-15293979b1c4",
+              "name": "Requested unsupported media type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "rtp",
+                    "participant"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Requested media type is not allowed, please verify the media type and resubmit the request.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/rtp/participant\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8fa35140-ea91-44f1-8048-9acd4b77a8e5",
+              "name": "Too many requests received",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "rtp",
+                    "participant"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Number requests threshold reached, please resubmit the request after sometime.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/rtp/participant\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a66d9e7b-642d-4da1-b032-5341c70343b7",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "rtp",
+                    "participant"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service.\",\n  \"TransactionId\": \"359681587523_SR-RMC-210729-11081\",\n  \"X-CorrelationId\": \"7ad7fdfb-2ade-a3ab-b97c-523dc5312688\",\n  \"TransactionTime\": \"2022-04-05T07:59:15.422Z\",\n  \"Api-Url\": \"/rtp/v1/payment/rtp/participant\",\n  \"ServiceError\": {\n    \"status\": \"ERROR\",\n    \"transactionId\": \"rrt-621075741872460927\",\n    \"requestReference\": \"RR-RMC-210720-0123458981\",\n    \"sendersReference\": \"SR-RMC-210729-11081\",\n    \"valueDate\": \"06-10-2023\",\n    \"error\": {\n      \"code\": \"KEY-9999\",\n      \"title\": \"Unknown error\",\n      \"description\": \"Payment Initiation ServiceException: AUTHENTICATION_FAILURE Unable to logon with the supplied credentials.\",\n      \"detail\": {\n        \"code\": \"KEY-9999\",\n        \"title\": \"Unknown error\",\n        \"description\": \"Additional information about error code.\"\n      }\n    },\n    \"doddFrank\": \"NO\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a58c07d0-553b-40de-a60f-9f5cc72a9151",
+              "name": "Bad Gateway",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "rtp",
+                    "participant"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/rtp/participant\",\n  \"ServiceError\": {\n    \"ConnectError\": \"Connectivity error occurred with the downstream service (unexpected EOF at target). Please check with application support team before resubmitting the request\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf8eafb7-6750-42a8-86e0-cf9839777d89",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "rtp",
+                    "participant"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/rtp/participant\",\n  \"ServiceError\": {\n    \"ConnectError\": \"Service is currently unavailable (NoActiveTargets), please check with application support before resubmitting the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5aeac29a-bde9-40cb-8416-61a5dd076185",
+              "name": "Gateway timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "rtp",
+                    "participant"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Your request took too long to process. Please try again.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/rtp/participant\",\n  \"ServiceError\": {\n    \"ConnectError\": \"Request could not be processed on time (gateway timeout). Please wait a moment and resubmit the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8488e85f-3388-4ce8-8dfa-e660b0d17064",
+          "name": "Get information about one RTP participant",
+          "request": {
+            "name": "Get information about one RTP participant",
+            "description": {
+              "content": "This call returns information about a single RTP participant. Use the routing number of the financial institution to search for the RTP participant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rtp",
+                "v1",
+                "payment",
+                "rtp",
+                "participant",
+                ":routingNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "routingNumber",
+                  "description": "(Required) Routing number of the participating RTP bank."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                "key": "KeyClientId",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "be93d117-665a-44f1-b3f2-578082ccb9e3",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "rtp",
+                    "participant",
+                    ":routingNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "routingNumber",
+                      "description": "(Required) Routing number of the participating RTP bank."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"KeyBank National Association\",\n  \"accountNumber\": \"8756654\",\n  \"aba\": \"125200879\",\n  \"bic\": \"KEYUSL2XXX\",\n  \"txid\": \"fa125da513hj135j42b5\",\n  \"foreignBankSystemId\": {\n    \"type\": \"USABA\"\n  },\n  \"postalAddress\": {\n    \"adrLine\": [\n      \"123 Keybank Street\",\n      \"Cleveland, OH\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "34c1c023-44a5-4770-b102-21c40228246e",
+              "name": "Missing data in the request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "rtp",
+                    "participant",
+                    ":routingNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "routingNumber",
+                      "description": "(Required) Routing number of the participating RTP bank."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"US21052400000000\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/rtp/participant/{routingNumber}\",\n  \"ServiceError\": {\n    \"status\": \"FAILED\",\n    \"transactionId\": \"rrt-770941720727587-2383364-1\",\n    \"requestReference\": \"RR-220818-01\",\n    \"sendersReference\": \"SR-220818-01\",\n    \"valueDate\": \"2023-05-10\",\n    \"error\": {\n      \"code\": \"KEY-1006\",\n      \"title\": \"Required field missing\",\n      \"description\": \"The object creditPartyBank is required in the request.\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a11670e9-c0a1-41d1-978b-3d2b090dd3d4",
+              "name": "Received request is unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "rtp",
+                    "participant",
+                    ":routingNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "routingNumber",
+                      "description": "(Required) Routing number of the participating RTP bank."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations. The ID is unique to each request.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service.\",\n  \"TransactionId\": \"rrt-621075741872460927-c-gce-9129-15867185-4\",\n  \"X-CorrelationId\": \"80457bcb-2c3b-8c55-8cd6-3520c3157e8f\",\n  \"TransactionTime\": \"2022-04-04T11:41:13.754Z\",\n  \"Api-Url\": \"/rtp/v1/payment/rtp/participant/{routingNumber}\",\n  \"ServiceError\": {\n    \"status\": \"ERROR\",\n    \"transactionId\": \"rrt-621075741872460927\",\n    \"requestReference\": \"REQUEST-REF-220314.1\",\n    \"sendersReference\": \"SENDER-REF-220314.1\",\n    \"valueDate\": \"06-10-2023\",\n    \"error\": {\n      \"code\": \"KEY-0006\",\n      \"title\": \"Not authorized for requested service\",\n      \"description\": \"Check your credentials.\"\n    },\n    \"doddFrank\": \"NO\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3afe107b-0552-4123-8e9c-a1f4b89845b6",
+              "name": "Request is forbidden to access the resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "rtp",
+                    "participant",
+                    ":routingNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "routingNumber",
+                      "description": "(Required) Routing number of the participating RTP bank."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Access to requested resource is forbidden.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/rtp/participant/{routingNumber}\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9de892b0-c6ee-478d-9eca-da25bf15f46e",
+              "name": "Requested resource is not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "rtp",
+                    "participant",
+                    ":routingNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "routingNumber",
+                      "description": "(Required) Routing number of the participating RTP bank."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Requested resource is not found, please verify the resource and resubmit the request.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/rtp/participant/{routingNumber}\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49345169-37af-4ee5-8893-cf7c3dc6d8a8",
+              "name": "Requested method is not allowed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "rtp",
+                    "participant",
+                    ":routingNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "routingNumber",
+                      "description": "(Required) Routing number of the participating RTP bank."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Requested method is not allowed, please verify the method and resubmit the request.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/rtp/participant/{routingNumber}\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "14304b60-65a3-44b0-99a8-af008642115f",
+              "name": "Requested unsupported media type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "rtp",
+                    "participant",
+                    ":routingNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "routingNumber",
+                      "description": "(Required) Routing number of the participating RTP bank."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Requested media type is not allowed, please verify the media type and resubmit the request.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/rtp/participant/{routingNumber}\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8d68b80-9ca8-4d30-bc09-3da0a8b697d9",
+              "name": "Too many requests received",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "rtp",
+                    "participant",
+                    ":routingNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "routingNumber",
+                      "description": "(Required) Routing number of the participating RTP bank."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Number requests threshold reached, please resubmit the request after sometime.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/rtp/participant/{routingNumber}\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7cbcaa4e-294d-4086-a8b0-8f1dd180042e",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "rtp",
+                    "participant",
+                    ":routingNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "routingNumber",
+                      "description": "(Required) Routing number of the participating RTP bank."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service\",\n  \"TransactionId\": \"359681587523_SR-RMC-210729-11081\",\n  \"X-CorrelationId\": \"7ad7fdfb-2ade-a3ab-b97c-523dc5312688\",\n  \"TransactionTime\": \"2022-04-05T07:59:15.422Z\",\n  \"Api-Url\": \"/rtp/v1/payment/rtp/participant/{routingNumber}\",\n  \"ServiceError\": {\n    \"status\": \"ERROR\",\n    \"transactionId\": \"rrt-621075741872460927\",\n    \"requestReference\": \"REQUEST-REF-220314.1\",\n    \"sendersReference\": \"SENDER-REF-220314.1\",\n    \"valueDate\": \"06-10-2023\",\n    \"error\": {\n      \"code\": \"KEY-9999\",\n      \"title\": \"Unknown error\",\n      \"description\": \"Payment Initiation ServiceException: AUTHENTICATION_FAILURE Unable to logon with the supplied credentials.\"\n    },\n    \"doddFrank\": \"NO\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bca856e2-2770-4b30-80b3-4ccc76959f81",
+              "name": "Bad Gateway",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "rtp",
+                    "participant",
+                    ":routingNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "routingNumber",
+                      "description": "(Required) Routing number of the participating RTP bank."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/rtp/participant/{routingNumber}\",\n  \"ServiceError\": {\n    \"ConnectError\": \"Connectivity error occurred with the downstream service (unexpected EOF at target). Please check with application support team before resubmitting the request\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6afd97e4-9793-4e37-86f1-3eb22c839d29",
+              "name": "Service Unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "rtp",
+                    "participant",
+                    ":routingNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "routingNumber",
+                      "description": "(Required) Routing number of the participating RTP bank."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/rtp/participant/{routingNumber}\",\n  \"ServiceError\": {\n    \"ConnectError\": \"Service is currently unavailable (NoActiveTargets), please check with application support before resubmitting the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea473d8d-184c-4e1e-ab4a-b14b3a090672",
+              "name": "Gateway timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "rtp",
+                    "participant",
+                    ":routingNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "routingNumber",
+                      "description": "(Required) Routing number of the participating RTP bank."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.",
+                    "key": "KeyClientId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service.\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/rtp/v1/payment/rtp/participant/{routingNumber}\",\n  \"ServiceError\": {\n    \"ConnectError\": \"Request could not be processed on time (gateway timeout). Please wait a moment and resubmit the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "99895f65-6bad-47d0-b9ca-852426e89808",
+      "name": "HealthCheck",
+      "description": {
+        "content": "Verify you can connect to the API service. A bearer token is required.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a3c08b30-8b97-46e4-a499-a974fcfe7332",
+          "name": "Health check",
+          "request": {
+            "name": "Health check",
+            "description": {
+              "content": "Verify you can connect to the API service. A bearer token is required.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rtp",
+                "v1",
+                "payment",
+                "healthCheck"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1bc29eda-af4a-47c2-9943-b532417db428",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "payment",
+                    "healthCheck"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"Ok\",\n  \"Source\": \"Roundtrip\",\n  \"Timestamp\": \"2022-09-16T02:36:20\",\n  \"ClientIp\": \"156.77.111.28\",\n  \"X-Forwarded-For\": \"[156.77.111.28]\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://partner-api-qv.key.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "89c03f38-3959-4dd9-a2f6-e4b09b0bb87a",
+    "name": "RTP and Wire Payments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The RTP and Wire Payments API is a single product with two service capabilities: real-time payments (RTP) and wire transfers (WIRE). Specific permissions are required to access either the RTP Send Payment API or the Wires Transfer API. You can initiate a payment, check on its status, and get information about participating parties.\n\nContact Support:\n Name: KeyBank Developer Support\n Email: developers@keybank.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Webhooks",
+    "version": "3.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ACH",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send an ACH alerts event notification to the client URI.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/\"Callback URL from client for ACH alerts - AL00906\"",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send an ACH alerts event notification to the client URI."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Wire/RTP v2",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send Wire/RTP Alerts event notification to the client URI.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/\"Callback URL from client for Wire/RTP alerts - AL00907\"",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send Wire/RTP Alerts event notification to the client URI."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Wire/RTP v1",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send Wire/RTP alerts event notification to the client URI.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/\"Callback URL from client for AL00901\"",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send Wire/RTP alerts event notification to the client URI."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

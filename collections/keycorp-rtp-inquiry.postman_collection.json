@@ -1,0 +1,938 @@
+{
+  "item": [
+    {
+      "id": "3956d552-e4a5-41fc-97e2-310605ecf7a9",
+      "name": "HealthCheck",
+      "description": {
+        "content": "Verify you can connect to the API service.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ada2457f-85ca-4a97-805f-847eb7c0212c",
+          "name": "Health check",
+          "request": {
+            "name": "Health check",
+            "description": {
+              "content": "Verify you can connect to the API service. A bearer token is required.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rtp",
+                "v1",
+                "healthCheck"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a3f9a03d-5ac3-43ab-9b74-923f91cdee24",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "healthCheck"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"Ok\",\n  \"Source\": \"Roundtrip\",\n  \"Timestamp\": \"2022-09-15T04:49:03\",\n  \"ClientIp\": \"192.0.2.1\",\n  \"X-Forwarded-For\": \"[192.0.2.1]\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "9180f283-4035-4051-a759-2552c270b609",
+      "name": "RTP",
+      "description": {
+        "content": "RTP functions to list and retrieve real-time payment details",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e9968362-82c3-43d2-85ec-20ad2db60b01",
+          "name": "Search real time payment transactions",
+          "request": {
+            "name": "Search real time payment transactions",
+            "description": {
+              "content": "Based on search criteria provided, get a list of RTP transactions. The account number and date range are required for every request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rtp",
+                "v1",
+                "transactions",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Universal ID to trace the transaction across all systems involved.",
+                "key": "X-CorrelationId",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountNumber\": \"<string>\",\n  \"fromDate\": \"<date>\",\n  \"toDate\": \"<date>\",\n  \"minimumAmount\": \"<double>\",\n  \"maximumAmount\": \"<double>\",\n  \"requestReference\": \"<string>\",\n  \"pageNumber\": \"<integer>\",\n  \"pageSize\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ee2aa746-783a-482e-aa1b-f62f3af5608d",
+              "name": "Search results match the criteria",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "transactions",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Universal ID to trace the transaction across all systems involved.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"3123456789\",\n  \"fromDate\": \"2024-02-01\",\n  \"toDate\": \"2024-02-01\",\n  \"minimumAmount\": 0.5,\n  \"maximumAmount\": 100,\n  \"requestReference\": \"1122334455\",\n  \"pageNumber\": 1,\n  \"pageSize\": 500\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations. The ID is unique to each request.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactions\": [\n    {\n      \"transactionId\": \"US99999000999999\",\n      \"transactionStatus\": \"COMPLETED\",\n      \"transactionStatusTimestamp\": \"2026-01-12T12:18:01\",\n      \"transactionDate\": \"2026-01-12\",\n      \"transactionAmount\": 32772.63,\n      \"requestReference\": \"1122334455\",\n      \"sendersReference\": \"US99999000999999\",\n      \"creditor\": {\n        \"name\": \"Global Markets LLC\"\n      },\n      \"creditorAccount\": {\n        \"accountNumber\": \"987654321\"\n      },\n      \"debtor\": {\n        \"name\": \"Paul Wilson\"\n      },\n      \"debtorAccount\": {\n        \"accountNumber\": \"123456789\"\n      },\n      \"originator\": {\n        \"name\": \"VAM TEST BANK\"\n      },\n      \"beneficiary\": {\n        \"name\": \"MARKET CAPITAL\"\n      }\n    }\n  ],\n  \"metadata\": {\n    \"page\": {\n      \"pageNumber\": 1,\n      \"pageSize\": 25,\n      \"totalPages\": 3,\n      \"totalRecords\": 75,\n      \"lastPage\": false\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2bb66d6e-e569-45be-b573-69f56f00c042",
+              "name": "Bad input parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "transactions",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Universal ID to trace the transaction across all systems involved.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"3123456789\",\n  \"fromDate\": \"2024-02-01\",\n  \"toDate\": \"2024-02-01\",\n  \"minimumAmount\": 0.5,\n  \"maximumAmount\": 100,\n  \"requestReference\": \"1122334455\",\n  \"pageNumber\": 1,\n  \"pageSize\": 500\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations. The ID is unique to each request.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"https://partner-api-qv.key.com/rtp/v1/transactions/list\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"RTP-List-400-toDate\",\n          \"message\": \"toDate format must be YYYY-MM-DD\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15822596-b7df-4d6b-8b24-f2fee77d327e",
+              "name": "Unauthorized request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "transactions",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Universal ID to trace the transaction across all systems involved.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"3123456789\",\n  \"fromDate\": \"2024-02-01\",\n  \"toDate\": \"2024-02-01\",\n  \"minimumAmount\": 0.5,\n  \"maximumAmount\": 100,\n  \"requestReference\": \"1122334455\",\n  \"pageNumber\": 1,\n  \"pageSize\": 500\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Received request is unauthorized, please provide valid credentials\",\n  \"TransactionId\": \"0635f201-8fbb-418f-b93a-138d5103e2b91348\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"https://partner-api-qv.key.com/rtp/v1/transactions/list\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b236019b-e797-4b23-aed7-fd1d52b5e106",
+              "name": "Entitlements validation failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "transactions",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Universal ID to trace the transaction across all systems involved.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"3123456789\",\n  \"fromDate\": \"2024-02-01\",\n  \"toDate\": \"2024-02-01\",\n  \"minimumAmount\": 0.5,\n  \"maximumAmount\": 100,\n  \"requestReference\": \"1122334455\",\n  \"pageNumber\": 1,\n  \"pageSize\": 500\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"https://partner-api-qv.key.com/rtp/v1/transactions/list\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"403-Forbidden\",\n          \"message\": \"Entitlements Validation Failed\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae6bdb0d-b760-40ec-901b-af047582f35e",
+              "name": "Request timeout error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "transactions",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Universal ID to trace the transaction across all systems involved.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"3123456789\",\n  \"fromDate\": \"2024-02-01\",\n  \"toDate\": \"2024-02-01\",\n  \"minimumAmount\": 0.5,\n  \"maximumAmount\": 100,\n  \"requestReference\": \"1122334455\",\n  \"pageNumber\": 1,\n  \"pageSize\": 500\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"https://partner-api-qv.key.com/rtp/v1/transactions/list\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"RTP-List-408-timeout\",\n          \"message\": \"The request exceeded the timeout limit.  Please adjust your request parameters and try again.\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "733b0ef3-c977-481c-941f-61251897a96f",
+              "name": "Unexpected server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "transactions",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Universal ID to trace the transaction across all systems involved.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"3123456789\",\n  \"fromDate\": \"2024-02-01\",\n  \"toDate\": \"2024-02-01\",\n  \"minimumAmount\": 0.5,\n  \"maximumAmount\": 100,\n  \"requestReference\": \"1122334455\",\n  \"pageNumber\": 1,\n  \"pageSize\": 500\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"Api-Url\": \"https://partner-api-qv.key.com/rtp/v1/transactions/list\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"500-InternalServerError\",\n          \"message\": \"An unexpected error occurred.  Please try again later or contact support if the problem persists.\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8e70e195-6c27-47a3-8abe-de4bf1cd76d0",
+          "name": "View the details of a RTP transaction by its ID",
+          "request": {
+            "name": "View the details of a RTP transaction by its ID",
+            "description": {
+              "content": "Provide the transaction ID to retrieve all available fields for that single real time payment transaction.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rtp",
+                "v1",
+                "transactions",
+                "detail",
+                ":transactionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) The unique ID number associated with the original payment request."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Universal ID to trace the transaction across all systems involved.",
+                "key": "X-CorrelationId",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "15a2232c-d1f1-4264-beb1-e01e720f6b01",
+              "name": "A RTP transaction matches the provided transactionId",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "transactions",
+                    "detail",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) The unique ID number associated with the original payment request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Universal ID to trace the transaction across all systems involved.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A universal ID to trace the transaction across all the systems involved, useful for system logging and identification.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"US99999000999999\",\n  \"transactionStatus\": \"COMPLETED\",\n  \"transactionStatusTimestamp\": \"2026-01-12T12:18:01\",\n  \"transactionDate\": \"2026-01-12\",\n  \"transactionAmount\": 32772.63,\n  \"transactionDirection\": \"INBOUND\",\n  \"requestReference\": \"1122334455\",\n  \"sendersReference\": \"US99999000999999\",\n  \"clearingReferenceNumber\": \"20209999MMZZZZZD099999\",\n  \"remittanceInformation\": \"Payment 01/12/2026_Invoice 123456789 Cust\",\n  \"bankToBankInstructions\": \"Final Payment\",\n  \"customData\": \"USER ID 1\",\n  \"creditor\": {\n    \"name\": \"Global Markets LLC\",\n    \"postalAddress\": {\n      \"type\": \"Office\",\n      \"department\": \"Financial\",\n      \"subDepartment\": \"Sub financial\",\n      \"street\": \"Columbus pike\",\n      \"buildingNumber\": \"123\",\n      \"postalCode\": \"43240\",\n      \"city\": \"Columbus\",\n      \"region\": \"OH\",\n      \"countryCode\": \"US\",\n      \"addressLine\": \"123 SIM ST,STE W123 |SIMCITY OH 12345|I/US\"\n    }\n  },\n  \"creditorAccount\": {\n    \"accountNumber\": \"987654321\",\n    \"virtualAccountNumber\": \"95312346654532\"\n  },\n  \"debtor\": {\n    \"name\": \"Paul Wilson\",\n    \"postalAddress\": {\n      \"type\": \"Office\",\n      \"department\": \"Financial\",\n      \"subDepartment\": \"Sub financial\",\n      \"street\": \"Columbus pike\",\n      \"buildingNumber\": \"123\",\n      \"postalCode\": \"43240\",\n      \"city\": \"Columbus\",\n      \"region\": \"OH\",\n      \"countryCode\": \"US\",\n      \"addressLine\": \"123 SIM ST,STE W123 |SIMCITY OH 12345|I/US\"\n    }\n  },\n  \"debtorAccount\": {\n    \"accountNumber\": \"123456789\",\n    \"virtualAccountNumber\": \"95312346654532\"\n  },\n  \"originator\": {\n    \"name\": \"VAM TEST BANK NA\",\n    \"originalName\": \"Raul Wilson\",\n    \"postalAddress\": {\n      \"type\": \"Office\",\n      \"department\": \"Financial\",\n      \"subDepartment\": \"Sub financial\",\n      \"street\": \"Columbus pike\",\n      \"buildingNumber\": \"123\",\n      \"postalCode\": \"43240\",\n      \"city\": \"Columbus\",\n      \"region\": \"OH\",\n      \"countryCode\": \"US\",\n      \"addressLine\": \"123 SIM ST,STE W123 |SIMCITY OH 12345|I/US\"\n    }\n  },\n  \"beneficiary\": {\n    \"name\": \"SIM IV INC\",\n    \"ultimateName\": \"Saul Wilson\",\n    \"postalAddress\": {\n      \"type\": \"Office\",\n      \"department\": \"Mortgage\",\n      \"subDepartment\": \"Housing\",\n      \"street\": \"123 BNFW1 ST\",\n      \"buildingNumber\": \"123\",\n      \"postalCode\": \"12334\",\n      \"city\": \"BNFCITY\",\n      \"region\": \"OH\",\n      \"countryCode\": \"US\",\n      \"addressLine\": \"123 BNFW1 SIM ST,BNFW1 123 |BNFCITY OH 12334|I/US\"\n    }\n  },\n  \"beneficiaryAccount\": {\n    \"accountNumber\": \"9350371100\"\n  },\n  \"originatorAccount\": {\n    \"accountNumber\": \"9350371111\"\n  },\n  \"ultimateCreditor\": {\n    \"name\": \"ULTCR Party1\",\n    \"postalAddress\": {\n      \"type\": \"Office\",\n      \"department\": \"dept\",\n      \"subDepartment\": \"subDept\",\n      \"street\": \"Oak Point Rd\",\n      \"buildingNumber\": \"100\",\n      \"postalCode\": \"12335\",\n      \"city\": \"Amherst\",\n      \"region\": \"NY\",\n      \"countryCode\": \"US\",\n      \"addressLine\": \"dept subDept 100 Oak Point Rd Amherst NY pstC44001d\"\n    }\n  },\n  \"ultimateCreditorAccount\": {\n    \"accountNumber\": \"1234321\"\n  },\n  \"ultimateDebtor\": {\n    \"name\": \"ULTDB Party\",\n    \"postalAddress\": {\n      \"type\": \"Office\",\n      \"department\": \"dept\",\n      \"subDepartment\": \"subDept\",\n      \"street\": \"Oak Point Rd\",\n      \"buildingNumber\": \"100\",\n      \"postalCode\": \"12335\",\n      \"city\": \"Amherst\",\n      \"region\": \"NY\",\n      \"countryCode\": \"US\",\n      \"addressLine\": \"dept subDept 100 Oak Point Rd Amherst NY pstC44001d\"\n    }\n  },\n  \"ultimateDebtorAccount\": {\n    \"accountNumber\": \"567651\"\n  },\n  \"intermediaryBank1\": {\n    \"name\": \"SIMW1 BANK\",\n    \"aba\": \"012345678\",\n    \"bic\": \"SIMWUS01\",\n    \"addressLine\": \"0123 INT2W1 ST|NEW YORK 01234 US\"\n  },\n  \"intermediaryBank2\": {\n    \"name\": \"SIMWINT2 BANK\",\n    \"aba\": \"112345555\",\n    \"bic\": \"SIMWUS22\",\n    \"addressLine\": \"0123 INT2W1 ST|NEW YORK 01235 US\"\n  },\n  \"intermediaryBank3\": {\n    \"name\": \"SIMINTW3 CANADA BANK\",\n    \"aba\": \"112346666\",\n    \"bic\": \"SIMINT3W1\",\n    \"addressLine\": \"0123 INT2W1 ST|NEW YORK 01238 US\"\n  },\n  \"beneficiaryBank\": {\n    \"aba\": \"021007821\",\n    \"bic\": \"SIMCRKEYBUS21\"\n  },\n  \"originatorBank\": {\n    \"aba\": \"011007822\",\n    \"bic\": \"SIMDBKEYBUS22\"\n  },\n  \"failureReasons\": {\n    \"initiatingFailureReasonCode\": \"KEY-9998\",\n    \"initiatingFailureReasonTitle\": \"Unauthorized for account\",\n    \"networkFailureReasonCode\": \"123\",\n    \"networkFailureReasonTitle\": \"Network Failure\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5931b53c-6915-4a99-835c-9bb520bd6fae",
+              "name": "Unauthorized request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "transactions",
+                    "detail",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) The unique ID number associated with the original payment request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Universal ID to trace the transaction across all systems involved.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Received request is unauthorized, please provide valid credentials\",\n  \"TransactionId\": \"0635f201-8fbb-418f-b93a-138d5103e2b91348\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"https://partner-api-qv.key.com/rtp/v1/transactions/detail/US99999000999999\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f2e1769d-0bf3-4fe2-bccb-a16bdde169d4",
+              "name": "No RTP transaction was found with the provided transactionId",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "transactions",
+                    "detail",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) The unique ID number associated with the original payment request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Universal ID to trace the transaction across all systems involved.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"https://partner-api-qv.key.com/rtp/v1/transactions/detail/US99999000999999\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"RTP-Detail-404-no-records\",\n          \"message\": \"Record Not Found\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a4024e7-d917-41b5-8f26-1ce5046ef66e",
+              "name": "Unexpected server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rtp",
+                    "v1",
+                    "transactions",
+                    "detail",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) The unique ID number associated with the original payment request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Universal ID to trace the transaction across all systems involved.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"Api-Url\": \"https://partner-api-qv.key.com/rtp/v1/transactions/detail/US99999000999999\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"500-InternalServerError\",\n          \"message\": \"An unexpected error occurred.  Please try again later or contact support if the problem persists.\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://partner-api-qv.key.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1b6de2a4-ec9c-4e5b-ab5c-14d4449baf76",
+    "name": "RTP Inquiry API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Retrieve the status and details of a real-time payments transactions\n\nContact Support:\n Name: KeyBank Developer Support\n Email: embedded_banking_support@keybank.com",
+      "type": "text/plain"
+    }
+  }
+}

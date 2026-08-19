@@ -1,0 +1,866 @@
+{
+  "item": [
+    {
+      "id": "6503f194-be52-42d3-ac82-9ad442a28a92",
+      "name": "HealthCheck",
+      "description": {
+        "content": "Verify you can connect to the API service.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cbc6d840-13d0-4203-bd8b-a460717ee5cb",
+          "name": "Health check",
+          "request": {
+            "name": "Health check",
+            "description": {
+              "content": "Verify you can connect to the API service. A bearer token is required.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "wireInquiry",
+                "v1",
+                "healthCheck"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b9f094e2-109d-4e39-a7b5-f3f4edf36b46",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wireInquiry",
+                    "v1",
+                    "healthCheck"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"Ok\",\n  \"Source\": \"Roundtrip\",\n  \"Timestamp\": \"2022-09-15T04:49:03\",\n  \"ClientIp\": \"192.0.2.1\",\n  \"X-Forwarded-For\": \"[192.0.2.1]\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "023fe552-97a1-4e54-b8e7-3d482c7e10eb",
+      "name": "Wire",
+      "description": {
+        "content": "Wire Inquiry functions to list wires and retrieve wire details",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6e195656-143f-469a-b1c5-3cb94c504333",
+          "name": "Search wire transfers",
+          "request": {
+            "name": "Search wire transfers",
+            "description": {
+              "content": "Based on search criteria provided, get a list of wire transfers. The account number and date range are required for every request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "wireInquiry",
+                "v1",
+                "transactions",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountNumber\": \"<string>\",\n  \"fromDate\": \"<date>\",\n  \"toDate\": \"<date>\",\n  \"minimumAmount\": \"<double>\",\n  \"maximumAmount\": \"<double>\",\n  \"requestReference\": \"<string>\",\n  \"pageNumber\": \"<integer>\",\n  \"pageSize\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "21cee2e3-8f87-459e-92ff-37bb996bcf4d",
+              "name": "Search results match the criteria",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wireInquiry",
+                    "v1",
+                    "transactions",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"3123456789\",\n  \"fromDate\": \"2024-02-01\",\n  \"toDate\": \"2024-02-01\",\n  \"minimumAmount\": 0.5,\n  \"maximumAmount\": 100,\n  \"requestReference\": \"1122334455\",\n  \"pageNumber\": 1,\n  \"pageSize\": 500\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations. The ID is unique to each request.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactions\": [\n    {\n      \"transactionId\": \"US99999000999999\",\n      \"transactionStatus\": \"COMPLETED\",\n      \"transactionStatusTimestamp\": \"2026-01-12T12:18:01\",\n      \"transactionDate\": \"2026-01-12\",\n      \"transactionAmount\": 32772.63,\n      \"requestReference\": \"1122334455\",\n      \"sendersReference\": \"US99999000999999\",\n      \"creditor\": {\n        \"name\": \"Global Markets LLC\"\n      },\n      \"creditorAccount\": {\n        \"accountNumber\": \"987654321\"\n      },\n      \"debtor\": {\n        \"name\": \"Paul Wilson\"\n      },\n      \"debtorAccount\": {\n        \"accountNumber\": \"123456789\"\n      },\n      \"originator\": {\n        \"name\": \"VAM TEST BANK\"\n      },\n      \"beneficiary\": {\n        \"name\": \"MARKET CAPITAL\"\n      }\n    }\n  ],\n  \"metadata\": {\n    \"page\": {\n      \"pageNumber\": 1,\n      \"pageSize\": 25,\n      \"totalPages\": 3,\n      \"totalRecords\": 75,\n      \"lastPage\": false\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26ca3454-b50c-4e4d-9be5-07268783d8a6",
+              "name": "Bad input parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wireInquiry",
+                    "v1",
+                    "transactions",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"3123456789\",\n  \"fromDate\": \"2024-02-01\",\n  \"toDate\": \"2024-02-01\",\n  \"minimumAmount\": 0.5,\n  \"maximumAmount\": 100,\n  \"requestReference\": \"1122334455\",\n  \"pageNumber\": 1,\n  \"pageSize\": 500\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations. The ID is unique to each request.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"https://partner-api-qv.key.com/wireInquiry/v1/transactions/list\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"Wire-List-400-toDate\",\n          \"message\": \"toDate format must be YYYY-MM-DD\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4979b46a-3089-4f77-b3c9-785f53b44301",
+              "name": "Unauthorized request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wireInquiry",
+                    "v1",
+                    "transactions",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"3123456789\",\n  \"fromDate\": \"2024-02-01\",\n  \"toDate\": \"2024-02-01\",\n  \"minimumAmount\": 0.5,\n  \"maximumAmount\": 100,\n  \"requestReference\": \"1122334455\",\n  \"pageNumber\": 1,\n  \"pageSize\": 500\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Received request is unauthorized, please provide valid credentials\",\n  \"TransactionId\": \"0635f201-8fbb-418f-b93a-138d5103e2b91348\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"https://partner-api-qv.key.com/wireInquiry/v1/transactions/list\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c501d34-8452-4cff-8479-8c969e5093a2",
+              "name": "Entitlements validation failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wireInquiry",
+                    "v1",
+                    "transactions",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"3123456789\",\n  \"fromDate\": \"2024-02-01\",\n  \"toDate\": \"2024-02-01\",\n  \"minimumAmount\": 0.5,\n  \"maximumAmount\": 100,\n  \"requestReference\": \"1122334455\",\n  \"pageNumber\": 1,\n  \"pageSize\": 500\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"https://partner-api-qv.key.com/wireInquiry/v1/transactions/list\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"403-Forbidden\",\n          \"message\": \"Entitlements Validation Failed\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "773d8526-5e55-4676-a62d-e95002c133bc",
+              "name": "Request timeout error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wireInquiry",
+                    "v1",
+                    "transactions",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"3123456789\",\n  \"fromDate\": \"2024-02-01\",\n  \"toDate\": \"2024-02-01\",\n  \"minimumAmount\": 0.5,\n  \"maximumAmount\": 100,\n  \"requestReference\": \"1122334455\",\n  \"pageNumber\": 1,\n  \"pageSize\": 500\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"https://partner-api-qv.key.com/wireInquiry/v1/transactions/list\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"Wire-List-408-timeout\",\n          \"message\": \"The request exceeded the timeout limit.  Please adjust your request parameters and try again.\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac4fcd70-cca6-4559-acff-0ca033f6a6a3",
+              "name": "Unexpected server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wireInquiry",
+                    "v1",
+                    "transactions",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"3123456789\",\n  \"fromDate\": \"2024-02-01\",\n  \"toDate\": \"2024-02-01\",\n  \"minimumAmount\": 0.5,\n  \"maximumAmount\": 100,\n  \"requestReference\": \"1122334455\",\n  \"pageNumber\": 1,\n  \"pageSize\": 500\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"Api-Url\": \"https://partner-api-qv.key.com/wireInquiry/v1/transactions/list\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"500-InternalServerError\",\n          \"message\": \"An unexpected error occurred.  Please try again later or contact support if the problem persists.\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2a46eb10-d6e5-4c5f-bbcc-e0be38bad1ab",
+          "name": "View the details of a wire transfer by the transaction ID",
+          "request": {
+            "name": "View the details of a wire transfer by the transaction ID",
+            "description": {
+              "content": "Provide the transaction ID to retrieve all available fields for that wire transfer.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "wireInquiry",
+                "v1",
+                "transactions",
+                "detail",
+                ":transactionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) The unique ID number associated with the original payment request."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ff3506f7-4347-4a8c-ba5d-6699a9e7da5a",
+              "name": "A Wire transaction matches the provided transactionId",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wireInquiry",
+                    "v1",
+                    "transactions",
+                    "detail",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) The unique ID number associated with the original payment request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A universal ID to trace the transaction across all the systems involved, useful for system logging and identification.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"US99999000999999\",\n  \"transactionStatus\": \"COMPLETED\",\n  \"transactionStatusTimestamp\": \"2026-01-12T12:18:01\",\n  \"transactionDate\": \"2026-01-12\",\n  \"transactionAmount\": 32772.63,\n  \"requestReference\": \"1122334455\",\n  \"sendersReference\": \"US99999000999999\",\n  \"remittanceInformation\": \"Payment 01/12/2026_Invoice 123456789 Cust\",\n  \"bankToBankInstructions\": \"Final Payment\",\n  \"customData\": \"USER ID 1\",\n  \"creditor\": {\n    \"name\": \"Global Markets LLC\",\n    \"postalAddress\": {\n      \"type\": \"Office\",\n      \"department\": \"Financial\",\n      \"subDepartment\": \"Sub financial\",\n      \"street\": \"Columbus pike\",\n      \"buildingNumber\": \"123\",\n      \"postalCode\": \"43240\",\n      \"city\": \"Columbus\",\n      \"region\": \"OH\",\n      \"countryCode\": \"US\",\n      \"addressLine\": \"123 SIM ST,STE W123 |SIMCITY OH 12345|I/US\"\n    }\n  },\n  \"creditorAccount\": {\n    \"accountNumber\": \"987654321\",\n    \"virtualAccountNumber\": \"95312346654532\"\n  },\n  \"debtor\": {\n    \"name\": \"Paul Wilson\",\n    \"postalAddress\": {\n      \"type\": \"Office\",\n      \"department\": \"Financial\",\n      \"subDepartment\": \"Sub financial\",\n      \"street\": \"Columbus pike\",\n      \"buildingNumber\": \"123\",\n      \"postalCode\": \"43240\",\n      \"city\": \"Columbus\",\n      \"region\": \"OH\",\n      \"countryCode\": \"US\",\n      \"addressLine\": \"123 SIM ST,STE W123 |SIMCITY OH 12345|I/US\"\n    }\n  },\n  \"debtorAccount\": {\n    \"accountNumber\": \"123456789\",\n    \"virtualAccountNumber\": \"95312346654532\"\n  },\n  \"originator\": {\n    \"name\": \"VAM TEST BANK NA\",\n    \"postalAddress\": {\n      \"type\": \"Office\",\n      \"department\": \"Financial\",\n      \"subDepartment\": \"Sub financial\",\n      \"street\": \"Columbus pike\",\n      \"buildingNumber\": \"123\",\n      \"postalCode\": \"43240\",\n      \"city\": \"Columbus\",\n      \"region\": \"OH\",\n      \"countryCode\": \"US\",\n      \"addressLine\": \"123 SIM ST,STE W123 |SIMCITY OH 12345|I/US\"\n    }\n  },\n  \"beneficiary\": {\n    \"name\": \"SIM IV INC\",\n    \"postalAddress\": {\n      \"type\": \"Office\",\n      \"department\": \"Mortgage\",\n      \"subDepartment\": \"Housing\",\n      \"street\": \"123 BNFW1 ST\",\n      \"buildingNumber\": \"123\",\n      \"postalCode\": \"12334\",\n      \"city\": \"BNFCITY\",\n      \"region\": \"OH\",\n      \"countryCode\": \"US\",\n      \"addressLine\": \"123 BNFW1 SIM ST,BNFW1 123 |BNFCITY OH 12334|I/US\"\n    }\n  },\n  \"beneficiaryAccount\": {\n    \"accountNumber\": \"9350371100\"\n  },\n  \"originatorAccount\": {\n    \"accountNumber\": \"9350371111\"\n  },\n  \"ultimateCreditor\": {\n    \"name\": \"ULTCR Party1\",\n    \"postalAddress\": {\n      \"type\": \"Office\",\n      \"department\": \"dept\",\n      \"subDepartment\": \"subDept\",\n      \"street\": \"Oak Point Rd\",\n      \"buildingNumber\": \"100\",\n      \"postalCode\": \"12335\",\n      \"city\": \"Amherst\",\n      \"region\": \"NY\",\n      \"countryCode\": \"US\",\n      \"addressLine\": \"dept subDept 100 Oak Point Rd Amherst NY pstC44001d\"\n    }\n  },\n  \"ultimateCreditorAccount\": {\n    \"accountNumber\": \"1234321\"\n  },\n  \"ultimateDebtor\": {\n    \"name\": \"ULTDB Party\",\n    \"postalAddress\": {\n      \"type\": \"Office\",\n      \"department\": \"dept\",\n      \"subDepartment\": \"subDept\",\n      \"street\": \"Oak Point Rd\",\n      \"buildingNumber\": \"100\",\n      \"postalCode\": \"12335\",\n      \"city\": \"Amherst\",\n      \"region\": \"NY\",\n      \"countryCode\": \"US\",\n      \"addressLine\": \"dept subDept 100 Oak Point Rd Amherst NY pstC44001d\"\n    }\n  },\n  \"ultimateDebtorAccount\": {\n    \"accountNumber\": \"567651\"\n  },\n  \"intermediaryBank1\": {\n    \"name\": \"SIMW1 BANK\",\n    \"aba\": \"012345678\",\n    \"bic\": \"SIMWUS01\",\n    \"addressLine\": \"0123 INT2W1 ST|NEW YORK 01234 US\"\n  },\n  \"intermediaryBank2\": {\n    \"name\": \"SIMWINT2 BANK\",\n    \"aba\": \"112345555\",\n    \"bic\": \"SIMWUS22\",\n    \"addressLine\": \"0123 INT2W1 ST|NEW YORK 01235 US\"\n  },\n  \"intermediaryBank3\": {\n    \"name\": \"SIMINTW3 CANADA BANK\",\n    \"aba\": \"112346666\",\n    \"bic\": \"SIMINT3W1\",\n    \"addressLine\": \"0123 INT2W1 ST|NEW YORK 01238 US\"\n  },\n  \"beneficiaryBank\": {\n    \"aba\": \"021007821\",\n    \"bic\": \"SIMCRKEYBUS21\"\n  },\n  \"originatorBank\": {\n    \"aba\": \"011007822\",\n    \"bic\": \"SIMDBKEYBUS22\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b4f1346-44b0-4c3a-b690-406b9223e8b9",
+              "name": "Unauthorized request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wireInquiry",
+                    "v1",
+                    "transactions",
+                    "detail",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) The unique ID number associated with the original payment request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Received request is unauthorized, please provide valid credentials\",\n  \"TransactionId\": \"0635f201-8fbb-418f-b93a-138d5103e2b91348\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"https://partner-api-qv.key.com/wireInquiry/v1/transactions/detail\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74d0c3d8-1430-46f4-a20a-fbf4196809a6",
+              "name": "No Wire transaction was found with the provided transactionId",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wireInquiry",
+                    "v1",
+                    "transactions",
+                    "detail",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) The unique ID number associated with the original payment request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"https://partner-api-qv.key.com/wireInquiry/v1/transactions/detail/US99999000999999\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"Wire-Detail-404-no-records\",\n          \"message\": \"Record Not Found\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26ca857e-8009-4924-8d94-70c9ede3f2b8",
+              "name": "Unexpected server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wireInquiry",
+                    "v1",
+                    "transactions",
+                    "detail",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) The unique ID number associated with the original payment request."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"Api-Url\": \"https://partner-api-qv.key.com/wireInquiry/v1/transactions/detail/US99999000999999\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"500-InternalServerError\",\n          \"message\": \"An unexpected error occurred.  Please try again later or contact support if the problem persists.\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://partner-api-qv.key.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "24abb0f1-e48f-4a91-b7d3-90c491ca7bc7",
+    "name": "Wire Inquiry",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Retrieve the status and details of a wire transaction.\n\nContact Support:\n Name: KeyBank Developer Support\n Email: embedded_banking_support@keybank.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,10 +1,9 @@
 generated: '2026-06-20'
 method: derived
 status: candidate
-note: "Derived candidate tool list \u2014 one tool per OpenAPI operation. KeyBank\
-  \ publishes no hosted MCP server; these tools inherit their real inputSchema from\
-  \ the backing OpenAPI operation. All operations require OAuth2 bearer + mutual-TLS\
-  \ client certs."
+note: Derived candidate tool list — one tool per OpenAPI operation. KeyBank publishes no hosted MCP server;
+  these tools inherit their real inputSchema from the backing OpenAPI operation. All operations require
+  OAuth2 bearer + mutual-TLS client certs.
 server:
   name: keycorp
   transport: http
@@ -51,8 +50,7 @@ tools:
   source_operation: openapi/keycorp-ach-originations-openapi.yml#achPaymentCCD
   category: ACH Payment Origination
 - name: achPaymentCTX
-  description: Make or collect payments to or from a corporate account with attached
-    records
+  description: Make or collect payments to or from a corporate account with attached records
   source_operation: openapi/keycorp-ach-originations-openapi.yml#achPaymentCTX
   category: ACH Payment Origination
 - name: achPaymentPPD
@@ -147,3 +145,9 @@ tools:
   description: View the details of a wire transfer by the transaction ID
   source_operation: openapi/keycorp-wire-inquiry-openapi.yml#searchWireTransaction
   category: Wire
+deployment:
+  mode: none
+  verified: derived
+  tools: 34
+  checked: '2026-08-12'
+  source: catalog MCP census

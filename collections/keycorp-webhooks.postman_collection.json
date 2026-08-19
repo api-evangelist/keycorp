@@ -1,0 +1,867 @@
+{
+  "item": [
+    {
+      "id": "cd563e4e-000c-4426-9cea-a259a937fbfa",
+      "name": "ACH",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "42b9e816-46b8-41dc-9610-f987d58c4762",
+          "name": "Send an ACH alerts event notification to the client URI.",
+          "request": {
+            "name": "Send an ACH alerts event notification to the client URI.",
+            "description": {},
+            "url": {
+              "path": [
+                "\"Callback URL from client for ACH alerts - AL00906\""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"alertNotificationRequest\": [\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"transactionStatus\": \"<string>\",\n          \"transactionStatusTimeStamp\": \"<dateTime>\",\n          \"traceNumber\": \"<string>\",\n          \"parNumber\": \"<string>\",\n          \"transactionAmount\": \"<string>\",\n          \"collectionDate\": \"<string>\",\n          \"settlementDate\": \"<string>\",\n          \"transactionCode\": \"<string>\",\n          \"transactionDescription\": \"<string>\",\n          \"authorizedCustomerName\": \"<string>\",\n          \"standardEntryClassCode\": \"<string>\",\n          \"receivingAccountNumber\": \"<string>\",\n          \"receivingCustomerIdentificationNumber\": \"<string>\",\n          \"receivingCompanyName\": \"<string>\",\n          \"originatingAccountNumber\": \"<string>\",\n          \"originatingCustomerIdentificationNumber\": \"<string>\",\n          \"originatingCompanyName\": \"<string>\",\n          \"returnReasonCode\": \"<string>\",\n          \"returnReasonDescription\": \"<string>\",\n          \"returnDate\": \"<string>\",\n          \"notificationOfChangeAddendaCount\": \"<string>\",\n          \"internationalAddendaCount\": \"<string>\",\n          \"addendaCount\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"transactionStatus\": \"<string>\",\n          \"transactionStatusTimeStamp\": \"<dateTime>\",\n          \"traceNumber\": \"<string>\",\n          \"parNumber\": \"<string>\",\n          \"transactionAmount\": \"<string>\",\n          \"collectionDate\": \"<string>\",\n          \"settlementDate\": \"<string>\",\n          \"transactionCode\": \"<string>\",\n          \"transactionDescription\": \"<string>\",\n          \"authorizedCustomerName\": \"<string>\",\n          \"standardEntryClassCode\": \"<string>\",\n          \"receivingAccountNumber\": \"<string>\",\n          \"receivingCustomerIdentificationNumber\": \"<string>\",\n          \"receivingCompanyName\": \"<string>\",\n          \"originatingAccountNumber\": \"<string>\",\n          \"originatingCustomerIdentificationNumber\": \"<string>\",\n          \"originatingCompanyName\": \"<string>\",\n          \"returnReasonCode\": \"<string>\",\n          \"returnReasonDescription\": \"<string>\",\n          \"returnDate\": \"<string>\",\n          \"notificationOfChangeAddendaCount\": \"<string>\",\n          \"internationalAddendaCount\": \"<string>\",\n          \"addendaCount\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9e087886-a23a-4182-95bf-c785132f7a0c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "\"Callback URL from client for ACH alerts - AL00906\""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alertNotificationRequest\": [\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"transactionStatus\": \"<string>\",\n          \"transactionStatusTimeStamp\": \"<dateTime>\",\n          \"traceNumber\": \"<string>\",\n          \"parNumber\": \"<string>\",\n          \"transactionAmount\": \"<string>\",\n          \"collectionDate\": \"<string>\",\n          \"settlementDate\": \"<string>\",\n          \"transactionCode\": \"<string>\",\n          \"transactionDescription\": \"<string>\",\n          \"authorizedCustomerName\": \"<string>\",\n          \"standardEntryClassCode\": \"<string>\",\n          \"receivingAccountNumber\": \"<string>\",\n          \"receivingCustomerIdentificationNumber\": \"<string>\",\n          \"receivingCompanyName\": \"<string>\",\n          \"originatingAccountNumber\": \"<string>\",\n          \"originatingCustomerIdentificationNumber\": \"<string>\",\n          \"originatingCompanyName\": \"<string>\",\n          \"returnReasonCode\": \"<string>\",\n          \"returnReasonDescription\": \"<string>\",\n          \"returnDate\": \"<string>\",\n          \"notificationOfChangeAddendaCount\": \"<string>\",\n          \"internationalAddendaCount\": \"<string>\",\n          \"addendaCount\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"transactionStatus\": \"<string>\",\n          \"transactionStatusTimeStamp\": \"<dateTime>\",\n          \"traceNumber\": \"<string>\",\n          \"parNumber\": \"<string>\",\n          \"transactionAmount\": \"<string>\",\n          \"collectionDate\": \"<string>\",\n          \"settlementDate\": \"<string>\",\n          \"transactionCode\": \"<string>\",\n          \"transactionDescription\": \"<string>\",\n          \"authorizedCustomerName\": \"<string>\",\n          \"standardEntryClassCode\": \"<string>\",\n          \"receivingAccountNumber\": \"<string>\",\n          \"receivingCustomerIdentificationNumber\": \"<string>\",\n          \"receivingCompanyName\": \"<string>\",\n          \"originatingAccountNumber\": \"<string>\",\n          \"originatingCustomerIdentificationNumber\": \"<string>\",\n          \"originatingCompanyName\": \"<string>\",\n          \"returnReasonCode\": \"<string>\",\n          \"returnReasonDescription\": \"<string>\",\n          \"returnDate\": \"<string>\",\n          \"notificationOfChangeAddendaCount\": \"<string>\",\n          \"internationalAddendaCount\": \"<string>\",\n          \"addendaCount\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0bf73340-497c-4874-a322-61f690d6ab18",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "\"Callback URL from client for ACH alerts - AL00906\""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alertNotificationRequest\": [\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"transactionStatus\": \"<string>\",\n          \"transactionStatusTimeStamp\": \"<dateTime>\",\n          \"traceNumber\": \"<string>\",\n          \"parNumber\": \"<string>\",\n          \"transactionAmount\": \"<string>\",\n          \"collectionDate\": \"<string>\",\n          \"settlementDate\": \"<string>\",\n          \"transactionCode\": \"<string>\",\n          \"transactionDescription\": \"<string>\",\n          \"authorizedCustomerName\": \"<string>\",\n          \"standardEntryClassCode\": \"<string>\",\n          \"receivingAccountNumber\": \"<string>\",\n          \"receivingCustomerIdentificationNumber\": \"<string>\",\n          \"receivingCompanyName\": \"<string>\",\n          \"originatingAccountNumber\": \"<string>\",\n          \"originatingCustomerIdentificationNumber\": \"<string>\",\n          \"originatingCompanyName\": \"<string>\",\n          \"returnReasonCode\": \"<string>\",\n          \"returnReasonDescription\": \"<string>\",\n          \"returnDate\": \"<string>\",\n          \"notificationOfChangeAddendaCount\": \"<string>\",\n          \"internationalAddendaCount\": \"<string>\",\n          \"addendaCount\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"transactionStatus\": \"<string>\",\n          \"transactionStatusTimeStamp\": \"<dateTime>\",\n          \"traceNumber\": \"<string>\",\n          \"parNumber\": \"<string>\",\n          \"transactionAmount\": \"<string>\",\n          \"collectionDate\": \"<string>\",\n          \"settlementDate\": \"<string>\",\n          \"transactionCode\": \"<string>\",\n          \"transactionDescription\": \"<string>\",\n          \"authorizedCustomerName\": \"<string>\",\n          \"standardEntryClassCode\": \"<string>\",\n          \"receivingAccountNumber\": \"<string>\",\n          \"receivingCustomerIdentificationNumber\": \"<string>\",\n          \"receivingCompanyName\": \"<string>\",\n          \"originatingAccountNumber\": \"<string>\",\n          \"originatingCustomerIdentificationNumber\": \"<string>\",\n          \"originatingCompanyName\": \"<string>\",\n          \"returnReasonCode\": \"<string>\",\n          \"returnReasonDescription\": \"<string>\",\n          \"returnDate\": \"<string>\",\n          \"notificationOfChangeAddendaCount\": \"<string>\",\n          \"internationalAddendaCount\": \"<string>\",\n          \"addendaCount\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f51c963a-43d6-4ca1-8fee-65aeb188f066",
+              "name": "Invalid Input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "\"Callback URL from client for ACH alerts - AL00906\""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alertNotificationRequest\": [\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"transactionStatus\": \"<string>\",\n          \"transactionStatusTimeStamp\": \"<dateTime>\",\n          \"traceNumber\": \"<string>\",\n          \"parNumber\": \"<string>\",\n          \"transactionAmount\": \"<string>\",\n          \"collectionDate\": \"<string>\",\n          \"settlementDate\": \"<string>\",\n          \"transactionCode\": \"<string>\",\n          \"transactionDescription\": \"<string>\",\n          \"authorizedCustomerName\": \"<string>\",\n          \"standardEntryClassCode\": \"<string>\",\n          \"receivingAccountNumber\": \"<string>\",\n          \"receivingCustomerIdentificationNumber\": \"<string>\",\n          \"receivingCompanyName\": \"<string>\",\n          \"originatingAccountNumber\": \"<string>\",\n          \"originatingCustomerIdentificationNumber\": \"<string>\",\n          \"originatingCompanyName\": \"<string>\",\n          \"returnReasonCode\": \"<string>\",\n          \"returnReasonDescription\": \"<string>\",\n          \"returnDate\": \"<string>\",\n          \"notificationOfChangeAddendaCount\": \"<string>\",\n          \"internationalAddendaCount\": \"<string>\",\n          \"addendaCount\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"transactionStatus\": \"<string>\",\n          \"transactionStatusTimeStamp\": \"<dateTime>\",\n          \"traceNumber\": \"<string>\",\n          \"parNumber\": \"<string>\",\n          \"transactionAmount\": \"<string>\",\n          \"collectionDate\": \"<string>\",\n          \"settlementDate\": \"<string>\",\n          \"transactionCode\": \"<string>\",\n          \"transactionDescription\": \"<string>\",\n          \"authorizedCustomerName\": \"<string>\",\n          \"standardEntryClassCode\": \"<string>\",\n          \"receivingAccountNumber\": \"<string>\",\n          \"receivingCustomerIdentificationNumber\": \"<string>\",\n          \"receivingCompanyName\": \"<string>\",\n          \"originatingAccountNumber\": \"<string>\",\n          \"originatingCustomerIdentificationNumber\": \"<string>\",\n          \"originatingCompanyName\": \"<string>\",\n          \"returnReasonCode\": \"<string>\",\n          \"returnReasonDescription\": \"<string>\",\n          \"returnDate\": \"<string>\",\n          \"notificationOfChangeAddendaCount\": \"<string>\",\n          \"internationalAddendaCount\": \"<string>\",\n          \"addendaCount\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"alertNotificationResponse\": [\n    {\n      \"alertAcknowledgment\": {\n        \"alertStatus\": \"FAILURE\",\n        \"confirmationGUID\": \"63617171-ba4e-f22b-f438-5910df7a287e\",\n        \"alertRecievedDateAndTime\": \"1995-06-03T11:40:43.825Z\",\n        \"eapAlertGUID\": \"e827b8d1-c85c-bdb4-94b6-8bd37210c21d\",\n        \"message\": \"string\"\n      }\n    },\n    {\n      \"alertAcknowledgment\": {\n        \"alertStatus\": \"FAILURE\",\n        \"confirmationGUID\": \"e5697259-317b-f01d-4dc8-08a600329ed7\",\n        \"alertRecievedDateAndTime\": \"1953-02-11T11:54:58.697Z\",\n        \"eapAlertGUID\": \"f3fbc86e-e6b3-2deb-9c3d-e43054db5bbf\",\n        \"message\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25bf8758-322f-4aec-a172-b5b33d075270",
+              "name": "Authentication Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "\"Callback URL from client for ACH alerts - AL00906\""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alertNotificationRequest\": [\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"transactionStatus\": \"<string>\",\n          \"transactionStatusTimeStamp\": \"<dateTime>\",\n          \"traceNumber\": \"<string>\",\n          \"parNumber\": \"<string>\",\n          \"transactionAmount\": \"<string>\",\n          \"collectionDate\": \"<string>\",\n          \"settlementDate\": \"<string>\",\n          \"transactionCode\": \"<string>\",\n          \"transactionDescription\": \"<string>\",\n          \"authorizedCustomerName\": \"<string>\",\n          \"standardEntryClassCode\": \"<string>\",\n          \"receivingAccountNumber\": \"<string>\",\n          \"receivingCustomerIdentificationNumber\": \"<string>\",\n          \"receivingCompanyName\": \"<string>\",\n          \"originatingAccountNumber\": \"<string>\",\n          \"originatingCustomerIdentificationNumber\": \"<string>\",\n          \"originatingCompanyName\": \"<string>\",\n          \"returnReasonCode\": \"<string>\",\n          \"returnReasonDescription\": \"<string>\",\n          \"returnDate\": \"<string>\",\n          \"notificationOfChangeAddendaCount\": \"<string>\",\n          \"internationalAddendaCount\": \"<string>\",\n          \"addendaCount\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"transactionStatus\": \"<string>\",\n          \"transactionStatusTimeStamp\": \"<dateTime>\",\n          \"traceNumber\": \"<string>\",\n          \"parNumber\": \"<string>\",\n          \"transactionAmount\": \"<string>\",\n          \"collectionDate\": \"<string>\",\n          \"settlementDate\": \"<string>\",\n          \"transactionCode\": \"<string>\",\n          \"transactionDescription\": \"<string>\",\n          \"authorizedCustomerName\": \"<string>\",\n          \"standardEntryClassCode\": \"<string>\",\n          \"receivingAccountNumber\": \"<string>\",\n          \"receivingCustomerIdentificationNumber\": \"<string>\",\n          \"receivingCompanyName\": \"<string>\",\n          \"originatingAccountNumber\": \"<string>\",\n          \"originatingCustomerIdentificationNumber\": \"<string>\",\n          \"originatingCompanyName\": \"<string>\",\n          \"returnReasonCode\": \"<string>\",\n          \"returnReasonDescription\": \"<string>\",\n          \"returnDate\": \"<string>\",\n          \"notificationOfChangeAddendaCount\": \"<string>\",\n          \"internationalAddendaCount\": \"<string>\",\n          \"addendaCount\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5ff10b7b-76ee-4eae-8f78-2f9a62d1cf52",
+              "name": "Authorization Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "\"Callback URL from client for ACH alerts - AL00906\""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alertNotificationRequest\": [\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"transactionStatus\": \"<string>\",\n          \"transactionStatusTimeStamp\": \"<dateTime>\",\n          \"traceNumber\": \"<string>\",\n          \"parNumber\": \"<string>\",\n          \"transactionAmount\": \"<string>\",\n          \"collectionDate\": \"<string>\",\n          \"settlementDate\": \"<string>\",\n          \"transactionCode\": \"<string>\",\n          \"transactionDescription\": \"<string>\",\n          \"authorizedCustomerName\": \"<string>\",\n          \"standardEntryClassCode\": \"<string>\",\n          \"receivingAccountNumber\": \"<string>\",\n          \"receivingCustomerIdentificationNumber\": \"<string>\",\n          \"receivingCompanyName\": \"<string>\",\n          \"originatingAccountNumber\": \"<string>\",\n          \"originatingCustomerIdentificationNumber\": \"<string>\",\n          \"originatingCompanyName\": \"<string>\",\n          \"returnReasonCode\": \"<string>\",\n          \"returnReasonDescription\": \"<string>\",\n          \"returnDate\": \"<string>\",\n          \"notificationOfChangeAddendaCount\": \"<string>\",\n          \"internationalAddendaCount\": \"<string>\",\n          \"addendaCount\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"transactionStatus\": \"<string>\",\n          \"transactionStatusTimeStamp\": \"<dateTime>\",\n          \"traceNumber\": \"<string>\",\n          \"parNumber\": \"<string>\",\n          \"transactionAmount\": \"<string>\",\n          \"collectionDate\": \"<string>\",\n          \"settlementDate\": \"<string>\",\n          \"transactionCode\": \"<string>\",\n          \"transactionDescription\": \"<string>\",\n          \"authorizedCustomerName\": \"<string>\",\n          \"standardEntryClassCode\": \"<string>\",\n          \"receivingAccountNumber\": \"<string>\",\n          \"receivingCustomerIdentificationNumber\": \"<string>\",\n          \"receivingCompanyName\": \"<string>\",\n          \"originatingAccountNumber\": \"<string>\",\n          \"originatingCustomerIdentificationNumber\": \"<string>\",\n          \"originatingCompanyName\": \"<string>\",\n          \"returnReasonCode\": \"<string>\",\n          \"returnReasonDescription\": \"<string>\",\n          \"returnDate\": \"<string>\",\n          \"notificationOfChangeAddendaCount\": \"<string>\",\n          \"internationalAddendaCount\": \"<string>\",\n          \"addendaCount\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "854c4176-16f3-4ee1-ab48-aa7f215c6db5",
+              "name": "Internal Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "\"Callback URL from client for ACH alerts - AL00906\""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alertNotificationRequest\": [\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"transactionStatus\": \"<string>\",\n          \"transactionStatusTimeStamp\": \"<dateTime>\",\n          \"traceNumber\": \"<string>\",\n          \"parNumber\": \"<string>\",\n          \"transactionAmount\": \"<string>\",\n          \"collectionDate\": \"<string>\",\n          \"settlementDate\": \"<string>\",\n          \"transactionCode\": \"<string>\",\n          \"transactionDescription\": \"<string>\",\n          \"authorizedCustomerName\": \"<string>\",\n          \"standardEntryClassCode\": \"<string>\",\n          \"receivingAccountNumber\": \"<string>\",\n          \"receivingCustomerIdentificationNumber\": \"<string>\",\n          \"receivingCompanyName\": \"<string>\",\n          \"originatingAccountNumber\": \"<string>\",\n          \"originatingCustomerIdentificationNumber\": \"<string>\",\n          \"originatingCompanyName\": \"<string>\",\n          \"returnReasonCode\": \"<string>\",\n          \"returnReasonDescription\": \"<string>\",\n          \"returnDate\": \"<string>\",\n          \"notificationOfChangeAddendaCount\": \"<string>\",\n          \"internationalAddendaCount\": \"<string>\",\n          \"addendaCount\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"transactionStatus\": \"<string>\",\n          \"transactionStatusTimeStamp\": \"<dateTime>\",\n          \"traceNumber\": \"<string>\",\n          \"parNumber\": \"<string>\",\n          \"transactionAmount\": \"<string>\",\n          \"collectionDate\": \"<string>\",\n          \"settlementDate\": \"<string>\",\n          \"transactionCode\": \"<string>\",\n          \"transactionDescription\": \"<string>\",\n          \"authorizedCustomerName\": \"<string>\",\n          \"standardEntryClassCode\": \"<string>\",\n          \"receivingAccountNumber\": \"<string>\",\n          \"receivingCustomerIdentificationNumber\": \"<string>\",\n          \"receivingCompanyName\": \"<string>\",\n          \"originatingAccountNumber\": \"<string>\",\n          \"originatingCustomerIdentificationNumber\": \"<string>\",\n          \"originatingCompanyName\": \"<string>\",\n          \"returnReasonCode\": \"<string>\",\n          \"returnReasonDescription\": \"<string>\",\n          \"returnDate\": \"<string>\",\n          \"notificationOfChangeAddendaCount\": \"<string>\",\n          \"internationalAddendaCount\": \"<string>\",\n          \"addendaCount\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"alertNotificationResponse\": [\n    {\n      \"alertAcknowledgment\": {\n        \"alertStatus\": \"FAILURE\",\n        \"confirmationGUID\": \"c23dd6bc-298f-725a-69fd-4a4dcb5a0ff9\",\n        \"alertRecievedDateAndTime\": \"1947-02-17T13:06:20.170Z\",\n        \"eapAlertGUID\": \"1c5ab0af-606e-764d-7714-a378f301c6f6\",\n        \"message\": \"string\"\n      }\n    },\n    {\n      \"alertAcknowledgment\": {\n        \"alertStatus\": \"FAILURE\",\n        \"confirmationGUID\": \"da99100f-17dd-f160-08b3-5dec83269147\",\n        \"alertRecievedDateAndTime\": \"1954-03-09T18:52:33.679Z\",\n        \"eapAlertGUID\": \"31c0a1ca-95f3-74e4-bb5a-66e091008334\",\n        \"message\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "6b0ed8ab-75f2-4e45-b399-2599a96c491f",
+      "name": "Wire/RTP v2",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4c91be5f-7f73-434b-a038-0c477a570d19",
+          "name": "Send Wire/RTP Alerts event notification to the client URI.",
+          "request": {
+            "name": "Send Wire/RTP Alerts event notification to the client URI.",
+            "description": {},
+            "url": {
+              "path": [
+                "\"Callback URL from client for Wire",
+                "RTP alerts - AL00907\""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"alertNotificationRequest\": [\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"payType\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"transactionId\": \"<string>\",\n          \"transactionStatus\": \"<string>\",\n          \"transactionStatusTimeStamp\": \"<dateTime>\",\n          \"transactionDate\": \"<string>\",\n          \"transactionAmount\": \"<string>\",\n          \"requestReference\": \"<string>\",\n          \"sendersReference\": \"<string>\",\n          \"channel\": \"<string>\",\n          \"transactionDirection\": \"<string>\",\n          \"creditor\": {\n            \"name\": \"<string>\"\n          }\n        },\n        \"creditorAccount\": {\n          \"accountNumber\": \"<string>\",\n          \"virtualAccountNumber\": \"<string>\",\n          \"currencyCode\": \"<string>\"\n        },\n        \"debtor\": {\n          \"name\": \"<string>\"\n        },\n        \"debtorAccount\": {\n          \"accountNumber\": \"<string>\",\n          \"virtualAccountNumber\": \"<string>\",\n          \"currencyCode\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"payType\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"transactionId\": \"<string>\",\n          \"transactionStatus\": \"<string>\",\n          \"transactionStatusTimeStamp\": \"<dateTime>\",\n          \"transactionDate\": \"<string>\",\n          \"transactionAmount\": \"<string>\",\n          \"requestReference\": \"<string>\",\n          \"sendersReference\": \"<string>\",\n          \"channel\": \"<string>\",\n          \"transactionDirection\": \"<string>\",\n          \"creditor\": {\n            \"name\": \"<string>\"\n          }\n        },\n        \"creditorAccount\": {\n          \"accountNumber\": \"<string>\",\n          \"virtualAccountNumber\": \"<string>\",\n          \"currencyCode\": \"<string>\"\n        },\n        \"debtor\": {\n          \"name\": \"<string>\"\n        },\n        \"debtorAccount\": {\n          \"accountNumber\": \"<string>\",\n          \"virtualAccountNumber\": \"<string>\",\n          \"currencyCode\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ad2dd662-f9bb-44fd-acd4-c7cc29fed56a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "\"Callback URL from client for Wire",
+                    "RTP alerts - AL00907\""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alertNotificationRequest\": [\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"payType\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"transactionId\": \"<string>\",\n          \"transactionStatus\": \"<string>\",\n          \"transactionStatusTimeStamp\": \"<dateTime>\",\n          \"transactionDate\": \"<string>\",\n          \"transactionAmount\": \"<string>\",\n          \"requestReference\": \"<string>\",\n          \"sendersReference\": \"<string>\",\n          \"channel\": \"<string>\",\n          \"transactionDirection\": \"<string>\",\n          \"creditor\": {\n            \"name\": \"<string>\"\n          }\n        },\n        \"creditorAccount\": {\n          \"accountNumber\": \"<string>\",\n          \"virtualAccountNumber\": \"<string>\",\n          \"currencyCode\": \"<string>\"\n        },\n        \"debtor\": {\n          \"name\": \"<string>\"\n        },\n        \"debtorAccount\": {\n          \"accountNumber\": \"<string>\",\n          \"virtualAccountNumber\": \"<string>\",\n          \"currencyCode\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"payType\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"transactionId\": \"<string>\",\n          \"transactionStatus\": \"<string>\",\n          \"transactionStatusTimeStamp\": \"<dateTime>\",\n          \"transactionDate\": \"<string>\",\n          \"transactionAmount\": \"<string>\",\n          \"requestReference\": \"<string>\",\n          \"sendersReference\": \"<string>\",\n          \"channel\": \"<string>\",\n          \"transactionDirection\": \"<string>\",\n          \"creditor\": {\n            \"name\": \"<string>\"\n          }\n        },\n        \"creditorAccount\": {\n          \"accountNumber\": \"<string>\",\n          \"virtualAccountNumber\": \"<string>\",\n          \"currencyCode\": \"<string>\"\n        },\n        \"debtor\": {\n          \"name\": \"<string>\"\n        },\n        \"debtorAccount\": {\n          \"accountNumber\": \"<string>\",\n          \"virtualAccountNumber\": \"<string>\",\n          \"currencyCode\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "15c15d3f-2454-48d8-9839-5de9272f75f0",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "\"Callback URL from client for Wire",
+                    "RTP alerts - AL00907\""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alertNotificationRequest\": [\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"payType\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"transactionId\": \"<string>\",\n          \"transactionStatus\": \"<string>\",\n          \"transactionStatusTimeStamp\": \"<dateTime>\",\n          \"transactionDate\": \"<string>\",\n          \"transactionAmount\": \"<string>\",\n          \"requestReference\": \"<string>\",\n          \"sendersReference\": \"<string>\",\n          \"channel\": \"<string>\",\n          \"transactionDirection\": \"<string>\",\n          \"creditor\": {\n            \"name\": \"<string>\"\n          }\n        },\n        \"creditorAccount\": {\n          \"accountNumber\": \"<string>\",\n          \"virtualAccountNumber\": \"<string>\",\n          \"currencyCode\": \"<string>\"\n        },\n        \"debtor\": {\n          \"name\": \"<string>\"\n        },\n        \"debtorAccount\": {\n          \"accountNumber\": \"<string>\",\n          \"virtualAccountNumber\": \"<string>\",\n          \"currencyCode\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"payType\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"transactionId\": \"<string>\",\n          \"transactionStatus\": \"<string>\",\n          \"transactionStatusTimeStamp\": \"<dateTime>\",\n          \"transactionDate\": \"<string>\",\n          \"transactionAmount\": \"<string>\",\n          \"requestReference\": \"<string>\",\n          \"sendersReference\": \"<string>\",\n          \"channel\": \"<string>\",\n          \"transactionDirection\": \"<string>\",\n          \"creditor\": {\n            \"name\": \"<string>\"\n          }\n        },\n        \"creditorAccount\": {\n          \"accountNumber\": \"<string>\",\n          \"virtualAccountNumber\": \"<string>\",\n          \"currencyCode\": \"<string>\"\n        },\n        \"debtor\": {\n          \"name\": \"<string>\"\n        },\n        \"debtorAccount\": {\n          \"accountNumber\": \"<string>\",\n          \"virtualAccountNumber\": \"<string>\",\n          \"currencyCode\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8bb2f82b-958a-43a4-850c-1d2aab857607",
+              "name": "Invalid Input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "\"Callback URL from client for Wire",
+                    "RTP alerts - AL00907\""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alertNotificationRequest\": [\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"payType\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"transactionId\": \"<string>\",\n          \"transactionStatus\": \"<string>\",\n          \"transactionStatusTimeStamp\": \"<dateTime>\",\n          \"transactionDate\": \"<string>\",\n          \"transactionAmount\": \"<string>\",\n          \"requestReference\": \"<string>\",\n          \"sendersReference\": \"<string>\",\n          \"channel\": \"<string>\",\n          \"transactionDirection\": \"<string>\",\n          \"creditor\": {\n            \"name\": \"<string>\"\n          }\n        },\n        \"creditorAccount\": {\n          \"accountNumber\": \"<string>\",\n          \"virtualAccountNumber\": \"<string>\",\n          \"currencyCode\": \"<string>\"\n        },\n        \"debtor\": {\n          \"name\": \"<string>\"\n        },\n        \"debtorAccount\": {\n          \"accountNumber\": \"<string>\",\n          \"virtualAccountNumber\": \"<string>\",\n          \"currencyCode\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"payType\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"transactionId\": \"<string>\",\n          \"transactionStatus\": \"<string>\",\n          \"transactionStatusTimeStamp\": \"<dateTime>\",\n          \"transactionDate\": \"<string>\",\n          \"transactionAmount\": \"<string>\",\n          \"requestReference\": \"<string>\",\n          \"sendersReference\": \"<string>\",\n          \"channel\": \"<string>\",\n          \"transactionDirection\": \"<string>\",\n          \"creditor\": {\n            \"name\": \"<string>\"\n          }\n        },\n        \"creditorAccount\": {\n          \"accountNumber\": \"<string>\",\n          \"virtualAccountNumber\": \"<string>\",\n          \"currencyCode\": \"<string>\"\n        },\n        \"debtor\": {\n          \"name\": \"<string>\"\n        },\n        \"debtorAccount\": {\n          \"accountNumber\": \"<string>\",\n          \"virtualAccountNumber\": \"<string>\",\n          \"currencyCode\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"alertNotificationResponse\": [\n    {\n      \"alertAcknowledgment\": {\n        \"alertStatus\": \"FAILURE\",\n        \"confirmationGUID\": \"63617171-ba4e-f22b-f438-5910df7a287e\",\n        \"alertRecievedDateAndTime\": \"1995-06-03T11:40:43.825Z\",\n        \"eapAlertGUID\": \"e827b8d1-c85c-bdb4-94b6-8bd37210c21d\",\n        \"message\": \"string\"\n      }\n    },\n    {\n      \"alertAcknowledgment\": {\n        \"alertStatus\": \"FAILURE\",\n        \"confirmationGUID\": \"e5697259-317b-f01d-4dc8-08a600329ed7\",\n        \"alertRecievedDateAndTime\": \"1953-02-11T11:54:58.697Z\",\n        \"eapAlertGUID\": \"f3fbc86e-e6b3-2deb-9c3d-e43054db5bbf\",\n        \"message\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b355bb0-b19a-41f8-950d-e8a3666c7f9e",
+              "name": "Authentication Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "\"Callback URL from client for Wire",
+                    "RTP alerts - AL00907\""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alertNotificationRequest\": [\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"payType\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"transactionId\": \"<string>\",\n          \"transactionStatus\": \"<string>\",\n          \"transactionStatusTimeStamp\": \"<dateTime>\",\n          \"transactionDate\": \"<string>\",\n          \"transactionAmount\": \"<string>\",\n          \"requestReference\": \"<string>\",\n          \"sendersReference\": \"<string>\",\n          \"channel\": \"<string>\",\n          \"transactionDirection\": \"<string>\",\n          \"creditor\": {\n            \"name\": \"<string>\"\n          }\n        },\n        \"creditorAccount\": {\n          \"accountNumber\": \"<string>\",\n          \"virtualAccountNumber\": \"<string>\",\n          \"currencyCode\": \"<string>\"\n        },\n        \"debtor\": {\n          \"name\": \"<string>\"\n        },\n        \"debtorAccount\": {\n          \"accountNumber\": \"<string>\",\n          \"virtualAccountNumber\": \"<string>\",\n          \"currencyCode\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"payType\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"transactionId\": \"<string>\",\n          \"transactionStatus\": \"<string>\",\n          \"transactionStatusTimeStamp\": \"<dateTime>\",\n          \"transactionDate\": \"<string>\",\n          \"transactionAmount\": \"<string>\",\n          \"requestReference\": \"<string>\",\n          \"sendersReference\": \"<string>\",\n          \"channel\": \"<string>\",\n          \"transactionDirection\": \"<string>\",\n          \"creditor\": {\n            \"name\": \"<string>\"\n          }\n        },\n        \"creditorAccount\": {\n          \"accountNumber\": \"<string>\",\n          \"virtualAccountNumber\": \"<string>\",\n          \"currencyCode\": \"<string>\"\n        },\n        \"debtor\": {\n          \"name\": \"<string>\"\n        },\n        \"debtorAccount\": {\n          \"accountNumber\": \"<string>\",\n          \"virtualAccountNumber\": \"<string>\",\n          \"currencyCode\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e82afb73-7a9e-4c05-86a3-216d6b103637",
+              "name": "Authorization Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "\"Callback URL from client for Wire",
+                    "RTP alerts - AL00907\""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alertNotificationRequest\": [\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"payType\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"transactionId\": \"<string>\",\n          \"transactionStatus\": \"<string>\",\n          \"transactionStatusTimeStamp\": \"<dateTime>\",\n          \"transactionDate\": \"<string>\",\n          \"transactionAmount\": \"<string>\",\n          \"requestReference\": \"<string>\",\n          \"sendersReference\": \"<string>\",\n          \"channel\": \"<string>\",\n          \"transactionDirection\": \"<string>\",\n          \"creditor\": {\n            \"name\": \"<string>\"\n          }\n        },\n        \"creditorAccount\": {\n          \"accountNumber\": \"<string>\",\n          \"virtualAccountNumber\": \"<string>\",\n          \"currencyCode\": \"<string>\"\n        },\n        \"debtor\": {\n          \"name\": \"<string>\"\n        },\n        \"debtorAccount\": {\n          \"accountNumber\": \"<string>\",\n          \"virtualAccountNumber\": \"<string>\",\n          \"currencyCode\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"payType\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"transactionId\": \"<string>\",\n          \"transactionStatus\": \"<string>\",\n          \"transactionStatusTimeStamp\": \"<dateTime>\",\n          \"transactionDate\": \"<string>\",\n          \"transactionAmount\": \"<string>\",\n          \"requestReference\": \"<string>\",\n          \"sendersReference\": \"<string>\",\n          \"channel\": \"<string>\",\n          \"transactionDirection\": \"<string>\",\n          \"creditor\": {\n            \"name\": \"<string>\"\n          }\n        },\n        \"creditorAccount\": {\n          \"accountNumber\": \"<string>\",\n          \"virtualAccountNumber\": \"<string>\",\n          \"currencyCode\": \"<string>\"\n        },\n        \"debtor\": {\n          \"name\": \"<string>\"\n        },\n        \"debtorAccount\": {\n          \"accountNumber\": \"<string>\",\n          \"virtualAccountNumber\": \"<string>\",\n          \"currencyCode\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b710b9b5-513a-4b50-9280-889e81ccbd66",
+              "name": "Internal Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "\"Callback URL from client for Wire",
+                    "RTP alerts - AL00907\""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alertNotificationRequest\": [\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"payType\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"transactionId\": \"<string>\",\n          \"transactionStatus\": \"<string>\",\n          \"transactionStatusTimeStamp\": \"<dateTime>\",\n          \"transactionDate\": \"<string>\",\n          \"transactionAmount\": \"<string>\",\n          \"requestReference\": \"<string>\",\n          \"sendersReference\": \"<string>\",\n          \"channel\": \"<string>\",\n          \"transactionDirection\": \"<string>\",\n          \"creditor\": {\n            \"name\": \"<string>\"\n          }\n        },\n        \"creditorAccount\": {\n          \"accountNumber\": \"<string>\",\n          \"virtualAccountNumber\": \"<string>\",\n          \"currencyCode\": \"<string>\"\n        },\n        \"debtor\": {\n          \"name\": \"<string>\"\n        },\n        \"debtorAccount\": {\n          \"accountNumber\": \"<string>\",\n          \"virtualAccountNumber\": \"<string>\",\n          \"currencyCode\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"payType\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"transactionId\": \"<string>\",\n          \"transactionStatus\": \"<string>\",\n          \"transactionStatusTimeStamp\": \"<dateTime>\",\n          \"transactionDate\": \"<string>\",\n          \"transactionAmount\": \"<string>\",\n          \"requestReference\": \"<string>\",\n          \"sendersReference\": \"<string>\",\n          \"channel\": \"<string>\",\n          \"transactionDirection\": \"<string>\",\n          \"creditor\": {\n            \"name\": \"<string>\"\n          }\n        },\n        \"creditorAccount\": {\n          \"accountNumber\": \"<string>\",\n          \"virtualAccountNumber\": \"<string>\",\n          \"currencyCode\": \"<string>\"\n        },\n        \"debtor\": {\n          \"name\": \"<string>\"\n        },\n        \"debtorAccount\": {\n          \"accountNumber\": \"<string>\",\n          \"virtualAccountNumber\": \"<string>\",\n          \"currencyCode\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"alertNotificationResponse\": [\n    {\n      \"alertAcknowledgment\": {\n        \"alertStatus\": \"FAILURE\",\n        \"confirmationGUID\": \"c23dd6bc-298f-725a-69fd-4a4dcb5a0ff9\",\n        \"alertRecievedDateAndTime\": \"1947-02-17T13:06:20.170Z\",\n        \"eapAlertGUID\": \"1c5ab0af-606e-764d-7714-a378f301c6f6\",\n        \"message\": \"string\"\n      }\n    },\n    {\n      \"alertAcknowledgment\": {\n        \"alertStatus\": \"FAILURE\",\n        \"confirmationGUID\": \"da99100f-17dd-f160-08b3-5dec83269147\",\n        \"alertRecievedDateAndTime\": \"1954-03-09T18:52:33.679Z\",\n        \"eapAlertGUID\": \"31c0a1ca-95f3-74e4-bb5a-66e091008334\",\n        \"message\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "5fe910ac-2207-4df8-9e1c-3f6e9307a835",
+      "name": "Wire/RTP v1",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2b8405e5-40c8-463f-af2d-30633305f5e9",
+          "name": "Send Wire/RTP alerts event notification to the client URI.",
+          "request": {
+            "name": "Send Wire/RTP alerts event notification to the client URI.",
+            "description": {},
+            "url": {
+              "path": [
+                "\"Callback URL from client for AL00901\""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"alertNotificationRequest\": [\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"crOrDbCode\": \"<string>\",\n          \"crArngNum\": \"<string>\",\n          \"crArngTypeCode\": \"<string>\",\n          \"crArngBankNum\": \"<string>\",\n          \"crTranCurrencyCode\": \"<string>\",\n          \"dbArngTypeCode\": \"<string>\",\n          \"dbTranCurrencyCode\": \"<string>\",\n          \"requestReferenceNumber\": \"<string>\",\n          \"crIpId\": \"<string>\",\n          \"crIpNm\": \"<string>\",\n          \"dbArngNum\": \"<string>\",\n          \"dbArngBankNum\": \"<string>\",\n          \"dbIpId\": \"<string>\",\n          \"dbIpNm\": \"<string>\",\n          \"payNotifyTs\": \"<string>\",\n          \"wireEventNm\": \"<string>\",\n          \"tranAmt\": \"<string>\",\n          \"tranExecutedDt\": \"<string>\",\n          \"federalReferNum\": \"<string>\",\n          \"sndngBankReferNum\": \"<string>\",\n          \"tranId\": \"<string>\",\n          \"tranBusnStatusCode\": \"<string>\",\n          \"wireDirectionCode\": \"<string>\",\n          \"tranType\": \"<string>\",\n          \"tranValueTypeCode\": \"<string>\",\n          \"wireProcessTypeCode\": \"<string>\",\n          \"benefitAba\": \"<string>\",\n          \"benefitArngNum\": \"<string>\",\n          \"benefitIpAddrLine\": \"<string>\",\n          \"benefitBicCode\": \"<string>\",\n          \"benefitBankAbaNum\": \"<string>\",\n          \"benefitBankArngNum\": \"<string>\",\n          \"benefitBankAddrLine\": \"<string>\",\n          \"benefitBankBicCode\": \"<string>\",\n          \"benefitBankNm\": \"<string>\",\n          \"intrmdryBankAbaNum1\": \"<string>\",\n          \"intrmdryBankAddrLine1\": \"<string>\",\n          \"intrmdryBankNm1\": \"<string>\",\n          \"intrmdryBicCode1\": \"<string>\",\n          \"intrmdryBankAbaNum2\": \"<string>\",\n          \"intrmdryBankAddrLine2\": \"<string>\",\n          \"intrmdryBankNm2\": \"<string>\",\n          \"intrmdryBicCode2\": \"<string>\",\n          \"intrmdryBankAbaNum3\": \"<string>\",\n          \"intrmdryBankAddrLine3\": \"<string>\",\n          \"intrmdryBankNm3\": \"<string>\",\n          \"intrmdryBicCode3\": \"<string>\",\n          \"orgntngBankAbaNum\": \"<string>\",\n          \"orgntngBankAddrLine\": \"<string>\",\n          \"orgntngBankBicCode\": \"<string>\",\n          \"orgntngBankNm\": \"<string>\",\n          \"orgntngAba1\": \"<string>\",\n          \"orgntngArngNum1\": \"<string>\",\n          \"orgntngIpNm1\": \"<string>\",\n          \"orgntngIpAddrLine1\": \"<string>\",\n          \"orgntngAba2\": \"<string>\",\n          \"orgntngArngNum2\": \"<string>\",\n          \"orgntngIpNm2\": \"<string>\",\n          \"orgntngIpAddrLine2\": \"<string>\",\n          \"orgntngAba3\": \"<string>\",\n          \"orgntngArngNum3\": \"<string>\",\n          \"orgntngIpNm3\": \"<string>\",\n          \"orgntngIpAddrLine3\": \"<string>\",\n          \"crVirtualNum\": \"<string>\",\n          \"dbVirtualNum\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"crOrDbCode\": \"<string>\",\n          \"crArngNum\": \"<string>\",\n          \"crArngTypeCode\": \"<string>\",\n          \"crArngBankNum\": \"<string>\",\n          \"crTranCurrencyCode\": \"<string>\",\n          \"dbArngTypeCode\": \"<string>\",\n          \"dbTranCurrencyCode\": \"<string>\",\n          \"requestReferenceNumber\": \"<string>\",\n          \"crIpId\": \"<string>\",\n          \"crIpNm\": \"<string>\",\n          \"dbArngNum\": \"<string>\",\n          \"dbArngBankNum\": \"<string>\",\n          \"dbIpId\": \"<string>\",\n          \"dbIpNm\": \"<string>\",\n          \"payNotifyTs\": \"<string>\",\n          \"wireEventNm\": \"<string>\",\n          \"tranAmt\": \"<string>\",\n          \"tranExecutedDt\": \"<string>\",\n          \"federalReferNum\": \"<string>\",\n          \"sndngBankReferNum\": \"<string>\",\n          \"tranId\": \"<string>\",\n          \"tranBusnStatusCode\": \"<string>\",\n          \"wireDirectionCode\": \"<string>\",\n          \"tranType\": \"<string>\",\n          \"tranValueTypeCode\": \"<string>\",\n          \"wireProcessTypeCode\": \"<string>\",\n          \"benefitAba\": \"<string>\",\n          \"benefitArngNum\": \"<string>\",\n          \"benefitIpAddrLine\": \"<string>\",\n          \"benefitBicCode\": \"<string>\",\n          \"benefitBankAbaNum\": \"<string>\",\n          \"benefitBankArngNum\": \"<string>\",\n          \"benefitBankAddrLine\": \"<string>\",\n          \"benefitBankBicCode\": \"<string>\",\n          \"benefitBankNm\": \"<string>\",\n          \"intrmdryBankAbaNum1\": \"<string>\",\n          \"intrmdryBankAddrLine1\": \"<string>\",\n          \"intrmdryBankNm1\": \"<string>\",\n          \"intrmdryBicCode1\": \"<string>\",\n          \"intrmdryBankAbaNum2\": \"<string>\",\n          \"intrmdryBankAddrLine2\": \"<string>\",\n          \"intrmdryBankNm2\": \"<string>\",\n          \"intrmdryBicCode2\": \"<string>\",\n          \"intrmdryBankAbaNum3\": \"<string>\",\n          \"intrmdryBankAddrLine3\": \"<string>\",\n          \"intrmdryBankNm3\": \"<string>\",\n          \"intrmdryBicCode3\": \"<string>\",\n          \"orgntngBankAbaNum\": \"<string>\",\n          \"orgntngBankAddrLine\": \"<string>\",\n          \"orgntngBankBicCode\": \"<string>\",\n          \"orgntngBankNm\": \"<string>\",\n          \"orgntngAba1\": \"<string>\",\n          \"orgntngArngNum1\": \"<string>\",\n          \"orgntngIpNm1\": \"<string>\",\n          \"orgntngIpAddrLine1\": \"<string>\",\n          \"orgntngAba2\": \"<string>\",\n          \"orgntngArngNum2\": \"<string>\",\n          \"orgntngIpNm2\": \"<string>\",\n          \"orgntngIpAddrLine2\": \"<string>\",\n          \"orgntngAba3\": \"<string>\",\n          \"orgntngArngNum3\": \"<string>\",\n          \"orgntngIpNm3\": \"<string>\",\n          \"orgntngIpAddrLine3\": \"<string>\",\n          \"crVirtualNum\": \"<string>\",\n          \"dbVirtualNum\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ced8b3b6-32a1-4765-a8c7-b678ebc95ab2",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "\"Callback URL from client for AL00901\""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alertNotificationRequest\": [\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"crOrDbCode\": \"<string>\",\n          \"crArngNum\": \"<string>\",\n          \"crArngTypeCode\": \"<string>\",\n          \"crArngBankNum\": \"<string>\",\n          \"crTranCurrencyCode\": \"<string>\",\n          \"dbArngTypeCode\": \"<string>\",\n          \"dbTranCurrencyCode\": \"<string>\",\n          \"requestReferenceNumber\": \"<string>\",\n          \"crIpId\": \"<string>\",\n          \"crIpNm\": \"<string>\",\n          \"dbArngNum\": \"<string>\",\n          \"dbArngBankNum\": \"<string>\",\n          \"dbIpId\": \"<string>\",\n          \"dbIpNm\": \"<string>\",\n          \"payNotifyTs\": \"<string>\",\n          \"wireEventNm\": \"<string>\",\n          \"tranAmt\": \"<string>\",\n          \"tranExecutedDt\": \"<string>\",\n          \"federalReferNum\": \"<string>\",\n          \"sndngBankReferNum\": \"<string>\",\n          \"tranId\": \"<string>\",\n          \"tranBusnStatusCode\": \"<string>\",\n          \"wireDirectionCode\": \"<string>\",\n          \"tranType\": \"<string>\",\n          \"tranValueTypeCode\": \"<string>\",\n          \"wireProcessTypeCode\": \"<string>\",\n          \"benefitAba\": \"<string>\",\n          \"benefitArngNum\": \"<string>\",\n          \"benefitIpAddrLine\": \"<string>\",\n          \"benefitBicCode\": \"<string>\",\n          \"benefitBankAbaNum\": \"<string>\",\n          \"benefitBankArngNum\": \"<string>\",\n          \"benefitBankAddrLine\": \"<string>\",\n          \"benefitBankBicCode\": \"<string>\",\n          \"benefitBankNm\": \"<string>\",\n          \"intrmdryBankAbaNum1\": \"<string>\",\n          \"intrmdryBankAddrLine1\": \"<string>\",\n          \"intrmdryBankNm1\": \"<string>\",\n          \"intrmdryBicCode1\": \"<string>\",\n          \"intrmdryBankAbaNum2\": \"<string>\",\n          \"intrmdryBankAddrLine2\": \"<string>\",\n          \"intrmdryBankNm2\": \"<string>\",\n          \"intrmdryBicCode2\": \"<string>\",\n          \"intrmdryBankAbaNum3\": \"<string>\",\n          \"intrmdryBankAddrLine3\": \"<string>\",\n          \"intrmdryBankNm3\": \"<string>\",\n          \"intrmdryBicCode3\": \"<string>\",\n          \"orgntngBankAbaNum\": \"<string>\",\n          \"orgntngBankAddrLine\": \"<string>\",\n          \"orgntngBankBicCode\": \"<string>\",\n          \"orgntngBankNm\": \"<string>\",\n          \"orgntngAba1\": \"<string>\",\n          \"orgntngArngNum1\": \"<string>\",\n          \"orgntngIpNm1\": \"<string>\",\n          \"orgntngIpAddrLine1\": \"<string>\",\n          \"orgntngAba2\": \"<string>\",\n          \"orgntngArngNum2\": \"<string>\",\n          \"orgntngIpNm2\": \"<string>\",\n          \"orgntngIpAddrLine2\": \"<string>\",\n          \"orgntngAba3\": \"<string>\",\n          \"orgntngArngNum3\": \"<string>\",\n          \"orgntngIpNm3\": \"<string>\",\n          \"orgntngIpAddrLine3\": \"<string>\",\n          \"crVirtualNum\": \"<string>\",\n          \"dbVirtualNum\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"crOrDbCode\": \"<string>\",\n          \"crArngNum\": \"<string>\",\n          \"crArngTypeCode\": \"<string>\",\n          \"crArngBankNum\": \"<string>\",\n          \"crTranCurrencyCode\": \"<string>\",\n          \"dbArngTypeCode\": \"<string>\",\n          \"dbTranCurrencyCode\": \"<string>\",\n          \"requestReferenceNumber\": \"<string>\",\n          \"crIpId\": \"<string>\",\n          \"crIpNm\": \"<string>\",\n          \"dbArngNum\": \"<string>\",\n          \"dbArngBankNum\": \"<string>\",\n          \"dbIpId\": \"<string>\",\n          \"dbIpNm\": \"<string>\",\n          \"payNotifyTs\": \"<string>\",\n          \"wireEventNm\": \"<string>\",\n          \"tranAmt\": \"<string>\",\n          \"tranExecutedDt\": \"<string>\",\n          \"federalReferNum\": \"<string>\",\n          \"sndngBankReferNum\": \"<string>\",\n          \"tranId\": \"<string>\",\n          \"tranBusnStatusCode\": \"<string>\",\n          \"wireDirectionCode\": \"<string>\",\n          \"tranType\": \"<string>\",\n          \"tranValueTypeCode\": \"<string>\",\n          \"wireProcessTypeCode\": \"<string>\",\n          \"benefitAba\": \"<string>\",\n          \"benefitArngNum\": \"<string>\",\n          \"benefitIpAddrLine\": \"<string>\",\n          \"benefitBicCode\": \"<string>\",\n          \"benefitBankAbaNum\": \"<string>\",\n          \"benefitBankArngNum\": \"<string>\",\n          \"benefitBankAddrLine\": \"<string>\",\n          \"benefitBankBicCode\": \"<string>\",\n          \"benefitBankNm\": \"<string>\",\n          \"intrmdryBankAbaNum1\": \"<string>\",\n          \"intrmdryBankAddrLine1\": \"<string>\",\n          \"intrmdryBankNm1\": \"<string>\",\n          \"intrmdryBicCode1\": \"<string>\",\n          \"intrmdryBankAbaNum2\": \"<string>\",\n          \"intrmdryBankAddrLine2\": \"<string>\",\n          \"intrmdryBankNm2\": \"<string>\",\n          \"intrmdryBicCode2\": \"<string>\",\n          \"intrmdryBankAbaNum3\": \"<string>\",\n          \"intrmdryBankAddrLine3\": \"<string>\",\n          \"intrmdryBankNm3\": \"<string>\",\n          \"intrmdryBicCode3\": \"<string>\",\n          \"orgntngBankAbaNum\": \"<string>\",\n          \"orgntngBankAddrLine\": \"<string>\",\n          \"orgntngBankBicCode\": \"<string>\",\n          \"orgntngBankNm\": \"<string>\",\n          \"orgntngAba1\": \"<string>\",\n          \"orgntngArngNum1\": \"<string>\",\n          \"orgntngIpNm1\": \"<string>\",\n          \"orgntngIpAddrLine1\": \"<string>\",\n          \"orgntngAba2\": \"<string>\",\n          \"orgntngArngNum2\": \"<string>\",\n          \"orgntngIpNm2\": \"<string>\",\n          \"orgntngIpAddrLine2\": \"<string>\",\n          \"orgntngAba3\": \"<string>\",\n          \"orgntngArngNum3\": \"<string>\",\n          \"orgntngIpNm3\": \"<string>\",\n          \"orgntngIpAddrLine3\": \"<string>\",\n          \"crVirtualNum\": \"<string>\",\n          \"dbVirtualNum\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"alertNotificationResponse\": [\n    {\n      \"alertAcknowledgment\": {\n        \"alertStatus\": \"SUCCESS\",\n        \"confirmationGUID\": \"5f0ada5b-056f-483c-98ae-ac6ccab269c1\",\n        \"alertRecievedDateAndTime\": \"2021-11-19T10:31:12Z\",\n        \"eapAlertGUID\": \"5163dee6-0b2b-4901-9f6a-4b3997ee8d77\",\n        \"message\": \"Successfully submitted the request\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ad4fe24-0f66-4eb1-8aef-9f6a0379f16e",
+              "name": "Invalid Input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "\"Callback URL from client for AL00901\""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alertNotificationRequest\": [\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"crOrDbCode\": \"<string>\",\n          \"crArngNum\": \"<string>\",\n          \"crArngTypeCode\": \"<string>\",\n          \"crArngBankNum\": \"<string>\",\n          \"crTranCurrencyCode\": \"<string>\",\n          \"dbArngTypeCode\": \"<string>\",\n          \"dbTranCurrencyCode\": \"<string>\",\n          \"requestReferenceNumber\": \"<string>\",\n          \"crIpId\": \"<string>\",\n          \"crIpNm\": \"<string>\",\n          \"dbArngNum\": \"<string>\",\n          \"dbArngBankNum\": \"<string>\",\n          \"dbIpId\": \"<string>\",\n          \"dbIpNm\": \"<string>\",\n          \"payNotifyTs\": \"<string>\",\n          \"wireEventNm\": \"<string>\",\n          \"tranAmt\": \"<string>\",\n          \"tranExecutedDt\": \"<string>\",\n          \"federalReferNum\": \"<string>\",\n          \"sndngBankReferNum\": \"<string>\",\n          \"tranId\": \"<string>\",\n          \"tranBusnStatusCode\": \"<string>\",\n          \"wireDirectionCode\": \"<string>\",\n          \"tranType\": \"<string>\",\n          \"tranValueTypeCode\": \"<string>\",\n          \"wireProcessTypeCode\": \"<string>\",\n          \"benefitAba\": \"<string>\",\n          \"benefitArngNum\": \"<string>\",\n          \"benefitIpAddrLine\": \"<string>\",\n          \"benefitBicCode\": \"<string>\",\n          \"benefitBankAbaNum\": \"<string>\",\n          \"benefitBankArngNum\": \"<string>\",\n          \"benefitBankAddrLine\": \"<string>\",\n          \"benefitBankBicCode\": \"<string>\",\n          \"benefitBankNm\": \"<string>\",\n          \"intrmdryBankAbaNum1\": \"<string>\",\n          \"intrmdryBankAddrLine1\": \"<string>\",\n          \"intrmdryBankNm1\": \"<string>\",\n          \"intrmdryBicCode1\": \"<string>\",\n          \"intrmdryBankAbaNum2\": \"<string>\",\n          \"intrmdryBankAddrLine2\": \"<string>\",\n          \"intrmdryBankNm2\": \"<string>\",\n          \"intrmdryBicCode2\": \"<string>\",\n          \"intrmdryBankAbaNum3\": \"<string>\",\n          \"intrmdryBankAddrLine3\": \"<string>\",\n          \"intrmdryBankNm3\": \"<string>\",\n          \"intrmdryBicCode3\": \"<string>\",\n          \"orgntngBankAbaNum\": \"<string>\",\n          \"orgntngBankAddrLine\": \"<string>\",\n          \"orgntngBankBicCode\": \"<string>\",\n          \"orgntngBankNm\": \"<string>\",\n          \"orgntngAba1\": \"<string>\",\n          \"orgntngArngNum1\": \"<string>\",\n          \"orgntngIpNm1\": \"<string>\",\n          \"orgntngIpAddrLine1\": \"<string>\",\n          \"orgntngAba2\": \"<string>\",\n          \"orgntngArngNum2\": \"<string>\",\n          \"orgntngIpNm2\": \"<string>\",\n          \"orgntngIpAddrLine2\": \"<string>\",\n          \"orgntngAba3\": \"<string>\",\n          \"orgntngArngNum3\": \"<string>\",\n          \"orgntngIpNm3\": \"<string>\",\n          \"orgntngIpAddrLine3\": \"<string>\",\n          \"crVirtualNum\": \"<string>\",\n          \"dbVirtualNum\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"crOrDbCode\": \"<string>\",\n          \"crArngNum\": \"<string>\",\n          \"crArngTypeCode\": \"<string>\",\n          \"crArngBankNum\": \"<string>\",\n          \"crTranCurrencyCode\": \"<string>\",\n          \"dbArngTypeCode\": \"<string>\",\n          \"dbTranCurrencyCode\": \"<string>\",\n          \"requestReferenceNumber\": \"<string>\",\n          \"crIpId\": \"<string>\",\n          \"crIpNm\": \"<string>\",\n          \"dbArngNum\": \"<string>\",\n          \"dbArngBankNum\": \"<string>\",\n          \"dbIpId\": \"<string>\",\n          \"dbIpNm\": \"<string>\",\n          \"payNotifyTs\": \"<string>\",\n          \"wireEventNm\": \"<string>\",\n          \"tranAmt\": \"<string>\",\n          \"tranExecutedDt\": \"<string>\",\n          \"federalReferNum\": \"<string>\",\n          \"sndngBankReferNum\": \"<string>\",\n          \"tranId\": \"<string>\",\n          \"tranBusnStatusCode\": \"<string>\",\n          \"wireDirectionCode\": \"<string>\",\n          \"tranType\": \"<string>\",\n          \"tranValueTypeCode\": \"<string>\",\n          \"wireProcessTypeCode\": \"<string>\",\n          \"benefitAba\": \"<string>\",\n          \"benefitArngNum\": \"<string>\",\n          \"benefitIpAddrLine\": \"<string>\",\n          \"benefitBicCode\": \"<string>\",\n          \"benefitBankAbaNum\": \"<string>\",\n          \"benefitBankArngNum\": \"<string>\",\n          \"benefitBankAddrLine\": \"<string>\",\n          \"benefitBankBicCode\": \"<string>\",\n          \"benefitBankNm\": \"<string>\",\n          \"intrmdryBankAbaNum1\": \"<string>\",\n          \"intrmdryBankAddrLine1\": \"<string>\",\n          \"intrmdryBankNm1\": \"<string>\",\n          \"intrmdryBicCode1\": \"<string>\",\n          \"intrmdryBankAbaNum2\": \"<string>\",\n          \"intrmdryBankAddrLine2\": \"<string>\",\n          \"intrmdryBankNm2\": \"<string>\",\n          \"intrmdryBicCode2\": \"<string>\",\n          \"intrmdryBankAbaNum3\": \"<string>\",\n          \"intrmdryBankAddrLine3\": \"<string>\",\n          \"intrmdryBankNm3\": \"<string>\",\n          \"intrmdryBicCode3\": \"<string>\",\n          \"orgntngBankAbaNum\": \"<string>\",\n          \"orgntngBankAddrLine\": \"<string>\",\n          \"orgntngBankBicCode\": \"<string>\",\n          \"orgntngBankNm\": \"<string>\",\n          \"orgntngAba1\": \"<string>\",\n          \"orgntngArngNum1\": \"<string>\",\n          \"orgntngIpNm1\": \"<string>\",\n          \"orgntngIpAddrLine1\": \"<string>\",\n          \"orgntngAba2\": \"<string>\",\n          \"orgntngArngNum2\": \"<string>\",\n          \"orgntngIpNm2\": \"<string>\",\n          \"orgntngIpAddrLine2\": \"<string>\",\n          \"orgntngAba3\": \"<string>\",\n          \"orgntngArngNum3\": \"<string>\",\n          \"orgntngIpNm3\": \"<string>\",\n          \"orgntngIpAddrLine3\": \"<string>\",\n          \"crVirtualNum\": \"<string>\",\n          \"dbVirtualNum\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"alertNotificationResponse\": [\n    {\n      \"alertAcknowledgment\": {\n        \"alertStatus\": \"FAILURE\",\n        \"confirmationGUID\": \"5f0ada5b-056f-483c-98ae-ac6ccab269c1\",\n        \"alertRecievedDateAndTime\": \"2021-11-19T10:31:12Z\",\n        \"eapAlertGUID\": \"ce816009-4aa9-47c7-b2ee-bacf9f0872d0\",\n        \"message\": \"Required parameter(s) not found: [fieldName(s)]\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc7039da-47f4-46d7-ad5a-4a7735baa245",
+              "name": "Authentication Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "\"Callback URL from client for AL00901\""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alertNotificationRequest\": [\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"crOrDbCode\": \"<string>\",\n          \"crArngNum\": \"<string>\",\n          \"crArngTypeCode\": \"<string>\",\n          \"crArngBankNum\": \"<string>\",\n          \"crTranCurrencyCode\": \"<string>\",\n          \"dbArngTypeCode\": \"<string>\",\n          \"dbTranCurrencyCode\": \"<string>\",\n          \"requestReferenceNumber\": \"<string>\",\n          \"crIpId\": \"<string>\",\n          \"crIpNm\": \"<string>\",\n          \"dbArngNum\": \"<string>\",\n          \"dbArngBankNum\": \"<string>\",\n          \"dbIpId\": \"<string>\",\n          \"dbIpNm\": \"<string>\",\n          \"payNotifyTs\": \"<string>\",\n          \"wireEventNm\": \"<string>\",\n          \"tranAmt\": \"<string>\",\n          \"tranExecutedDt\": \"<string>\",\n          \"federalReferNum\": \"<string>\",\n          \"sndngBankReferNum\": \"<string>\",\n          \"tranId\": \"<string>\",\n          \"tranBusnStatusCode\": \"<string>\",\n          \"wireDirectionCode\": \"<string>\",\n          \"tranType\": \"<string>\",\n          \"tranValueTypeCode\": \"<string>\",\n          \"wireProcessTypeCode\": \"<string>\",\n          \"benefitAba\": \"<string>\",\n          \"benefitArngNum\": \"<string>\",\n          \"benefitIpAddrLine\": \"<string>\",\n          \"benefitBicCode\": \"<string>\",\n          \"benefitBankAbaNum\": \"<string>\",\n          \"benefitBankArngNum\": \"<string>\",\n          \"benefitBankAddrLine\": \"<string>\",\n          \"benefitBankBicCode\": \"<string>\",\n          \"benefitBankNm\": \"<string>\",\n          \"intrmdryBankAbaNum1\": \"<string>\",\n          \"intrmdryBankAddrLine1\": \"<string>\",\n          \"intrmdryBankNm1\": \"<string>\",\n          \"intrmdryBicCode1\": \"<string>\",\n          \"intrmdryBankAbaNum2\": \"<string>\",\n          \"intrmdryBankAddrLine2\": \"<string>\",\n          \"intrmdryBankNm2\": \"<string>\",\n          \"intrmdryBicCode2\": \"<string>\",\n          \"intrmdryBankAbaNum3\": \"<string>\",\n          \"intrmdryBankAddrLine3\": \"<string>\",\n          \"intrmdryBankNm3\": \"<string>\",\n          \"intrmdryBicCode3\": \"<string>\",\n          \"orgntngBankAbaNum\": \"<string>\",\n          \"orgntngBankAddrLine\": \"<string>\",\n          \"orgntngBankBicCode\": \"<string>\",\n          \"orgntngBankNm\": \"<string>\",\n          \"orgntngAba1\": \"<string>\",\n          \"orgntngArngNum1\": \"<string>\",\n          \"orgntngIpNm1\": \"<string>\",\n          \"orgntngIpAddrLine1\": \"<string>\",\n          \"orgntngAba2\": \"<string>\",\n          \"orgntngArngNum2\": \"<string>\",\n          \"orgntngIpNm2\": \"<string>\",\n          \"orgntngIpAddrLine2\": \"<string>\",\n          \"orgntngAba3\": \"<string>\",\n          \"orgntngArngNum3\": \"<string>\",\n          \"orgntngIpNm3\": \"<string>\",\n          \"orgntngIpAddrLine3\": \"<string>\",\n          \"crVirtualNum\": \"<string>\",\n          \"dbVirtualNum\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"crOrDbCode\": \"<string>\",\n          \"crArngNum\": \"<string>\",\n          \"crArngTypeCode\": \"<string>\",\n          \"crArngBankNum\": \"<string>\",\n          \"crTranCurrencyCode\": \"<string>\",\n          \"dbArngTypeCode\": \"<string>\",\n          \"dbTranCurrencyCode\": \"<string>\",\n          \"requestReferenceNumber\": \"<string>\",\n          \"crIpId\": \"<string>\",\n          \"crIpNm\": \"<string>\",\n          \"dbArngNum\": \"<string>\",\n          \"dbArngBankNum\": \"<string>\",\n          \"dbIpId\": \"<string>\",\n          \"dbIpNm\": \"<string>\",\n          \"payNotifyTs\": \"<string>\",\n          \"wireEventNm\": \"<string>\",\n          \"tranAmt\": \"<string>\",\n          \"tranExecutedDt\": \"<string>\",\n          \"federalReferNum\": \"<string>\",\n          \"sndngBankReferNum\": \"<string>\",\n          \"tranId\": \"<string>\",\n          \"tranBusnStatusCode\": \"<string>\",\n          \"wireDirectionCode\": \"<string>\",\n          \"tranType\": \"<string>\",\n          \"tranValueTypeCode\": \"<string>\",\n          \"wireProcessTypeCode\": \"<string>\",\n          \"benefitAba\": \"<string>\",\n          \"benefitArngNum\": \"<string>\",\n          \"benefitIpAddrLine\": \"<string>\",\n          \"benefitBicCode\": \"<string>\",\n          \"benefitBankAbaNum\": \"<string>\",\n          \"benefitBankArngNum\": \"<string>\",\n          \"benefitBankAddrLine\": \"<string>\",\n          \"benefitBankBicCode\": \"<string>\",\n          \"benefitBankNm\": \"<string>\",\n          \"intrmdryBankAbaNum1\": \"<string>\",\n          \"intrmdryBankAddrLine1\": \"<string>\",\n          \"intrmdryBankNm1\": \"<string>\",\n          \"intrmdryBicCode1\": \"<string>\",\n          \"intrmdryBankAbaNum2\": \"<string>\",\n          \"intrmdryBankAddrLine2\": \"<string>\",\n          \"intrmdryBankNm2\": \"<string>\",\n          \"intrmdryBicCode2\": \"<string>\",\n          \"intrmdryBankAbaNum3\": \"<string>\",\n          \"intrmdryBankAddrLine3\": \"<string>\",\n          \"intrmdryBankNm3\": \"<string>\",\n          \"intrmdryBicCode3\": \"<string>\",\n          \"orgntngBankAbaNum\": \"<string>\",\n          \"orgntngBankAddrLine\": \"<string>\",\n          \"orgntngBankBicCode\": \"<string>\",\n          \"orgntngBankNm\": \"<string>\",\n          \"orgntngAba1\": \"<string>\",\n          \"orgntngArngNum1\": \"<string>\",\n          \"orgntngIpNm1\": \"<string>\",\n          \"orgntngIpAddrLine1\": \"<string>\",\n          \"orgntngAba2\": \"<string>\",\n          \"orgntngArngNum2\": \"<string>\",\n          \"orgntngIpNm2\": \"<string>\",\n          \"orgntngIpAddrLine2\": \"<string>\",\n          \"orgntngAba3\": \"<string>\",\n          \"orgntngArngNum3\": \"<string>\",\n          \"orgntngIpNm3\": \"<string>\",\n          \"orgntngIpAddrLine3\": \"<string>\",\n          \"crVirtualNum\": \"<string>\",\n          \"dbVirtualNum\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "68b2c688-7187-4134-90c6-779c0f26ebb0",
+              "name": "Authorization Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "\"Callback URL from client for AL00901\""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alertNotificationRequest\": [\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"crOrDbCode\": \"<string>\",\n          \"crArngNum\": \"<string>\",\n          \"crArngTypeCode\": \"<string>\",\n          \"crArngBankNum\": \"<string>\",\n          \"crTranCurrencyCode\": \"<string>\",\n          \"dbArngTypeCode\": \"<string>\",\n          \"dbTranCurrencyCode\": \"<string>\",\n          \"requestReferenceNumber\": \"<string>\",\n          \"crIpId\": \"<string>\",\n          \"crIpNm\": \"<string>\",\n          \"dbArngNum\": \"<string>\",\n          \"dbArngBankNum\": \"<string>\",\n          \"dbIpId\": \"<string>\",\n          \"dbIpNm\": \"<string>\",\n          \"payNotifyTs\": \"<string>\",\n          \"wireEventNm\": \"<string>\",\n          \"tranAmt\": \"<string>\",\n          \"tranExecutedDt\": \"<string>\",\n          \"federalReferNum\": \"<string>\",\n          \"sndngBankReferNum\": \"<string>\",\n          \"tranId\": \"<string>\",\n          \"tranBusnStatusCode\": \"<string>\",\n          \"wireDirectionCode\": \"<string>\",\n          \"tranType\": \"<string>\",\n          \"tranValueTypeCode\": \"<string>\",\n          \"wireProcessTypeCode\": \"<string>\",\n          \"benefitAba\": \"<string>\",\n          \"benefitArngNum\": \"<string>\",\n          \"benefitIpAddrLine\": \"<string>\",\n          \"benefitBicCode\": \"<string>\",\n          \"benefitBankAbaNum\": \"<string>\",\n          \"benefitBankArngNum\": \"<string>\",\n          \"benefitBankAddrLine\": \"<string>\",\n          \"benefitBankBicCode\": \"<string>\",\n          \"benefitBankNm\": \"<string>\",\n          \"intrmdryBankAbaNum1\": \"<string>\",\n          \"intrmdryBankAddrLine1\": \"<string>\",\n          \"intrmdryBankNm1\": \"<string>\",\n          \"intrmdryBicCode1\": \"<string>\",\n          \"intrmdryBankAbaNum2\": \"<string>\",\n          \"intrmdryBankAddrLine2\": \"<string>\",\n          \"intrmdryBankNm2\": \"<string>\",\n          \"intrmdryBicCode2\": \"<string>\",\n          \"intrmdryBankAbaNum3\": \"<string>\",\n          \"intrmdryBankAddrLine3\": \"<string>\",\n          \"intrmdryBankNm3\": \"<string>\",\n          \"intrmdryBicCode3\": \"<string>\",\n          \"orgntngBankAbaNum\": \"<string>\",\n          \"orgntngBankAddrLine\": \"<string>\",\n          \"orgntngBankBicCode\": \"<string>\",\n          \"orgntngBankNm\": \"<string>\",\n          \"orgntngAba1\": \"<string>\",\n          \"orgntngArngNum1\": \"<string>\",\n          \"orgntngIpNm1\": \"<string>\",\n          \"orgntngIpAddrLine1\": \"<string>\",\n          \"orgntngAba2\": \"<string>\",\n          \"orgntngArngNum2\": \"<string>\",\n          \"orgntngIpNm2\": \"<string>\",\n          \"orgntngIpAddrLine2\": \"<string>\",\n          \"orgntngAba3\": \"<string>\",\n          \"orgntngArngNum3\": \"<string>\",\n          \"orgntngIpNm3\": \"<string>\",\n          \"orgntngIpAddrLine3\": \"<string>\",\n          \"crVirtualNum\": \"<string>\",\n          \"dbVirtualNum\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"crOrDbCode\": \"<string>\",\n          \"crArngNum\": \"<string>\",\n          \"crArngTypeCode\": \"<string>\",\n          \"crArngBankNum\": \"<string>\",\n          \"crTranCurrencyCode\": \"<string>\",\n          \"dbArngTypeCode\": \"<string>\",\n          \"dbTranCurrencyCode\": \"<string>\",\n          \"requestReferenceNumber\": \"<string>\",\n          \"crIpId\": \"<string>\",\n          \"crIpNm\": \"<string>\",\n          \"dbArngNum\": \"<string>\",\n          \"dbArngBankNum\": \"<string>\",\n          \"dbIpId\": \"<string>\",\n          \"dbIpNm\": \"<string>\",\n          \"payNotifyTs\": \"<string>\",\n          \"wireEventNm\": \"<string>\",\n          \"tranAmt\": \"<string>\",\n          \"tranExecutedDt\": \"<string>\",\n          \"federalReferNum\": \"<string>\",\n          \"sndngBankReferNum\": \"<string>\",\n          \"tranId\": \"<string>\",\n          \"tranBusnStatusCode\": \"<string>\",\n          \"wireDirectionCode\": \"<string>\",\n          \"tranType\": \"<string>\",\n          \"tranValueTypeCode\": \"<string>\",\n          \"wireProcessTypeCode\": \"<string>\",\n          \"benefitAba\": \"<string>\",\n          \"benefitArngNum\": \"<string>\",\n          \"benefitIpAddrLine\": \"<string>\",\n          \"benefitBicCode\": \"<string>\",\n          \"benefitBankAbaNum\": \"<string>\",\n          \"benefitBankArngNum\": \"<string>\",\n          \"benefitBankAddrLine\": \"<string>\",\n          \"benefitBankBicCode\": \"<string>\",\n          \"benefitBankNm\": \"<string>\",\n          \"intrmdryBankAbaNum1\": \"<string>\",\n          \"intrmdryBankAddrLine1\": \"<string>\",\n          \"intrmdryBankNm1\": \"<string>\",\n          \"intrmdryBicCode1\": \"<string>\",\n          \"intrmdryBankAbaNum2\": \"<string>\",\n          \"intrmdryBankAddrLine2\": \"<string>\",\n          \"intrmdryBankNm2\": \"<string>\",\n          \"intrmdryBicCode2\": \"<string>\",\n          \"intrmdryBankAbaNum3\": \"<string>\",\n          \"intrmdryBankAddrLine3\": \"<string>\",\n          \"intrmdryBankNm3\": \"<string>\",\n          \"intrmdryBicCode3\": \"<string>\",\n          \"orgntngBankAbaNum\": \"<string>\",\n          \"orgntngBankAddrLine\": \"<string>\",\n          \"orgntngBankBicCode\": \"<string>\",\n          \"orgntngBankNm\": \"<string>\",\n          \"orgntngAba1\": \"<string>\",\n          \"orgntngArngNum1\": \"<string>\",\n          \"orgntngIpNm1\": \"<string>\",\n          \"orgntngIpAddrLine1\": \"<string>\",\n          \"orgntngAba2\": \"<string>\",\n          \"orgntngArngNum2\": \"<string>\",\n          \"orgntngIpNm2\": \"<string>\",\n          \"orgntngIpAddrLine2\": \"<string>\",\n          \"orgntngAba3\": \"<string>\",\n          \"orgntngArngNum3\": \"<string>\",\n          \"orgntngIpNm3\": \"<string>\",\n          \"orgntngIpAddrLine3\": \"<string>\",\n          \"crVirtualNum\": \"<string>\",\n          \"dbVirtualNum\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f15c84b2-bf2c-4a67-9e80-9662e9e47079",
+              "name": "Internal Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "\"Callback URL from client for AL00901\""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alertNotificationRequest\": [\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"crOrDbCode\": \"<string>\",\n          \"crArngNum\": \"<string>\",\n          \"crArngTypeCode\": \"<string>\",\n          \"crArngBankNum\": \"<string>\",\n          \"crTranCurrencyCode\": \"<string>\",\n          \"dbArngTypeCode\": \"<string>\",\n          \"dbTranCurrencyCode\": \"<string>\",\n          \"requestReferenceNumber\": \"<string>\",\n          \"crIpId\": \"<string>\",\n          \"crIpNm\": \"<string>\",\n          \"dbArngNum\": \"<string>\",\n          \"dbArngBankNum\": \"<string>\",\n          \"dbIpId\": \"<string>\",\n          \"dbIpNm\": \"<string>\",\n          \"payNotifyTs\": \"<string>\",\n          \"wireEventNm\": \"<string>\",\n          \"tranAmt\": \"<string>\",\n          \"tranExecutedDt\": \"<string>\",\n          \"federalReferNum\": \"<string>\",\n          \"sndngBankReferNum\": \"<string>\",\n          \"tranId\": \"<string>\",\n          \"tranBusnStatusCode\": \"<string>\",\n          \"wireDirectionCode\": \"<string>\",\n          \"tranType\": \"<string>\",\n          \"tranValueTypeCode\": \"<string>\",\n          \"wireProcessTypeCode\": \"<string>\",\n          \"benefitAba\": \"<string>\",\n          \"benefitArngNum\": \"<string>\",\n          \"benefitIpAddrLine\": \"<string>\",\n          \"benefitBicCode\": \"<string>\",\n          \"benefitBankAbaNum\": \"<string>\",\n          \"benefitBankArngNum\": \"<string>\",\n          \"benefitBankAddrLine\": \"<string>\",\n          \"benefitBankBicCode\": \"<string>\",\n          \"benefitBankNm\": \"<string>\",\n          \"intrmdryBankAbaNum1\": \"<string>\",\n          \"intrmdryBankAddrLine1\": \"<string>\",\n          \"intrmdryBankNm1\": \"<string>\",\n          \"intrmdryBicCode1\": \"<string>\",\n          \"intrmdryBankAbaNum2\": \"<string>\",\n          \"intrmdryBankAddrLine2\": \"<string>\",\n          \"intrmdryBankNm2\": \"<string>\",\n          \"intrmdryBicCode2\": \"<string>\",\n          \"intrmdryBankAbaNum3\": \"<string>\",\n          \"intrmdryBankAddrLine3\": \"<string>\",\n          \"intrmdryBankNm3\": \"<string>\",\n          \"intrmdryBicCode3\": \"<string>\",\n          \"orgntngBankAbaNum\": \"<string>\",\n          \"orgntngBankAddrLine\": \"<string>\",\n          \"orgntngBankBicCode\": \"<string>\",\n          \"orgntngBankNm\": \"<string>\",\n          \"orgntngAba1\": \"<string>\",\n          \"orgntngArngNum1\": \"<string>\",\n          \"orgntngIpNm1\": \"<string>\",\n          \"orgntngIpAddrLine1\": \"<string>\",\n          \"orgntngAba2\": \"<string>\",\n          \"orgntngArngNum2\": \"<string>\",\n          \"orgntngIpNm2\": \"<string>\",\n          \"orgntngIpAddrLine2\": \"<string>\",\n          \"orgntngAba3\": \"<string>\",\n          \"orgntngArngNum3\": \"<string>\",\n          \"orgntngIpNm3\": \"<string>\",\n          \"orgntngIpAddrLine3\": \"<string>\",\n          \"crVirtualNum\": \"<string>\",\n          \"dbVirtualNum\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"alertNotification\": {\n        \"alertHeader\": {\n          \"alertSentDateAndTime\": \"<dateTime>\",\n          \"alertCode\": \"<string>\",\n          \"eapAlertGUID\": \"<uuid>\"\n        },\n        \"alertBody\": {\n          \"crOrDbCode\": \"<string>\",\n          \"crArngNum\": \"<string>\",\n          \"crArngTypeCode\": \"<string>\",\n          \"crArngBankNum\": \"<string>\",\n          \"crTranCurrencyCode\": \"<string>\",\n          \"dbArngTypeCode\": \"<string>\",\n          \"dbTranCurrencyCode\": \"<string>\",\n          \"requestReferenceNumber\": \"<string>\",\n          \"crIpId\": \"<string>\",\n          \"crIpNm\": \"<string>\",\n          \"dbArngNum\": \"<string>\",\n          \"dbArngBankNum\": \"<string>\",\n          \"dbIpId\": \"<string>\",\n          \"dbIpNm\": \"<string>\",\n          \"payNotifyTs\": \"<string>\",\n          \"wireEventNm\": \"<string>\",\n          \"tranAmt\": \"<string>\",\n          \"tranExecutedDt\": \"<string>\",\n          \"federalReferNum\": \"<string>\",\n          \"sndngBankReferNum\": \"<string>\",\n          \"tranId\": \"<string>\",\n          \"tranBusnStatusCode\": \"<string>\",\n          \"wireDirectionCode\": \"<string>\",\n          \"tranType\": \"<string>\",\n          \"tranValueTypeCode\": \"<string>\",\n          \"wireProcessTypeCode\": \"<string>\",\n          \"benefitAba\": \"<string>\",\n          \"benefitArngNum\": \"<string>\",\n          \"benefitIpAddrLine\": \"<string>\",\n          \"benefitBicCode\": \"<string>\",\n          \"benefitBankAbaNum\": \"<string>\",\n          \"benefitBankArngNum\": \"<string>\",\n          \"benefitBankAddrLine\": \"<string>\",\n          \"benefitBankBicCode\": \"<string>\",\n          \"benefitBankNm\": \"<string>\",\n          \"intrmdryBankAbaNum1\": \"<string>\",\n          \"intrmdryBankAddrLine1\": \"<string>\",\n          \"intrmdryBankNm1\": \"<string>\",\n          \"intrmdryBicCode1\": \"<string>\",\n          \"intrmdryBankAbaNum2\": \"<string>\",\n          \"intrmdryBankAddrLine2\": \"<string>\",\n          \"intrmdryBankNm2\": \"<string>\",\n          \"intrmdryBicCode2\": \"<string>\",\n          \"intrmdryBankAbaNum3\": \"<string>\",\n          \"intrmdryBankAddrLine3\": \"<string>\",\n          \"intrmdryBankNm3\": \"<string>\",\n          \"intrmdryBicCode3\": \"<string>\",\n          \"orgntngBankAbaNum\": \"<string>\",\n          \"orgntngBankAddrLine\": \"<string>\",\n          \"orgntngBankBicCode\": \"<string>\",\n          \"orgntngBankNm\": \"<string>\",\n          \"orgntngAba1\": \"<string>\",\n          \"orgntngArngNum1\": \"<string>\",\n          \"orgntngIpNm1\": \"<string>\",\n          \"orgntngIpAddrLine1\": \"<string>\",\n          \"orgntngAba2\": \"<string>\",\n          \"orgntngArngNum2\": \"<string>\",\n          \"orgntngIpNm2\": \"<string>\",\n          \"orgntngIpAddrLine2\": \"<string>\",\n          \"orgntngAba3\": \"<string>\",\n          \"orgntngArngNum3\": \"<string>\",\n          \"orgntngIpNm3\": \"<string>\",\n          \"orgntngIpAddrLine3\": \"<string>\",\n          \"crVirtualNum\": \"<string>\",\n          \"dbVirtualNum\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"alertNotificationResponse\": [\n    {\n      \"alertAcknowledgment\": {\n        \"alertStatus\": \"FAILURE\",\n        \"confirmationGUID\": \"5f0ada5b-056f-483c-98ae-ac6ccab269c1\",\n        \"alertRecievedDateAndTime\": \"2021-11-19T10:31:12Z\",\n        \"eapAlertGUID\": \"3eecd293-8c45-40ba-be09-d8570c5665ed\",\n        \"message\": \"Internal Error\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "41cc6d9d-b06c-46fb-b5b0-ad5399991512",
+    "name": "Webhooks",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Payment webhook service for ACH, Wire, and RTP alert notifications.\n\nContact Support:\n Name: KeyBank Developer Support\n Email: developers@keybank.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,222 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Commercial Accounts Reporting",
+    "version": "1.0.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Account Information",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve account details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://partner-api-qv.key.com/commercial/accounts/v1/:accountId",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              },
+              {
+                "name": "Accept-Charset",
+                "value": "UTF-8"
+              },
+              {
+                "name": "User-Agent",
+                "value": "Example/1.2.3 Crawler/4.3.1"
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+              }
+            ],
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "Account Identifier"
+              },
+              {
+                "name": "balanceAsOf",
+                "value": "",
+                "type": "query",
+                "description": "A query option to return historical balance information from a certain date. Balance information includes opening and closed ledger balances, opening and closing available balances, and commercial balances. The date must be within 180 days of the current date. If a date is not provided, historical balance information is not returned. Format: YYYY-MM-DD"
+              }
+            ]
+          },
+          "docs": "Get full details about the account identified with accountId parameter."
+        },
+        {
+          "info": {
+            "name": "Search for accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://partner-api-qv.key.com/commercial/accounts/v1/list",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              },
+              {
+                "name": "Accept-Charset",
+                "value": "UTF-8"
+              },
+              {
+                "name": "User-Agent",
+                "value": "Example/1.2.3 Crawler/4.3.1"
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "50",
+                "type": "query",
+                "description": "Restrict the amount of data you receive. For accounts, the limit can be between 1 and 100. If omitted, the default is 50. For transactions, the limit can be between 1 and 500. If omitted, the default is 100."
+              },
+              {
+                "name": "pageKey",
+                "value": "",
+                "type": "query",
+                "description": "A secure and flexible pagination capability to retrieve the following set of records."
+              }
+            ]
+          },
+          "docs": "Return information for all client authorized accounts"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Account Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search prior day account transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://partner-api-qv.key.com/commercial/accounts/v1/:accountId/transactions/previous",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              },
+              {
+                "name": "Accept-Charset",
+                "value": "UTF-8"
+              },
+              {
+                "name": "User-Agent",
+                "value": "Example/1.2.3 Crawler/4.3.1"
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+              }
+            ],
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "Account Identifier"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date to search a past date range. Leave blank to search prior day transactions. If you enter a date, you must also specify an end date. Start date can not be older than 180 days from today. If no date range is provided, the request returns the prior weekday's information. Format: YYYY-MM-DD"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End date for a date range. Leave blank to search prior day transactions. If you enter a date, you must also specify a start date. The end date cannot be today's date. To search for a single day's transactions, make the end date the same as the start date. If no date range is provided, the request returns the prior weekday's information. Format: YYYY-MM-DD"
+              },
+              {
+                "name": "limit",
+                "value": "50",
+                "type": "query",
+                "description": "Restrict the amount of data you receive. For accounts, the limit can be between 1 and 100. If omitted, the default is 50. For transactions, the limit can be between 1 and 500. If omitted, the default is 100."
+              },
+              {
+                "name": "pageKey",
+                "value": "",
+                "type": "query",
+                "description": "A secure and flexible pagination capability to retrieve the following set of records."
+              }
+            ]
+          },
+          "docs": "Search for account transactions. Example:/accounts/{accountId}/transactions/previous?startTime=value1&endTime=value2"
+        },
+        {
+          "info": {
+            "name": "Search current day account transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://partner-api-qv.key.com/commercial/accounts/v1/:accountId/transactions/current",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": "application/json"
+              },
+              {
+                "name": "Accept-Charset",
+                "value": "UTF-8"
+              },
+              {
+                "name": "User-Agent",
+                "value": "Example/1.2.3 Crawler/4.3.1"
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+              }
+            ],
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "Account Identifier"
+              },
+              {
+                "name": "limit",
+                "value": "50",
+                "type": "query",
+                "description": "Restrict the amount of data you receive. For accounts, the limit can be between 1 and 100. If omitted, the default is 50. For transactions, the limit can be between 1 and 500. If omitted, the default is 100."
+              },
+              {
+                "name": "pageKey",
+                "value": "",
+                "type": "query",
+                "description": "A secure and flexible pagination capability to retrieve the following set of records."
+              }
+            ]
+          },
+          "docs": "Search for account transactions that have not posted."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,101 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "RTP Inquiry API",
+    "version": "1.2.3"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "HealthCheck",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Health check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://partner-api-qv.key.com/rtp/v1/healthCheck",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Verify you can connect to the API service. A bearer token is required."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "RTP",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search real time payment transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://partner-api-qv.key.com/rtp/v1/transactions/list",
+            "headers": [
+              {
+                "name": "X-CorrelationId",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Based on search criteria provided, get a list of RTP transactions. The account number and date range are required for every request."
+        },
+        {
+          "info": {
+            "name": "View the details of a RTP transaction by its ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://partner-api-qv.key.com/rtp/v1/transactions/detail/:transactionId",
+            "headers": [
+              {
+                "name": "X-CorrelationId",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "US99999000999999",
+                "type": "path",
+                "description": "The unique ID number associated with the original payment request."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Provide the transaction ID to retrieve all available fields for that single real time payment transaction."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

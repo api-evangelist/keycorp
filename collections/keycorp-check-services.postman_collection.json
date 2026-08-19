@@ -1,0 +1,2163 @@
+{
+  "item": [
+    {
+      "id": "71e41a2b-2937-4044-811d-9b7c5d692b1a",
+      "name": "StopPayments",
+      "description": {
+        "content": "Place new stop payments",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "78e68086-f20a-4c1c-b346-58687d640ccf",
+          "name": "Place a stop payment",
+          "request": {
+            "name": "Place a stop payment",
+            "description": {
+              "content": "Places a stop payment for an account using  an account number and check number. You can only stop a payment between the hours of 06:00 a.m. and 11:59 p.m. EST.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "commercial",
+                "checks",
+                "v1",
+                "stops",
+                "place"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                "key": "X-CorrelationId",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountNumber\": \"<string>\",\n  \"checkNumberStart\": \"<long>\",\n  \"checkAmount\": \"<double>\",\n  \"issueDate\": \"<date>\",\n  \"checkNumberEnd\": \"<long>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ab35382c-9f12-48da-924b-7d5112fabfb2",
+              "name": "Successful response with stop payment records",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "checks",
+                    "v1",
+                    "stops",
+                    "place"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"12345678910\",\n  \"checkAmount\": 12.12,\n  \"issueDate\": \"2026-02-14\",\n  \"checkNumberStart\": 8940,\n  \"description\": \"Stop payment for issued check number\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"stopPayments\": {\n    \"accountNumber\": \"12345678910\",\n    \"checkNumberStart\": 8940,\n    \"checkNumberEnd\": 8963,\n    \"checkAmount\": 12.1,\n    \"expirationDate\": \"2026-09-14\",\n    \"description\": \"Stop payment for issued check range\",\n    \"placedDate\": \"2026-03-14\",\n    \"issueDate\": \"2026-02-14\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e711caae-f92e-427b-bb00-191407021966",
+              "name": "The stop payment request was accepted and submitted for processing, but final confirmation was not available before the response timeout. Do not assume the request failed and there is not a need to immediately resubmit the same stop payment request. The original request may still complete successfully. If the same request is submitted again after processing completes, the API will return a 409 Duplicate Stop response indicating the first request completed successfully.  Retain the X-CorrelationId for tracking or support.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "checks",
+                    "v1",
+                    "stops",
+                    "place"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"12345678910\",\n  \"checkAmount\": 12.12,\n  \"issueDate\": \"2026-02-14\",\n  \"checkNumberStart\": 8940,\n  \"description\": \"Stop payment for issued check number\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"messages\": [\n      {\n        \"code\": \"STOP-Place-202-processing\",\n        \"message\": \"Your request for placing a stop is accepted and is still being processed.\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd5ba851-1c56-4e2a-a273-9511557fc3dd",
+              "name": "Validation failure on request payload",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "checks",
+                    "v1",
+                    "stops",
+                    "place"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"12345678910\",\n  \"checkAmount\": 12.12,\n  \"issueDate\": \"2026-02-14\",\n  \"checkNumberStart\": 8940,\n  \"description\": \"Stop payment for issued check number\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/commercial/checks/v1/stops/place\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"STOP-Place-400-accountNumber\",\n          \"message\": \"accountNumber must be numeric\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "250e6c62-4ee9-4179-9e08-0ea28a01b1db",
+              "name": "Unauthorized request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "checks",
+                    "v1",
+                    "stops",
+                    "place"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"12345678910\",\n  \"checkAmount\": 12.12,\n  \"issueDate\": \"2026-02-14\",\n  \"checkNumberStart\": 8940,\n  \"description\": \"Stop payment for issued check number\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Received request is unauthorized, please provide valid credentials\",\n  \"TransactionId\": \"0635f201-8fbb-418f-b93a-138d5103e2b91348\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/commercial/checks/v1/stops/place\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5503879f-e8d7-46d8-ae6f-cbc17c176dba",
+              "name": "Entitlements validation failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "checks",
+                    "v1",
+                    "stops",
+                    "place"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"12345678910\",\n  \"checkAmount\": 12.12,\n  \"issueDate\": \"2026-02-14\",\n  \"checkNumberStart\": 8940,\n  \"description\": \"Stop payment for issued check number\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/commercial/checks/v1/stops/place\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"Forbidden\",\n          \"message\": \"Entitlements Validation Failed\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "979a0c54-d76c-4796-b6e7-b3ce03514b26",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "checks",
+                    "v1",
+                    "stops",
+                    "place"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"12345678910\",\n  \"checkAmount\": 12.12,\n  \"issueDate\": \"2026-02-14\",\n  \"checkNumberStart\": 8940,\n  \"description\": \"Stop payment for issued check number\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/commercial/checks/v1/stops/place\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"STOP-Place-404-Not-Found\",\n          \"message\": \"No static resource v1/stops/place\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42d82e82-73bc-4f0d-a4a9-470df4fa90a3",
+              "name": "Requested method denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "checks",
+                    "v1",
+                    "stops",
+                    "place"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"12345678910\",\n  \"checkAmount\": 12.12,\n  \"issueDate\": \"2026-02-14\",\n  \"checkNumberStart\": 8940,\n  \"description\": \"Stop payment for issued check number\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/commercial/checks/v1/stops/place\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"STOP-Place-405-Method-Not-Allowed\",\n          \"message\": \"Method 'Get' is not supported.\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06c8a080-c52f-4c51-8d08-c903e36e7c6b",
+              "name": "Duplicate stop",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "checks",
+                    "v1",
+                    "stops",
+                    "place"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"12345678910\",\n  \"checkAmount\": 12.12,\n  \"issueDate\": \"2026-02-14\",\n  \"checkNumberStart\": 8940,\n  \"description\": \"Stop payment for issued check number\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/commercial/checks/v1/stops/place\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"STOP-Place-409-duplicate\",\n          \"message\": \"A Stop Payment already exists for the requested check(s)\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "955f2b29-3ec3-4b60-82ea-b2ef589f5ff4",
+              "name": "Precondition failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "checks",
+                    "v1",
+                    "stops",
+                    "place"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"12345678910\",\n  \"checkAmount\": 12.12,\n  \"issueDate\": \"2026-02-14\",\n  \"checkNumberStart\": 8940,\n  \"description\": \"Stop payment for issued check number\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/commercial/checks/v1/stops/place\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"STOP-Place-412-accountNumber\",\n          \"message\": \"Invalid Account\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0c6bf5d-fc49-48a0-8520-bb7c95dc3596",
+              "name": "Media type not supported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "checks",
+                    "v1",
+                    "stops",
+                    "place"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"12345678910\",\n  \"checkAmount\": 12.12,\n  \"issueDate\": \"2026-02-14\",\n  \"checkNumberStart\": 8940,\n  \"description\": \"Stop payment for issued check number\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/commercial/checks/v1/stops/place\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"STOP-Place-415-Unsupported-Media-Type\",\n          \"message\": \"Content-Type 'X' is not supported.\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ce27fa3-3751-4fa2-9fd0-f0856e603604",
+              "name": "Unexpected backend server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "checks",
+                    "v1",
+                    "stops",
+                    "place"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"12345678910\",\n  \"checkAmount\": 12.12,\n  \"issueDate\": \"2026-02-14\",\n  \"checkNumberStart\": 8940,\n  \"description\": \"Stop payment for issued check number\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/commercial/checks/v1/stops/place\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"STOP-Place-422-error\",\n          \"message\": \"Unable to place the requested Stop Payment.\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c8c5af0-4aec-459b-8e9b-a47df8fcc65f",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "checks",
+                    "v1",
+                    "stops",
+                    "place"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"12345678910\",\n  \"checkAmount\": 12.12,\n  \"issueDate\": \"2026-02-14\",\n  \"checkNumberStart\": 8940,\n  \"description\": \"Stop payment for issued check number\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Number requests threshold reached, please resubmit the request after sometime\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/commercial/checks/v1/stops/place\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed3b6cef-5471-4f66-805b-183529dc8f7d",
+              "name": "Unexpected server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "checks",
+                    "v1",
+                    "stops",
+                    "place"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"12345678910\",\n  \"checkAmount\": 12.12,\n  \"issueDate\": \"2026-02-14\",\n  \"checkNumberStart\": 8940,\n  \"description\": \"Stop payment for issued check number\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"Api-Url\": \"/commercial/checks/v1/stops/place\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"STOP-Place-500-error\",\n          \"message\": \"Unable to place the requested Stop Payment.\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19f32efd-199f-4b17-b442-518c8056c1d9",
+              "name": "Bad gateway",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "checks",
+                    "v1",
+                    "stops",
+                    "place"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"12345678910\",\n  \"checkAmount\": 12.12,\n  \"issueDate\": \"2026-02-14\",\n  \"checkNumberStart\": 8940,\n  \"description\": \"Stop payment for issued check number\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"Api-Url\": \"/commercial/checks/v1/stops/place\",\n  \"ServiceError\": {\n    \"ConnectError\": \"Connectivity error occurred with the downstream service (Unexpected EOF at target), please check with application support team before resubmitting the request\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3bbef404-1275-4f05-803c-9996c3472dd7",
+              "name": "Service unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "checks",
+                    "v1",
+                    "stops",
+                    "place"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"12345678910\",\n  \"checkAmount\": 12.12,\n  \"issueDate\": \"2026-02-14\",\n  \"checkNumberStart\": 8940,\n  \"description\": \"Stop payment for issued check number\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/commercial/checks/v1/stops/place\",\n  \"ServiceError\": {\n    \"ConnectError\": \"Service is currently unavailable (NoActiveTargets), please check with application support before resubmitting the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31303c30-89b2-45a8-b9b7-34307455fe65",
+              "name": "Gateway timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "checks",
+                    "v1",
+                    "stops",
+                    "place"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"12345678910\",\n  \"checkAmount\": 12.12,\n  \"issueDate\": \"2026-02-14\",\n  \"checkNumberStart\": 8940,\n  \"description\": \"Stop payment for issued check number\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/commercial/checks/v1/stops/place\",\n  \"ServiceError\": {\n    \"ConnectError\": \"Request could not be processed on time (GatewayTimeout), please wait a moment and resubmit the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "08da1b81-deac-4662-a369-ba8f5fbfc733",
+      "name": "ImageCheck",
+      "description": {
+        "content": "List check images",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "76147a5a-aeee-4e7d-9636-b28b9bc4926e",
+          "name": "List of check images",
+          "request": {
+            "name": "List of check images",
+            "description": {
+              "content": "Get check data with an account number and check number. To return a check image, define the image format in the request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "commercial",
+                "checks",
+                "v1",
+                "images",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                "key": "X-CorrelationId",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountNumber\": \"<string>\",\n  \"checkNumber\": \"<long>\",\n  \"checkProcessDate\": \"<string>\",\n  \"checkAmount\": \"<double>\",\n  \"imageFormat\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9b984b14-7429-4c21-b231-12ce2b6c64b9",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "checks",
+                    "v1",
+                    "images",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"12345678910\",\n  \"checkNumber\": 123,\n  \"checkAmount\": 111.11,\n  \"checkProcessDate\": \"2026-01-27\",\n  \"imageFormat\": \"PNG\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"checkImages\": {\n    \"accountNumber\": \"12345678910\",\n    \"checkNumber\": 123,\n    \"checkAmount\": 111.11,\n    \"checkProcessDate\": \"2026-01-27\",\n    \"sequenceNumber\": 1,\n    \"transactionType\": \"DEBIT\",\n    \"checkRoutingNumber\": \"04120704\",\n    \"checkFrontImage\": \"lUwXMGBwTm4dy/5pe8GwlRZULmMfPkzL8yZKfDxRTU7HFMW/b7DYqjBq0vyC85PxMObQ2UxtcbVe78MWsdgIBkKY7pCB4eE7GQr9QOcFRW2O7FQshj8ExEy0bmCV8cQFyxzKh04XPWIDxp71PIw/BFWy2GG+R3b1SFP/Mbj0Hdppoxn+rUxAz7Red+39BodSSz1xZteU8hu6fYvvNmbqasZmkVAEE6hS2H+3uVKqaMmnpHJ2oIie0rtowueFradOWhNGvV5pRuEhEd6j93X/7mt=\",\n    \"checkRearImage\": \"73mfoZbjXF4Gr9XuIYSieWR0o3NV2bvMcwiurzvU8Dyvy2CG+1DYdw3IyHHZRdY6CKiarVFK7mG+IgJKVaDwqA2Ma7YxopwgEIJ5oc8gS/O8BzX7zms/6hmRn9wrcZj3ZhaSUmAdOtSc3qOzp6JPLoYyJg2hQwnEtJyormF8GT5ajF8ADV6XQD+d3Ym8bKsR6rHWwGB0bmiKu+9r+33mR8QZmzmmCPIUZXzj6CXaLr0dNA4+xXszgMbWAHI00ZGhTsSfzyWp8FHYZx24fbEOkS9ApuVBRihL+Eb14ldJayOgAXI3OjLJgo2pB4EUvbQmhwu=\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f858ee45-28c2-49cd-b0b6-8acea312757b",
+              "name": "Validation failure on request payload",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "checks",
+                    "v1",
+                    "images",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"12345678910\",\n  \"checkNumber\": 123,\n  \"checkAmount\": 111.11,\n  \"checkProcessDate\": \"2026-01-27\",\n  \"imageFormat\": \"PNG\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/commercial/checks/v1/images/list\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"IMAGE-Check-400-accountNumber\",\n          \"message\": \"accountNumber must be numeric\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e727de56-a3eb-4214-b922-90d3ebc7a949",
+              "name": "Unauthorized request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "checks",
+                    "v1",
+                    "images",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"12345678910\",\n  \"checkNumber\": 123,\n  \"checkAmount\": 111.11,\n  \"checkProcessDate\": \"2026-01-27\",\n  \"imageFormat\": \"PNG\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Received request is unauthorized, please provide valid credentials\",\n  \"TransactionId\": \"0635f201-8fbb-418f-b93a-138d5103e2b91348\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/commercial/checks/v1/images/list\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "806f9326-1ceb-456c-9ef0-191b2f7b026a",
+              "name": "Entitlements validation failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "checks",
+                    "v1",
+                    "images",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"12345678910\",\n  \"checkNumber\": 123,\n  \"checkAmount\": 111.11,\n  \"checkProcessDate\": \"2026-01-27\",\n  \"imageFormat\": \"PNG\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/commercial/checks/v1/images/list\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"Forbidden\",\n          \"message\": \"Entitlements Validation Failed\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b78dc61-b4a1-4c6c-bbbe-d518ef97f84a",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "checks",
+                    "v1",
+                    "images",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"12345678910\",\n  \"checkNumber\": 123,\n  \"checkAmount\": 111.11,\n  \"checkProcessDate\": \"2026-01-27\",\n  \"imageFormat\": \"PNG\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/commercial/checks/v1/images/list\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"IMAGE-Check-404-Not-Found\",\n          \"message\": \"No static resource v1/images/list\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee330f5a-511e-4ac0-b144-00e901a6f522",
+              "name": "Requested method denied",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "checks",
+                    "v1",
+                    "images",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"12345678910\",\n  \"checkNumber\": 123,\n  \"checkAmount\": 111.11,\n  \"checkProcessDate\": \"2026-01-27\",\n  \"imageFormat\": \"PNG\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/commercial/checks/v1/images/list\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"IMAGE-Check-405-Method-Not-Allowed\",\n          \"message\": \"Method 'Get' is not supported.\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4fd7c401-ff75-4d0f-8916-5e4be9b850ad",
+              "name": "Media type not supported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "checks",
+                    "v1",
+                    "images",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"12345678910\",\n  \"checkNumber\": 123,\n  \"checkAmount\": 111.11,\n  \"checkProcessDate\": \"2026-01-27\",\n  \"imageFormat\": \"PNG\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend service\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/commercial/checks/v1/images/list\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"IMAGE-Check-415-Unsupported-Media-Type\",\n          \"message\": \"Content-Type 'X' is not supported.\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "02d73d07-15e4-48d5-8aed-e7c2600ff9fb",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "checks",
+                    "v1",
+                    "images",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"12345678910\",\n  \"checkNumber\": 123,\n  \"checkAmount\": 111.11,\n  \"checkProcessDate\": \"2026-01-27\",\n  \"imageFormat\": \"PNG\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Number requests threshold reached, please resubmit the request after sometime\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/commercial/checks/v1/stops/place\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77695476-6527-45b0-88c5-1dbb3595d259",
+              "name": "Unexpected server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "checks",
+                    "v1",
+                    "images",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"12345678910\",\n  \"checkNumber\": 123,\n  \"checkAmount\": 111.11,\n  \"checkProcessDate\": \"2026-01-27\",\n  \"imageFormat\": \"PNG\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"Api-Url\": \"/commercial/checks/v1/images/list\",\n  \"ServiceError\": {\n    \"metadata\": {\n      \"messages\": [\n        {\n          \"code\": \"IMAGE-Check-500-error\",\n          \"message\": \"Unable to process the request.\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a78fe467-4c3f-41fe-817f-6615511e462d",
+              "name": "Bad gateway",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "checks",
+                    "v1",
+                    "images",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"12345678910\",\n  \"checkNumber\": 123,\n  \"checkAmount\": 111.11,\n  \"checkProcessDate\": \"2026-01-27\",\n  \"imageFormat\": \"PNG\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"Api-Url\": \"/commercial/checks/v1/images/list\",\n  \"ServiceError\": {\n    \"ConnectError\": \"Connectivity error occurred with the downstream service (Unexpected EOF at target), please check with application support team before resubmitting the request\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "953872ad-3892-4d4c-8644-7ef9f3fd655d",
+              "name": "Service unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "checks",
+                    "v1",
+                    "images",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"12345678910\",\n  \"checkNumber\": 123,\n  \"checkAmount\": 111.11,\n  \"checkProcessDate\": \"2026-01-27\",\n  \"imageFormat\": \"PNG\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/commercial/checks/v1/images/list\",\n  \"ServiceError\": {\n    \"ConnectError\": \"Service is currently unavailable (NoActiveTargets), please check with application support before resubmitting the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37c74f87-f3b7-4619-ab1b-ff981558cdac",
+              "name": "Gateway timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "checks",
+                    "v1",
+                    "images",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                    "key": "X-CorrelationId",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountNumber\": \"12345678910\",\n  \"checkNumber\": 123,\n  \"checkAmount\": 111.11,\n  \"checkProcessDate\": \"2026-01-27\",\n  \"imageFormat\": \"PNG\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ErrorMessage\": \"Error received from backend\",\n  \"TransactionId\": \"84293235-5d2c-42ba-afc3-a5d4afc5f88e27097\",\n  \"X-CorrelationId\": \"929618f2-6163-bf73-51b0-6c54a8533c74\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/commercial/checks/v1/images/list\",\n  \"ServiceError\": {\n    \"ConnectError\": \"Request could not be processed on time (GatewayTimeout), please wait a moment and resubmit the request.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "fec1c08f-67ea-452d-ad61-059b3c8bc5a2",
+      "name": "HealthCheck",
+      "description": {
+        "content": "Verify you can connect to the API service.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "75c28c3c-cdfa-408c-86f3-04086f4ed09e",
+          "name": "Health check",
+          "request": {
+            "name": "Health check",
+            "description": {
+              "content": "Verify you can connect to the API service. A bearer token is required.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "commercial",
+                "checks",
+                "v1",
+                "healthCheck"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1bc90681-8e4a-471f-9d99-6080af973b7a",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "checks",
+                    "v1",
+                    "healthCheck"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"Ok\",\n  \"Source\": \"Roundtrip\",\n  \"Timestamp\": \"2022-09-15T04:49:03\",\n  \"ClientIp\": \"192.0.2.1\",\n  \"X-Forwarded-For\": \"[192.0.2.1]\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://partner-api-qv.key.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "227554ea-7b66-40d4-a6de-207a0f47d27a",
+    "name": "Check Services",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Use the Check Services API to place a stop payment on commercial checking accounts or retrieve check details with the option to include check image.\n\nContact Support:\n Name: KeyBank Developer Support\n Email: embedded_banking_support@keybank.com",
+      "type": "text/plain"
+    }
+  }
+}

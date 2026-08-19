@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Check Services",
+    "version": "1.1.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "StopPayments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Place a stop payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://partner-api-qv.key.com/commercial/checks/v1/stops/place",
+            "headers": [
+              {
+                "name": "X-CorrelationId",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Places a stop payment for an account using  an account number and check number. You can only stop a payment between the hours of 06:00 a.m. and 11:59 p.m. EST."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ImageCheck",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List of check images",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://partner-api-qv.key.com/commercial/checks/v1/images/list",
+            "headers": [
+              {
+                "name": "X-CorrelationId",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get check data with an account number and check number. To return a check image, define the image format in the request."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "HealthCheck",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Health check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://partner-api-qv.key.com/commercial/checks/v1/healthCheck",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Verify you can connect to the API service. A bearer token is required."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

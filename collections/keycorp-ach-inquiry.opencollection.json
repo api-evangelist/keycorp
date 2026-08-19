@@ -1,0 +1,142 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ACH Inquiry",
+    "version": "2.1.2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "HealthCheck",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Health check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://partner-api-qv.key.com/accounts/transactions/v1/healthCheck",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Verify you can connect to the API service. A bearer token is required."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ACH Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get details about an ACH transaction with a parNumber.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://partner-api-qv.key.com/accounts/transactions/v1/ach/detail/:parNumber",
+            "headers": [
+              {
+                "name": "X-CorrelationId",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "parNumber",
+                "value": "22018007665985",
+                "type": "path",
+                "description": "The unique parNumber assigned to the transaction by the ACH processor."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Use the parNumber to retrieve information about an ACH transaction. The parNumber can be obtained from the ACH List endpoint."
+        },
+        {
+          "info": {
+            "name": "Advanced search for ACH transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://partner-api-qv.key.com/accounts/transactions/v1/ach/list",
+            "headers": [
+              {
+                "name": "X-CorrelationId",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Search for ACH transactions by passing certain search parameters."
+        },
+        {
+          "info": {
+            "name": "Advanced search for settled ACH transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://partner-api-qv.key.com/accounts/transactions/v1/ach/settled/:settlementTransactionId",
+            "headers": [
+              {
+                "name": "X-CorrelationId",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "settlementTransactionId",
+                "value": "23218003015954",
+                "type": "path",
+                "description": "The transaction ID that is assigned during settlement. This can be obtained from the Commercial Accounting API."
+              },
+              {
+                "name": "pageNumber",
+                "value": "1",
+                "type": "query",
+                "description": "The number of the page being viewed. This number must be greater than or equal to 1."
+              },
+              {
+                "name": "pageSize",
+                "value": "150",
+                "type": "query",
+                "description": "The number of records per page. Must be between 1 and 1000."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Search for ACH batch details of transactions that have posted to the KeyBank account where the status is settled or returned."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,234 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ACH Origination",
+    "version": "1.3.4"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "HealthCheck",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Health check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://partner-api-qv.key.com/ach/payments/v1/healthCheck",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Verify you can connect to the API service. A bearer token is required."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ACH Payment Request Inquiry",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Check the status of a payment request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://partner-api-qv.key.com/ach/payments/v1/status",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Check the return status of one or more transactions. Use this request to see if the originated item failed, was accepted, is waiting for one or more addenda items, or is being processed."
+        },
+        {
+          "info": {
+            "name": "Check the status of addenda records",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://partner-api-qv.key.com/ach/payments/v1/status/addenda",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Check the return status of one or more addenda records"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ACH Payment Origination",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send or collect a payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://partner-api-qv.key.com/ach/payments/v1/ccd",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Make or collect payments to a corporate account. This call originates an ACH transaction for SEC code CCD (Corporate Credit or Debit). Use this request to send or collect cash, debit, or credit transactions between the buyer and seller financial institution accounts. This can also be used by companies to move funds and deposit to a central bank account."
+        },
+        {
+          "info": {
+            "name": "Make or collect payments to or from a corporate account with attached records",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://partner-api-qv.key.com/ach/payments/v1/ctx",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Submit or collect a payment from one business/entity to another.  This call originates an ACH transaction for SEC code CTX (Corporate Trade Exchange). Use this request to send or collect an electronic payment with remittance information."
+        },
+        {
+          "info": {
+            "name": "Make deposits and withdrawals to or from consumer accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://partner-api-qv.key.com/ach/payments/v1/ppd",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Submit or collect a payment based on consumer authorization and terms of service. This call originates an ACH transaction for SEC code PPD (Prearranged Payments and Debits). Use this request to send or collect a routine electronic payment, like a subscription or monthly payment plan."
+        },
+        {
+          "info": {
+            "name": "Send a payment over the phone",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://partner-api-qv.key.com/ach/payments/v1/tel",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Authorize and submit a payment by the phone."
+        },
+        {
+          "info": {
+            "name": "Send an online payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://partner-api-qv.key.com/ach/payments/v1/web",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Authorize and submit a payment on a website."
+        },
+        {
+          "info": {
+            "name": "Send additional addenda information",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://partner-api-qv.key.com/ach/payments/v1/addenda",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Add records to an existing ACH transaction."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Undo ACH Payment Request",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Undo a payment request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://partner-api-qv.key.com/ach/payments/v1/undo",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Reverse a payment request before it enters consolidation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

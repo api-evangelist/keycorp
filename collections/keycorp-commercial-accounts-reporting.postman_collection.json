@@ -1,0 +1,2488 @@
+{
+  "item": [
+    {
+      "id": "b4aaaaff-bd74-4e24-974d-8938b15f7e19",
+      "name": "Account Information",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2336559b-8531-4565-bc8a-887b43bd2665",
+          "name": "Retrieve account details",
+          "request": {
+            "name": "Retrieve account details",
+            "description": {
+              "content": "Get full details about the account identified with accountId parameter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "commercial",
+                "accounts",
+                "v1",
+                ":accountId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "balanceAsOf",
+                  "value": "<date>",
+                  "description": "A query option to return historical balance information from a certain date. Balance information includes opening and closed ledger balances, opening and closing available balances, and commercial balances. The date must be within 180 days of the current date. If a date is not provided, historical balance information is not returned. Format: YYYY-MM-DD"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) Account Identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.",
+                "key": "Accept-Charset",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Identifies the web browser and/or cURL command line used in the HTTP request. We collect this data to see which products use our API data services, helpful for troubleshooting and compatibility.",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Unique identifier for this interaction. A valid ID must be 36 characters in length. This is used across all API requests and responses.",
+                "key": "x-fapi-interaction-id",
+                "value": "<uuid>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "42d8a19f-b6c4-4f8b-974d-f17ee139ba1e",
+              "name": "Commercial Account",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "accounts",
+                    "v1",
+                    ":accountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "balanceAsOf",
+                      "value": "2025-02-15"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) Account Identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Preferred syntax for content type. This content type should be application/json.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.",
+                    "key": "Accept-Charset",
+                    "value": "UTF-8"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the web browser and/or cURL command line used in the HTTP request. We collect this data to see which products use our API data services, helpful for troubleshooting and compatibility.",
+                    "key": "User-Agent",
+                    "value": "Example/1.2.3 Crawler/4.3.1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique identifier for this interaction. A valid ID must be 36 characters in length. This is used across all API requests and responses.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier for this interaction",
+                  "key": "x-fapi-interaction-id",
+                  "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accountId\": \"17e13f78-20c7-4ce6-ad4e-5afff48c8834\",\n  \"accountNumberDisplay\": \"X5678\",\n  \"accountNumber\": \"012345678\",\n  \"accountCategory\": \"COMMERCIAL_ACCOUNT\",\n  \"currentAvailableBalance\": 1000.1,\n  \"currentLedgerBalance\": 3000.2,\n  \"openingLedgerBalance\": 123.45,\n  \"closingLedgerBalance\": 25000.99,\n  \"openingAvailableBalance\": 15000.5,\n  \"closingAvailableBalance\": 25000.36,\n  \"balanceAsOf\": \"2025-08-21\",\n  \"commercialBalances\": [\n    {\n      \"commercialCode\": {\n        \"type\": \"BAI\",\n        \"code\": \"010\",\n        \"memo\": \"Opening Ledger Balance\"\n      },\n      \"amount\": 123.45\n    },\n    {\n      \"commercialCode\": {\n        \"type\": \"BAI\",\n        \"code\": \"015\",\n        \"memo\": \"Closing Ledger Balance\"\n      },\n      \"amount\": 25000.99\n    },\n    {\n      \"commercialCode\": {\n        \"type\": \"BAI\",\n        \"code\": \"040\",\n        \"memo\": \"Opening Available Balance\"\n      },\n      \"amount\": 15000.5\n    },\n    {\n      \"commercialCode\": {\n        \"type\": \"BAI\",\n        \"code\": \"045\",\n        \"memo\": \"Closing Available Balance\"\n      },\n      \"amount\": 25000.36\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b6dfc2d-50c2-4ed4-983b-7819e0ba102b",
+              "name": "Partial Success of Commercial Account",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "accounts",
+                    "v1",
+                    ":accountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "balanceAsOf",
+                      "value": "2025-02-15"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) Account Identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Preferred syntax for content type. This content type should be application/json.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.",
+                    "key": "Accept-Charset",
+                    "value": "UTF-8"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the web browser and/or cURL command line used in the HTTP request. We collect this data to see which products use our API data services, helpful for troubleshooting and compatibility.",
+                    "key": "User-Agent",
+                    "value": "Example/1.2.3 Crawler/4.3.1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique identifier for this interaction. A valid ID must be 36 characters in length. This is used across all API requests and responses.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Partial Content",
+              "code": 206,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier for this interaction",
+                  "key": "x-fapi-interaction-id",
+                  "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accountCategory\": \"COMMERCIAL_ACCOUNT\",\n  \"accountId\": \"string\",\n  \"accountNumberDisplay\": \"X5678\",\n  \"accountNumber\": \"012345678\",\n  \"balanceAsOf\": \"1972-12-04T15:14:42.849Z\",\n  \"openingLedgerBalance\": 8366.370639244808,\n  \"closingLedgerBalance\": 4141.727475877294,\n  \"currentLedgerBalance\": 1599.8761268876838,\n  \"openingAvailableBalance\": 3324.465488890188,\n  \"currentAvailableBalance\": 5512.901613462029,\n  \"closingAvailableBalance\": 3366.9502852484534,\n  \"commercialBalances\": [\n    {\n      \"commercialCode\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"code\": \"string\"\n      },\n      \"amount\": 1306.5352807774423,\n      \"memo\": \"string\"\n    },\n    {\n      \"commercialCode\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"code\": \"string\"\n      },\n      \"amount\": 5804.16962113043,\n      \"memo\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0e17335-c96b-4085-9210-f13a92e3ae0d",
+              "name": "Input sent by client does not satisfy API specification",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "accounts",
+                    "v1",
+                    ":accountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "balanceAsOf",
+                      "value": "2025-02-15"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) Account Identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Preferred syntax for content type. This content type should be application/json.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.",
+                    "key": "Accept-Charset",
+                    "value": "UTF-8"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the web browser and/or cURL command line used in the HTTP request. We collect this data to see which products use our API data services, helpful for troubleshooting and compatibility.",
+                    "key": "User-Agent",
+                    "value": "Example/1.2.3 Crawler/4.3.1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique identifier for this interaction. A valid ID must be 36 characters in length. This is used across all API requests and responses.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier for this interaction",
+                  "key": "x-fapi-interaction-id",
+                  "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"Invalid Input\",\n  \"debugMessage\": \"Required header 'x-fapi-interaction-id' is not valid.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06cb99a0-3b63-4538-abd9-dbf7b0473bad",
+              "name": "Request lacks valid authentication credentials for the target resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "accounts",
+                    "v1",
+                    ":accountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "balanceAsOf",
+                      "value": "2025-02-15"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) Account Identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Preferred syntax for content type. This content type should be application/json.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.",
+                    "key": "Accept-Charset",
+                    "value": "UTF-8"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the web browser and/or cURL command line used in the HTTP request. We collect this data to see which products use our API data services, helpful for troubleshooting and compatibility.",
+                    "key": "User-Agent",
+                    "value": "Example/1.2.3 Crawler/4.3.1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique identifier for this interaction. A valid ID must be 36 characters in length. This is used across all API requests and responses.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier for this interaction",
+                  "key": "x-fapi-interaction-id",
+                  "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"603\",\n  \"message\": \"Authentication failed\",\n  \"debugMessage\": \"Please update the request and try again.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b891385-f769-47f8-b03f-8ac5e8e8e168",
+              "name": "Forbidden, server understands the request but refuses to authorize it",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "accounts",
+                    "v1",
+                    ":accountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "balanceAsOf",
+                      "value": "2025-02-15"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) Account Identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Preferred syntax for content type. This content type should be application/json.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.",
+                    "key": "Accept-Charset",
+                    "value": "UTF-8"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the web browser and/or cURL command line used in the HTTP request. We collect this data to see which products use our API data services, helpful for troubleshooting and compatibility.",
+                    "key": "User-Agent",
+                    "value": "Example/1.2.3 Crawler/4.3.1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique identifier for this interaction. A valid ID must be 36 characters in length. This is used across all API requests and responses.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier for this interaction",
+                  "key": "x-fapi-interaction-id",
+                  "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"Forbidden\",\n  \"debugMessage\": \"Please update the request and try again.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "157d4959-6ba9-491e-a3c2-e6de98f8a47f",
+              "name": "Content Type not Supported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "accounts",
+                    "v1",
+                    ":accountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "balanceAsOf",
+                      "value": "2025-02-15"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) Account Identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Preferred syntax for content type. This content type should be application/json.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.",
+                    "key": "Accept-Charset",
+                    "value": "UTF-8"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the web browser and/or cURL command line used in the HTTP request. We collect this data to see which products use our API data services, helpful for troubleshooting and compatibility.",
+                    "key": "User-Agent",
+                    "value": "Example/1.2.3 Crawler/4.3.1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique identifier for this interaction. A valid ID must be 36 characters in length. This is used across all API requests and responses.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier for this interaction",
+                  "key": "x-fapi-interaction-id",
+                  "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"1203\",\n  \"message\": \"Content Type not Supported\",\n  \"debugMessage\": \"Acceptable representations: [application/json, application/*+json].\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ee6e7e01-7542-4fc8-bae5-5dd9a063c3bc",
+          "name": "Search for accounts",
+          "request": {
+            "name": "Search for accounts",
+            "description": {
+              "content": "Return information for all client authorized accounts",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "commercial",
+                "accounts",
+                "v1",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Restrict the amount of data you receive. For accounts, the limit can be between 1 and 100. If omitted, the default is 50. For transactions, the limit can be between 1 and 500. If omitted, the default is 100."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageKey",
+                  "value": "<string>",
+                  "description": "A secure and flexible pagination capability to retrieve the following set of records."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.",
+                "key": "Accept-Charset",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Identifies the web browser and/or cURL command line used in the HTTP request. We collect this data to see which products use our API data services, helpful for troubleshooting and compatibility.",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Unique identifier for this interaction. A valid ID must be 36 characters in length. This is used across all API requests and responses.",
+                "key": "x-fapi-interaction-id",
+                "value": "<uuid>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f67e5e70-6403-4d8d-b32b-0bc150388334",
+              "name": "Array of accounts (Account)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "accounts",
+                    "v1",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Preferred syntax for content type. This content type should be application/json.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.",
+                    "key": "Accept-Charset",
+                    "value": "UTF-8"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the web browser and/or cURL command line used in the HTTP request. We collect this data to see which products use our API data services, helpful for troubleshooting and compatibility.",
+                    "key": "User-Agent",
+                    "value": "Example/1.2.3 Crawler/4.3.1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique identifier for this interaction. A valid ID must be 36 characters in length. This is used across all API requests and responses.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier for this interaction",
+                  "key": "x-fapi-interaction-id",
+                  "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"page\": {\n    \"nextPageKey\": \"2\",\n    \"previousPageKey\": \"1\",\n    \"totalElements\": 3\n  },\n  \"links\": {\n    \"next\": {\n      \"href\": \"https://partner-api.key.com/accounts/12345\"\n    },\n    \"prev\": {\n      \"href\": \"https://partner-api.key.com/accounts/12345\"\n    }\n  },\n  \"accounts\": [\n    {\n      \"accountCategory\": \"COMMERCIAL_ACCOUNT\",\n      \"accountId\": \"string\",\n      \"accountNumberDisplay\": \"X5678\",\n      \"accountNumber\": \"012345678\"\n    },\n    {\n      \"accountCategory\": \"COMMERCIAL_ACCOUNT\",\n      \"accountId\": \"string\",\n      \"accountNumberDisplay\": \"X5678\",\n      \"accountNumber\": \"012345678\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c223e0f7-f895-4404-84f5-c373f205521b",
+              "name": "Input sent by client does not satisfy API specification",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "accounts",
+                    "v1",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Preferred syntax for content type. This content type should be application/json.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.",
+                    "key": "Accept-Charset",
+                    "value": "UTF-8"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the web browser and/or cURL command line used in the HTTP request. We collect this data to see which products use our API data services, helpful for troubleshooting and compatibility.",
+                    "key": "User-Agent",
+                    "value": "Example/1.2.3 Crawler/4.3.1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique identifier for this interaction. A valid ID must be 36 characters in length. This is used across all API requests and responses.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier for this interaction",
+                  "key": "x-fapi-interaction-id",
+                  "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"Invalid Input\",\n  \"debugMessage\": \"Required header 'x-fapi-interaction-id' is not valid.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c46e338-76c8-4f5b-9aeb-9c6c1083b030",
+              "name": "Request lacks valid authentication credentials for the target resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "accounts",
+                    "v1",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Preferred syntax for content type. This content type should be application/json.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.",
+                    "key": "Accept-Charset",
+                    "value": "UTF-8"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the web browser and/or cURL command line used in the HTTP request. We collect this data to see which products use our API data services, helpful for troubleshooting and compatibility.",
+                    "key": "User-Agent",
+                    "value": "Example/1.2.3 Crawler/4.3.1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique identifier for this interaction. A valid ID must be 36 characters in length. This is used across all API requests and responses.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier for this interaction",
+                  "key": "x-fapi-interaction-id",
+                  "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"603\",\n  \"message\": \"Authentication failed\",\n  \"debugMessage\": \"Please update the request and try again.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fca0589a-ff6b-407b-b885-b815c6c37815",
+              "name": "Forbidden, server understands the request but refuses to authorize it",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "accounts",
+                    "v1",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Preferred syntax for content type. This content type should be application/json.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.",
+                    "key": "Accept-Charset",
+                    "value": "UTF-8"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the web browser and/or cURL command line used in the HTTP request. We collect this data to see which products use our API data services, helpful for troubleshooting and compatibility.",
+                    "key": "User-Agent",
+                    "value": "Example/1.2.3 Crawler/4.3.1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique identifier for this interaction. A valid ID must be 36 characters in length. This is used across all API requests and responses.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier for this interaction",
+                  "key": "x-fapi-interaction-id",
+                  "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"Forbidden\",\n  \"debugMessage\": \"Please update the request and try again.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b7d9dd68-bb40-4022-b289-4f67a2ae3b78",
+              "name": "Data not found for request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "accounts",
+                    "v1",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Preferred syntax for content type. This content type should be application/json.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.",
+                    "key": "Accept-Charset",
+                    "value": "UTF-8"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the web browser and/or cURL command line used in the HTTP request. We collect this data to see which products use our API data services, helpful for troubleshooting and compatibility.",
+                    "key": "User-Agent",
+                    "value": "Example/1.2.3 Crawler/4.3.1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique identifier for this interaction. A valid ID must be 36 characters in length. This is used across all API requests and responses.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier for this interaction",
+                  "key": "x-fapi-interaction-id",
+                  "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"1107\",\n  \"message\": \"Data not found for request parameters\",\n  \"debugMessage\": \"Please adjust your search criteria and try again.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4ab6c05-6277-47c2-9e1f-dcdca2b3021a",
+              "name": "Content Type not Supported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "accounts",
+                    "v1",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Preferred syntax for content type. This content type should be application/json.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.",
+                    "key": "Accept-Charset",
+                    "value": "UTF-8"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the web browser and/or cURL command line used in the HTTP request. We collect this data to see which products use our API data services, helpful for troubleshooting and compatibility.",
+                    "key": "User-Agent",
+                    "value": "Example/1.2.3 Crawler/4.3.1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique identifier for this interaction. A valid ID must be 36 characters in length. This is used across all API requests and responses.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier for this interaction",
+                  "key": "x-fapi-interaction-id",
+                  "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"1203\",\n  \"message\": \"Content Type not Supported\",\n  \"debugMessage\": \"Acceptable representations: [application/json, application/*+json].\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "4aae15a8-80e0-400c-89f7-92c0c532868b",
+      "name": "Account Transactions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "23a8dde8-69d1-4bf6-b554-ae8932aabe70",
+          "name": "Search prior day account transactions",
+          "request": {
+            "name": "Search prior day account transactions",
+            "description": {
+              "content": "Search for account transactions. Example:/accounts/{accountId}/transactions/previous?startTime=value1&endTime=value2",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "commercial",
+                "accounts",
+                "v1",
+                ":accountId",
+                "transactions",
+                "previous"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<date>",
+                  "description": "Start date to search a past date range. Leave blank to search prior day transactions. If you enter a date, you must also specify an end date. Start date can not be older than 180 days from today. If no date range is provided, the request returns the prior weekday's information. Format: YYYY-MM-DD"
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<date>",
+                  "description": "End date for a date range. Leave blank to search prior day transactions. If you enter a date, you must also specify a start date. The end date cannot be today's date. To search for a single day's transactions, make the end date the same as the start date. If no date range is provided, the request returns the prior weekday's information. Format: YYYY-MM-DD"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Restrict the amount of data you receive. For accounts, the limit can be between 1 and 100. If omitted, the default is 50. For transactions, the limit can be between 1 and 500. If omitted, the default is 100."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageKey",
+                  "value": "<string>",
+                  "description": "A secure and flexible pagination capability to retrieve the following set of records."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) Account Identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.",
+                "key": "Accept-Charset",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Identifies the web browser and/or cURL command line used in the HTTP request. We collect this data to see which products use our API data services, helpful for troubleshooting and compatibility.",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Unique identifier for this interaction. A valid ID must be 36 characters in length. This is used across all API requests and responses.",
+                "key": "x-fapi-interaction-id",
+                "value": "<uuid>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "791943d2-e6e4-4f54-a5c9-b6a829532402",
+              "name": "Paginated collection of commercial transactions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "accounts",
+                    "v1",
+                    ":accountId",
+                    "transactions",
+                    "previous"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "2025-02-15"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "2025-02-15"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) Account Identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Preferred syntax for content type. This content type should be application/json.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.",
+                    "key": "Accept-Charset",
+                    "value": "UTF-8"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the web browser and/or cURL command line used in the HTTP request. We collect this data to see which products use our API data services, helpful for troubleshooting and compatibility.",
+                    "key": "User-Agent",
+                    "value": "Example/1.2.3 Crawler/4.3.1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique identifier for this interaction. A valid ID must be 36 characters in length. This is used across all API requests and responses.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier for this interaction",
+                  "key": "x-fapi-interaction-id",
+                  "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"page\": {\n    \"nextPageKey\": \"2\",\n    \"previousPageKey\": \"1\",\n    \"totalElements\": 3\n  },\n  \"links\": {\n    \"next\": {\n      \"href\": \"https://partner-api.key.com/accounts/12345\"\n    },\n    \"prev\": {\n      \"href\": \"https://partner-api.key.com/accounts/12345\"\n    }\n  },\n  \"transactions\": [\n    {\n      \"accountCategory\": \"COMMERCIAL_ACCOUNT\",\n      \"accountId\": \"17e13f78-20c7-4ce6-ad4e-5afff48c8834\",\n      \"transactionId\": \"string\",\n      \"postedTimestamp\": \"2021-07-15T14:46:41.375\",\n      \"transactionTimestamp\": \"2021-07-15T14:46:41.375\",\n      \"description\": \"string\",\n      \"debitCreditMemo\": \"CREDIT\",\n      \"status\": \"PENDING\",\n      \"amount\": 7991.492659162382,\n      \"lineItem\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"fiAttributes\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"reference\": \"string\",\n      \"commercialCode\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"code\": \"string\"\n      }\n    },\n    {\n      \"accountCategory\": \"COMMERCIAL_ACCOUNT\",\n      \"accountId\": \"17e13f78-20c7-4ce6-ad4e-5afff48c8834\",\n      \"transactionId\": \"string\",\n      \"postedTimestamp\": \"2021-07-15T14:46:41.375\",\n      \"transactionTimestamp\": \"2021-07-15T14:46:41.375\",\n      \"description\": \"string\",\n      \"debitCreditMemo\": \"CREDIT\",\n      \"status\": \"POSTED\",\n      \"amount\": 177.1184339419629,\n      \"lineItem\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"fiAttributes\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"reference\": \"string\",\n      \"commercialCode\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"code\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aa38aab7-a6b2-4799-b8d9-94fa45cc07b2",
+              "name": "Partial Success of Prior Day",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "accounts",
+                    "v1",
+                    ":accountId",
+                    "transactions",
+                    "previous"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "2025-02-15"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "2025-02-15"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) Account Identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Preferred syntax for content type. This content type should be application/json.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.",
+                    "key": "Accept-Charset",
+                    "value": "UTF-8"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the web browser and/or cURL command line used in the HTTP request. We collect this data to see which products use our API data services, helpful for troubleshooting and compatibility.",
+                    "key": "User-Agent",
+                    "value": "Example/1.2.3 Crawler/4.3.1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique identifier for this interaction. A valid ID must be 36 characters in length. This is used across all API requests and responses.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Partial Content",
+              "code": 206,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier for this interaction",
+                  "key": "x-fapi-interaction-id",
+                  "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accountCategory\": \"COMMERCIAL_ACCOUNT\",\n  \"accountId\": \"string\",\n  \"accountNumberDisplay\": \"X5678\",\n  \"accountNumber\": \"012345678\",\n  \"balanceAsOf\": \"1972-12-04T15:14:42.849Z\",\n  \"openingLedgerBalance\": 8366.370639244808,\n  \"closingLedgerBalance\": 4141.727475877294,\n  \"currentLedgerBalance\": 1599.8761268876838,\n  \"openingAvailableBalance\": 3324.465488890188,\n  \"currentAvailableBalance\": 5512.901613462029,\n  \"closingAvailableBalance\": 3366.9502852484534,\n  \"commercialBalances\": [\n    {\n      \"commercialCode\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"code\": \"string\"\n      },\n      \"amount\": 1306.5352807774423,\n      \"memo\": \"string\"\n    },\n    {\n      \"commercialCode\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"code\": \"string\"\n      },\n      \"amount\": 5804.16962113043,\n      \"memo\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca13de3c-8d25-46f4-b79d-dac2a720f2f6",
+              "name": "Input sent by client does not satisfy API specification",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "accounts",
+                    "v1",
+                    ":accountId",
+                    "transactions",
+                    "previous"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "2025-02-15"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "2025-02-15"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) Account Identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Preferred syntax for content type. This content type should be application/json.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.",
+                    "key": "Accept-Charset",
+                    "value": "UTF-8"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the web browser and/or cURL command line used in the HTTP request. We collect this data to see which products use our API data services, helpful for troubleshooting and compatibility.",
+                    "key": "User-Agent",
+                    "value": "Example/1.2.3 Crawler/4.3.1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique identifier for this interaction. A valid ID must be 36 characters in length. This is used across all API requests and responses.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier for this interaction",
+                  "key": "x-fapi-interaction-id",
+                  "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"Invalid Input\",\n  \"debugMessage\": \"Required header 'x-fapi-interaction-id' is not valid.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5de5fbe5-e116-4a70-9ea1-affb26dff29e",
+              "name": "Request lacks valid authentication credentials for the target resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "accounts",
+                    "v1",
+                    ":accountId",
+                    "transactions",
+                    "previous"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "2025-02-15"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "2025-02-15"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) Account Identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Preferred syntax for content type. This content type should be application/json.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.",
+                    "key": "Accept-Charset",
+                    "value": "UTF-8"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the web browser and/or cURL command line used in the HTTP request. We collect this data to see which products use our API data services, helpful for troubleshooting and compatibility.",
+                    "key": "User-Agent",
+                    "value": "Example/1.2.3 Crawler/4.3.1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique identifier for this interaction. A valid ID must be 36 characters in length. This is used across all API requests and responses.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier for this interaction",
+                  "key": "x-fapi-interaction-id",
+                  "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"603\",\n  \"message\": \"Authentication failed\",\n  \"debugMessage\": \"Please update the request and try again.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4dcc0443-9789-4f3c-98fa-df146141cb79",
+              "name": "Forbidden, server understands the request but refuses to authorize it",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "accounts",
+                    "v1",
+                    ":accountId",
+                    "transactions",
+                    "previous"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "2025-02-15"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "2025-02-15"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) Account Identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Preferred syntax for content type. This content type should be application/json.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.",
+                    "key": "Accept-Charset",
+                    "value": "UTF-8"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the web browser and/or cURL command line used in the HTTP request. We collect this data to see which products use our API data services, helpful for troubleshooting and compatibility.",
+                    "key": "User-Agent",
+                    "value": "Example/1.2.3 Crawler/4.3.1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique identifier for this interaction. A valid ID must be 36 characters in length. This is used across all API requests and responses.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier for this interaction",
+                  "key": "x-fapi-interaction-id",
+                  "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"Forbidden\",\n  \"debugMessage\": \"Please update the request and try again.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e907ec2e-8e96-432c-a2c1-cb8911a8cd8f",
+              "name": "Data not found for request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "accounts",
+                    "v1",
+                    ":accountId",
+                    "transactions",
+                    "previous"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "2025-02-15"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "2025-02-15"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) Account Identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Preferred syntax for content type. This content type should be application/json.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.",
+                    "key": "Accept-Charset",
+                    "value": "UTF-8"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the web browser and/or cURL command line used in the HTTP request. We collect this data to see which products use our API data services, helpful for troubleshooting and compatibility.",
+                    "key": "User-Agent",
+                    "value": "Example/1.2.3 Crawler/4.3.1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique identifier for this interaction. A valid ID must be 36 characters in length. This is used across all API requests and responses.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier for this interaction",
+                  "key": "x-fapi-interaction-id",
+                  "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"1107\",\n  \"message\": \"Data not found for request parameters\",\n  \"debugMessage\": \"Please adjust your search criteria and try again.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76d8d421-46e3-4ac0-8311-9b763641343b",
+              "name": "Content Type not Supported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "accounts",
+                    "v1",
+                    ":accountId",
+                    "transactions",
+                    "previous"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "2025-02-15"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "2025-02-15"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) Account Identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Preferred syntax for content type. This content type should be application/json.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.",
+                    "key": "Accept-Charset",
+                    "value": "UTF-8"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the web browser and/or cURL command line used in the HTTP request. We collect this data to see which products use our API data services, helpful for troubleshooting and compatibility.",
+                    "key": "User-Agent",
+                    "value": "Example/1.2.3 Crawler/4.3.1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique identifier for this interaction. A valid ID must be 36 characters in length. This is used across all API requests and responses.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier for this interaction",
+                  "key": "x-fapi-interaction-id",
+                  "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"1203\",\n  \"message\": \"Content Type not Supported\",\n  \"debugMessage\": \"Acceptable representations: [application/json, application/*+json].\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ca85700-915b-4577-8990-7b718c22a9a5",
+          "name": "Search current day account transactions",
+          "request": {
+            "name": "Search current day account transactions",
+            "description": {
+              "content": "Search for account transactions that have not posted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "commercial",
+                "accounts",
+                "v1",
+                ":accountId",
+                "transactions",
+                "current"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Restrict the amount of data you receive. For accounts, the limit can be between 1 and 100. If omitted, the default is 50. For transactions, the limit can be between 1 and 500. If omitted, the default is 100."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageKey",
+                  "value": "<string>",
+                  "description": "A secure and flexible pagination capability to retrieve the following set of records."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) Account Identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.",
+                "key": "Accept-Charset",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Identifies the web browser and/or cURL command line used in the HTTP request. We collect this data to see which products use our API data services, helpful for troubleshooting and compatibility.",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Unique identifier for this interaction. A valid ID must be 36 characters in length. This is used across all API requests and responses.",
+                "key": "x-fapi-interaction-id",
+                "value": "<uuid>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d0dd43d2-9968-4578-97ac-de957d652870",
+              "name": "Paginated collection of commercial transactions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "accounts",
+                    "v1",
+                    ":accountId",
+                    "transactions",
+                    "current"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) Account Identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Preferred syntax for content type. This content type should be application/json.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.",
+                    "key": "Accept-Charset",
+                    "value": "UTF-8"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the web browser and/or cURL command line used in the HTTP request. We collect this data to see which products use our API data services, helpful for troubleshooting and compatibility.",
+                    "key": "User-Agent",
+                    "value": "Example/1.2.3 Crawler/4.3.1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique identifier for this interaction. A valid ID must be 36 characters in length. This is used across all API requests and responses.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier for this interaction",
+                  "key": "x-fapi-interaction-id",
+                  "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"page\": {\n    \"nextPageKey\": \"2\",\n    \"previousPageKey\": \"1\",\n    \"totalElements\": 3\n  },\n  \"links\": {\n    \"next\": {\n      \"href\": \"https://partner-api.key.com/accounts/12345\"\n    },\n    \"prev\": {\n      \"href\": \"https://partner-api.key.com/accounts/12345\"\n    }\n  },\n  \"transactions\": [\n    {\n      \"accountCategory\": \"COMMERCIAL_ACCOUNT\",\n      \"accountId\": \"17e13f78-20c7-4ce6-ad4e-5afff48c8834\",\n      \"transactionId\": \"string\",\n      \"postedTimestamp\": \"2021-07-15T14:46:41.375\",\n      \"transactionTimestamp\": \"2021-07-15T14:46:41.375\",\n      \"description\": \"string\",\n      \"debitCreditMemo\": \"CREDIT\",\n      \"status\": \"PENDING\",\n      \"amount\": 7991.492659162382,\n      \"lineItem\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"fiAttributes\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"reference\": \"string\",\n      \"commercialCode\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"code\": \"string\"\n      }\n    },\n    {\n      \"accountCategory\": \"COMMERCIAL_ACCOUNT\",\n      \"accountId\": \"17e13f78-20c7-4ce6-ad4e-5afff48c8834\",\n      \"transactionId\": \"string\",\n      \"postedTimestamp\": \"2021-07-15T14:46:41.375\",\n      \"transactionTimestamp\": \"2021-07-15T14:46:41.375\",\n      \"description\": \"string\",\n      \"debitCreditMemo\": \"CREDIT\",\n      \"status\": \"POSTED\",\n      \"amount\": 177.1184339419629,\n      \"lineItem\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"fiAttributes\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"reference\": \"string\",\n      \"commercialCode\": {\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"code\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5e64b2a-1efd-4304-bb95-07dfee97e58e",
+              "name": "Input sent by client does not satisfy API specification",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "accounts",
+                    "v1",
+                    ":accountId",
+                    "transactions",
+                    "current"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) Account Identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Preferred syntax for content type. This content type should be application/json.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.",
+                    "key": "Accept-Charset",
+                    "value": "UTF-8"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the web browser and/or cURL command line used in the HTTP request. We collect this data to see which products use our API data services, helpful for troubleshooting and compatibility.",
+                    "key": "User-Agent",
+                    "value": "Example/1.2.3 Crawler/4.3.1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique identifier for this interaction. A valid ID must be 36 characters in length. This is used across all API requests and responses.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier for this interaction",
+                  "key": "x-fapi-interaction-id",
+                  "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"401\",\n  \"message\": \"Invalid Input\",\n  \"debugMessage\": \"Required header 'x-fapi-interaction-id' is not valid.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5c516a8-9190-457e-8843-545001bd5a28",
+              "name": "Request lacks valid authentication credentials for the target resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "accounts",
+                    "v1",
+                    ":accountId",
+                    "transactions",
+                    "current"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) Account Identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Preferred syntax for content type. This content type should be application/json.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.",
+                    "key": "Accept-Charset",
+                    "value": "UTF-8"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the web browser and/or cURL command line used in the HTTP request. We collect this data to see which products use our API data services, helpful for troubleshooting and compatibility.",
+                    "key": "User-Agent",
+                    "value": "Example/1.2.3 Crawler/4.3.1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique identifier for this interaction. A valid ID must be 36 characters in length. This is used across all API requests and responses.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier for this interaction",
+                  "key": "x-fapi-interaction-id",
+                  "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"603\",\n  \"message\": \"Authentication failed\",\n  \"debugMessage\": \"Please update the request and try again.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bdaf6db4-b616-4dbc-aa95-360e3170c0c8",
+              "name": "Forbidden, server understands the request but refuses to authorize it",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "accounts",
+                    "v1",
+                    ":accountId",
+                    "transactions",
+                    "current"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) Account Identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Preferred syntax for content type. This content type should be application/json.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.",
+                    "key": "Accept-Charset",
+                    "value": "UTF-8"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the web browser and/or cURL command line used in the HTTP request. We collect this data to see which products use our API data services, helpful for troubleshooting and compatibility.",
+                    "key": "User-Agent",
+                    "value": "Example/1.2.3 Crawler/4.3.1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique identifier for this interaction. A valid ID must be 36 characters in length. This is used across all API requests and responses.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier for this interaction",
+                  "key": "x-fapi-interaction-id",
+                  "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"403\",\n  \"message\": \"Forbidden\",\n  \"debugMessage\": \"Please update the request and try again.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19e8ad59-de26-4e2f-bdd7-9c2d5b476066",
+              "name": "Data not found for request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "accounts",
+                    "v1",
+                    ":accountId",
+                    "transactions",
+                    "current"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) Account Identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Preferred syntax for content type. This content type should be application/json.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.",
+                    "key": "Accept-Charset",
+                    "value": "UTF-8"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the web browser and/or cURL command line used in the HTTP request. We collect this data to see which products use our API data services, helpful for troubleshooting and compatibility.",
+                    "key": "User-Agent",
+                    "value": "Example/1.2.3 Crawler/4.3.1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique identifier for this interaction. A valid ID must be 36 characters in length. This is used across all API requests and responses.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier for this interaction",
+                  "key": "x-fapi-interaction-id",
+                  "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"1107\",\n  \"message\": \"Data not found for request parameters\",\n  \"debugMessage\": \"Please adjust your search criteria and try again.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "03d83588-7148-4da3-a8c0-8560b2b82c27",
+              "name": "Content Type not Supported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commercial",
+                    "accounts",
+                    "v1",
+                    ":accountId",
+                    "transactions",
+                    "current"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "pageKey",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) Account Identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Preferred syntax for content type. This content type should be application/json.",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.",
+                    "key": "Accept-Charset",
+                    "value": "UTF-8"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the web browser and/or cURL command line used in the HTTP request. We collect this data to see which products use our API data services, helpful for troubleshooting and compatibility.",
+                    "key": "User-Agent",
+                    "value": "Example/1.2.3 Crawler/4.3.1"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Unique identifier for this interaction. A valid ID must be 36 characters in length. This is used across all API requests and responses.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Unique identifier for this interaction",
+                  "key": "x-fapi-interaction-id",
+                  "value": "c770aef3-6784-41f7-8e0e-ff5f97bddb3a"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"1203\",\n  \"message\": \"Content Type not Supported\",\n  \"debugMessage\": \"Acceptable representations: [application/json, application/*+json].\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://partner-api-qv.key.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "093e8399-7a53-4425-a034-594d64d375ad",
+    "name": "Commercial Accounts Reporting",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A set of commercial accounting APIs used to get account-level information for client authorized accounts.\n\nContact Support:\n Name: KeyBank Developer Support\n Email: embedded_banking_support@keybank.com",
+      "type": "text/plain"
+    }
+  }
+}

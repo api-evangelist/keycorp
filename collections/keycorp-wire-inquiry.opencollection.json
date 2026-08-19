@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Wire Inquiry",
+    "version": "1.3.6"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "HealthCheck",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Health check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://partner-api-qv.key.com/wireInquiry/v1/healthCheck",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Verify you can connect to the API service. A bearer token is required."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Wire",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search wire transfers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://partner-api-qv.key.com/wireInquiry/v1/transactions/list",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Based on search criteria provided, get a list of wire transfers. The account number and date range are required for every request."
+        },
+        {
+          "info": {
+            "name": "View the details of a wire transfer by the transaction ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://partner-api-qv.key.com/wireInquiry/v1/transactions/detail/:transactionId",
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "US99999000999999",
+                "type": "path",
+                "description": "The unique ID number associated with the original payment request."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Provide the transaction ID to retrieve all available fields for that wire transfer."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

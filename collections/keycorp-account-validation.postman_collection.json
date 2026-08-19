@@ -1,0 +1,849 @@
+{
+  "item": [
+    {
+      "id": "7cfda1a0-2164-4349-9bbb-a82b1419de42",
+      "name": "HealthCheck",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "35b27167-0ca8-47d9-86bd-36e890e67e4f",
+          "name": "Health check",
+          "request": {
+            "name": "Health check",
+            "description": {
+              "content": "Verify you can connect to the API service. A bearer token is required.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                "validations",
+                "v2",
+                "healthCheck"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2a871ffe-b7f7-440b-b52d-dc854cb8bfd5",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "validations",
+                    "v2",
+                    "healthCheck"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+                  "key": "X-CorrelationId",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"Ok\",\n  \"Source\": \"Roundtrip\",\n  \"Timestamp\": \"2022-09-15T04:49:03\",\n  \"ClientIp\": \"156.77.111.28\",\n  \"X-Forwarded-For\": \"[156.77.111.28]\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "fc498152-da65-4f47-bc69-8a6db910da4a",
+      "name": "Verify an account",
+      "request": {
+        "name": "Verify an account",
+        "description": {
+          "content": "Verify that an account owner's name, address, and other identifying elements match the account information in the National Shared Database Resource and that they are authorized to transact on the account. The National Shared Database Resource is the financial industry's leading source of up-to-date, collaborative financial data.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "accounts",
+            "validations",
+            "v2",
+            "verifyAccount"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{bearerToken}}"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"accountValidationV2Request\": {\n    \"AOARequest\": {\n      \"Inquiry\": {\n        \"accountNumber\": \"<string>\",\n        \"routingNumber\": \"<string>\",\n        \"serviceType\": \"<string>\",\n        \"secondaryId\": \"<string>\",\n        \"additionalId\": \"<string>\",\n        \"AcctOwner\": {\n          \"firstName\": \"<string>\",\n          \"lastName\": \"<string>\",\n          \"middleName\": \"<string>\",\n          \"namePrefix\": \"<string>\",\n          \"nameSuffix\": \"<string>\",\n          \"businessName\": \"<string>\",\n          \"addressLine1\": \"<string>\",\n          \"addressLine2\": \"<string>\",\n          \"city\": \"<string>\",\n          \"state\": \"<string>\",\n          \"zipCode\": \"<string>\",\n          \"homePhone\": \"<string>\",\n          \"workPhone\": \"<string>\",\n          \"ssn\": \"<string>\",\n          \"dob\": \"<string>\",\n          \"idType\": \"<string>\",\n          \"idNo\": \"<string>\",\n          \"idState\": \"<string>\"\n        },\n        \"Client\": {\n          \"clientDate\": \"<date>\",\n          \"clientTime\": \"<time>\",\n          \"userDefined\": \"<string>\"\n        }\n      }\n    }\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "f5a76f44-ccf9-4548-9f2f-4f7c4d5f77e9",
+          "name": "Successful response",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "accounts",
+                "validations",
+                "v2",
+                "verifyAccount"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountValidationV2Request\": {\n    \"AOARequest\": {\n      \"Inquiry\": {\n        \"serviceType\": \"Owner\",\n        \"secondaryId\": \"KeyCli03\",\n        \"additionalId\": \"AddCli04\",\n        \"routingNumber\": \"122199983\",\n        \"accountNumber\": \"89455\",\n        \"AcctOwner\": {\n          \"firstName\": \"Paul\",\n          \"lastName\": \"wilson\",\n          \"middleName\": \"Dan\",\n          \"namePrefix\": \"Mr\",\n          \"nameSuffix\": \"Lal\",\n          \"businessName\": \"\",\n          \"addressLine1\": \"206 GOODWIN ST\",\n          \"addressLine2\": \"Land\",\n          \"city\": \"MERRIT\",\n          \"state\": \"MI\",\n          \"zipCode\": \"49667\",\n          \"homePhone\": \"3077553623\",\n          \"workPhone\": \"3077555330\",\n          \"ssn\": \"666082367\",\n          \"dob\": \"19730801\",\n          \"idType\": \"\",\n          \"idNo\": \"590909812\",\n          \"idState\": \"AL\"\n        },\n        \"Client\": {\n          \"clientDate\": \"2022-12-03\",\n          \"clientTime\": \"14:00:00\",\n          \"userDefined\": \"\"\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "disabled": false,
+              "description": "A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.",
+              "key": "X-CorrelationId",
+              "value": "string"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"accountValidationV2Response\": {\n    \"AOAResponse\": {\n      \"Result\": {\n        \"errorCode\": \"000\",\n        \"systemRecordId\": \"2360130828140884\",\n        \"primaryId\": \"TROM122101\",\n        \"secondaryId\": \"KeyCli03\",\n        \"routingNumber\": \"122199983\",\n        \"accountNumber\": \"89455\",\n        \"feeAttrib\": \"HH\",\n        \"AcctOwner\": {\n          \"conditionCode\": \"000\",\n          \"nameMatch\": \"Y\",\n          \"firstNameMatch\": \"Y\",\n          \"lastNameMatch\": \"Y\",\n          \"middleNameMatch\": \"N\",\n          \"namePrefixMatch\": \"U\",\n          \"nameSuffixMatch\": \"U\",\n          \"addressMatch\": \"Y\",\n          \"cityMatch\": \"Y\",\n          \"stateMatch\": \"Y\",\n          \"zipCodeMatch\": \"Y\",\n          \"ssnMatch\": \"Y\",\n          \"dobMatch\": \"Y\",\n          \"idNoMatch\": \"Y\",\n          \"idStateMatch\": \"Y\",\n          \"overallMatchScore\": \"85\"\n        },\n        \"AcctStatus\": {\n          \"primaryStatusCode\": \"699\",\n          \"primMessage\": \"Open Valid\"\n        },\n        \"Client\": {\n          \"clientDate\": \"2022-12-31\",\n          \"clientTime\": \"14:00:80\",\n          \"userDefined\": \"\"\n        }\n      }\n    },\n    \"errorResponse\": {\n      \"businessFault\": {\n        \"errorDescription\": \"Description if an error is found.\"\n      }\n    }\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "86ffbbf9-9a0e-4f30-b3c5-eb37ca204b1d",
+          "name": "Missing mandatory information",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "accounts",
+                "validations",
+                "v2",
+                "verifyAccount"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountValidationV2Request\": {\n    \"AOARequest\": {\n      \"Inquiry\": {\n        \"serviceType\": \"Owner\",\n        \"secondaryId\": \"KeyCli03\",\n        \"additionalId\": \"AddCli04\",\n        \"routingNumber\": \"122199983\",\n        \"accountNumber\": \"89455\",\n        \"AcctOwner\": {\n          \"firstName\": \"Paul\",\n          \"lastName\": \"wilson\",\n          \"middleName\": \"Dan\",\n          \"namePrefix\": \"Mr\",\n          \"nameSuffix\": \"Lal\",\n          \"businessName\": \"\",\n          \"addressLine1\": \"206 GOODWIN ST\",\n          \"addressLine2\": \"Land\",\n          \"city\": \"MERRIT\",\n          \"state\": \"MI\",\n          \"zipCode\": \"49667\",\n          \"homePhone\": \"3077553623\",\n          \"workPhone\": \"3077555330\",\n          \"ssn\": \"666082367\",\n          \"dob\": \"19730801\",\n          \"idType\": \"\",\n          \"idNo\": \"590909812\",\n          \"idState\": \"AL\"\n        },\n        \"Client\": {\n          \"clientDate\": \"2022-12-03\",\n          \"clientTime\": \"14:00:00\",\n          \"userDefined\": \"\"\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "disabled": false,
+              "description": "A universal ID to trace the transaction across all the systems involved. The ID is unique to each request.",
+              "key": "X-CorrelationId",
+              "value": "string"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"ErrorMessage\": \"Error received from backend service\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"X-CorrelationId\": \"abcgd133\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/accounts/validations/v2/verifyAccount\",\n  \"ServiceError\": {\n    \"AOAResponse\": {\n      \"Result\": {\n        \"errorCode\": \"104\"\n      }\n    }\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "cd3ef2e6-9639-487f-8ad1-ff0652f1900f",
+          "name": "Unauthorized request",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "accounts",
+                "validations",
+                "v2",
+                "verifyAccount"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountValidationV2Request\": {\n    \"AOARequest\": {\n      \"Inquiry\": {\n        \"serviceType\": \"Owner\",\n        \"secondaryId\": \"KeyCli03\",\n        \"additionalId\": \"AddCli04\",\n        \"routingNumber\": \"122199983\",\n        \"accountNumber\": \"89455\",\n        \"AcctOwner\": {\n          \"firstName\": \"Paul\",\n          \"lastName\": \"wilson\",\n          \"middleName\": \"Dan\",\n          \"namePrefix\": \"Mr\",\n          \"nameSuffix\": \"Lal\",\n          \"businessName\": \"\",\n          \"addressLine1\": \"206 GOODWIN ST\",\n          \"addressLine2\": \"Land\",\n          \"city\": \"MERRIT\",\n          \"state\": \"MI\",\n          \"zipCode\": \"49667\",\n          \"homePhone\": \"3077553623\",\n          \"workPhone\": \"3077555330\",\n          \"ssn\": \"666082367\",\n          \"dob\": \"19730801\",\n          \"idType\": \"\",\n          \"idNo\": \"590909812\",\n          \"idState\": \"AL\"\n        },\n        \"Client\": {\n          \"clientDate\": \"2022-12-03\",\n          \"clientTime\": \"14:00:00\",\n          \"userDefined\": \"\"\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "disabled": false,
+              "description": "A universal ID to trace the transaction across all the systems involved. The ID is unique to each request.",
+              "key": "X-CorrelationId",
+              "value": "string"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"ErrorMessage\": \"Received request is unauthorized, please provide valid credentials\",\n  \"X-CorrelationId\": \"abcgd133\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/accounts/validations/v2/verifyAccount\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "f1c63199-0b5e-41f3-b491-3ffdcf00a593",
+          "name": "Forbidden request access",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "accounts",
+                "validations",
+                "v2",
+                "verifyAccount"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountValidationV2Request\": {\n    \"AOARequest\": {\n      \"Inquiry\": {\n        \"serviceType\": \"Owner\",\n        \"secondaryId\": \"KeyCli03\",\n        \"additionalId\": \"AddCli04\",\n        \"routingNumber\": \"122199983\",\n        \"accountNumber\": \"89455\",\n        \"AcctOwner\": {\n          \"firstName\": \"Paul\",\n          \"lastName\": \"wilson\",\n          \"middleName\": \"Dan\",\n          \"namePrefix\": \"Mr\",\n          \"nameSuffix\": \"Lal\",\n          \"businessName\": \"\",\n          \"addressLine1\": \"206 GOODWIN ST\",\n          \"addressLine2\": \"Land\",\n          \"city\": \"MERRIT\",\n          \"state\": \"MI\",\n          \"zipCode\": \"49667\",\n          \"homePhone\": \"3077553623\",\n          \"workPhone\": \"3077555330\",\n          \"ssn\": \"666082367\",\n          \"dob\": \"19730801\",\n          \"idType\": \"\",\n          \"idNo\": \"590909812\",\n          \"idState\": \"AL\"\n        },\n        \"Client\": {\n          \"clientDate\": \"2022-12-03\",\n          \"clientTime\": \"14:00:00\",\n          \"userDefined\": \"\"\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Forbidden",
+          "code": 403,
+          "header": [
+            {
+              "disabled": false,
+              "description": "A universal ID to trace the transaction across all the systems involved. The ID is unique to each request.",
+              "key": "X-CorrelationId",
+              "value": "string"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"ErrorMessage\": \"Access Denied for client ip\",\n  \"X-CorrelationId\": \"abcgd133\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/accounts/validations/v2/verifyAccount\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "daa4ed4a-6372-4a2c-83f3-bba295751928",
+          "name": "Resource not found",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "accounts",
+                "validations",
+                "v2",
+                "verifyAccount"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountValidationV2Request\": {\n    \"AOARequest\": {\n      \"Inquiry\": {\n        \"serviceType\": \"Owner\",\n        \"secondaryId\": \"KeyCli03\",\n        \"additionalId\": \"AddCli04\",\n        \"routingNumber\": \"122199983\",\n        \"accountNumber\": \"89455\",\n        \"AcctOwner\": {\n          \"firstName\": \"Paul\",\n          \"lastName\": \"wilson\",\n          \"middleName\": \"Dan\",\n          \"namePrefix\": \"Mr\",\n          \"nameSuffix\": \"Lal\",\n          \"businessName\": \"\",\n          \"addressLine1\": \"206 GOODWIN ST\",\n          \"addressLine2\": \"Land\",\n          \"city\": \"MERRIT\",\n          \"state\": \"MI\",\n          \"zipCode\": \"49667\",\n          \"homePhone\": \"3077553623\",\n          \"workPhone\": \"3077555330\",\n          \"ssn\": \"666082367\",\n          \"dob\": \"19730801\",\n          \"idType\": \"\",\n          \"idNo\": \"590909812\",\n          \"idState\": \"AL\"\n        },\n        \"Client\": {\n          \"clientDate\": \"2022-12-03\",\n          \"clientTime\": \"14:00:00\",\n          \"userDefined\": \"\"\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "header": [
+            {
+              "disabled": false,
+              "description": "A universal ID to trace the transaction across all the systems involved. The ID is unique to each request.",
+              "key": "X-CorrelationId",
+              "value": "string"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"ErrorMessage\": \"Requested resource is not found, please verify the resource then resubmit the request\",\n  \"X-CorrelationId\": \"abcgd133\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/accounts/validations/v2/verifyAccount\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "c23952fb-34c2-4bfe-be84-2969b5aa9e14",
+          "name": "Invalid request type",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "accounts",
+                "validations",
+                "v2",
+                "verifyAccount"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountValidationV2Request\": {\n    \"AOARequest\": {\n      \"Inquiry\": {\n        \"serviceType\": \"Owner\",\n        \"secondaryId\": \"KeyCli03\",\n        \"additionalId\": \"AddCli04\",\n        \"routingNumber\": \"122199983\",\n        \"accountNumber\": \"89455\",\n        \"AcctOwner\": {\n          \"firstName\": \"Paul\",\n          \"lastName\": \"wilson\",\n          \"middleName\": \"Dan\",\n          \"namePrefix\": \"Mr\",\n          \"nameSuffix\": \"Lal\",\n          \"businessName\": \"\",\n          \"addressLine1\": \"206 GOODWIN ST\",\n          \"addressLine2\": \"Land\",\n          \"city\": \"MERRIT\",\n          \"state\": \"MI\",\n          \"zipCode\": \"49667\",\n          \"homePhone\": \"3077553623\",\n          \"workPhone\": \"3077555330\",\n          \"ssn\": \"666082367\",\n          \"dob\": \"19730801\",\n          \"idType\": \"\",\n          \"idNo\": \"590909812\",\n          \"idState\": \"AL\"\n        },\n        \"Client\": {\n          \"clientDate\": \"2022-12-03\",\n          \"clientTime\": \"14:00:00\",\n          \"userDefined\": \"\"\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unsupported Media Type",
+          "code": 415,
+          "header": [
+            {
+              "disabled": false,
+              "description": "A universal ID to trace the transaction across all the systems involved. The ID is unique to each request.",
+              "key": "X-CorrelationId",
+              "value": "string"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"ErrorMessage\": \"Requested media type is not allowed, please verify the media type and resubmit the request\",\n  \"X-CorrelationId\": \"abcgd133\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/accounts/validations/v2/verifyAccount\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "ca4e7781-7e50-4f02-a8c6-c4f7990c14de",
+          "name": "Request timeout",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "accounts",
+                "validations",
+                "v2",
+                "verifyAccount"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountValidationV2Request\": {\n    \"AOARequest\": {\n      \"Inquiry\": {\n        \"serviceType\": \"Owner\",\n        \"secondaryId\": \"KeyCli03\",\n        \"additionalId\": \"AddCli04\",\n        \"routingNumber\": \"122199983\",\n        \"accountNumber\": \"89455\",\n        \"AcctOwner\": {\n          \"firstName\": \"Paul\",\n          \"lastName\": \"wilson\",\n          \"middleName\": \"Dan\",\n          \"namePrefix\": \"Mr\",\n          \"nameSuffix\": \"Lal\",\n          \"businessName\": \"\",\n          \"addressLine1\": \"206 GOODWIN ST\",\n          \"addressLine2\": \"Land\",\n          \"city\": \"MERRIT\",\n          \"state\": \"MI\",\n          \"zipCode\": \"49667\",\n          \"homePhone\": \"3077553623\",\n          \"workPhone\": \"3077555330\",\n          \"ssn\": \"666082367\",\n          \"dob\": \"19730801\",\n          \"idType\": \"\",\n          \"idNo\": \"590909812\",\n          \"idState\": \"AL\"\n        },\n        \"Client\": {\n          \"clientDate\": \"2022-12-03\",\n          \"clientTime\": \"14:00:00\",\n          \"userDefined\": \"\"\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Too Many Requests",
+          "code": 429,
+          "header": [
+            {
+              "disabled": false,
+              "description": "A universal ID to trace the transaction across all the systems involved. The ID is unique to each request.",
+              "key": "X-CorrelationId",
+              "value": "string"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"ErrorMessage\": \"Number requests threshold reached, please resubmit the request after sometime\",\n  \"X-CorrelationId\": \"abcgd133\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/accounts/validations/v2/verifyAccount\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "4fc77d10-c38b-46eb-8468-ca28776b03ba",
+          "name": "Unknown error",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "accounts",
+                "validations",
+                "v2",
+                "verifyAccount"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountValidationV2Request\": {\n    \"AOARequest\": {\n      \"Inquiry\": {\n        \"serviceType\": \"Owner\",\n        \"secondaryId\": \"KeyCli03\",\n        \"additionalId\": \"AddCli04\",\n        \"routingNumber\": \"122199983\",\n        \"accountNumber\": \"89455\",\n        \"AcctOwner\": {\n          \"firstName\": \"Paul\",\n          \"lastName\": \"wilson\",\n          \"middleName\": \"Dan\",\n          \"namePrefix\": \"Mr\",\n          \"nameSuffix\": \"Lal\",\n          \"businessName\": \"\",\n          \"addressLine1\": \"206 GOODWIN ST\",\n          \"addressLine2\": \"Land\",\n          \"city\": \"MERRIT\",\n          \"state\": \"MI\",\n          \"zipCode\": \"49667\",\n          \"homePhone\": \"3077553623\",\n          \"workPhone\": \"3077555330\",\n          \"ssn\": \"666082367\",\n          \"dob\": \"19730801\",\n          \"idType\": \"\",\n          \"idNo\": \"590909812\",\n          \"idState\": \"AL\"\n        },\n        \"Client\": {\n          \"clientDate\": \"2022-12-03\",\n          \"clientTime\": \"14:00:00\",\n          \"userDefined\": \"\"\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "header": [
+            {
+              "disabled": false,
+              "description": "A universal ID to trace the transaction across all the systems involved. The ID is unique to each request.",
+              "key": "X-CorrelationId",
+              "value": "string"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"ErrorMessage\": \"Runtime error occurred in the service, please check with application support team before resubmitting the request\",\n  \"X-CorrelationId\": \"abcgd133\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/accounts/validations/v2/verifyAccount\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "6d5512d8-2f77-431c-90a5-25cf5018b7d3",
+          "name": "Bad gateway",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "accounts",
+                "validations",
+                "v2",
+                "verifyAccount"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountValidationV2Request\": {\n    \"AOARequest\": {\n      \"Inquiry\": {\n        \"serviceType\": \"Owner\",\n        \"secondaryId\": \"KeyCli03\",\n        \"additionalId\": \"AddCli04\",\n        \"routingNumber\": \"122199983\",\n        \"accountNumber\": \"89455\",\n        \"AcctOwner\": {\n          \"firstName\": \"Paul\",\n          \"lastName\": \"wilson\",\n          \"middleName\": \"Dan\",\n          \"namePrefix\": \"Mr\",\n          \"nameSuffix\": \"Lal\",\n          \"businessName\": \"\",\n          \"addressLine1\": \"206 GOODWIN ST\",\n          \"addressLine2\": \"Land\",\n          \"city\": \"MERRIT\",\n          \"state\": \"MI\",\n          \"zipCode\": \"49667\",\n          \"homePhone\": \"3077553623\",\n          \"workPhone\": \"3077555330\",\n          \"ssn\": \"666082367\",\n          \"dob\": \"19730801\",\n          \"idType\": \"\",\n          \"idNo\": \"590909812\",\n          \"idState\": \"AL\"\n        },\n        \"Client\": {\n          \"clientDate\": \"2022-12-03\",\n          \"clientTime\": \"14:00:00\",\n          \"userDefined\": \"\"\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Gateway",
+          "code": 502,
+          "header": [
+            {
+              "disabled": false,
+              "description": "A universal ID to trace the transaction across all the systems involved. The ID is unique to each request.",
+              "key": "X-CorrelationId",
+              "value": "string"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"ErrorMessage\": \"Error received from backend service\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/accounts/validations/v2/verifyAccount\",\n  \"ServiceError\": {\n    \"ConnectError\": \"Connectivity error occurred with the downstream service (Unexpected EOF at target), please check with application support team before resubmitting the request\"\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "b966540f-fcb2-4907-9cea-12e694e43e74",
+          "name": "Unavailable service",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "accounts",
+                "validations",
+                "v2",
+                "verifyAccount"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountValidationV2Request\": {\n    \"AOARequest\": {\n      \"Inquiry\": {\n        \"serviceType\": \"Owner\",\n        \"secondaryId\": \"KeyCli03\",\n        \"additionalId\": \"AddCli04\",\n        \"routingNumber\": \"122199983\",\n        \"accountNumber\": \"89455\",\n        \"AcctOwner\": {\n          \"firstName\": \"Paul\",\n          \"lastName\": \"wilson\",\n          \"middleName\": \"Dan\",\n          \"namePrefix\": \"Mr\",\n          \"nameSuffix\": \"Lal\",\n          \"businessName\": \"\",\n          \"addressLine1\": \"206 GOODWIN ST\",\n          \"addressLine2\": \"Land\",\n          \"city\": \"MERRIT\",\n          \"state\": \"MI\",\n          \"zipCode\": \"49667\",\n          \"homePhone\": \"3077553623\",\n          \"workPhone\": \"3077555330\",\n          \"ssn\": \"666082367\",\n          \"dob\": \"19730801\",\n          \"idType\": \"\",\n          \"idNo\": \"590909812\",\n          \"idState\": \"AL\"\n        },\n        \"Client\": {\n          \"clientDate\": \"2022-12-03\",\n          \"clientTime\": \"14:00:00\",\n          \"userDefined\": \"\"\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Service Unavailable",
+          "code": 503,
+          "header": [
+            {
+              "disabled": false,
+              "description": "A universal ID to trace the transaction across all the systems involved. The ID is unique to each request.",
+              "key": "X-CorrelationId",
+              "value": "string"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"ErrorMessage\": \"Error received from backend service\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/accounts/validations/v2/verifyAccount\",\n  \"ServiceError\": {\n    \"ConnectError\": \"Service is currently unavailable (NoActiveTargets), please check with application support before resubmitting the request.\"\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "6af4eff2-035a-4bb2-837f-e87efd7b0ab3",
+          "name": "Unable to process request",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "accounts",
+                "validations",
+                "v2",
+                "verifyAccount"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountValidationV2Request\": {\n    \"AOARequest\": {\n      \"Inquiry\": {\n        \"serviceType\": \"Owner\",\n        \"secondaryId\": \"KeyCli03\",\n        \"additionalId\": \"AddCli04\",\n        \"routingNumber\": \"122199983\",\n        \"accountNumber\": \"89455\",\n        \"AcctOwner\": {\n          \"firstName\": \"Paul\",\n          \"lastName\": \"wilson\",\n          \"middleName\": \"Dan\",\n          \"namePrefix\": \"Mr\",\n          \"nameSuffix\": \"Lal\",\n          \"businessName\": \"\",\n          \"addressLine1\": \"206 GOODWIN ST\",\n          \"addressLine2\": \"Land\",\n          \"city\": \"MERRIT\",\n          \"state\": \"MI\",\n          \"zipCode\": \"49667\",\n          \"homePhone\": \"3077553623\",\n          \"workPhone\": \"3077555330\",\n          \"ssn\": \"666082367\",\n          \"dob\": \"19730801\",\n          \"idType\": \"\",\n          \"idNo\": \"590909812\",\n          \"idState\": \"AL\"\n        },\n        \"Client\": {\n          \"clientDate\": \"2022-12-03\",\n          \"clientTime\": \"14:00:00\",\n          \"userDefined\": \"\"\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Gateway Timeout",
+          "code": 504,
+          "header": [
+            {
+              "disabled": false,
+              "description": "A universal ID to trace the transaction across all the systems involved. The ID is unique to each request.",
+              "key": "X-CorrelationId",
+              "value": "string"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"ErrorMessage\": \"Error received from backend service\",\n  \"X-CorrelationId\": \"2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab\",\n  \"TransactionId\": \"rrt-7709400285867417207-b-gce-27587-2383364-1\",\n  \"TransactionTime\": \"2021-06-11T16:31:34.041Z\",\n  \"Api-Url\": \"/accounts/validations/v2/verifyAccount\",\n  \"ServiceError\": {\n    \"ConnectError\": \"Request could not be processed on time (GatewayTimeout), please wait a moment and resubmit the request\"\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://partner-api-qv.key.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "00a023da-17ff-4e32-8dfe-1e7c9a01371c",
+    "name": "Account Validation v2 API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Use the Account Validation API to verify an account and its owner with confidence. This API evaluates account owner data through an inquiry request and response process.\n\nContact Support:\n Name: KeyBank Developer Support\n Email: developers@keybank.com",
+      "type": "text/plain"
+    }
+  }
+}
