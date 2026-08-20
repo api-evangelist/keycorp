@@ -42,6 +42,19 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/keycorp.pn
 tags:
   - Banking
   - Commercial Banking
+  - Financial-Services
+  - Fortune 500
+  - Payments
+  - United States
+  - Super-Regional Bank
+  - Treasury Management
+  - Embedded Banking
+  - ACH
+  - Real-Time Payments
+  - Wire Transfer
+tags_raw:
+  - Banking
+  - Commercial Banking
   - Financial Services
   - Fortune 500
   - Payments
@@ -269,6 +282,11 @@ apis:
     catalog.
   humanURL: https://developer.key.com/docs/webhooks
   tags:
+  - Event
+  - Webhook
+  - Payments
+  - United States
+  tags_raw:
   - Events
   - Webhooks
   - Payments
