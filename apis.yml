@@ -70,230 +70,547 @@ created: '2026-03-21'
 modified: '2026-07-23'
 specificationVersion: '0.23'
 apis:
-- aid: keycorp:account-information-api
-  name: KeyBank Account Information API
-  description: >-
-    The Commercial Accounts Reporting API delivers real-time and historical
-    account-level information for client-authorized commercial KeyBank accounts.
-    It exposes operations to retrieve full account details and balances, search
-    the list of accessible payment accounts, and query both prior-day (up to 180
-    days) and current-day transaction activity with paging. Requests require
-    OAuth2 bearer tokens, client certificates, and an x-fapi-interaction-id UUID
-    for traceability. Base host is https://partner-api.key.com with a QV sandbox
-    at https://partner-api-qv.key.com.
+- aid: keycorp:keycorp-account-information-api
+  name: KeyCorp Account Information API
+  description: The Account Information API from KeyCorp — 2 operation(s) for account information.
   humanURL: https://developer.key.com/docs/commercial/accounts
   baseURL: https://partner-api.key.com/commercial/accounts/v1
   tags:
   - Account Information
-  - Commercial Banking
-  - Reporting
-  - United States
   properties:
   - type: OpenAPI
-    url: openapi/keycorp-commercial-accounts-reporting-openapi.yml
+    url: openapi/keycorp-account-information-api-openapi.yml
   - type: Documentation
     url: https://developer.key.com/docs/commercial/accounts
-- aid: keycorp:ach-origination-api
-  name: KeyBank ACH Origination API
-  description: >-
-    The ACH Origination API initiates secure, automated ACH fund transfers from
-    commercial KeyBank accounts across the full range of Standard Entry Class
-    codes — CCD, CTX, PPD, TEL, and WEB — for both send (credit) and collect
-    (debit) transactions. It supports addenda records, payment undo/cancellation,
-    payment status and status-addenda inquiry, and a health check operation.
-    Secured with OAuth2 bearer tokens and client certificates over the
-    https://partner-api.key.com host, with a QV sandbox environment for testing.
-  humanURL: https://developer.key.com/docs/ach
-  baseURL: https://partner-api.key.com/ach/payments/v1
-  tags:
-  - ACH
-  - Payments
-  - Commercial Banking
-  - United States
-  properties:
-  - type: OpenAPI
-    url: openapi/keycorp-ach-originations-openapi.yml
   - type: Documentation
     url: https://developer.key.com/docs/ach
-- aid: keycorp:wire-transfer-api
-  name: KeyBank Wire Transfer API
-  description: >-
-    The Wire Transfer API, delivered through KeyBank's combined RTP and Wire
-    Payments service, facilitates high-value domestic wire payments from
-    commercial accounts. It provides operations to initiate a payment, validate
-    payment details before submission, and look up RTP/wire network participants
-    by routing number. Requests are authenticated with OAuth2 bearer tokens and
-    mutual TLS client certificates and carry an x-fapi-interaction-id header;
-    production runs on https://partner-api.key.com with a QV sandbox.
-  humanURL: https://developer.key.com/docs/wireTransfer
-  baseURL: https://partner-api.key.com/rtp/v1/payment
-  tags:
-  - Payments
-  - Wire Transfer
-  - Commercial Banking
-  - United States
-  properties:
-  - type: OpenAPI
-    url: openapi/keycorp-rtp-wire-payments-openapi.yml
   - type: Documentation
     url: https://developer.key.com/docs/wireTransfer
-- aid: keycorp:rtp-send-payment-api
-  name: KeyBank RTP Send Payment API
-  description: >-
-    The RTP Send Payment API initiates instant, irrevocable payments over The
-    Clearing House Real-Time Payments (RTP) network from commercial KeyBank
-    accounts. Sharing KeyBank's combined RTP and Wire Payments service, it
-    supports payment initiation, pre-submission validation, and RTP participant
-    directory lookups by routing number so senders can confirm reachability
-    before dispatch. Secured with OAuth2 bearer tokens and client certificates
-    over https://partner-api.key.com, with a QV sandbox for integration testing.
-  humanURL: https://developer.key.com/docs/rtp
-  baseURL: https://partner-api.key.com/rtp/v1/payment
-  tags:
-  - Payments
-  - Real-Time Payments
-  - Commercial Banking
-  - United States
-  properties:
-  - type: OpenAPI
-    url: openapi/keycorp-rtp-wire-payments-openapi.yml
   - type: Documentation
     url: https://developer.key.com/docs/rtp
-- aid: keycorp:account-validation-api
-  name: KeyBank Account Validation API
-  description: >-
-    The Account Validation v2 API verifies account details and ownership before
-    commercial payments and transfers are initiated, matching the supplied
-    account and owner information against the National Shared Database Resource,
-    the financial industry's collaborative source of account status data. It
-    exposes a verifyAccount operation plus a health check, and requires a
-    KeyBank-issued secondaryId in addition to OAuth2 bearer tokens and client
-    certificates. Base host is https://partner-api.key.com with a QV sandbox.
-  humanURL: https://developer.key.com/docs/actval/v2
-  baseURL: https://partner-api.key.com/accounts/validations/v2
-  tags:
-  - Account Validation
-  - Payments
-  - Fraud Prevention
-  - United States
-  properties:
-  - type: OpenAPI
-    url: openapi/keycorp-account-validation-openapi.yml
   - type: Documentation
     url: https://developer.key.com/docs/actval/v2
-- aid: keycorp:ach-inquiry-api
-  name: KeyBank ACH Inquiry API
-  description: >-
-    The ACH Inquiry API lets commercial clients check the current status and
-    detail of ACH transactions posted to their KeyBank accounts. It provides
-    operations to list ACH transactions, retrieve full detail by PAR number,
-    look up settled items by settlement transaction id, and a health check,
-    supporting reconciliation and exception handling workflows. Secured with
-    OAuth2 bearer tokens and client certificates over https://partner-api.key.com
-    with a QV sandbox environment for testing.
-  humanURL: https://developer.key.com/docs/achinquiry
-  baseURL: https://partner-api.key.com/accounts/transactions/v1
-  tags:
-  - ACH
-  - Inquiry
-  - Reporting
-  - United States
-  properties:
-  - type: OpenAPI
-    url: openapi/keycorp-ach-inquiry-openapi.yml
   - type: Documentation
     url: https://developer.key.com/docs/achinquiry
-- aid: keycorp:wire-inquiry-api
-  name: KeyBank Wire Inquiry API
-  description: >-
-    The Wire Inquiry API tracks the status and delivery of wire transfers
-    associated with commercial KeyBank accounts. It exposes operations to list
-    wire transactions, retrieve detailed information for a specific wire by
-    transaction id, and a health check, giving treasury teams real-time
-    visibility into outbound and inbound wire activity for reconciliation.
-    Authenticated with OAuth2 bearer tokens and mutual TLS client certificates
-    over https://partner-api.key.com, with a QV sandbox for integration testing.
-  humanURL: https://developer.key.com/docs/wireinquiry
-  baseURL: https://partner-api.key.com/wireInquiry/v1
-  tags:
-  - Inquiry
-  - Wire Transfer
-  - Reporting
-  - United States
-  properties:
-  - type: OpenAPI
-    url: openapi/keycorp-wire-inquiry-openapi.yml
   - type: Documentation
     url: https://developer.key.com/docs/wireinquiry
-- aid: keycorp:rtp-inquiry-api
-  name: KeyBank RTP Inquiry API
-  description: >-
-    The RTP Inquiry API confirms the delivery and status of Real-Time Payments
-    sent through KeyBank on The Clearing House RTP network. It provides
-    operations to list RTP transactions, retrieve full detail for a single
-    transaction by id, and a health check, supporting immediate confirmation and
-    reconciliation of instant payment flows. Secured with OAuth2 bearer tokens
-    and client certificates over the https://partner-api.key.com host, with a QV
-    sandbox environment available for integration testing.
-  humanURL: https://developer.key.com/docs/rtpinquiry
-  baseURL: https://partner-api.key.com/rtp/v1
-  tags:
-  - Inquiry
-  - Real-Time Payments
-  - Reporting
-  - United States
-  properties:
-  - type: OpenAPI
-    url: openapi/keycorp-rtp-inquiry-openapi.yml
   - type: Documentation
     url: https://developer.key.com/docs/rtpinquiry
-- aid: keycorp:check-services-api
-  name: KeyBank Check Services API
-  description: >-
-    The Check Services API manages stop payments and check image retrieval for
-    commercial KeyBank accounts. It exposes operations to place a stop payment,
-    list and retrieve check images, and a health check, letting treasury and
-    accounts-payable teams control and audit paper and electronic check activity
-    programmatically. Authenticated with OAuth2 bearer tokens and mutual TLS
-    client certificates over https://partner-api.key.com, with a QV sandbox
-    environment for integration testing.
-  humanURL: https://developer.key.com/docs/check-services
-  baseURL: https://partner-api.key.com/commercial/checks/v1
-  tags:
-  - Check Services
-  - Commercial Banking
-  - Payments
-  - United States
-  properties:
-  - type: OpenAPI
-    url: openapi/keycorp-check-services-openapi.yml
   - type: Documentation
     url: https://developer.key.com/docs/check-services
-- aid: keycorp:webhooks
-  name: KeyBank Webhooks
-  description: >-
-    The KeyBank Webhooks service delivers real-time payment event notifications
-    to subscribed commercial client applications for ACH, Wire, and RTP alerts.
-    It defines client-hosted callback endpoints (alert codes such as AL00901,
-    AL00906, and AL00907) that KeyBank invokes to push status and settlement
-    events, allowing consuming systems to react to payment lifecycle changes
-    without polling the inquiry APIs. Callback delivery follows the same OAuth2
-    and certificate-based security posture as the rest of the KeyBank API
-    catalog.
-  humanURL: https://developer.key.com/docs/webhooks
+  - type: Documentation
+    url: https://developer.key.com/docs/webhooks
+- aid: keycorp:keycorp-account-transactions-api
+  name: KeyCorp Account Transactions API
+  description: The Account Transactions API from KeyCorp — 2 operation(s) for account transactions.
+  humanURL: https://developer.key.com/docs/commercial/accounts
+  baseURL: https://partner-api.key.com/commercial/accounts/v1
   tags:
-  - Event
-  - Webhook
-  - Payments
-  - United States
-  tags_raw:
-  - Events
-  - Webhooks
-  - Payments
-  - United States
+  - Account Transactions
   properties:
   - type: OpenAPI
-    url: openapi/keycorp-webhooks-openapi.yml
+    url: openapi/keycorp-account-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://developer.key.com/docs/commercial/accounts
+  - type: Documentation
+    url: https://developer.key.com/docs/ach
+  - type: Documentation
+    url: https://developer.key.com/docs/wireTransfer
+  - type: Documentation
+    url: https://developer.key.com/docs/rtp
+  - type: Documentation
+    url: https://developer.key.com/docs/actval/v2
+  - type: Documentation
+    url: https://developer.key.com/docs/achinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/wireinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/rtpinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/check-services
+  - type: Documentation
+    url: https://developer.key.com/docs/webhooks
+- aid: keycorp:keycorp-accounts-api
+  name: KeyCorp Accounts API
+  description: The Accounts API from KeyCorp — 1 operation(s) for accounts.
+  humanURL: https://developer.key.com/docs/commercial/accounts
+  baseURL: https://partner-api.key.com/commercial/accounts/v1
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/keycorp-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://developer.key.com/docs/commercial/accounts
+  - type: Documentation
+    url: https://developer.key.com/docs/ach
+  - type: Documentation
+    url: https://developer.key.com/docs/wireTransfer
+  - type: Documentation
+    url: https://developer.key.com/docs/rtp
+  - type: Documentation
+    url: https://developer.key.com/docs/actval/v2
+  - type: Documentation
+    url: https://developer.key.com/docs/achinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/wireinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/rtpinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/check-services
+  - type: Documentation
+    url: https://developer.key.com/docs/webhooks
+- aid: keycorp:keycorp-ach-api
+  name: KeyCorp ACH API
+  description: The ACH API from KeyCorp — 1 operation(s) for ach.
+  humanURL: https://developer.key.com/docs/commercial/accounts
+  baseURL: https://partner-api.key.com/commercial/accounts/v1
+  tags:
+  - ACH
+  properties:
+  - type: OpenAPI
+    url: openapi/keycorp-ach-api-openapi.yml
+  - type: Documentation
+    url: https://developer.key.com/docs/commercial/accounts
+  - type: Documentation
+    url: https://developer.key.com/docs/ach
+  - type: Documentation
+    url: https://developer.key.com/docs/wireTransfer
+  - type: Documentation
+    url: https://developer.key.com/docs/rtp
+  - type: Documentation
+    url: https://developer.key.com/docs/actval/v2
+  - type: Documentation
+    url: https://developer.key.com/docs/achinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/wireinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/rtpinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/check-services
+  - type: Documentation
+    url: https://developer.key.com/docs/webhooks
+- aid: keycorp:keycorp-ach-payment-origination-api
+  name: KeyCorp ACH Payment Origination API
+  description: >-
+    The ACH Payment Origination API from KeyCorp — 6 operation(s) for ach payment origination.
+  humanURL: https://developer.key.com/docs/commercial/accounts
+  baseURL: https://partner-api.key.com/commercial/accounts/v1
+  tags:
+  - ACH Payment Origination
+  properties:
+  - type: OpenAPI
+    url: openapi/keycorp-ach-payment-origination-api-openapi.yml
+  - type: Documentation
+    url: https://developer.key.com/docs/commercial/accounts
+  - type: Documentation
+    url: https://developer.key.com/docs/ach
+  - type: Documentation
+    url: https://developer.key.com/docs/wireTransfer
+  - type: Documentation
+    url: https://developer.key.com/docs/rtp
+  - type: Documentation
+    url: https://developer.key.com/docs/actval/v2
+  - type: Documentation
+    url: https://developer.key.com/docs/achinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/wireinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/rtpinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/check-services
+  - type: Documentation
+    url: https://developer.key.com/docs/webhooks
+- aid: keycorp:keycorp-ach-payment-request-inquiry-api
+  name: KeyCorp ACH Payment Request Inquiry API
+  description: >-
+    The ACH Payment Request Inquiry API from KeyCorp — 2 operation(s) for ach payment request inquiry.
+  humanURL: https://developer.key.com/docs/commercial/accounts
+  baseURL: https://partner-api.key.com/commercial/accounts/v1
+  tags:
+  - ACH Payment Request Inquiry
+  properties:
+  - type: OpenAPI
+    url: openapi/keycorp-ach-payment-request-inquiry-api-openapi.yml
+  - type: Documentation
+    url: https://developer.key.com/docs/commercial/accounts
+  - type: Documentation
+    url: https://developer.key.com/docs/ach
+  - type: Documentation
+    url: https://developer.key.com/docs/wireTransfer
+  - type: Documentation
+    url: https://developer.key.com/docs/rtp
+  - type: Documentation
+    url: https://developer.key.com/docs/actval/v2
+  - type: Documentation
+    url: https://developer.key.com/docs/achinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/wireinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/rtpinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/check-services
+  - type: Documentation
+    url: https://developer.key.com/docs/webhooks
+- aid: keycorp:keycorp-ach-transactions-api
+  name: KeyCorp ACH Transactions API
+  description: ACH Inquiry functions to list and retrieve ACH transaction details
+  humanURL: https://developer.key.com/docs/commercial/accounts
+  baseURL: https://partner-api.key.com/commercial/accounts/v1
+  tags:
+  - ACH Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/keycorp-ach-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://developer.key.com/docs/commercial/accounts
+  - type: Documentation
+    url: https://developer.key.com/docs/ach
+  - type: Documentation
+    url: https://developer.key.com/docs/wireTransfer
+  - type: Documentation
+    url: https://developer.key.com/docs/rtp
+  - type: Documentation
+    url: https://developer.key.com/docs/actval/v2
+  - type: Documentation
+    url: https://developer.key.com/docs/achinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/wireinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/rtpinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/check-services
+  - type: Documentation
+    url: https://developer.key.com/docs/webhooks
+- aid: keycorp:keycorp-healthcheck-api
+  name: KeyCorp Health Check API
+  description: The HealthCheck API from KeyCorp — 7 operation(s) for healthcheck.
+  humanURL: https://developer.key.com/docs/commercial/accounts
+  baseURL: https://partner-api.key.com/commercial/accounts/v1
+  tags:
+  - HealthCheck
+  properties:
+  - type: OpenAPI
+    url: openapi/keycorp-healthcheck-api-openapi.yml
+  - type: Documentation
+    url: https://developer.key.com/docs/commercial/accounts
+  - type: Documentation
+    url: https://developer.key.com/docs/ach
+  - type: Documentation
+    url: https://developer.key.com/docs/wireTransfer
+  - type: Documentation
+    url: https://developer.key.com/docs/rtp
+  - type: Documentation
+    url: https://developer.key.com/docs/actval/v2
+  - type: Documentation
+    url: https://developer.key.com/docs/achinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/wireinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/rtpinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/check-services
+  - type: Documentation
+    url: https://developer.key.com/docs/webhooks
+- aid: keycorp:keycorp-imagecheck-api
+  name: KeyCorp Image Check API
+  description: List check images
+  humanURL: https://developer.key.com/docs/commercial/accounts
+  baseURL: https://partner-api.key.com/commercial/accounts/v1
+  tags:
+  - ImageCheck
+  properties:
+  - type: OpenAPI
+    url: openapi/keycorp-imagecheck-api-openapi.yml
+  - type: Documentation
+    url: https://developer.key.com/docs/commercial/accounts
+  - type: Documentation
+    url: https://developer.key.com/docs/ach
+  - type: Documentation
+    url: https://developer.key.com/docs/wireTransfer
+  - type: Documentation
+    url: https://developer.key.com/docs/rtp
+  - type: Documentation
+    url: https://developer.key.com/docs/actval/v2
+  - type: Documentation
+    url: https://developer.key.com/docs/achinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/wireinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/rtpinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/check-services
+  - type: Documentation
+    url: https://developer.key.com/docs/webhooks
+- aid: keycorp:keycorp-initiate-api
+  name: KeyCorp Initiate API
+  description: Send a payment.
+  humanURL: https://developer.key.com/docs/commercial/accounts
+  baseURL: https://partner-api.key.com/commercial/accounts/v1
+  tags:
+  - Initiate
+  properties:
+  - type: OpenAPI
+    url: openapi/keycorp-initiate-api-openapi.yml
+  - type: Documentation
+    url: https://developer.key.com/docs/commercial/accounts
+  - type: Documentation
+    url: https://developer.key.com/docs/ach
+  - type: Documentation
+    url: https://developer.key.com/docs/wireTransfer
+  - type: Documentation
+    url: https://developer.key.com/docs/rtp
+  - type: Documentation
+    url: https://developer.key.com/docs/actval/v2
+  - type: Documentation
+    url: https://developer.key.com/docs/achinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/wireinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/rtpinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/check-services
+  - type: Documentation
+    url: https://developer.key.com/docs/webhooks
+- aid: keycorp:keycorp-participant-api
+  name: KeyCorp Participant API
+  description: Look up a RTP participating banks.
+  humanURL: https://developer.key.com/docs/commercial/accounts
+  baseURL: https://partner-api.key.com/commercial/accounts/v1
+  tags:
+  - Participant
+  properties:
+  - type: OpenAPI
+    url: openapi/keycorp-participant-api-openapi.yml
+  - type: Documentation
+    url: https://developer.key.com/docs/commercial/accounts
+  - type: Documentation
+    url: https://developer.key.com/docs/ach
+  - type: Documentation
+    url: https://developer.key.com/docs/wireTransfer
+  - type: Documentation
+    url: https://developer.key.com/docs/rtp
+  - type: Documentation
+    url: https://developer.key.com/docs/actval/v2
+  - type: Documentation
+    url: https://developer.key.com/docs/achinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/wireinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/rtpinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/check-services
+  - type: Documentation
+    url: https://developer.key.com/docs/webhooks
+- aid: keycorp:keycorp-rtp-api
+  name: KeyCorp RTP API
+  description: RTP functions to list and retrieve real-time payment details
+  humanURL: https://developer.key.com/docs/commercial/accounts
+  baseURL: https://partner-api.key.com/commercial/accounts/v1
+  tags:
+  - RTP
+  properties:
+  - type: OpenAPI
+    url: openapi/keycorp-rtp-api-openapi.yml
+  - type: Documentation
+    url: https://developer.key.com/docs/commercial/accounts
+  - type: Documentation
+    url: https://developer.key.com/docs/ach
+  - type: Documentation
+    url: https://developer.key.com/docs/wireTransfer
+  - type: Documentation
+    url: https://developer.key.com/docs/rtp
+  - type: Documentation
+    url: https://developer.key.com/docs/actval/v2
+  - type: Documentation
+    url: https://developer.key.com/docs/achinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/wireinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/rtpinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/check-services
+  - type: Documentation
+    url: https://developer.key.com/docs/webhooks
+- aid: keycorp:keycorp-stoppayments-api
+  name: KeyCorp Stop Payments API
+  description: Place new stop payments
+  humanURL: https://developer.key.com/docs/commercial/accounts
+  baseURL: https://partner-api.key.com/commercial/accounts/v1
+  tags:
+  - StopPayments
+  properties:
+  - type: OpenAPI
+    url: openapi/keycorp-stoppayments-api-openapi.yml
+  - type: Documentation
+    url: https://developer.key.com/docs/commercial/accounts
+  - type: Documentation
+    url: https://developer.key.com/docs/ach
+  - type: Documentation
+    url: https://developer.key.com/docs/wireTransfer
+  - type: Documentation
+    url: https://developer.key.com/docs/rtp
+  - type: Documentation
+    url: https://developer.key.com/docs/actval/v2
+  - type: Documentation
+    url: https://developer.key.com/docs/achinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/wireinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/rtpinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/check-services
+  - type: Documentation
+    url: https://developer.key.com/docs/webhooks
+- aid: keycorp:keycorp-undo-ach-payment-request-api
+  name: KeyCorp Undo ACH Payment Request API
+  description: >-
+    The Undo ACH Payment Request API from KeyCorp — 1 operation(s) for undo ach payment request.
+  humanURL: https://developer.key.com/docs/commercial/accounts
+  baseURL: https://partner-api.key.com/commercial/accounts/v1
+  tags:
+  - Undo ACH Payment Request
+  properties:
+  - type: OpenAPI
+    url: openapi/keycorp-undo-ach-payment-request-api-openapi.yml
+  - type: Documentation
+    url: https://developer.key.com/docs/commercial/accounts
+  - type: Documentation
+    url: https://developer.key.com/docs/ach
+  - type: Documentation
+    url: https://developer.key.com/docs/wireTransfer
+  - type: Documentation
+    url: https://developer.key.com/docs/rtp
+  - type: Documentation
+    url: https://developer.key.com/docs/actval/v2
+  - type: Documentation
+    url: https://developer.key.com/docs/achinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/wireinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/rtpinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/check-services
+  - type: Documentation
+    url: https://developer.key.com/docs/webhooks
+- aid: keycorp:keycorp-validate-api
+  name: KeyCorp Validate API
+  description: Perform validation checks for a payment transaction.
+  humanURL: https://developer.key.com/docs/commercial/accounts
+  baseURL: https://partner-api.key.com/commercial/accounts/v1
+  tags:
+  - Validate
+  properties:
+  - type: OpenAPI
+    url: openapi/keycorp-validate-api-openapi.yml
+  - type: Documentation
+    url: https://developer.key.com/docs/commercial/accounts
+  - type: Documentation
+    url: https://developer.key.com/docs/ach
+  - type: Documentation
+    url: https://developer.key.com/docs/wireTransfer
+  - type: Documentation
+    url: https://developer.key.com/docs/rtp
+  - type: Documentation
+    url: https://developer.key.com/docs/actval/v2
+  - type: Documentation
+    url: https://developer.key.com/docs/achinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/wireinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/rtpinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/check-services
+  - type: Documentation
+    url: https://developer.key.com/docs/webhooks
+- aid: keycorp:keycorp-wire-api
+  name: KeyCorp Wire API
+  description: Wire Inquiry functions to list wires and retrieve wire details
+  humanURL: https://developer.key.com/docs/commercial/accounts
+  baseURL: https://partner-api.key.com/commercial/accounts/v1
+  tags:
+  - Wire
+  properties:
+  - type: OpenAPI
+    url: openapi/keycorp-wire-api-openapi.yml
+  - type: Documentation
+    url: https://developer.key.com/docs/commercial/accounts
+  - type: Documentation
+    url: https://developer.key.com/docs/ach
+  - type: Documentation
+    url: https://developer.key.com/docs/wireTransfer
+  - type: Documentation
+    url: https://developer.key.com/docs/rtp
+  - type: Documentation
+    url: https://developer.key.com/docs/actval/v2
+  - type: Documentation
+    url: https://developer.key.com/docs/achinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/wireinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/rtpinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/check-services
+  - type: Documentation
+    url: https://developer.key.com/docs/webhooks
+- aid: keycorp:keycorp-wire-rtp-v1-api
+  name: KeyCorp Wire/RTP v1 API
+  description: The Wire/RTP v1 API from KeyCorp — 1 operation(s) for wire/rtp v1.
+  humanURL: https://developer.key.com/docs/commercial/accounts
+  baseURL: https://partner-api.key.com/commercial/accounts/v1
+  tags:
+  - Wire/RTP v1
+  properties:
+  - type: OpenAPI
+    url: openapi/keycorp-wire-rtp-v1-api-openapi.yml
+  - type: Documentation
+    url: https://developer.key.com/docs/commercial/accounts
+  - type: Documentation
+    url: https://developer.key.com/docs/ach
+  - type: Documentation
+    url: https://developer.key.com/docs/wireTransfer
+  - type: Documentation
+    url: https://developer.key.com/docs/rtp
+  - type: Documentation
+    url: https://developer.key.com/docs/actval/v2
+  - type: Documentation
+    url: https://developer.key.com/docs/achinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/wireinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/rtpinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/check-services
+  - type: Documentation
+    url: https://developer.key.com/docs/webhooks
+- aid: keycorp:keycorp-wire-rtp-v2-api
+  name: KeyCorp Wire/RTP v2 API
+  description: The Wire/RTP v2 API from KeyCorp — 1 operation(s) for wire/rtp v2.
+  humanURL: https://developer.key.com/docs/commercial/accounts
+  baseURL: https://partner-api.key.com/commercial/accounts/v1
+  tags:
+  - Wire/RTP v2
+  properties:
+  - type: OpenAPI
+    url: openapi/keycorp-wire-rtp-v2-api-openapi.yml
+  - type: Documentation
+    url: https://developer.key.com/docs/commercial/accounts
+  - type: Documentation
+    url: https://developer.key.com/docs/ach
+  - type: Documentation
+    url: https://developer.key.com/docs/wireTransfer
+  - type: Documentation
+    url: https://developer.key.com/docs/rtp
+  - type: Documentation
+    url: https://developer.key.com/docs/actval/v2
+  - type: Documentation
+    url: https://developer.key.com/docs/achinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/wireinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/rtpinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/check-services
   - type: Documentation
     url: https://developer.key.com/docs/webhooks
 common:
