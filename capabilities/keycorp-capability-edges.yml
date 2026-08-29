@@ -1,0 +1,99 @@
+slug: keycorp
+provider: KeyCorp
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 9
+edges:
+- tag: ACH Payment Origination
+  spec_file: keycorp-ach-payment-origination-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.9
+  evidence: '''Use the ACH Origination API to submit a payment''; achPaymentCCD ''Send or collect a payment'';
+    achPaymentPPD ''Make deposits and withdrawals to or from consumer accounts'''
+  reason: Origination of ACH debits/credits across SEC codes (CCD, CTX, PPD, TEL, WEB) is payment instruction
+    capture, validation and submission — payment initiation.
+- tag: Initiate
+  spec_file: keycorp-initiate-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.9
+  evidence: POST /rtp/v1/payment/initiate  Payment-Initiate  "Send a real-time payment or a wire transfer"
+  reason: Operation captures and submits a payment instruction (RTP or wire), i.e. payment initiation.
+- tag: Validate
+  spec_file: keycorp-validate-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.85
+  evidence: POST /rtp/v1/payment/validate  Payment-Validate  "Perform validation checks" with schema paymentTransactionRequestV1
+  reason: Pre-submission validation of an RTP/wire payment instruction maps directly to payment instruction
+    capture and validation.
+- tag: Wire
+  spec_file: keycorp-wire-api-openapi.yml
+  capability_id: BC-1340
+  capability_id_l1: BC-1340
+  capability_name: Payments & Card Management
+  confidence: 0.8
+  evidence: POST /wireInquiry/v1/transactions/list  searchWireTransactions  "Search wire transfers"; "Retrieve
+    the status and details of a wire transaction"
+  reason: Wire transfer status/detail inquiry sits in payments management; cannot tell from context whether
+    domestic or cross-border, so no L2.
+- tag: RTP
+  spec_file: keycorp-rtp-api-openapi.yml
+  capability_id: BC-1340.50
+  capability_id_l1: BC-1340
+  capability_name: Real-Time Payment Management
+  confidence: 0.75
+  evidence: POST /rtp/v1/transactions/list  searchRtpTransactions  "Search real time payment transactions";
+    "Retrieve the status and details of a real-time payments transactions"
+  reason: Status and detail inquiry over real-time payment transactions on the RTP rail.
+- tag: ACH Transactions
+  spec_file: keycorp-ach-transactions-api-openapi.yml
+  capability_id: BC-1340.20
+  capability_id_l1: BC-1340
+  capability_name: Payment Processing Management
+  confidence: 0.7
+  evidence: '''Use the ACH Inquiry API to get the status on ACH transactions''; searchAchSettledTransactions
+    ''Advanced search for settled ACH transactions''; schemas AchSettledTransaction, NotificationOfChange'
+  reason: Inquiry and search over ACH transactions including settled items and notifications of change
+    is ACH payment processing/settlement operations; sub-capability could equally be clearing & settlement.
+- tag: Participant
+  spec_file: keycorp-participant-api-openapi.yml
+  capability_id: BC-1340.50
+  capability_id_l1: BC-1340
+  capability_name: Real-Time Payment Management
+  confidence: 0.7
+  evidence: GET /rtp/v1/payment/rtp/participant  participantList  "Get a list of RTP participants"
+  reason: Directory of institutions participating in the real-time payments rail, supporting RTP routing;
+    reference data specific to the instant payment rail.
+- tag: StopPayments
+  spec_file: keycorp-stoppayments-api-openapi.yml
+  capability_id: BC-1340
+  capability_id_l1: BC-1340
+  capability_name: Payments & Card Management
+  confidence: 0.7
+  evidence: POST /commercial/checks/v1/stops/place  PlaceStopPayments  "Place a stop payment"
+  reason: Placing stop payments on commercial checking accounts is control over check payment instructions;
+    L1 payments is defensible, specific L2 unclear.
+- tag: Undo ACH Payment Request
+  spec_file: keycorp-undo-ach-payment-request-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.7
+  evidence: POST /ach/payments/v1/undo  achPaymentUndo  "Undo a payment request"; "With the ACH Origination
+    API, you can submit a payment, check on its status, and undo a request"
+  reason: Cancellation of a submitted ACH origination request is part of payment instruction capture/authorisation
+    lifecycle.

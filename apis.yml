@@ -614,6 +614,9 @@ apis:
   - type: Documentation
     url: https://developer.key.com/docs/webhooks
 common:
+  - type: CapabilityMap
+    url: capabilities/keycorp-capability-edges.yml
+    name: KeyCorp Business Capability Map
   - type: AgentSkill
     url: skills/keycorp-originate-ach-payment.md
   - type: TermsOfService
