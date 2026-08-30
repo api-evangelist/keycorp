@@ -136,6 +136,8 @@ apis:
   humanURL: https://developer.key.com/docs/commercial/accounts
   baseURL: https://partner-api.key.com/commercial/accounts/v1
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -288,6 +290,8 @@ apis:
   humanURL: https://developer.key.com/docs/commercial/accounts
   baseURL: https://partner-api.key.com/commercial/accounts/v1
   tags:
+  - Health Check
+  tags_raw:
   - HealthCheck
   properties:
   - type: OpenAPI
@@ -438,6 +442,8 @@ apis:
   humanURL: https://developer.key.com/docs/commercial/accounts
   baseURL: https://partner-api.key.com/commercial/accounts/v1
   tags:
+  - Stop Payments
+  tags_raw:
   - StopPayments
   properties:
   - type: OpenAPI
