@@ -1,0 +1,460 @@
+openapi: 3.2.0
+info:
+  title: Webhooks Wire/RTP v1 API
+  description: Payment webhook service for ACH, Wire, and RTP alert notifications.
+  contact:
+    name: KeyBank Developer Support
+    email: developers@keybank.com
+  version: 3.1.0
+tags:
+- name: Wire/RTP v1
+paths:
+  /"Callback URL from client for AL00901":
+    post:
+      tags:
+      - Wire/RTP v1
+      summary: Send Wire/RTP alerts event notification to the client URI.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/alertNotificationAL00901Request'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/alertSuccessResponse'
+        400:
+          description: Invalid Input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/alertInvalidInputResponse'
+        401:
+          description: Authentication Error
+        403:
+          description: Authorization Error
+        500:
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/alertFailureResponse'
+components:
+  schemas:
+    alertSuccessResponse:
+      type: object
+      properties:
+        alertNotificationResponse:
+          type: array
+          items:
+            type: object
+            properties:
+              alertAcknowledgment:
+                type: object
+                properties:
+                  alertStatus:
+                    type: string
+                    description: Indicates if the alert was a success or failure.
+                    enum:
+                    - SUCCESS
+                  confirmationGUID:
+                    type: string
+                    description: API Customer Unique ID for the Alert Notification
+                    format: uuid
+                  alertRecievedDateAndTime:
+                    type: string
+                    format: date-time
+                    description: 'Date and time the alert was received. Format: (YYYY-MM-DD)T(HH:MM:SS)Z'
+                  eapAlertGUID:
+                    type: string
+                    description: Unique alert notification identifier passed through from the request.
+                    format: uuid
+                  message:
+                    type: string
+                    description: Free-form text field to describe the response.
+      example:
+        alertNotificationResponse:
+        - alertAcknowledgment:
+            alertStatus: SUCCESS
+            confirmationGUID: 5f0ada5b-056f-483c-98ae-ac6ccab269c1
+            alertRecievedDateAndTime: 2021-11-19 10:31:12+00:00
+            eapAlertGUID: 5163dee6-0b2b-4901-9f6a-4b3997ee8d77
+            message: Successfully submitted the request
+    alertInvalidInputResponse:
+      type: object
+      properties:
+        alertNotificationResponse:
+          type: array
+          items:
+            type: object
+            properties:
+              alertAcknowledgment:
+                type: object
+                properties:
+                  alertStatus:
+                    type: string
+                    enum:
+                    - FAILURE
+                  confirmationGUID:
+                    type: string
+                    description: API Customer Unique ID for the Alert Notification
+                    format: uuid
+                  alertRecievedDateAndTime:
+                    type: string
+                    format: date-time
+                  eapAlertGUID:
+                    type: string
+                    description: ECHO back the value from request
+                    format: uuid
+                  message:
+                    type: string
+                    description: Free form text - can be used at API Consumer Discretion
+      example:
+        alertNotificationResponse:
+        - alertAcknowledgment:
+            alertStatus: FAILURE
+            confirmationGUID: 5f0ada5b-056f-483c-98ae-ac6ccab269c1
+            alertRecievedDateAndTime: 2021-11-19 10:31:12+00:00
+            eapAlertGUID: ce816009-4aa9-47c7-b2ee-bacf9f0872d0
+            message: 'Required parameter(s) not found: [fieldName(s)]'
+    alertNotificationAL00901Request:
+      type: object
+      properties:
+        alertNotificationRequest:
+          type: array
+          items:
+            type: object
+            properties:
+              alertNotification:
+                type: object
+                properties:
+                  alertHeader:
+                    type: object
+                    properties:
+                      alertSentDateAndTime:
+                        type: string
+                        format: date-time
+                        description: 'Date and time the alert was sent. Format: (YYYY-MM-DD)T(HH:MM:SS)Z'
+                      alertCode:
+                        type: string
+                        enum:
+                        - AL00901
+                        description: For Wire and RTP alerts, the alert code is AL00901.
+                      eapAlertGUID:
+                        type: string
+                        format: uuid
+                        description: Unique alert notification identifier.
+                  alertBody:
+                    type: object
+                    properties:
+                      crOrDbCode:
+                        type: string
+                        description: 'Identifies the transaction type as credit or debit. Valid values: C (credit), D (debit)'
+                      crArngNum:
+                        type: string
+                        description: Account number of the credit account.
+                      crArngTypeCode:
+                        type: string
+                        description: Type code of the credit account.
+                      crArngBankNum:
+                        type: string
+                        description: Bank number of the credit account.
+                      crTranCurrencyCode:
+                        type: string
+                        description: Transaction currency code of the credit account.
+                      dbArngTypeCode:
+                        type: string
+                        description: Type code of the debit account
+                      dbTranCurrencyCode:
+                        type: string
+                        description: Transaction currency code of the debit account.
+                      requestReferenceNumber:
+                        type: string
+                        maxLength: 32
+                        description: Unique identification number for an originating wire or RTP transaction. This number is limited to 32 characters.
+                      crIpId:
+                        type: string
+                        description: Customer number associated with the credit account.
+                      crIpNm:
+                        type: string
+                        description: Customer name associated with the credit account.
+                      dbArngNum:
+                        type: string
+                        description: Account number of the debit account.
+                      dbArngBankNum:
+                        type: string
+                        description: Bank number of the debit account.
+                      dbIpId:
+                        type: string
+                        description: Customer number associated with the debit account.
+                      dbIpNm:
+                        type: string
+                        description: Customer name associated with the debit account.
+                      payNotifyTs:
+                        type: string
+                        description: Timestamp of the payment event.
+                      wireEventNm:
+                        type: string
+                        description: Payment status code
+                      tranAmt:
+                        type: string
+                        description: Dollar amount of the transaction.
+                      tranExecutedDt:
+                        type: string
+                        description: 'Date the transaction is executed. Format: YYYYMMDD'
+                      federalReferNum:
+                        type: string
+                        description: Federal reference number
+                      sndngBankReferNum:
+                        type: string
+                        description: Reference number attached to a wire, issued by the sending bank.
+                      tranId:
+                        type: string
+                        description: Unique transaction identifier
+                      tranBusnStatusCode:
+                        type: string
+                        description: Transaction business status code
+                      wireDirectionCode:
+                        type: string
+                        description: Indicates the direction of the transaction.
+                      tranType:
+                        type: string
+                        description: Type of transaction.
+                      tranValueTypeCode:
+                        type: string
+                        description: Identifies the value of a transaction.
+                      wireProcessTypeCode:
+                        type: string
+                        description: Wire processing type code
+                      benefitAba:
+                        type: string
+                        description: ABA routing number of the beneficiary.
+                      benefitArngNum:
+                        type: string
+                        description: Account number of the beneficiary.
+                      benefitIpAddrLine:
+                        type: string
+                        description: Address lines 1-7 (array) of the beneficiary.
+                      benefitBicCode:
+                        type: string
+                        description: BIC number of the beneficiary.
+                      benefitBankAbaNum:
+                        type: string
+                        description: ABA routing number of the beneficiary's bank.
+                      benefitBankArngNum:
+                        type: string
+                        description: Account number of the beneficiary's bank.
+                      benefitBankAddrLine:
+                        type: string
+                        description: Address lines 1-7 (array) of the beneficiary's bank.
+                      benefitBankBicCode:
+                        type: string
+                        description: BIC number of the beneficiary's bank.
+                      benefitBankNm:
+                        type: string
+                        description: Name of the beneficiary's bank.
+                      intrmdryBankAbaNum1:
+                        type: string
+                        description: ABA routing number of the intermediary bank 1.
+                      intrmdryBankAddrLine1:
+                        type: string
+                        description: Address lines 1-7 (array) of the intermediary bank 1.
+                      intrmdryBankNm1:
+                        type: string
+                        description: Name of the intermediary bank 1.
+                      intrmdryBicCode1:
+                        type: string
+                        description: BIC number of the intermediary bank 1.
+                      intrmdryBankAbaNum2:
+                        type: string
+                        description: ABA routing number of the intermediary bank 2.
+                      intrmdryBankAddrLine2:
+                        type: string
+                        description: Address lines 1-7 (array) of the intermediary bank 2.
+                      intrmdryBankNm2:
+                        type: string
+                        description: Name of the intermediary bank 2.
+                      intrmdryBicCode2:
+                        type: string
+                        description: BIC number of the intermediary bank 2.
+                      intrmdryBankAbaNum3:
+                        type: string
+                        description: ABA routing number of the intermediary bank 3.
+                      intrmdryBankAddrLine3:
+                        type: string
+                        description: Address lines 1-7 (array) of the intermediary bank 3.
+                      intrmdryBankNm3:
+                        type: string
+                        description: Name of the intermediary bank 3.
+                      intrmdryBicCode3:
+                        type: string
+                        description: BIC number of the intermediary bank 3.
+                      orgntngBankAbaNum:
+                        type: string
+                        description: ABA routing number of the wire originator's bank.
+                      orgntngBankAddrLine:
+                        type: string
+                        description: Address lines 1-7 (array) of the wire originator's bank.
+                      orgntngBankBicCode:
+                        type: string
+                        description: BIC number of the wire originator's bank.
+                      orgntngBankNm:
+                        type: string
+                        description: Name of the wire originator's bank.
+                      orgntngAba1:
+                        type: string
+                        description: ABA routing number of the originator 1.
+                      orgntngArngNum1:
+                        type: string
+                        description: Account number of the originator 1.
+                      orgntngIpNm1:
+                        type: string
+                        description: Name of the originator 1.
+                      orgntngIpAddrLine1:
+                        type: string
+                        description: Address lines 1-7 (array) of the originator 1.
+                      orgntngAba2:
+                        type: string
+                        description: ABA routing number of the originator 2.
+                      orgntngArngNum2:
+                        type: string
+                        description: Account number of the originator 2.
+                      orgntngIpNm2:
+                        type: string
+                        description: Name of the originator 2.
+                      orgntngIpAddrLine2:
+                        type: string
+                        description: Address lines 1-7 (array) of the originator 2.
+                      orgntngAba3:
+                        type: string
+                        description: ABA routing number of the originator 3.
+                      orgntngArngNum3:
+                        type: string
+                        description: Account number of the originator 3.
+                      orgntngIpNm3:
+                        type: string
+                        description: Name of the originator 3.
+                      orgntngIpAddrLine3:
+                        type: string
+                        description: Address lines 1-7 (array) of the originator 3.
+                      crVirtualNum:
+                        type: string
+                        description: Virtual account number of the credit account.
+                      dbVirtualNum:
+                        type: string
+                        description: Virtual account number of the debit account.
+      example:
+        alertNotificationRequest:
+        - alertNotification:
+            alertHeader:
+              alertSentDateAndTime: 2023-02-1159T10:20:56Z
+              alertCode: AL00901
+              payType: WIRE
+              eapAlertGUID: f4d88cd2-446c-3cc4-9330-aa123456789
+            alertBody:
+              crOrDbCode: C
+              crArngNum: '359123456789'
+              crArngTypeCode: DDA
+              crArngBankNum: '0101'
+              crTranCurrencyCode: USD
+              dbArngTypeCode: DDA
+              dbTranCurrencyCode: USD
+              requestReferenceNumber: 4630123-20240212161123
+              crIpId: '999997'
+              crIpNm: BANKOFTEST
+              dbArngNum: '201907987654321'
+              dbArngBankNum: '0101'
+              dbIpId: '30472222'
+              dbIpNm: Test Name
+              payNotifyTs: '1673615327943'
+              wireEventNm: WirePaymentTransactionEvent
+              tranAmt: '12.79'
+              tranExecutedDt: '20230112'
+              federalReferNum: 'null'
+              sndngBankReferNum: 'null'
+              tranId: US23010987654321
+              tranBusnStatusCode: RegulatoryFilter
+              wireDirectionCode: OUTBOUND
+              tranType: 'null'
+              tranValueTypeCode: N
+              wireProcessTypeCode: 'null'
+              benefitAba: 'null'
+              benefitArngNum: '3435656765'
+              benefitIpAddrLine: 250 Delaware Ave St
+              benefitBicCode: KEYBUS33 XXX
+              benefitBankAbaNum: 'null'
+              benefitBankArngNum: 'null'
+              benefitBankAddrLine: 250 Delaware Ave St
+              benefitBankBicCode: KEYBUS33 XXX
+              benefitBankNm: KeyBank National Association
+              intrmdryBankAbaNum1: 'null'
+              intrmdryBankAddrLine1: 'null'
+              intrmdryBankNm1: KeyBank National Association
+              intrmdryBicCode1: '21300077'
+              intrmdryBankAbaNum2: 'null'
+              intrmdryBankAddrLine2: 'null'
+              intrmdryBankNm2: BANKOFTEST
+              intrmdryBicCode2: KEYBUS33 XXX
+              intrmdryBankAbaNum3: 'null'
+              intrmdryBankAddrLine3: 'null'
+              intrmdryBankNm3: 'null'
+              intrmdryBicCode3: 'null'
+              orgntngBankAbaNum: 'null'
+              orgntngBankAddrLine: 'null'
+              orgntngBankBicCode: 'null'
+              orgntngBankNm: 'null'
+              orgntngAba1: 'null'
+              orgntngArngNum1: '123456789'
+              orgntngIpNm1: TEST COMPANY 1, LLC
+              orgntngIpAddrLine1: 127 Public Sq, Cleveland,OH 44114,US
+              orgntngAba2: 'null'
+              orgntngArngNum2: 'null'
+              orgntngIpNm2: 'null'
+              orgntngIpAddrLine2: 'null'
+              orgntngAba3: 'null'
+              orgntngArngNum3: 'null'
+              orgntngIpNm3: 'null'
+              orgntngIpAddrLine3: 'null'
+              crVirtualNum: '953456789'
+              dbVirtualNum: '953654321'
+    alertFailureResponse:
+      type: object
+      properties:
+        alertNotificationResponse:
+          type: array
+          items:
+            type: object
+            properties:
+              alertAcknowledgment:
+                type: object
+                properties:
+                  alertStatus:
+                    type: string
+                    enum:
+                    - FAILURE
+                  confirmationGUID:
+                    type: string
+                    description: API Customer Unique ID for the Alert Notification
+                    format: uuid
+                  alertRecievedDateAndTime:
+                    type: string
+                    format: date-time
+                  eapAlertGUID:
+                    type: string
+                    description: ECHO back the value from request
+                    format: uuid
+                  message:
+                    type: string
+                    description: Free form text - can be used at API Consumer Discretion
+      example:
+        alertNotificationResponse:
+        - alertAcknowledgment:
+            alertStatus: FAILURE
+            confirmationGUID: 5f0ada5b-056f-483c-98ae-ac6ccab269c1
+            alertRecievedDateAndTime: 2021-11-19 10:31:12+00:00
+            eapAlertGUID: 3eecd293-8c45-40ba-be09-d8570c5665ed
+            message: Internal Error

@@ -1,0 +1,537 @@
+openapi: 3.2.0
+info:
+  title: Commercial Accounts Reporting Account Information API
+  description: A set of commercial accounting APIs used to get account-level information for client authorized accounts.
+  contact:
+    name: KeyBank Developer Support
+    email: embedded_banking_support@keybank.com
+  version: 1.0.3
+servers:
+- url: https://partner-api-qv.key.com
+- url: https://partner-api.key.com
+tags:
+- name: Account Information
+paths:
+  /commercial/accounts/v1/{accountId}:
+    get:
+      operationId: getAccount
+      tags:
+      - Account Information
+      summary: Retrieve account details
+      description: Get full details about the account identified with accountId parameter.
+      parameters:
+      - $ref: '#/components/parameters/Accept'
+      - $ref: '#/components/parameters/AcceptCharset'
+      - $ref: '#/components/parameters/UserAgent'
+      - $ref: '#/components/parameters/FapiInteractionIdHeader'
+      - $ref: '#/components/parameters/AccountIdPath'
+      - $ref: '#/components/parameters/BalanceAsOfDate'
+      responses:
+        '200':
+          description: Commercial Account
+          headers:
+            x-fapi-interaction-id:
+              $ref: '#/components/headers/x-fapi-interaction-id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountWithDetails'
+              example:
+                accountId: 17e13f78-20c7-4ce6-ad4e-5afff48c8834
+                accountNumberDisplay: X5678
+                accountNumber: 012345678
+                accountCategory: COMMERCIAL_ACCOUNT
+                currentAvailableBalance: 1000.1
+                currentLedgerBalance: 3000.2
+                openingLedgerBalance: 123.45
+                closingLedgerBalance: 25000.99
+                openingAvailableBalance: 15000.5
+                closingAvailableBalance: 25000.36
+                balanceAsOf: 2025-08-21
+                commercialBalances:
+                - commercialCode:
+                    type: BAI
+                    code: '010'
+                    memo: Opening Ledger Balance
+                  amount: 123.45
+                - commercialCode:
+                    type: BAI
+                    code: '015'
+                    memo: Closing Ledger Balance
+                  amount: 25000.99
+                - commercialCode:
+                    type: BAI
+                    code: '040'
+                    memo: Opening Available Balance
+                  amount: 15000.5
+                - commercialCode:
+                    type: BAI
+                    code: '045'
+                    memo: Closing Available Balance
+                  amount: 25000.36
+        '206':
+          description: Partial Success of Commercial Account
+          headers:
+            x-fapi-interaction-id:
+              $ref: '#/components/headers/x-fapi-interaction-id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountWithDetails'
+        '400':
+          description: Input sent by client does not satisfy API specification
+          headers:
+            x-fapi-interaction-id:
+              $ref: '#/components/headers/x-fapi-interaction-id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Invalid Input:
+                  value:
+                    code: '401'
+                    message: Invalid Input
+                    debugMessage: Required header 'x-fapi-interaction-id' is not valid.
+        '401':
+          description: Request lacks valid authentication credentials for the target resource
+          headers:
+            x-fapi-interaction-id:
+              $ref: '#/components/headers/x-fapi-interaction-id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Unauthorized:
+                  value:
+                    code: '603'
+                    message: Authentication failed
+                    debugMessage: Please update the request and try again.
+        '403':
+          description: Forbidden, server understands the request but refuses to authorize it
+          headers:
+            x-fapi-interaction-id:
+              $ref: '#/components/headers/x-fapi-interaction-id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Forbidden:
+                  value:
+                    code: '403'
+                    message: Forbidden
+                    debugMessage: Please update the request and try again.
+        '406':
+          description: Content Type not Supported
+          headers:
+            x-fapi-interaction-id:
+              $ref: '#/components/headers/x-fapi-interaction-id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Content Type not Supported:
+                  value:
+                    code: '1203'
+                    message: Content Type not Supported
+                    debugMessage: 'Acceptable representations: [application/json, application/*+json].'
+  /commercial/accounts/v1/list:
+    get:
+      operationId: searchForAccounts
+      tags:
+      - Account Information
+      summary: Search for accounts
+      description: Return information for all client authorized accounts
+      parameters:
+      - $ref: '#/components/parameters/Accept'
+      - $ref: '#/components/parameters/AcceptCharset'
+      - $ref: '#/components/parameters/UserAgent'
+      - $ref: '#/components/parameters/LimitQuery'
+      - $ref: '#/components/parameters/PageKeyQuery'
+      - $ref: '#/components/parameters/FapiInteractionIdHeader'
+      responses:
+        '200':
+          description: Array of accounts (Account)
+          headers:
+            x-fapi-interaction-id:
+              $ref: '#/components/headers/x-fapi-interaction-id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Accounts'
+        '400':
+          description: Input sent by client does not satisfy API specification
+          headers:
+            x-fapi-interaction-id:
+              $ref: '#/components/headers/x-fapi-interaction-id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Invalid Input:
+                  value:
+                    code: '401'
+                    message: Invalid Input
+                    debugMessage: Required header 'x-fapi-interaction-id' is not valid.
+        '401':
+          description: Request lacks valid authentication credentials for the target resource
+          headers:
+            x-fapi-interaction-id:
+              $ref: '#/components/headers/x-fapi-interaction-id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Unauthorized:
+                  value:
+                    code: '603'
+                    message: Authentication failed
+                    debugMessage: Please update the request and try again.
+        '403':
+          description: Forbidden, server understands the request but refuses to authorize it
+          headers:
+            x-fapi-interaction-id:
+              $ref: '#/components/headers/x-fapi-interaction-id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Forbidden:
+                  value:
+                    code: '403'
+                    message: Forbidden
+                    debugMessage: Please update the request and try again.
+        '404':
+          description: Data not found for request parameters
+          headers:
+            x-fapi-interaction-id:
+              $ref: '#/components/headers/x-fapi-interaction-id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Data not found for request parameters:
+                  value:
+                    code: '1107'
+                    message: Data not found for request parameters
+                    debugMessage: Please adjust your search criteria and try again.
+        '406':
+          description: Content Type not Supported
+          headers:
+            x-fapi-interaction-id:
+              $ref: '#/components/headers/x-fapi-interaction-id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Content Type not Supported:
+                  value:
+                    code: '1203'
+                    message: Content Type not Supported
+                    debugMessage: 'Acceptable representations: [application/json, application/*+json].'
+components:
+  schemas:
+    PageMetadata:
+      title: Page Metadata
+      description: Page information based on the pagination controls and result set.
+      type: object
+      properties:
+        nextPageKey:
+          type: string
+          example: '2'
+          description: Displays the next page number. This is an opaque identifier and does not need to be numeric or have any specific pattern.
+        previousPageKey:
+          type: string
+          example: '1'
+          description: Display the previous page number. This is an opaque identifier and does not need to be numeric or have any specific pattern.
+        totalElements:
+          type: integer
+          example: 3
+          description: Total number of elements
+    Identifier:
+      title: Identifier
+      description: Value for a unique identifier
+      type: string
+      maxLength: 256
+    Timestamp:
+      title: Timestamp
+      description: 'Date and time format based on ISO 8601 standard. Format: ''YYYY-MM-DDThh:mm:ss.nnn'
+      type: string
+      format: date-time
+    HateoasLink:
+      title: HATEOAS Link
+      description: HATEOAS is 'Hypermedia As The Engine Of Application State,' a REST application constraint for URL addresses.
+      required:
+      - href
+      type: object
+      properties:
+        href:
+          type: string
+          format: uri-reference
+          description: URL address to invoke the action on the resource.
+          example: https://partner-api.key.com/accounts/12345
+    CommercialAccount:
+      title: Commercial Account entity
+      description: Information related to the commercial account
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Account'
+      - type: object
+        properties:
+          balanceAsOf:
+            description: As-of date of balances
+            $ref: '#/components/schemas/Timestamp'
+          openingLedgerBalance:
+            type: number
+            description: The ledger balance at the start of the business day (balance as-of date) for which the activity is being reported.
+          closingLedgerBalance:
+            type: number
+            description: 'The ledger balance at the end of the business day (balance as-of date) for which the activity is being reported. Calculated as: Opening Ledger + Total Credits - Total Debits = Closing Ledger Balance'
+          currentLedgerBalance:
+            type: number
+            description: 'The ledger balance at the time during the day the information is being reported. It includes debits and credits that have been processed up to that time. Calculated as: Opening Ledger Balance + the Current Net of Debits and Credits = Current Ledger Balance.'
+          openingAvailableBalance:
+            type: number
+            description: 'The available balance at the start of the business day following the day for which activity is reported. Calculated as: Closing Available   Balance Reported + The Net of One-day Float = Opening Available Balance.'
+          currentAvailableBalance:
+            type: number
+            description: 'The available balance at a given time during the business day the information is being reported. It includes zero-float debits and credits processed up to that time. Calculated as: Opening Available Balance + the Current Net of Zero Day Float Debits and Credits = Current Available Balance.'
+          closingAvailableBalance:
+            type: number
+            description: 'The available balance at the end of the business day for which activity is being reported. Calculated as: Closing Ledger Balance - Float = Closing Available Balance.'
+          commercialBalances:
+            type: array
+            description: A list of specific treasury management defined balances
+            items:
+              $ref: '#/components/schemas/CommercialBalance'
+    Accounts:
+      title: Accounts entity
+      description: Paginated array of accounts
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/PaginatedArray'
+      - type: object
+        properties:
+          accounts:
+            type: array
+            description: A list of commercial accounts
+            items:
+              $ref: '#/components/schemas/Account'
+    Error:
+      title: Error
+      description: Contains details if there is an issue with the API or the account.
+      type: object
+      properties:
+        code:
+          type: string
+          description: Code indicates the type of error that occurred.
+        message:
+          type: string
+          description: Information associated with the code that helps you diagnose the error.
+        debugMessage:
+          type: string
+          description: Message used to debug the root cause of the error and determine what needs correction in the request. Content can change depending on the request data provided.
+    AccountDescriptor:
+      title: Account Descriptor entity
+      description: Basic account information including the account category, GUID, and account number.
+      type: object
+      required:
+      - accountCategory
+      discriminator:
+        propertyName: accountCategory
+      properties:
+        accountCategory:
+          $ref: '#/components/schemas/AccountCategory'
+          description: The account type. KeyBank currently supports only commercial account types.
+        accountId:
+          description: A long-term persistent identity of the account that is not the account number. This identity must be unique to the owning institution.
+          $ref: '#/components/schemas/Identifier'
+        accountNumberDisplay:
+          description: The account display number suitable for the interface provider.
+          type: string
+          example: X5678
+        accountNumber:
+          type: string
+          description: The bank account number.
+          example: 012345678
+    Charsets:
+      title: Character Sets
+      description: The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.
+      type: string
+      enum:
+      - UTF-8
+    TreasuryManagementType:
+      title: Treasury Management Type
+      description: 'Identifies the source of the treasury management account. Valid values: BAI, BTRS, ISO, SWIFT'
+      type: string
+      enum:
+      - BAI
+      - BTRS
+      - ISO
+      - SWIFT
+      example: BAI
+    FapiInteractionId:
+      title: FAPI Interaction ID
+      description: Universally unique identifier for this interaction, used across all API requests and responses. A valid ID must be 36 characters in length.
+      type: string
+      format: uuid
+      minLength: 36
+      maxLength: 36
+      example: c770aef3-6784-41f7-8e0e-ff5f97bddb3a
+    Account:
+      title: Account entity
+      description: Contains basic account information
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/AccountDescriptor'
+    PageMetadataLinks:
+      title: Page Metadata Links
+      description: Resource URLs for retrieving next or previous datasets.
+      type: object
+      properties:
+        next:
+          $ref: '#/components/schemas/HateoasLink'
+          description: Resource URL for retrieving next dataset
+        prev:
+          $ref: '#/components/schemas/HateoasLink'
+          description: Resource URL for retrieving previous dataset
+    CommercialBalance:
+      title: Commercial Balance entity
+      description: A specific treasury management defined balance
+      type: object
+      properties:
+        commercialCode:
+          $ref: '#/components/schemas/CommercialCode'
+          description: The code for a specific treasury management defined field
+        amount:
+          type: number
+          description: The treasury management balance amount
+        memo:
+          type: string
+          description: Memo field for the treasury management balance amount
+    DateString:
+      title: Date String
+      description: 'Date format based on ISO 8601 standards. Format: YYYY-MM-DD'
+      type: string
+      format: date
+      maxLength: 10
+      example: '2025-02-15'
+    CommercialCode:
+      title: Commercial Code entity
+      description: Code for commercial transactions that retrieves the summary, account information, and related transaction codes from the treasury object. The code for a specific treasury management defined field.
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/TreasuryManagementType'
+          description: 'The source of treasury management account definition. Valid values: BAI, BTRS, ISO, SWIFT'
+        code:
+          type: string
+          description: The code of the Treasury Management defined field
+    ContentTypes:
+      title: Content Types
+      description: Types of supported document formats.
+      type: string
+      enum:
+      - application/json
+    PaginatedArray:
+      title: Paginated Array
+      description: Page metadata and related URLs for the result set.
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/PageMetadata'
+          description: Offset IDs for navigating result sets
+        links:
+          $ref: '#/components/schemas/PageMetadataLinks'
+          description: Resource URLs for navigating result sets
+    AccountWithDetails:
+      title: Account With Details entity
+      description: Detailed information about an authorized client account. If the BalanceAsOfDate is provided, balance summary information is also returned.
+      type: object
+      discriminator:
+        propertyName: accountCategory
+        mapping:
+          COMMERCIAL_ACCOUNT: '#/components/schemas/CommercialAccount'
+      oneOf:
+      - $ref: '#/components/schemas/CommercialAccount'
+    AccountCategory:
+      title: Account Category type
+      description: 'The account type for the transaction. Valid values: COMMERCIAL_ACCOUNT'
+      type: string
+      enum:
+      - COMMERCIAL_ACCOUNT
+  parameters:
+    FapiInteractionIdHeader:
+      name: x-fapi-interaction-id
+      in: header
+      description: Unique identifier for this interaction. A valid ID must be 36 characters in length. This is used across all API requests and responses.
+      schema:
+        $ref: '#/components/schemas/FapiInteractionId'
+      required: true
+      example: c770aef3-6784-41f7-8e0e-ff5f97bddb3a
+    AcceptCharset:
+      name: Accept-Charset
+      in: header
+      description: The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.
+      schema:
+        $ref: '#/components/schemas/Charsets'
+      required: true
+      example: UTF-8
+    PageKeyQuery:
+      name: pageKey
+      in: query
+      description: A secure and flexible pagination capability to retrieve the following set of records.
+      schema:
+        type: string
+    UserAgent:
+      name: User-Agent
+      in: header
+      description: Identifies the web browser and/or cURL command line used in the HTTP request. We collect this data to see which products use our API data services, helpful for troubleshooting and compatibility.
+      schema:
+        type: string
+      required: true
+      example: Example/1.2.3 Crawler/4.3.1
+    LimitQuery:
+      name: limit
+      in: query
+      description: Restrict the amount of data you receive. For accounts, the limit can be between 1 and 100. If omitted, the default is 50. For transactions, the limit can be between 1 and 500. If omitted, the default is 100.
+      schema:
+        type: integer
+        minLength: 1
+        maxLength: 500
+      example: 50
+    AccountIdPath:
+      name: accountId
+      in: path
+      description: Account Identifier
+      required: true
+      schema:
+        type: string
+    Accept:
+      name: Accept
+      in: header
+      description: Preferred syntax for content type. This content type should be application/json.
+      schema:
+        $ref: '#/components/schemas/ContentTypes'
+      required: true
+      example: application/json
+    BalanceAsOfDate:
+      name: balanceAsOf
+      in: query
+      description: 'A query option to return historical balance information from a certain date. Balance information includes opening and closed ledger balances, opening and closing available balances, and commercial balances. The date must be within 180 days of the current date. If a date is not provided, historical balance information is not returned. Format: YYYY-MM-DD'
+      schema:
+        $ref: '#/components/schemas/DateString'
+  headers:
+    x-fapi-interaction-id:
+      description: Unique identifier for this interaction
+      schema:
+        $ref: '#/components/schemas/FapiInteractionId'
+      example: c770aef3-6784-41f7-8e0e-ff5f97bddb3a

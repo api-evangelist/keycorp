@@ -1,0 +1,753 @@
+openapi: 3.2.0
+info:
+  title: Account Validation v2 Accounts API
+  description: Use the Account Validation API to verify an account and its owner with confidence. This API evaluates account owner data through an inquiry request and response process.
+  contact:
+    name: KeyBank Developer Support
+    email: developers@keybank.com
+  version: 2.0.4
+servers:
+- url: https://partner-api-qv.key.com
+- url: https://partner-api.key.com
+tags:
+- name: Accounts
+paths:
+  /accounts/validations/v2/verifyAccount:
+    post:
+      summary: Verify an account
+      description: Verify that an account owner's name, address, and other identifying elements match the account information in the National Shared Database Resource and that they are authorized to transact on the account. The National Shared Database Resource is the financial industry's leading source of up-to-date, collaborative financial data.
+      operationId: verifyAccount
+      security:
+      - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/accountValidation_POST_bodyParameters'
+            example:
+              accountValidationV2Request:
+                AOARequest:
+                  Inquiry:
+                    serviceType: Owner
+                    secondaryId: KeyCli03
+                    additionalId: AddCli04
+                    routingNumber: '122199983'
+                    accountNumber: '89455'
+                    AcctOwner:
+                      firstName: Paul
+                      lastName: wilson
+                      middleName: Dan
+                      namePrefix: Mr
+                      nameSuffix: Lal
+                      businessName: ''
+                      addressLine1: 206 GOODWIN ST
+                      addressLine2: Land
+                      city: MERRIT
+                      state: MI
+                      zipCode: '49667'
+                      homePhone: '3077553623'
+                      workPhone: '3077555330'
+                      ssn: '666082367'
+                      dob: '19730801'
+                      idType: ''
+                      idNo: '590909812'
+                      idState: AL
+                    Client:
+                      clientDate: '2022-12-03'
+                      clientTime: '14:00:00'
+                      userDefined: ''
+        required: true
+      responses:
+        '200':
+          description: Successful response
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/accountValidation_POST_response'
+              example:
+                accountValidationV2Response:
+                  AOAResponse:
+                    Result:
+                      errorCode: '000'
+                      systemRecordId: '2360130828140884'
+                      primaryId: TROM122101
+                      secondaryId: KeyCli03
+                      routingNumber: '122199983'
+                      accountNumber: '89455'
+                      feeAttrib: HH
+                      AcctOwner:
+                        conditionCode: '000'
+                        nameMatch: Y
+                        firstNameMatch: Y
+                        lastNameMatch: Y
+                        middleNameMatch: N
+                        namePrefixMatch: U
+                        nameSuffixMatch: U
+                        addressMatch: Y
+                        cityMatch: Y
+                        stateMatch: Y
+                        zipCodeMatch: Y
+                        ssnMatch: Y
+                        dobMatch: Y
+                        idNoMatch: Y
+                        idStateMatch: Y
+                        overallMatchScore: '85'
+                      AcctStatus:
+                        primaryStatusCode: '699'
+                        primMessage: Open Valid
+                      Client:
+                        clientDate: '2022-12-31'
+                        clientTime: 14:00:80
+                        userDefined: ''
+                  errorResponse:
+                    businessFault:
+                      errorDescription: Description if an error is found.
+        '400':
+          description: Missing mandatory information
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A universal ID to trace the transaction across all the systems involved. The ID is unique to each request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+              example:
+                ErrorMessage: Error received from backend service
+                TransactionId: rrt-7709400285867417207-b-gce-27587-2383364-1
+                X-CorrelationId: abcgd133
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /accounts/validations/v2/verifyAccount
+                ServiceError:
+                  AOAResponse:
+                    Result:
+                      errorCode: '104'
+        '401':
+          description: Unauthorized request
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A universal ID to trace the transaction across all the systems involved. The ID is unique to each request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+              example:
+                ErrorMessage: Received request is unauthorized, please provide valid credentials
+                X-CorrelationId: abcgd133
+                TransactionId: rrt-7709400285867417207-b-gce-27587-2383364-1
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /accounts/validations/v2/verifyAccount
+        '403':
+          description: Forbidden request access
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A universal ID to trace the transaction across all the systems involved. The ID is unique to each request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+              example:
+                ErrorMessage: Access Denied for client ip
+                X-CorrelationId: abcgd133
+                TransactionId: rrt-7709400285867417207-b-gce-27587-2383364-1
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /accounts/validations/v2/verifyAccount
+        '404':
+          description: Resource not found
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A universal ID to trace the transaction across all the systems involved. The ID is unique to each request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+              example:
+                ErrorMessage: Requested resource is not found, please verify the resource then resubmit the request
+                X-CorrelationId: abcgd133
+                TransactionId: rrt-7709400285867417207-b-gce-27587-2383364-1
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /accounts/validations/v2/verifyAccount
+        '415':
+          description: Invalid request type
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A universal ID to trace the transaction across all the systems involved. The ID is unique to each request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+              example:
+                ErrorMessage: Requested media type is not allowed, please verify the media type and resubmit the request
+                X-CorrelationId: abcgd133
+                TransactionId: rrt-7709400285867417207-b-gce-27587-2383364-1
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /accounts/validations/v2/verifyAccount
+        '429':
+          description: Request timeout
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A universal ID to trace the transaction across all the systems involved. The ID is unique to each request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+              example:
+                ErrorMessage: Number requests threshold reached, please resubmit the request after sometime
+                X-CorrelationId: abcgd133
+                TransactionId: rrt-7709400285867417207-b-gce-27587-2383364-1
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /accounts/validations/v2/verifyAccount
+        '500':
+          description: Unknown error
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A universal ID to trace the transaction across all the systems involved. The ID is unique to each request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+              example:
+                ErrorMessage: Runtime error occurred in the service, please check with application support team before resubmitting the request
+                X-CorrelationId: abcgd133
+                TransactionId: rrt-7709400285867417207-b-gce-27587-2383364-1
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /accounts/validations/v2/verifyAccount
+        '502':
+          description: Bad gateway
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A universal ID to trace the transaction across all the systems involved. The ID is unique to each request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+              example:
+                ErrorMessage: Error received from backend service
+                X-CorrelationId: 2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab
+                TransactionId: rrt-7709400285867417207-b-gce-27587-2383364-1
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /accounts/validations/v2/verifyAccount
+                ServiceError:
+                  ConnectError: Connectivity error occurred with the downstream service (Unexpected EOF at target), please check with application support team before resubmitting the request
+        '503':
+          description: Unavailable service
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A universal ID to trace the transaction across all the systems involved. The ID is unique to each request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+              example:
+                ErrorMessage: Error received from backend service
+                X-CorrelationId: 2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab
+                TransactionId: rrt-7709400285867417207-b-gce-27587-2383364-1
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /accounts/validations/v2/verifyAccount
+                ServiceError:
+                  ConnectError: Service is currently unavailable (NoActiveTargets), please check with application support before resubmitting the request.
+        '504':
+          description: Unable to process request
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A universal ID to trace the transaction across all the systems involved. The ID is unique to each request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+              example:
+                ErrorMessage: Error received from backend service
+                X-CorrelationId: 2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab
+                TransactionId: rrt-7709400285867417207-b-gce-27587-2383364-1
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /accounts/validations/v2/verifyAccount
+                ServiceError:
+                  ConnectError: Request could not be processed on time (GatewayTimeout), please wait a moment and resubmit the request
+      tags:
+      - Accounts
+components:
+  schemas:
+    Client:
+      type: object
+      description: Contains the client-provided date, time, and description of the inquiry request.
+      properties:
+        clientDate:
+          type: string
+          maxLength: 10
+          format: date
+          description: 'Client-provided date the inquiry request was made. Format: YYYY-MM-DD'
+        clientTime:
+          type: string
+          maxLength: 8
+          pattern: ^$|[12][890][0-9][0-9]-[01][0-9]-[0-3][0-9]
+          format: time
+          description: 'Client-provided time the inquiry request was made. Format: HH:MM:SS'
+        userDefined:
+          type: string
+          maxLength: 255
+          description: Client-provided descriptive text about the inquiry request. This field cannot exceed 255 characters.
+    AcctOwner_1:
+      type: object
+      properties:
+        conditionCode:
+          type: string
+          maxLength: 3
+          description: Three-digit system response code that reflects the state of the account owner provided.
+        nameMatch:
+          type: string
+          maxLength: 1
+          description: 'First name, middle name, and last name match status. Valid values: Y, N, U'
+        firstNameMatch:
+          type: string
+          maxLength: 1
+          description: 'First name match status. Valid values: Y, N, U'
+        lastNameMatch:
+          type: string
+          maxLength: 1
+          description: 'Last name match status. Valid values: Y, N, U'
+        middleNameMatch:
+          type: string
+          maxLength: 1
+          description: 'Middle name or initial match status. Valid values: Y, N, U'
+        namePrefixMatch:
+          type: string
+          maxLength: 1
+          description: Name prefix match status. U will always be returned for a name prefix if included in the request.
+        nameSuffixMatch:
+          type: string
+          maxLength: 1
+          description: Name suffix match status. U will always be returned for a name suffix if included in the request.
+        businessNameMatch:
+          type: string
+          maxLength: 1
+          description: 'Business name match status. Valid values: Y, N, U'
+        addressMatch:
+          type: string
+          maxLength: 1
+          description: 'Combined address line one and two match status. Valid values: Y, N, U'
+        cityMatch:
+          type: string
+          maxLength: 1
+          description: 'City match status. Valid values: Y, N, U'
+        stateMatch:
+          type: string
+          maxLength: 1
+          description: 'State match status. Valid values: Y, N, U'
+        zipCodeMatch:
+          type: string
+          maxLength: 1
+          description: 'ZIP code match status. Valid values: Y, N, U'
+        homePhoneMatch:
+          type: string
+          maxLength: 1
+          description: 'Home phone number match status. Valid values: Y, N, U'
+        workPhoneMatch:
+          type: string
+          maxLength: 1
+          description: 'Work phone number match status. Valid values: Y, N, U'
+        ssnMatch:
+          type: string
+          maxLength: 1
+          description: 'SSN/TIN or last four digits of SSN match status. If you are a merchant provider, the value returned will always be ''U''. Valid values: Y, N, U'
+        dobMatch:
+          type: string
+          maxLength: 1
+          description: 'Date of birth match status. Valid values: Y, N, U'
+        idTypeMatch:
+          type: string
+          maxLength: 1
+          description: 'ID type match status. Valid values: Y, N, U'
+        idNoMatch:
+          type: string
+          maxLength: 1
+          description: 'ID number match status. Valid values: Y, N, U'
+        idStateMatch:
+          type: string
+          maxLength: 1
+          description: 'State or place of issuance match status. Valid values: Y, N, U'
+        overallMatchScore:
+          type: string
+          minLength: 1
+          maxLength: 3
+          description: 'The measure of how closely the inquiry request attributes match the actual account ownership data. This number is calculated based on the analysis of all information sent. Valid values: 0-100'
+    AOAResponse:
+      type: object
+      description: Contains the response payload for the account validation endpoint.
+      properties:
+        Result:
+          $ref: '#/components/schemas/Result'
+    accountValidationV2Request:
+      type: object
+      properties:
+        AOARequest:
+          $ref: '#/components/schemas/AOARequest'
+    Client_1:
+      type: object
+      description: Contains the client-provided date, time, and description of the inquiry request.
+      properties:
+        clientDate:
+          type: string
+          maxLength: 10
+          format: date
+          description: 'Client-provided date the inquiry request was made. Format: YYYY-MM-DD'
+        clientTime:
+          type: string
+          maxLength: 8
+          format: time
+          description: 'Client-provided time the inquiry request was made. Format: HH:MM:SS'
+        userDefined:
+          type: string
+          maxLength: 255
+          description: Client-provided descriptive text about the inquiry request. This field cannot exceed 255 characters.
+    systemFault:
+      type: object
+      properties:
+        errorDescription:
+          type: string
+          description: Descriptive error message that identifies if it is a system issue or business fault.
+    accountValidationV2Response:
+      required:
+      - errorResponse
+      type: object
+      properties:
+        AOAResponse:
+          $ref: '#/components/schemas/AOAResponse'
+        errorResponse:
+          $ref: '#/components/schemas/errorResponse'
+    accountValidation_POST_bodyParameters:
+      required:
+      - accountValidationV2Request
+      type: object
+      properties:
+        accountValidationV2Request:
+          $ref: '#/components/schemas/accountValidationV2Request'
+    Inquiry:
+      type: object
+      required:
+      - accountNumber
+      - routingNumber
+      - serviceType
+      - secondaryId
+      description: Contains the account inquiry request fields
+      properties:
+        serviceType:
+          type: string
+          enum:
+          - Owner
+          description: Represents the type of request made to the API. This value is case-sensitive and must be set to "Owner".
+        secondaryId:
+          type: string
+          minLength: 1
+          maxLength: 10
+          pattern: ^[a-zA-Z0-9]*$
+          description: Secondary client ID provided by KeyBank. No special characters are allowed. This value is different from your client credentials.
+        additionalId:
+          type: string
+          maxLength: 10
+          description: This ID is rarely used. If it is required, the value is provided during onboarding.
+        routingNumber:
+          type: string
+          maxLength: 9
+          pattern: ^[0-9]*$
+          description: Nine-digit routing number for the account, including leading zeroes.
+        accountNumber:
+          type: string
+          minLength: 1
+          maxLength: 17
+          description: Full bank account number, without separators or leading zeroes. The length and format depends on the bank. This field cannot exceed 17 characters.
+        AcctOwner:
+          $ref: '#/components/schemas/AcctOwner'
+        Client:
+          $ref: '#/components/schemas/Client'
+    AOARequest:
+      type: object
+      description: Contains the request payload for the account validation endpoint.
+      properties:
+        Inquiry:
+          $ref: '#/components/schemas/Inquiry'
+    errorResponse:
+      type: object
+      description: Error response with related business or system fault related information.
+      properties:
+        businessFault:
+          $ref: '#/components/schemas/businessFault'
+        systemFault:
+          $ref: '#/components/schemas/systemFault'
+    Result:
+      type: object
+      description: Contains the response results for the account owner inquiry
+      properties:
+        errorCode:
+          type: string
+          maxLength: 3
+          description: Three-digit error code. Returns a "000" when no errors are present.
+        systemRecordId:
+          type: string
+          minLength: 1
+          maxLength: 16
+          description: Unique, system-generated transaction ID.
+        primaryId:
+          type: string
+          minLength: 1
+          maxLength: 10
+          description: Primary client ID returned via a KeyBank lookup. This is a KeyBank ID.
+        secondaryId:
+          type: string
+          minLength: 1
+          maxLength: 10
+          description: Secondary client ID provided in the original request.
+        additionalId:
+          type: string
+          minLength: 1
+          maxLength: 10
+          description: Additional client ID, if provided in the original request. This is rarely used.
+        routingNumber:
+          type: string
+          maxLength: 9
+          description: Nine-digit routing number for the account provided in the original request.
+        accountNumber:
+          type: string
+          minLength: 1
+          maxLength: 17
+          description: Full bank account number provided in the original request.
+        feeAttrib:
+          type: string
+          maxLength: 2
+          description: Two-character code that represents how a transaction took place. Currently, the only value reported is "HH", which represents an ACH transaction.
+        AcctOwner:
+          $ref: '#/components/schemas/AcctOwner_1'
+        AcctStatus:
+          $ref: '#/components/schemas/AcctStatus'
+        Client:
+          $ref: '#/components/schemas/Client_1'
+    accountValidation_POST_response:
+      required:
+      - accountValidationV2Response
+      type: object
+      properties:
+        accountValidationV2Response:
+          $ref: '#/components/schemas/accountValidationV2Response'
+    AcctStatus:
+      type: object
+      description: Contains the account status details.
+      properties:
+        primaryStatusCode:
+          type: string
+          description: Primary three-digit account status code. This is an informational response code that represents the status of an account.
+        primMessage:
+          type: string
+          description: Message associated with the primary status code.
+    connectError:
+      type: object
+      properties:
+        ConnectError:
+          type: string
+          description: API connectivity error information, if available.
+    exception:
+      type: object
+      title: exceptionSchema
+      properties:
+        ErrorMessage:
+          type: string
+          description: A human-readable message that describes the type or source of the error.
+          example: Requested resource is not found, please verify the resource then resubmit the request.
+        TransactionId:
+          type: string
+          description: A unique transaction ID returned with the response, useful for traceability.
+          example: rrt-7354978519411102852-c-gce-30597-7590748-1
+        X-CorrelationId:
+          type: string
+          description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          example: 2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab
+        TransactionTime:
+          type: string
+          description: Date (YYYY-MM-DD) and time (HH:MM:SS) the error occurred.
+        Api-Url:
+          type: string
+          description: The API URL path of the call that generated the response.
+        ServiceError:
+          type: object
+          title: ServiceError
+          description: Detailed service-level error details, if available.
+          oneOf:
+          - $ref: '#/components/schemas/serviceErrorData'
+          - $ref: '#/components/schemas/connectError'
+    businessFault:
+      type: object
+      properties:
+        errorDescription:
+          type: string
+          description: Contains business system messages generated if there is an issue.
+    AcctOwner:
+      type: object
+      description: Contains details about the account owner to for a more advanced inquiry.
+      properties:
+        firstName:
+          type: string
+          minLength: 1
+          maxLength: 40
+          description: First name of the account owner. Required with lastName for a personal inquiry.
+        lastName:
+          type: string
+          minLength: 1
+          maxLength: 40
+          description: Last name of the account owner. Required with firstName for a personal inquiry.
+        middleName:
+          type: string
+          maxLength: 40
+          pattern: ^[a-zA-Z]*$
+          description: Middle initial or name of the account owner. If the middle initial is provided do not include a period.
+        namePrefix:
+          type: string
+          minLength: 1
+          maxLength: 4
+          description: 'Optional name prefix of the account owner. This field cannot exceed four characters. Example: Dr., Mr., Mrs.'
+        nameSuffix:
+          type: string
+          minLength: 1
+          maxLength: 4
+          description: 'Optional name suffix of the account owner. This field cannot exceed four characters. Example: Jr., PhD'
+        businessName:
+          type: string
+          minLength: 1
+          maxLength: 87
+          description: Business name or the individual's full name (first and last name) that owns the account. This is a required field for a business inquiry.
+        addressLine1:
+          type: string
+          minLength: 1
+          maxLength: 40
+          description: First line of the address on the account. This field cannot exceed 40 characters.
+        addressLine2:
+          type: string
+          minLength: 1
+          maxLength: 40
+          description: Second line of the address on the account. For international addresses, combine province, country, and postal code in this second address line.
+        city:
+          type: string
+          minLength: 1
+          maxLength: 25
+          description: The city of the account owner if in the US. Keep this field blank for international addresses.
+        state:
+          type: string
+          maxLength: 2
+          description: The two-character state abbreviation if in the US. Keep this field blank for international addresses.
+        zipCode:
+          type: string
+          minLength: 5
+          maxLength: 10
+          pattern: ^$|^[0-9]{5}(-?[0-9]{4})?$
+          description: 'ZIP code of the account if in the US. This can either be five digits or nine digits. If a nine-digit ZIP code is provided, a dash between the groups of digits is acceptable. Do not use a space. Possible examples: 52255, 522551313, or 52255-1313. Keep this field blank for international addresses.'
+        homePhone:
+          type: string
+          maxLength: 10
+          pattern: ^$|^\d{10}$
+          description: 10-digit home phone number on the account. Do not add dashes, parenthesis, or any other non-numeric value.
+        workPhone:
+          type: string
+          maxLength: 10
+          pattern: ^$|^\d{10}$
+          description: 10-digit work phone number on the account. Do not add dashes, parenthesis, or any other non-numeric value.
+        ssn:
+          type: string
+          description: Full social security/tax ID number or the last four digits of the social security number of the account owner.
+          minLength: 4
+          maxLength: 9
+        dob:
+          type: string
+          maxLength: 8
+          pattern: ^$|[12][890][0-9][0-9][01][0-9][0-3][0-9]
+          description: 'Date of birth for the individual on the account. Format: YYYYMMDD'
+        idType:
+          type: string
+          enum:
+          - '0'
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - '5'
+          - '6'
+          - '7'
+          - '8'
+          - '9'
+          - A
+          - B
+          - C
+          - D
+          - E
+          - F
+          - G
+          - H
+          - I
+          - J
+          - K
+          - L
+          - M
+          - N
+          - O
+          - P
+          - Q
+          - R
+          - S
+          - T
+          - U
+          - V
+          - W
+          - X
+          - Y
+          - Z
+          - ''
+          maxLength: 1
+          description: 'One-character code that represents the type of identification used to verify the account owner. Valid values: 0-9, A-Z'
+        idNo:
+          type: string
+          minLength: 1
+          maxLength: 28
+          description: ID number for the account owner's form of identification. This field cannot exceed 28 characters.
+        idState:
+          type: string
+          minLength: 2
+          maxLength: 6
+          pattern: ^$|^([a-zA-Z0-9]{2}|[a-zA-Z0-9]{6})$
+          description: Two-character state of issuance for the account owner's form of identification. If not a US state, enter the place of issuance. This field must be between 2-6 characters in length.
+    serviceErrorData:
+      type: object
+      properties:
+        AOAResponse:
+          type: object
+          properties:
+            Result:
+              type: object
+              properties:
+                errorCode:
+                  type: string
+                  maxLength: 3
+                  description: Three-digit error code. Returns a "000" when no errors are present.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

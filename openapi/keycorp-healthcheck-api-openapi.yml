@@ -1,0 +1,327 @@
+openapi: 3.2.0
+info:
+  title: Keycorp Health Check API
+  version: '1.0'
+  description: 'Operations tagged HealthCheck across 7 of this provider''s published API definitions: keycorp-account-validation-openapi.yml, keycorp-ach-inquiry-openapi.yml, keycorp-ach-originations-openapi.yml, keycorp-check-services-openapi.yml, keycorp-rtp-inquiry-openapi.yml, keycorp-rtp-wire-payments-openapi.yml, keycorp-wire-inquiry-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://partner-api-qv.key.com
+- url: https://partner-api.key.com
+tags:
+- name: HealthCheck
+paths:
+  /accounts/validations/v2/healthCheck:
+    get:
+      tags:
+      - HealthCheck
+      summary: Health check
+      description: Verify you can connect to the API service. A bearer token is required.
+      operationId: healthCheck
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/healthResponse'
+              example:
+                Status: Ok
+                Source: Roundtrip
+                Timestamp: '2022-09-15T04:49:03'
+                ClientIp: 156.77.111.28
+                X-Forwarded-For: '[156.77.111.28]'
+    servers:
+    - url: https://partner-api-qv.key.com
+    - url: https://partner-api.key.com
+  /accounts/transactions/v1/healthCheck:
+    get:
+      tags:
+      - HealthCheck
+      summary: Health check
+      description: Verify you can connect to the API service. A bearer token is required.
+      operationId: healthCheck
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          headers:
+            X-CorrelationId:
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+              example:
+                Status: Ok
+                Source: Roundtrip
+                Timestamp: '2022-09-15T04:49:03'
+                ClientIp: 192.0.2.1
+                X-Forwarded-For: '[192.0.2.1]'
+    servers:
+    - url: https://partner-api-qv.key.com
+      description: Non-Production environment (QV)
+    - url: https://partner-api.key.com
+      description: Production and Simulator environment
+  /ach/payments/v1/healthCheck:
+    get:
+      tags:
+      - HealthCheck
+      summary: Health check
+      description: Verify you can connect to the API service. A bearer token is required.
+      operationId: healthCheck
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: Universal id to trace the transaction across all the systems involved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/healthResponse_2'
+              example:
+                Status: Ok
+                Source: Roundtrip
+                Timestamp: '2022-09-15T04:49:03'
+                ClientIp: 156.77.111.28
+                X-Forwarded-For: '[156.77.111.28]'
+    servers:
+    - url: https://partner-api-qv.key.com
+    - url: https://partner-api.key.com
+  /commercial/checks/v1/healthCheck:
+    get:
+      tags:
+      - HealthCheck
+      summary: Health check
+      operationId: healthCheck
+      description: Verify you can connect to the API service. A bearer token is required.
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+              example:
+                Status: Ok
+                Source: Roundtrip
+                Timestamp: '2022-09-15T04:49:03'
+                ClientIp: 192.0.2.1
+                X-Forwarded-For: '[192.0.2.1]'
+    servers:
+    - url: https://partner-api-qv.key.com
+    - url: https://partner-api.key.com
+  /rtp/v1/healthCheck:
+    get:
+      tags:
+      - HealthCheck
+      summary: Health check
+      description: Verify you can connect to the API service. A bearer token is required.
+      operationId: healthCheck
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          headers:
+            X-CorrelationId:
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+              example:
+                Status: Ok
+                Source: Roundtrip
+                Timestamp: '2022-09-15T04:49:03'
+                ClientIp: 192.0.2.1
+                X-Forwarded-For: '[192.0.2.1]'
+    servers:
+    - url: https://partner-api-qv.key.com
+      description: Non-Production environment (QV)
+    - url: https://partner-api.key.com
+      description: Production and Simulator environment
+  /rtp/v1/payment/healthCheck:
+    get:
+      tags:
+      - HealthCheck
+      summary: Health check
+      description: Verify you can connect to the API service. A bearer token is required.
+      operationId: healthCheckv1
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          headers:
+            X-CorrelationId:
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+              style: simple
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/healthResponse_3'
+              example:
+                Status: Ok
+                Source: Roundtrip
+                Timestamp: '2022-09-16T02:36:20'
+                ClientIp: 156.77.111.28
+                X-Forwarded-For: '[156.77.111.28]'
+    servers:
+    - url: https://partner-api-qv.key.com
+    - url: https://partner-api.key.com
+  /wireInquiry/v1/healthCheck:
+    get:
+      tags:
+      - HealthCheck
+      summary: Health check
+      description: Verify you can connect to the API service. A bearer token is required.
+      operationId: healthCheck
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          headers:
+            X-CorrelationId:
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+              example:
+                Status: Ok
+                Source: Roundtrip
+                Timestamp: '2022-09-15T04:49:03'
+                ClientIp: 192.0.2.1
+                X-Forwarded-For: '[192.0.2.1]'
+    servers:
+    - url: https://partner-api-qv.key.com
+      description: Non-Production environment (QV)
+    - url: https://partner-api.key.com
+      description: Production and Simulator environment
+components:
+  schemas:
+    healthResponse:
+      type: object
+      title: healthResponse
+      properties:
+        Status:
+          type: string
+          description: Status of the health check response.
+        Source:
+          type: string
+          description: Origin of the system response can be 'Gateway' or 'Roundtrip'. Roundtrip returns a response from the farthest system involved.
+        Timestamp:
+          type: string
+          description: Date (YYYY-MM-DD) and time (HH:MM:SS) of response from the API service.
+        ClientIp:
+          type: string
+          description: Client IP address the gateway receives from the request.
+        X-Forwarded-For:
+          type: string
+          description: Sequence of IP addresses for systems between the client and the gateway.
+    HealthResponse:
+      type: object
+      title: healthResponse
+      properties:
+        Status:
+          type: string
+          description: Status of the health check response.
+          examples:
+          - Ok
+        Source:
+          type: string
+          description: Origin of the system response can be 'Gateway' or 'Roundtrip'. Roundtrip returns a response from the farthest system involved.
+          examples:
+          - Gateway
+          - Roundtrip
+        Timestamp:
+          type: string
+          description: Date (YYYY-MM-DD) and time (HH:MM:SS) of response from the API service.
+          pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$
+          examples:
+          - '2022-09-15T04:49:03'
+        ClientIp:
+          type: string
+          description: Client IP address the gateway receives from the request.
+          examples:
+          - 192.0.2.1
+        X-Forwarded-For:
+          type: string
+          description: Sequence of IP addresses for systems between the client and the gateway.
+          examples:
+          - '[192.0.2.1]'
+    healthResponse_2:
+      type: object
+      title: healthResponse
+      description: The response for a successful API health check.
+      properties:
+        Status:
+          type: string
+          description: The status of the health check response.
+        Source:
+          type: string
+          description: The origin of the system response can be 'Gateway' or 'Roundtrip'. Roundtrip returns a response from the farthest system involved.
+        Timestamp:
+          type: string
+          description: The date (YYYY-MM-DD) and time (HH:MM:SS) of response from the API service.
+        ClientIp:
+          type: string
+          description: The client IP address the gateway receives from the request.
+        X-Forwarded-For:
+          type: string
+          description: The sequence of the IP addresses for systems between the client and the gateway.
+    healthResponse_3:
+      title: healthResponse
+      type: object
+      description: The response for a successful API health check.
+      properties:
+        Status:
+          type: string
+          description: The status of the health check response.
+        Source:
+          type: string
+          description: The system that produces the health response. The origin of the response can be 'Gateway' or 'Roundtrip.' Roundtrip returns a response from the farthest system involved.
+        Timestamp:
+          type: string
+          description: The date (YYYY-MM-DD) and time (HH:MM:SS) of response from the API service.
+        ClientIp:
+          type: string
+          description: The client IP address the gateway receives from the request.
+        X-Forwarded-For:
+          type: string
+          description: The sequence of the IP addresses for systems between the client and the gateway. Addresses are separated by a comma.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+x-refined-from:
+- keycorp-account-validation-openapi.yml
+- keycorp-ach-inquiry-openapi.yml
+- keycorp-ach-originations-openapi.yml
+- keycorp-check-services-openapi.yml
+- keycorp-rtp-inquiry-openapi.yml
+- keycorp-rtp-wire-payments-openapi.yml
+- keycorp-wire-inquiry-openapi.yml

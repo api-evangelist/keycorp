@@ -1,0 +1,746 @@
+openapi: 3.2.0
+info:
+  title: RTP and Wire Payments Validate API
+  description: 'The RTP and Wire Payments API is a single product with two service capabilities: real-time payments (RTP) and wire transfers (WIRE). Specific permissions are required to access either the RTP Send Payment API or the Wires Transfer API. You can initiate a payment, check on its status, and get information about participating parties.'
+  contact:
+    name: KeyBank Developer Support
+    email: developers@keybank.com
+  version: 1.3.3
+servers:
+- url: https://partner-api-qv.key.com
+- url: https://partner-api.key.com
+tags:
+- name: Validate
+  description: Perform validation checks for a payment transaction.
+paths:
+  /rtp/v1/payment/validate:
+    post:
+      tags:
+      - Validate
+      summary: Perform validation checks
+      description: This call performs all the validation checks needed to initiate a payment without creating a payment.
+      operationId: Payment-Validate
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: KeyClientId
+        in: header
+        description: Unique ID provided by KeyBank during onboarding. This is different from your client credentials. It is required for each call.
+        schema:
+          type: string
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/paymentTransactionRequestV1'
+            example:
+              requestedService: RTP
+              requestReference: AZX01234567891011
+              type: PAYMENT
+              requestedValueDate: 2025-12-15
+              originatorReference: null
+              sendersReference: INVC0012345
+              receiversReference: INVC0054321
+              ultimateDebitParty:
+                name: CLARK GABLE
+              debitParty:
+                name: CLARK GABLE
+                accountNumber: '001122334455'
+              creditPartyBank:
+                name: CARY GRANT'S BANK
+                aba: 123456789
+              creditParty:
+                name: CARY GRANT
+                accountNumber: 987654321
+                postalAddress:
+                  adrTp: HOME
+                  dept: Test Dept
+                  subDept: Test Sub Dept
+                  strtNm: Main Street
+                  bldgNb: 123
+                  pstCd: 12345
+                  twnNm: Central Town
+                  ctrySubDvsn: OH
+                  ctry: US
+              transferAmount: 10.0
+              transferCurrency: USD
+              customData: ''
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/paymentTransactionResponse'
+              example:
+                status: VALID
+                transactionId: XZ23050714000000
+                requestReference: testWBB25889710252
+                sendersReference: INVC0012345
+                receiversReference: INVC0054321
+                debitAccountNumber: '12345'
+                creditAccountNumber: '987654321'
+                transferAmount: 10
+                transferCurrency: USD
+        '400':
+          description: Missing data in the request
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+              example:
+                ErrorMessage: Error received from backend service.
+                X-CorrelationId: 2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab
+                TransactionId: US21052400000000
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /rtp/v1/payment/validate
+                ServiceError:
+                  status: FAILED
+                  transactionId: rrt-770941720727587-2383364-1
+                  requestReference: RR-220818-01
+                  sendersReference: SR-220818-01
+                  valueDate: 2023-05-10
+                  error:
+                    code: KEY-1006
+                    title: Required field missing
+                    description: The object creditPartyBank is required in the request.
+        '401':
+          description: Received request is unauthorized
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations. The ID is unique to each request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+              example:
+                ErrorMessage: Error received from backend service.
+                TransactionId: rrt-621075741872460927-c-gce-9129-15867185-4
+                X-CorrelationId: 80457bcb-2c3b-8c55-8cd6-3520c3157e8f
+                TransactionTime: '2022-04-04T11:41:13.754Z'
+                Api-Url: /rtp/v1/payment/validate
+                ServiceError:
+                  status: ERROR
+                  transactionId: rrt-621075741872460927
+                  requestReference: REQUEST-REF-220314.1
+                  sendersReference: SENDER-REF-220314.1
+                  valueDate: 06-10-2023
+                  error:
+                    code: KEY-0006
+                    title: Not authorized for requested service
+                    description: Check your credentials.
+                  doddFrank: 'NO'
+        '403':
+          description: Request is forbidden to access the resource
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+              example:
+                ErrorMessage: Access to requested resource is forbidden.
+                X-CorrelationId: 2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab
+                TransactionId: rrt-7709400285867417207-b-gce-27587-2383364-1
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /rtp/v1/payment/validate
+        '404':
+          description: Requested resource is not found
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+              example:
+                ErrorMessage: Requested resource is not found, please verify the resource and resubmit the request.
+                X-CorrelationId: 2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab
+                TransactionId: rrt-7709400285867417207-b-gce-27587-2383364-1
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /rtp/v1/payment/validate
+        '405':
+          description: Requested method is not allowed
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+              example:
+                ErrorMessage: Requested method is not allowed, please verify the method and resubmit the request.
+                X-CorrelationId: 2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab
+                TransactionId: rrt-7709400285867417207-b-gce-27587-2383364-1
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /rtp/v1/payment/validate
+        '415':
+          description: Requested unsupported media type
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+              example:
+                ErrorMessage: Requested media type is not allowed, please verify the media type and resubmit the request.
+                X-CorrelationId: 2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab
+                TransactionId: rrt-7709400285867417207-b-gce-27587-2383364-1
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /rtp/v1/payment/validate
+        '429':
+          description: Too many requests received
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+              example:
+                ErrorMessage: Number requests threshold reached, please resubmit the request after sometime.
+                X-CorrelationId: 2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab
+                TransactionId: rrt-7709400285867417207-b-gce-27587-2383364-1
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /rtp/v1/payment/validate
+        '500':
+          description: Internal server error
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+              example:
+                ErrorMessage: Error received from backend service.
+                TransactionId: 359681587523_SR-RMC-210729-11081
+                X-CorrelationId: 7ad7fdfb-2ade-a3ab-b97c-523dc5312688
+                TransactionTime: '2022-04-05T07:59:15.422Z'
+                Api-Url: /rtp/v1/payment/validate
+                ServiceError:
+                  status: ERROR
+                  transactionId: rrt-621075741872460927
+                  requestReference: REQUEST-REF-220314.1
+                  sendersReference: SENDER-REF-220314.1
+                  valueDate: 06-10-2023
+                  error:
+                    code: KEY-9999
+                    title: Unknown error
+                    description: 'Payment Initiation ServiceException: AUTHENTICATION_FAILURE Unable to logon with the supplied credentials.'
+                    detail:
+                      code: KEY-1005
+                      title: Error
+                      description: Additional information about error code.
+                  doddFrank: 'NO'
+        '502':
+          description: Bad Gateway
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+              example:
+                ErrorMessage: Error received from backend service.
+                X-CorrelationId: 2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab
+                TransactionId: rrt-7709400285867417207-b-gce-27587-2383364-1
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /rtp/v1/payment/validate
+                ServiceError:
+                  ConnectError: Connectivity error occurred with the downstream service (unexpected EOF at target). Please check with application support team before resubmitting the request
+        '503':
+          description: Service Unavailable
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+              example:
+                ErrorMessage: Error received from backend service.
+                X-CorrelationId: 2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab
+                TransactionId: rrt-7709400285867417207-b-gce-27587-2383364-1
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /rtp/v1/payment/validate
+                ServiceError:
+                  ConnectError: Service is currently unavailable (NoActiveTargets), please check with application support before resubmitting the request.
+        '504':
+          description: Gateway timeout
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+              example:
+                ErrorMessage: Your request took too long to process. Please try again.
+                X-CorrelationId: 2ebd5c24-0e8d-5a70-0e91-ffd2727c1aab
+                TransactionId: rrt-7709400285867417207-b-gce-27587-2383364-1
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /rtp/v1/payment/validate
+                ServiceError:
+                  ConnectError: Request could not be processed on time (gateway timeout). Please wait a moment and resubmit the request.
+components:
+  schemas:
+    foreignBankSystemType:
+      type: object
+      properties:
+        type:
+          type: string
+          description: The five character global routing code for a foreign financial institution.
+          enum:
+          - ATBLZ
+          - AUBSB
+          - CACPA
+          - CHBCC
+          - CHSIC
+          - CNAPS
+          - DEBLZ
+          - ESNCC
+          - GBDSC
+          - GRBIC
+          - HKNCC
+          - IENCC
+          - INFSC
+          - ITNCC
+          - JPZGN
+          - NZNCC
+          - PLKNR
+          - PTNCC
+          - RUCBC
+          - SESBA
+          - SGIBG
+          - THCBC
+          - TWNCC
+          - USABA
+          - USPID
+          - ZANCC
+        id:
+          type: string
+          description: The identification number associated with the foreign financial institution.
+    exception:
+      title: exceptionSchema
+      type: object
+      description: Contains information about the errors related to the request.
+      properties:
+        ErrorMessage:
+          type: string
+          description: A human-readable message that describes the type or source of the error.
+        TransactionId:
+          type: string
+          description: A unique transaction ID returned with the response, useful for traceability.
+        TransactionTime:
+          type: string
+          description: Date (YYYY-MM-DD) and time (HH:MM:SS) the error occurred.
+        Api-Url:
+          type: string
+          description: The API URL path of the call that generated the response.
+        ServiceError:
+          type: object
+          title: ServiceError
+          description: Detailed service-level error details, if available.
+          oneOf:
+          - $ref: '#/components/schemas/serviceErrorData'
+          - $ref: '#/components/schemas/connectError'
+    serviceErrorData:
+      title: serviceErrorData
+      required:
+      - status
+      type: object
+      description: The service error returns the same response payload as a successful response with additional details specific to the error.
+      properties:
+        status:
+          description: 'The status of the payment transaction. Valid values: IN_PROCESS, IN_REVIEW, COMPLETED, FAILED, RETURNED, ERROR, VALID'
+          $ref: '#/components/schemas/paymentStatus'
+        transactionId:
+          type: string
+          description: The unique ID number associated with the original payment request in KeyBank's payment system.
+        requestReference:
+          type: string
+          description: A unique reference value for the original request that is useful for traceability and reporting. The ID cannot exceed 32 characters.
+          minLength: 1
+          maxLength: 32
+        sendersReference:
+          type: string
+          description: Unique reference value provided by the sender. The ID cannot exceed 32 characters.
+          minLength: 1
+          maxLength: 32
+        receiversReference:
+          type: string
+          description: The sender reference value from the original request. This is useful for traceability and reporting.
+          minLength: 1
+          maxLength: 140
+        debitAccountNumber:
+          type: string
+          description: The sender reference value from the original request. This is useful for traceability and reporting.
+          minLength: 1
+          maxLength: 34
+        creditAccountNumber:
+          type: string
+          description: The sender reference value from the original request. This is useful for traceability and reporting.
+          minLength: 1
+          maxLength: 34
+        valueDate:
+          type: string
+          description: The date (YYYY-MM-DD) the transferred occurred.
+        error:
+          description: Additional error information for payment transactions with the status ERROR.
+          $ref: '#/components/schemas/paymentError'
+        doddFrank:
+          description: The initial assessment of whether the transaction qualifies as a Dodd-Frank wire transaction. This value can change during the payment cycle.
+          $ref: '#/components/schemas/noYesType'
+    paymentTransactionRequestV1:
+      title: paymentTransactionRequestV1
+      required:
+      - requestedService
+      - requestReference
+      - type
+      - requestedValueDate
+      - sendersReference
+      - debitParty
+      - creditPartyBank
+      - creditParty
+      - transferAmount
+      - transferCurrency
+      type: object
+      description: Contains the request body for payment initiation or validation.
+      properties:
+        requestedService:
+          type: string
+          description: 'The type of payment transaction. The transaction request is valid only for the API products with granted access. This field is case-sensitive, and values must be provided in all capital letters. Valid values: RTP, WIRE.'
+          enum:
+          - RTP
+          - WIRE
+        requestReference:
+          type: string
+          description: Unique API request identifier for idempotency and retries. The ID cannot exceed 32 characters.
+          minLength: 1
+          maxLength: 32
+        type:
+          type: string
+          description: For both RTP and Wire, the value is always PAYMENT.
+          enum:
+          - PAYMENT
+          - DRAFT
+        requestedValueDate:
+          type: string
+          description: Date (YYYY-MM-DD) the transfer will occur.
+        originatorReference:
+          type: string
+          description: An additional reference value that is meaningful to the party originating the payment.
+          minLength: 1
+          maxLength: 35
+        sendersReference:
+          type: string
+          description: Unique reference value provided by the sender. The ID cannot exceed 32 characters.
+          minLength: 1
+          maxLength: 32
+        receiversReference:
+          type: string
+          description: A reference value for the beneficiary. This value cannot exceed 140 characters.
+          minLength: 1
+          maxLength: 140
+        bankToBankInstructions:
+          type: string
+          description: Area to share messages or instructions from one bank to another bank. This cannot exceed 140 characters.
+          minLength: 1
+          maxLength: 140
+        ultimateDebitParty:
+          description: Typically this is the name of the party that instructed the debit party to initiate a payment. This value cannot exceed 140 characters.
+          $ref: '#/components/schemas/ultParty'
+        debitParty:
+          description: Details about the debit party in the transaction. The name is required.
+          $ref: '#/components/schemas/party'
+        debitPartyBank:
+          description: Details about the bank of the debit party. The name is required.
+          $ref: '#/components/schemas/party'
+        debitPartyInstructions:
+          description: Instructions particular to the debit party that stay with the transaction. This cannot exceed 140 characters.
+          minLength: 1
+          maxLength: 140
+        intermediaryBank1:
+          description: Details about the financial institution sent the funds. You must enter a name for any party identified in the request and cannot exceed 140 characters.
+          $ref: '#/components/schemas/party'
+        intermediaryBank2:
+          description: Details about a second financial institution sent the funds. You must enter a name for any party identified in the request and cannot exceed 140 characters.
+          $ref: '#/components/schemas/party'
+        intermediaryBank3:
+          description: Details about a third financial institution sent the funds. You must enter a name for any party identified in the request and cannot exceed 140 characters.
+          $ref: '#/components/schemas/party'
+        creditPartyBank:
+          description: Details about the financial institution that will receive the funds. The name is require for requests.
+          $ref: '#/components/schemas/party'
+        creditParty:
+          description: Details about the party that will receive the funds. The name is required.
+          $ref: '#/components/schemas/party'
+        transferAmount:
+          type: number
+          format: double
+          description: Amount of money to transfer in the correct currency format.
+          maximum: 999999999999999999
+          examples:
+          - 101.5
+          - 101
+          - 101.5
+        transferCurrency:
+          type: string
+          description: Currency code for the transfer amount. Must be USD.
+          pattern: '[A-Z]{3,3}'
+        externalTemplateName:
+          type: string
+          description: The name of an externally managed wire template used to initiate the payment. This value is stored and displayed for billing and reporting purposes. Required when initiating wires using an external template. If provided, the value must match a valid template known to the processing system.
+          minLength: 1
+          maxLength: 2048
+        customData:
+          type: string
+          description: The values for custom data is defined by the client. This free-form text field can contain up to 500 alphanumeric characters. Custom information stays with the transaction through its lifecycle.
+          pattern: ^\s*
+          minLength: 0
+          maxLength: 500
+    paymentError:
+      required:
+      - code
+      - title
+      type: object
+      description: Error messages related to the API and backend services.
+      properties:
+        code:
+          type: string
+          description: Status code assigned to each error type.
+        title:
+          type: string
+          description: Brief title about the error associated with the status code.
+        description:
+          type: string
+          description: Description of the error.
+        detail:
+          type: object
+          description: Additional details about the error from the payment network.
+          properties:
+            code:
+              type: string
+              description: A static code assigned by the network or payment system.
+            title:
+              type: string
+              description: Brief title about the error associated with the status code.
+            description:
+              type: string
+              description: Description of the error
+    party:
+      title: party
+      required:
+      - name
+      type: object
+      description: Details about the parties involved in the transaction.
+      properties:
+        name:
+          type: string
+          description: Name of the party. This can be an individual, a financial institution, or a beneficiary. The name is required for the creditParty. This cannot exceed 140 characters.
+          maxLength: 140
+        accountNumber:
+          description: Account number of the party. If this is a wire transfer, you must provide the name and address with the account number for all parties, except debitParty and debitPartyBank. This cannot exceed 34 digits.
+          type: string
+          minLength: 1
+          maxLength: 34
+        aba:
+          type: string
+          description: The ABA or routing number of the financial institution. If this is a wire transfer, you do not need to provide other account information like address or name, unless it is for debitParty or debitPartyBank. This cannot exceed 9 digits.
+          pattern: '[0-9]{9,9}'
+          maxLength: 9
+        bic:
+          type: string
+          description: The bank identifier code (BIC) for the party. This is a combination code that identifies the bank, country, location, and possibly the bank branch.
+          pattern: '[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}'
+        txid:
+          type: string
+          description: The tax identification number for the party.
+        foreignBankSystemId:
+          description: For wire transfer to a financial institution located internationally or outside of the United States, this is the global routing number and identification number.
+          $ref: '#/components/schemas/foreignBankSystemType'
+        postalAddress:
+          type: object
+          description: The address of the party. If the address is present in the request, all fields are required.
+          properties:
+            adrTp:
+              type: string
+              description: 'Address type for the party that specifies if it is a home, business, or mailing address. Valid values: ADDR, PBOX, HOME, BIZZ, MLTO, DLVY'
+              enum:
+              - ADDR
+              - PBOX
+              - HOME
+              - BIZZ
+              - MLTO
+              - DLVY
+            dept:
+              type: string
+              description: Department of the party for the mailing address, if applicable. This field cannot exceed 70 characters.
+              minLength: 1
+              maxLength: 70
+            subDept:
+              type: string
+              description: Sub-department of the party, if applicable. This field cannot exceed 70 characters.
+              minLength: 1
+              maxLength: 70
+            strtNm:
+              type: string
+              description: Street address for the party. This field cannot exceed 70 characters.
+              minLength: 1
+              maxLength: 70
+            bldgNb:
+              type: string
+              description: Building number. This field cannot exceed 16 characters.
+              minLength: 1
+              maxLength: 16
+            pstCd:
+              type: string
+              description: The postal code or zip code for the address. This field cannot exceed 16 characters.
+              minLength: 1
+              maxLength: 16
+            twnNm:
+              type: string
+              description: Name of the town. This field cannot exceed 35 characters.
+              minLength: 1
+              maxLength: 35
+            ctrySubDvsn:
+              type: string
+              description: Name of subdivision of a country like a state, region, or county. This field cannot exceed 35 characters.
+              minLength: 1
+              maxLength: 35
+            ctry:
+              type: string
+              description: Two-character country abbreviation.
+              pattern: '[A-Z]{2,2}'
+            adrLine:
+              type: array
+              maxItems: 3
+              description: An unstructured address line. You can have up to three lines of text. Each line can be 70 characters or less.
+              items:
+                type: string
+                maxLength: 70
+    paymentStatus:
+      type: string
+      description: 'The status of the payment transaction. Valid values: IN_PROCESS, IN_REVIEW, COMPLETED, FAILED, RETURNED, ERROR, VALID'
+      enum:
+      - IN_PROCESS
+      - IN_REVIEW
+      - COMPLETED
+      - FAILED
+      - RETURNED
+      - ERROR
+      - VALID
+    connectError:
+      type: object
+      properties:
+        ConnectError:
+          type: string
+          description: API connectivity error information, if available.
+    paymentTransactionResponse:
+      required:
+      - status
+      type: object
+      description: Contains the response body with payment transaction details.
+      properties:
+        status:
+          description:
+            description: 'The status of the payment transaction. Valid values: IN PROCESS, IN REVIEW, COMPLETED, FAILED, RETURNED, ERROR, VALID'
+          $ref: '#/components/schemas/paymentStatus'
+        transactionId:
+          type: string
+          description: The unique ID number associated with the original payment request in KeyBank's payment system.
+        requestReference:
+          type: string
+          description: A unique reference value for the original request that is useful for traceability and reporting. The ID cannot exceed 32 characters.
+          minLength: 1
+          maxLength: 32
+        sendersReference:
+          type: string
+          description: Unique reference value provided by the sender. The ID cannot exceed 32 characters.
+          minLength: 1
+          maxLength: 32
+        receiversReference:
+          type: string
+          description: A reference value for the beneficiary. This value cannot exceed 140 characters.
+          minLength: 1
+          maxLength: 140
+        debitAccountNumber:
+          type: string
+          description: Debit account number. This cannot exceed 34 digits.
+          maxLength: 34
+        creditAccountNumber:
+          type: string
+          description: Credit account number. This cannot exceed 34 digits.
+          maxLength: 34
+        valueDate:
+          type: string
+          description: The date (YYYY-MM-DD) the transfer occurred.
+        transferAmount:
+          type: number
+          format: double
+          description: Amount of money to transfer in the correct currency format.
+          maximum: 999999999999999999
+          examples:
+          - 101.5
+          - 101
+          - 101.5
+        transferCurrency:
+          type: string
+          description: Currency code for the transfer amount. Must be USD.
+        error:
+          $ref: '#/components/schemas/paymentError'
+        doddFrank:
+          description: The initial assessment of whether the transaction qualifies as a Dodd-Frank wire transaction. This value can change during the payment cycle.
+          $ref: '#/components/schemas/noYesType'
+        clearingSystemReference:
+          type: string
+          description: A reference value for the beneficiary. This value cannot exceed 140 characters.
+          maxLength: 140
+    ultParty:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Typically this is the name of the party that instructed the debit party to initiate a payment. This applies only to RTP transactions and the value cannot exceed 140 characters.
+          minLength: 1
+          maxLength: 140
+    noYesType:
+      type: string
+      description: This field indicates whether the transaction qualifies for Dodd-Frank.
+      enum:
+      - true
+      - false
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

@@ -1,0 +1,333 @@
+openapi: 3.2.0
+info:
+  title: ACH Origination Undo ACH Payment Request API
+  description: Use the ACH Origination API to submit a payment. This API is more than a single action. With the ACH Origination API, you can submit a payment, check on its status, and undo a request.
+  contact:
+    name: KeyBank Developer Support
+    email: developers@keybank.com
+  version: 1.3.4
+servers:
+- url: https://partner-api-qv.key.com
+- url: https://partner-api.key.com
+security:
+- bearerAuth: []
+tags:
+- name: Undo ACH Payment Request
+paths:
+  /ach/payments/v1/undo:
+    post:
+      tags:
+      - Undo ACH Payment Request
+      summary: Undo a payment request
+      description: Reverse a payment request before it enters consolidation.
+      operationId: achPaymentUndo
+      security:
+      - bearerAuth: []
+      requestBody:
+        description: DetailStatusRequestEnvelope having parameters for initiating ACH Payment request for undo.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/detailUndoRequestEnvelope'
+            example:
+              uuid: qas220517x-49eb-47664-b94rhd1-e52e2re13001
+        required: true
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/baseDetailResponse'
+              example:
+                uuid: qas220517x-49eb-47664-b94rhd1-e52e2re13001
+                status: accepted
+                errorMessages:
+                - code: 1006040-651
+                - moreInfo: Effective date assigned 220411
+                informationMessages:
+                - code: 1006040-651
+                - moreInfo: Effective date assigned 220411
+                traceNumber: 041001030008013
+        '400':
+          description: Missing mandatory information
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+              example:
+                ErrorMessage: Mandatory data not provided, please verify the data and resubmit the request
+                TransactionId: rrt-7709400285867417207-b-gce-27587-2383364-1
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /ach/payments/v1/undo
+        '401':
+          description: Unauthorized request
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+              example:
+                ErrorMessage: Received request is unauthorized, please provide valid credentials
+                TransactionId: rrt-7709400285867417207-b-gce-27587-2383364-1
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /ach/payments/v1/undo
+        '403':
+          description: Forbidden request access
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+              example:
+                ErrorMessage: Access to requested resource is forbidden
+                TransactionId: rrt-7709400285867417207-b-gce-27587-2383364-1
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /ach/payments/v1/undo
+        '404':
+          description: Resource not found
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+              example:
+                ErrorMessage: Requested resource is not found, please verify the resource then resubmit the request
+                TransactionId: rrt-7709400285867417207-b-gce-27587-2383364-1
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /ach/payments/v1/undo
+        '405':
+          description: Invalid request method
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+              example:
+                ErrorMessage: Requested method is not allowed, please verify the method and resubmit the request
+                TransactionId: rrt-7709400285867417207-b-gce-27587-2383364-1
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /ach/payments/v1/undo
+        '415':
+          description: Invalid request type
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+              example:
+                ErrorMessage: Requested media type is not allowed, please verify the media type and resubmit the request
+                TransactionId: rrt-7709400285867417207-b-gce-27587-2383364-1
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /ach/payments/v1/undo
+        '429':
+          description: Request timeout
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+              example:
+                ErrorMessage: Number requests threshold reached, please resubmit the request after sometime
+                TransactionId: rrt-7709400285867417207-b-gce-27587-2383364-1
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /ach/payments/v1/undo
+        '500':
+          description: Unknown error
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+              example:
+                ErrorMessage: Runtime error occurred in the service, please check with application support team before resubmitting the request
+                TransactionId: rrt-7709400285867417207-b-gce-27587-2383364-1
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /ach/payments/v1/undo
+        '502':
+          description: Bad gateway
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+              example:
+                ErrorMessage: Error received from backend
+                TransactionId: rrt-7709400285867417207-b-gce-27587-2383364-1
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                Api-Url: /ach/payments/v1/undo
+                ServiceError:
+                  ConnectError: Connectivity error occurred with the downstream service (Unexpected EOF at target), please check with application support team before resubmitting the request
+        '503':
+          description: Unavailable service
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+              example:
+                ErrorMessage: Error received from backend
+                TransactionId: rrt-7709400285867417207-b-gce-27587-2383364-1
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /ach/payments/v1/undo
+                ServiceError:
+                  ConnectError: Service is currently unavailable (NoActiveTargets), please check with application support before resubmitting the request.
+        '504':
+          description: Unable to process request
+          headers:
+            X-CorrelationId:
+              schema:
+                type: string
+              description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+              example:
+                ErrorMessage: Error received from backend
+                TransactionId: rrt-7709400285867417207-b-gce-27587-2383364-1
+                X-CorrelationId: 929618f2-6163-bf73-51b0-6c54a8533c74
+                TransactionTime: '2021-06-11T16:31:34.041Z'
+                Api-Url: /ach/payments/v1/undo
+                ServiceError:
+                  ConnectError: Please verify your payment status UUID and send the request again. The request could not be processed on time (GatewayTimeout).
+components:
+  schemas:
+    baseDetailResponse:
+      required:
+      - uuid
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: A custom value used to identify each transaction. It is required to undo a payment. The ID must not exceed 45 alphanumeric characters.
+          maxLength: 45
+          example: qas220517x-49eb-47664-b94rhd1-e52e2re13001
+        status:
+          type: string
+          description: The status of a batch record can be accepted or rejected. The status of a detailed record can be deleted, accepted, rejected, notFound, or waitingForAddenda.
+          example: accepted
+        errorMessages:
+          type: array
+          description: List of error messages.
+          items:
+            $ref: '#/components/schemas/detailMessage'
+        informationMessages:
+          type: array
+          description: List of informational messages.
+          items:
+            $ref: '#/components/schemas/detailMessage'
+        traceNumber:
+          type: string
+          description: The unique number for the ACH transaction. Record this number for possible ACH inquiry requests.
+          maxLength: 15
+          example: 041001030008013
+    exception:
+      type: object
+      title: ExceptionSchema
+      properties:
+        ErrorMessage:
+          type: string
+          description: Error message related to system generating this error.
+        TransactionId:
+          type: string
+          description: Unique functional identifier from the data to identify a message.
+        X-CorrelationId:
+          type: string
+          description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+        TransactionTime:
+          type: string
+          description: Time of the occurrence of the error of the message.
+        Api-Url:
+          type: string
+          description: The API URL path of the call that generated the response.
+        ServiceError:
+          type: object
+          title: ServiceError
+          description: Indicates the service error details, if available.
+          oneOf:
+          - $ref: '#/components/schemas/detailMessage'
+          - $ref: '#/components/schemas/connectError'
+    detailMessage:
+      type: object
+      description: Contains the code and message with details about the response.
+      properties:
+        code:
+          type: string
+          description: A static status code assigned by the network or payment system.
+          example: 1006040-65I
+        moreInfo:
+          type: string
+          description: Detailed descriptive message.
+          example: Effective date assigned 220411
+    detailUndoRequestEnvelope:
+      required:
+      - uuid
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: A custom value used to identify each transaction. It is required to undo a payment. The ID must not exceed 45 alphanumeric characters.
+          maxLength: 45
+          example: qas220517x-49eb-47664-b94rhd1-e52e2re13001
+    connectError:
+      type: object
+      properties:
+        ConnectError:
+          type: string
+          description: Error information of the connectivity with downstream service.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
