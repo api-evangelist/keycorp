@@ -1,20 +1,31 @@
-generated: '2026-07-15'
+generated: '2026-09-16'
 method: generated
-source: openapi/keycorp-openapi.yml
+source: openapi/keycorp-account-information-api-openapi.yml, openapi/keycorp-account-transactions-api-openapi.yml,
+  openapi/keycorp-accounts-api-openapi.yml, openapi/keycorp-ach-api-openapi.yml, openapi/keycorp-ach-payment-origination-api-openapi.yml,
+  openapi/keycorp-ach-payment-request-inquiry-api-openapi.yml, openapi/keycorp-ach-transactions-api-openapi.yml,
+  openapi/keycorp-health-check-api-openapi.yml, openapi/keycorp-imagecheck-api-openapi.yml,
+  openapi/keycorp-initiate-api-openapi.yml, openapi/keycorp-participant-api-openapi.yml, openapi/keycorp-rtp-api-openapi.yml,
+  openapi/keycorp-stoppayments-api-openapi.yml, openapi/keycorp-undo-ach-payment-request-api-openapi.yml,
+  openapi/keycorp-validate-api-openapi.yml, openapi/keycorp-wire-api-openapi.yml, openapi/keycorp-wire-rtp-v1-api-openapi.yml,
+  openapi/keycorp-wire-rtp-v2-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
-  operations: 4
+  operations: 37
   by_action_class:
-    connected: 4
+    connected: 17
+    acting: 20
   by_consequence:
-    read: 4
-  human_in_the_loop_required: 0
+    read: 17
+    write: 3
+    physical: 16
+    safety-critical: 1
+  human_in_the_loop_required: 1
 operations:
-- path: /commercial/accounts/v1/list
+- path: /commercial/accounts/v1/{accountId}
   method: get
-  operationId: listCommercialAccounts
+  operationId: getAccount
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -22,9 +33,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /commercial/accounts/v1/{accountId}
+- path: /commercial/accounts/v1/list
   method: get
-  operationId: getCommercialAccount
+  operationId: searchForAccounts
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -34,7 +45,7 @@ operations:
     audit: none
 - path: /commercial/accounts/v1/{accountId}/transactions/previous
   method: get
-  operationId: listPreviousTransactions
+  operationId: searchForPreviousDayAccountTransactionsV1
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -42,9 +53,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /commercial/v1/accounts/{accountId}/transactions/current
+- path: /commercial/accounts/v1/{accountId}/transactions/current
   method: get
-  operationId: listCurrentDayTransactions
+  operationId: searchForCurrentDayAccountTransactionsV1
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -52,3 +63,485 @@ operations:
     token:
       max-ttl: 3600
     audit: none
+- path: /accounts/validations/v2/verifyAccount
+  method: post
+  operationId: verifyAccount
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /"Callback URL from client for ACH alerts - AL00906"
+  method: post
+  operationId: post"Callback URL from client for ACH alerts  AL00906"
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /ach/payments/v1/ccd
+  method: post
+  operationId: achPaymentCCD
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /ach/payments/v1/ctx
+  method: post
+  operationId: achPaymentCTX
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /ach/payments/v1/ppd
+  method: post
+  operationId: achPaymentPPD
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /ach/payments/v1/tel
+  method: post
+  operationId: achPaymentTEL
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /ach/payments/v1/web
+  method: post
+  operationId: achPaymentWEB
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /ach/payments/v1/addenda
+  method: post
+  operationId: achPaymentAddenda
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /ach/payments/v1/status
+  method: post
+  operationId: achPaymentStatus
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /ach/payments/v1/status/addenda
+  method: post
+  operationId: achPaymentAddendasStatus
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /accounts/transactions/v1/ach/detail/{parNumber}
+  method: get
+  operationId: searchAchTransaction
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /accounts/transactions/v1/ach/list
+  method: post
+  operationId: searchAchTransactions
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /accounts/transactions/v1/ach/settled/{settlementTransactionId}
+  method: get
+  operationId: searchAchSettledTransactions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /accounts/validations/v2/healthCheck
+  method: get
+  operationId: healthCheck
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /accounts/transactions/v1/healthCheck
+  method: get
+  operationId: healthCheck
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ach/payments/v1/healthCheck
+  method: get
+  operationId: healthCheck
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /commercial/checks/v1/healthCheck
+  method: get
+  operationId: healthCheck
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rtp/v1/healthCheck
+  method: get
+  operationId: healthCheck
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rtp/v1/payment/healthCheck
+  method: get
+  operationId: healthCheckv1
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /wireInquiry/v1/healthCheck
+  method: get
+  operationId: healthCheck
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /commercial/checks/v1/images/list
+  method: post
+  operationId: CheckImageListRequest
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rtp/v1/payment/initiate
+  method: post
+  operationId: Payment-Initiate
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rtp/v1/payment/rtp/participant
+  method: get
+  operationId: participantList
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rtp/v1/payment/rtp/participant/{routingNumber}
+  method: get
+  operationId: participant
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rtp/v1/transactions/list
+  method: post
+  operationId: searchRtpTransactions
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rtp/v1/transactions/detail/{transactionId}
+  method: get
+  operationId: searchRtpTransaction
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /commercial/checks/v1/stops/place
+  method: post
+  operationId: PlaceStopPayments
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /ach/payments/v1/undo
+  method: post
+  operationId: achPaymentUndo
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rtp/v1/payment/validate
+  method: post
+  operationId: Payment-Validate
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /wireInquiry/v1/transactions/list
+  method: post
+  operationId: searchWireTransactions
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /wireInquiry/v1/transactions/detail/{transactionId}
+  method: get
+  operationId: searchWireTransaction
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /"Callback URL from client for AL00901"
+  method: post
+  operationId: post"Callback URL from client for AL00901"
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /"Callback URL from client for Wire/RTP alerts - AL00907"
+  method: post
+  operationId: post"Callback URL from client for WireRTP alerts  AL00907"
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
