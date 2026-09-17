@@ -285,38 +285,6 @@ apis:
     url: https://developer.key.com/docs/check-services
   - type: Documentation
     url: https://developer.key.com/docs/webhooks
-- aid: keycorp:keycorp-healthcheck-api
-  name: KeyCorp Health Check API
-  description: The HealthCheck API from KeyCorp — 7 operation(s) for healthcheck.
-  humanURL: https://developer.key.com/docs/commercial/accounts
-  baseURL: https://partner-api.key.com/commercial/accounts/v1
-  tags:
-  - Health Check
-  tags_raw:
-  - HealthCheck
-  properties:
-  - type: OpenAPI
-    url: openapi/keycorp-healthcheck-api-openapi.yml
-  - type: Documentation
-    url: https://developer.key.com/docs/commercial/accounts
-  - type: Documentation
-    url: https://developer.key.com/docs/ach
-  - type: Documentation
-    url: https://developer.key.com/docs/wireTransfer
-  - type: Documentation
-    url: https://developer.key.com/docs/rtp
-  - type: Documentation
-    url: https://developer.key.com/docs/actval/v2
-  - type: Documentation
-    url: https://developer.key.com/docs/achinquiry
-  - type: Documentation
-    url: https://developer.key.com/docs/wireinquiry
-  - type: Documentation
-    url: https://developer.key.com/docs/rtpinquiry
-  - type: Documentation
-    url: https://developer.key.com/docs/check-services
-  - type: Documentation
-    url: https://developer.key.com/docs/webhooks
 - aid: keycorp:keycorp-imagecheck-api
   name: KeyCorp Image Check API
   description: List check images
@@ -600,6 +568,36 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/keycorp-wire-rtp-v2-api-openapi.yml
+  - type: Documentation
+    url: https://developer.key.com/docs/commercial/accounts
+  - type: Documentation
+    url: https://developer.key.com/docs/ach
+  - type: Documentation
+    url: https://developer.key.com/docs/wireTransfer
+  - type: Documentation
+    url: https://developer.key.com/docs/rtp
+  - type: Documentation
+    url: https://developer.key.com/docs/actval/v2
+  - type: Documentation
+    url: https://developer.key.com/docs/achinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/wireinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/rtpinquiry
+  - type: Documentation
+    url: https://developer.key.com/docs/check-services
+  - type: Documentation
+    url: https://developer.key.com/docs/webhooks
+- aid: keycorp:keycorp-health-check-api
+  name: KeyCorp Health Check API
+  description: The Health Check API from KeyCorp — 7 operation(s) for health check.
+  humanURL: https://developer.key.com/docs/commercial/accounts
+  baseURL: https://partner-api.key.com/commercial/accounts/v1
+  tags:
+  - Health Check
+  properties:
+  - type: OpenAPI
+    url: openapi/keycorp-health-check-api-openapi.yml
   - type: Documentation
     url: https://developer.key.com/docs/commercial/accounts
   - type: Documentation
