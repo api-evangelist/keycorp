@@ -470,45 +470,6 @@ paths:
                       message: An unexpected error occurred.  Please try again later or contact support if the problem persists.
 components:
   schemas:
-    PageMetadata:
-      type: object
-      description: Data information returned as a message or page information retrieved from the server.
-      properties:
-        page:
-          $ref: '#/components/schemas/Page'
-    AccountExtended:
-      allOf:
-      - $ref: '#/components/schemas/Account'
-      - type: object
-        properties:
-          virtualAccountNumber:
-            type: string
-            description: Account number for the virtual account (VAM).
-            maxLength: 20
-            examples:
-            - '95312346654532'
-    ConnectError:
-      type: object
-      properties:
-        ConnectError:
-          type: string
-          description: API connectivity error information, if available.
-          examples:
-          - Request could not be processed on time (GatewayTimeout), please wait a moment and resubmit the request.
-    Message:
-      type: object
-      description: Informational code and message from the server.
-      properties:
-        code:
-          type: string
-          description: Static code assigned by the network or payment system.
-          examples:
-          - Wire-List-400-toDate
-        message:
-          type: string
-          description: A human-readable message associated with the code.
-          examples:
-          - toDate format must be YYYY-MM-DD
     WireListTransaction:
       type: object
       description: Contains the response payload for Wire inquiries.
@@ -573,6 +534,177 @@ components:
           $ref: '#/components/schemas/PartySummary'
         beneficiary:
           $ref: '#/components/schemas/PartySummary'
+    PartySummary:
+      type: object
+      description: Minimal party representation returned in list results.
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Contains the customer name
+          maxLength: 255
+          examples:
+          - Paul Wilson
+    Bank:
+      type: object
+      properties:
+        aba:
+          type: string
+          description: An ABA routing number is a nine-digit code used in the United States to identify specific financial institutions
+          examples:
+          - 012345678
+        bic:
+          type: string
+          description: Business Identifier Code (BIC) is an 8 to 11-character alphanumeric code that uniquely identifies a specific bank or financial institution worldwide
+          examples:
+          - SIMWUS01
+    AccountExtended:
+      allOf:
+      - $ref: '#/components/schemas/Account'
+      - type: object
+        properties:
+          virtualAccountNumber:
+            type: string
+            description: Account number for the virtual account (VAM).
+            maxLength: 20
+            examples:
+            - '95312346654532'
+    Message:
+      type: object
+      description: Informational code and message from the server.
+      properties:
+        code:
+          type: string
+          description: Static code assigned by the network or payment system.
+          examples:
+          - Wire-List-400-toDate
+        message:
+          type: string
+          description: A human-readable message associated with the code.
+          examples:
+          - toDate format must be YYYY-MM-DD
+    Amount0To1B:
+      description: Amount between 0 and 1,000,000,000 inclusive. Accepts a JSON number or a string. If a string is used, commas are allowed as thousands separators. Decimal precision must be at most 2 decimal places.
+      oneOf:
+      - title: AmountAsNumber
+        type: number
+        format: double
+        minimum: 0
+        maximum: 1000000000
+        multipleOf: 0.01
+        description: Amount between 0 and 1 billion.  Decimals are optional.  If present, must contain 1 or 2 digits (e.g., 2433.0, 3939.2, 100.25).
+      - title: AmountAsString
+        type: string
+        description: 'String amount may include commas. If commas are used, they must be valid thousands separators (e.g., 1,234,567). Must be 0..1,000,000,000 inclusive. Decimals are optional; if present, must be 1 or 2 digits (e.g., 2433.0, 3939.2, 100.25). Note: 1,000,000,000 may only be whole dollars or with a decimal value of .0/.00.'
+        pattern: ^(?:(?:1(?:,000){3}|1000000000)(?:\.0{1,2})?|(?:0|[1-9]\d{0,8}|[1-9]\d{0,2}(?:,\d{3}){1,2})(?:\.\d{1,2})?|\.\d{1,2})$
+      examples:
+      - 0.25
+      - 100
+      - 100
+      - 2433
+      - 3939.2
+      - '.25'
+      - '100'
+      - '100.0'
+      - '100.25'
+      - 75,020.52
+      - 1,000,000,000
+      - 1,000,000,000.00
+    Exception:
+      type: object
+      description: Contains information about errors related to the request.
+      title: exceptionSchema
+      properties:
+        ErrorMessage:
+          type: string
+          description: A human-readable message that describes the type or source of the error.
+          examples:
+          - Error received from backend service
+        TransactionId:
+          type: string
+          description: A unique transaction ID returned with the response, useful for traceability.
+          examples:
+          - 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+        X-CorrelationId:
+          type: string
+          description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          examples:
+          - 929618f2-6163-bf73-51b0-6c54a8533c74
+        TransactionTime:
+          type: string
+          format: date-time
+          description: Date and time the error occurred.
+          examples:
+          - '2021-06-11T16:31:34.041Z'
+        Api-Url:
+          type: string
+          description: The API URL path of the call that generated the response.
+          examples:
+          - /wireInquiry/v1/transactions/list
+        ServiceError:
+          type: object
+          title: ServiceError
+          description: Detailed service-level error details, if available.
+          oneOf:
+          - $ref: '#/components/schemas/ServiceErrorData'
+          - $ref: '#/components/schemas/ConnectError'
+    Page:
+      type: object
+      description: Page information returned from the server.
+      properties:
+        pageNumber:
+          type: integer
+          format: int32
+          minimum: 1
+          description: The number of the page being viewed.
+          examples:
+          - 1
+        pageSize:
+          type: integer
+          format: int32
+          minimum: 1
+          description: The number of records per page.
+          examples:
+          - 500
+        totalPages:
+          type: integer
+          format: int32
+          minimum: 0
+          description: The total number of pages available.
+          examples:
+          - 3
+        totalRecords:
+          type: integer
+          format: int32
+          minimum: 0
+          description: The total number of transactions (records) available in the result set.
+          examples:
+          - 500
+        lastPage:
+          type: boolean
+          description: Indicates the last page of the total pages.
+          examples:
+          - false
+          - true
+    ErrorMetadata:
+      type: object
+      description: Error metadata including validation or service messages.
+      properties:
+        messages:
+          type: array
+          description: List of messages describing validation errors or other informational messages.
+          maxItems: 100
+          items:
+            $ref: '#/components/schemas/Message'
+    ConnectError:
+      type: object
+      properties:
+        ConnectError:
+          type: string
+          description: API connectivity error information, if available.
+          examples:
+          - Request could not be processed on time (GatewayTimeout), please wait a moment and resubmit the request.
     PostalAddress:
       type: object
       properties:
@@ -636,139 +768,6 @@ components:
           maxLength: 140
           examples:
           - 123 SIM ST,STE W123
-    Bank:
-      type: object
-      properties:
-        aba:
-          type: string
-          description: An ABA routing number is a nine-digit code used in the United States to identify specific financial institutions
-          examples:
-          - 012345678
-        bic:
-          type: string
-          description: Business Identifier Code (BIC) is an 8 to 11-character alphanumeric code that uniquely identifies a specific bank or financial institution worldwide
-          examples:
-          - SIMWUS01
-    Account:
-      type: object
-      properties:
-        accountNumber:
-          type: string
-          description: Account number of the party.
-          maxLength: 20
-    PartySummary:
-      type: object
-      description: Minimal party representation returned in list results.
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Contains the customer name
-          maxLength: 255
-          examples:
-          - Paul Wilson
-    IntermediaryBank:
-      allOf:
-      - $ref: '#/components/schemas/Bank'
-      - type: object
-        properties:
-          name:
-            type: string
-            description: Name.
-            examples:
-            - SIMW1 BANK
-          addressLine:
-            type: string
-            description: Address line.
-            examples:
-            - 0123 INT2W1 ST
-    ErrorMetadata:
-      type: object
-      description: Error metadata including validation or service messages.
-      properties:
-        messages:
-          type: array
-          description: List of messages describing validation errors or other informational messages.
-          maxItems: 100
-          items:
-            $ref: '#/components/schemas/Message'
-    Page:
-      type: object
-      description: Page information returned from the server.
-      properties:
-        pageNumber:
-          type: integer
-          format: int32
-          minimum: 1
-          description: The number of the page being viewed.
-          examples:
-          - 1
-        pageSize:
-          type: integer
-          format: int32
-          minimum: 1
-          description: The number of records per page.
-          examples:
-          - 500
-        totalPages:
-          type: integer
-          format: int32
-          minimum: 0
-          description: The total number of pages available.
-          examples:
-          - 3
-        totalRecords:
-          type: integer
-          format: int32
-          minimum: 0
-          description: The total number of transactions (records) available in the result set.
-          examples:
-          - 500
-        lastPage:
-          type: boolean
-          description: Indicates the last page of the total pages.
-          examples:
-          - false
-          - true
-    Exception:
-      type: object
-      description: Contains information about errors related to the request.
-      title: exceptionSchema
-      properties:
-        ErrorMessage:
-          type: string
-          description: A human-readable message that describes the type or source of the error.
-          examples:
-          - Error received from backend service
-        TransactionId:
-          type: string
-          description: A unique transaction ID returned with the response, useful for traceability.
-          examples:
-          - 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
-        X-CorrelationId:
-          type: string
-          description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
-          examples:
-          - 929618f2-6163-bf73-51b0-6c54a8533c74
-        TransactionTime:
-          type: string
-          format: date-time
-          description: Date and time the error occurred.
-          examples:
-          - '2021-06-11T16:31:34.041Z'
-        Api-Url:
-          type: string
-          description: The API URL path of the call that generated the response.
-          examples:
-          - /wireInquiry/v1/transactions/list
-        ServiceError:
-          type: object
-          title: ServiceError
-          description: Detailed service-level error details, if available.
-          oneOf:
-          - $ref: '#/components/schemas/ServiceErrorData'
-          - $ref: '#/components/schemas/ConnectError'
     ServiceErrorData:
       type: object
       title: serviceErrorData
@@ -776,6 +775,21 @@ components:
       properties:
         metadata:
           $ref: '#/components/schemas/ErrorMetadata'
+    Account:
+      type: object
+      properties:
+        accountNumber:
+          type: string
+          description: Account number of the party.
+          maxLength: 20
+    PartyDetail:
+      description: Party representation returned in detail results.
+      allOf:
+      - $ref: '#/components/schemas/PartySummary'
+      - type: object
+        properties:
+          postalAddress:
+            $ref: '#/components/schemas/PostalAddress'
     WireDetailTransaction:
       type: object
       description: Contains the response payload with details about a Wire transfer.
@@ -881,41 +895,27 @@ components:
           $ref: '#/components/schemas/Bank'
         originatorBank:
           $ref: '#/components/schemas/Bank'
-    PartyDetail:
-      description: Party representation returned in detail results.
+    PageMetadata:
+      type: object
+      description: Data information returned as a message or page information retrieved from the server.
+      properties:
+        page:
+          $ref: '#/components/schemas/Page'
+    IntermediaryBank:
       allOf:
-      - $ref: '#/components/schemas/PartySummary'
+      - $ref: '#/components/schemas/Bank'
       - type: object
         properties:
-          postalAddress:
-            $ref: '#/components/schemas/PostalAddress'
-    Amount0To1B:
-      description: Amount between 0 and 1,000,000,000 inclusive. Accepts a JSON number or a string. If a string is used, commas are allowed as thousands separators. Decimal precision must be at most 2 decimal places.
-      oneOf:
-      - title: AmountAsNumber
-        type: number
-        format: double
-        minimum: 0
-        maximum: 1000000000
-        multipleOf: 0.01
-        description: Amount between 0 and 1 billion.  Decimals are optional.  If present, must contain 1 or 2 digits (e.g., 2433.0, 3939.2, 100.25).
-      - title: AmountAsString
-        type: string
-        description: 'String amount may include commas. If commas are used, they must be valid thousands separators (e.g., 1,234,567). Must be 0..1,000,000,000 inclusive. Decimals are optional; if present, must be 1 or 2 digits (e.g., 2433.0, 3939.2, 100.25). Note: 1,000,000,000 may only be whole dollars or with a decimal value of .0/.00.'
-        pattern: ^(?:(?:1(?:,000){3}|1000000000)(?:\.0{1,2})?|(?:0|[1-9]\d{0,8}|[1-9]\d{0,2}(?:,\d{3}){1,2})(?:\.\d{1,2})?|\.\d{1,2})$
-      examples:
-      - 0.25
-      - 100
-      - 100
-      - 2433
-      - 3939.2
-      - '.25'
-      - '100'
-      - '100.0'
-      - '100.25'
-      - 75,020.52
-      - 1,000,000,000
-      - 1,000,000,000.00
+          name:
+            type: string
+            description: Name.
+            examples:
+            - SIMW1 BANK
+          addressLine:
+            type: string
+            description: Address line.
+            examples:
+            - 0123 INT2W1 ST
   securitySchemes:
     bearerAuth:
       type: http

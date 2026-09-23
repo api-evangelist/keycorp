@@ -1,7 +1,9 @@
 ---
 title: KeyCorp bulks up investment banking with purchase of UK ...
 url: https://www.americanbanker.com/news/keycorp-bulks-up-investment-banking-with-purchase-of-uk-firm
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"KeyCorp" press release artificial intelligence'
 position: 4
 source: serpapi-google

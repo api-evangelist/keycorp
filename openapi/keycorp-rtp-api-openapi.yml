@@ -492,79 +492,37 @@ paths:
                       message: An unexpected error occurred.  Please try again later or contact support if the problem persists.
 components:
   schemas:
+    Bank:
+      type: object
+      properties:
+        aba:
+          type: string
+          description: An ABA routing number is a nine-digit code used in the United States to identify specific financial institutions
+          examples:
+          - 012345678
+        bic:
+          type: string
+          description: Business Identifier Code (BIC) is an 8 to 11-character alphanumeric code that uniquely identifies a specific bank or financial institution worldwide
+          examples:
+          - SIMWUS01
+    OriginatorPartyDetail:
+      description: Originator party representation returned in detail results.
+      allOf:
+      - $ref: '#/components/schemas/PartyDetail'
+      - type: object
+        properties:
+          originalName:
+            type: string
+            description: Contains the original origination customer name
+            maxLength: 255
+            examples:
+            - Raul Wilson
     PageMetadata:
       type: object
       description: Data information returned as a message or page information retrieved from the server.
       properties:
         page:
           $ref: '#/components/schemas/Page'
-    ConnectError:
-      type: object
-      properties:
-        ConnectError:
-          type: string
-          description: API connectivity error information, if available.
-          examples:
-          - Request could not be processed on time (GatewayTimeout), please wait a moment and resubmit the request.
-    FailureReasons:
-      type: object
-      properties:
-        initiatingFailureReasonCode:
-          type: string
-          description: Reason code for initiating failure
-          maxLength: 32
-          examples:
-          - KEY-9998
-        initiatingFailureReasonTitle:
-          type: string
-          description: Reason description for initiating failure
-          maxLength: 256
-          examples:
-          - Unauthorized for account
-        networkFailureReasonCode:
-          type: string
-          description: Reason code for network failure
-          maxLength: 32
-          examples:
-          - '123'
-        networkFailureReasonTitle:
-          type: string
-          description: Reason description for network failure
-          maxLength: 256
-          examples:
-          - Network Failure
-    IntermediaryBank:
-      allOf:
-      - $ref: '#/components/schemas/Bank'
-      - type: object
-        properties:
-          name:
-            type: string
-            description: Name.
-            examples:
-            - SIMW1 BANK
-          addressLine:
-            type: string
-            description: Address line.
-            examples:
-            - 0123 INT2W1 ST
-    ErrorMetadata:
-      type: object
-      description: Error metadata including validation or service messages.
-      properties:
-        messages:
-          type: array
-          description: List of messages describing validation errors or other informational messages.
-          maxItems: 100
-          items:
-            $ref: '#/components/schemas/Message'
-    ServiceErrorData:
-      type: object
-      title: serviceErrorData
-      description: Detailed service-level error information, if available.
-      properties:
-        metadata:
-          $ref: '#/components/schemas/ErrorMetadata'
     RtpDetailTransaction:
       type: object
       description: Contains the response payload with details about an RTP transaction.
@@ -688,6 +646,166 @@ components:
           $ref: '#/components/schemas/Bank'
         failureReasons:
           $ref: '#/components/schemas/FailureReasons'
+    Amount0To1B:
+      description: Amount between 0 and 1,000,000,000 inclusive. Accepts a JSON number or a string. If a string is used, commas are allowed as thousands separators. Decimal precision must be at most 2 decimal places.
+      oneOf:
+      - title: AmountAsNumber
+        type: number
+        format: double
+        minimum: 0
+        maximum: 1000000000
+        multipleOf: 0.01
+        description: Amount between 0 and 1 billion.  Decimals are optional.  If present, must contain 1 or 2 digits (e.g., 2433.0, 3939.2, 100.25).
+      - title: AmountAsString
+        type: string
+        description: 'String amount may include commas. If commas are used, they must be valid thousands separators (e.g., 1,234,567). Must be 0..1,000,000,000 inclusive. Decimals are optional; if present, must be 1 or 2 digits (e.g., 2433.0, 3939.2, 100.25). Note: 1,000,000,000 may only be whole dollars or with a decimal value of .0/.00.'
+        pattern: ^(?:(?:1(?:,000){3}|1000000000)(?:\.0{1,2})?|(?:0|[1-9]\d{0,8}|[1-9]\d{0,2}(?:,\d{3}){1,2})(?:\.\d{1,2})?|\.\d{1,2})$
+      examples:
+      - 0.25
+      - 100
+      - 100.0
+      - 2433.0
+      - 3939.2
+      - '.25'
+      - '100'
+      - '100.0'
+      - '100.25'
+      - 75,020.52
+      - 1,000,000,000
+      - 1,000,000,000.00
+    Page:
+      type: object
+      description: Page information returned from the server.
+      properties:
+        pageNumber:
+          type: integer
+          format: int32
+          minimum: 1
+          description: The number of the page being viewed.
+          examples:
+          - 1
+        pageSize:
+          type: integer
+          format: int32
+          minimum: 1
+          description: The number of records per page.
+          examples:
+          - 500
+        totalPages:
+          type: integer
+          format: int32
+          minimum: 0
+          description: The total number of pages available.
+          examples:
+          - 3
+        totalRecords:
+          type: integer
+          format: int32
+          minimum: 0
+          description: The total number of transactions (records) available in the result set.
+          examples:
+          - 500
+        lastPage:
+          type: boolean
+          description: Indicates the last page of the total pages.
+          examples:
+          - false
+          - true
+    BeneficiaryPartyDetail:
+      description: Beneficiary party representation returned in detail results.
+      allOf:
+      - $ref: '#/components/schemas/PartyDetail'
+      - type: object
+        properties:
+          ultimateName:
+            type: string
+            description: Contains the ultimate beneficiary name.
+            maxLength: 255
+            examples:
+            - Saul Wilson
+    ServiceErrorData:
+      type: object
+      title: serviceErrorData
+      description: Detailed service-level error information, if available.
+      properties:
+        metadata:
+          $ref: '#/components/schemas/ErrorMetadata'
+    PartyDetail:
+      description: Party representation returned in detail results.
+      allOf:
+      - $ref: '#/components/schemas/PartySummary'
+      - type: object
+        properties:
+          postalAddress:
+            $ref: '#/components/schemas/PostalAddress'
+    IntermediaryBank:
+      allOf:
+      - $ref: '#/components/schemas/Bank'
+      - type: object
+        properties:
+          name:
+            type: string
+            description: Name.
+            examples:
+            - SIMW1 BANK
+          addressLine:
+            type: string
+            description: Address line.
+            examples:
+            - 0123 INT2W1 ST
+    PartySummary:
+      type: object
+      description: Minimal party representation returned in list results.
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Contains the customer name
+          maxLength: 255
+          examples:
+          - Paul Wilson
+    FailureReasons:
+      type: object
+      properties:
+        initiatingFailureReasonCode:
+          type: string
+          description: Reason code for initiating failure
+          maxLength: 32
+          examples:
+          - KEY-9998
+        initiatingFailureReasonTitle:
+          type: string
+          description: Reason description for initiating failure
+          maxLength: 256
+          examples:
+          - Unauthorized for account
+        networkFailureReasonCode:
+          type: string
+          description: Reason code for network failure
+          maxLength: 32
+          examples:
+          - '123'
+        networkFailureReasonTitle:
+          type: string
+          description: Reason description for network failure
+          maxLength: 256
+          examples:
+          - Network Failure
+    Message:
+      type: object
+      description: Informational code and message from the server.
+      properties:
+        code:
+          type: string
+          description: Static code assigned by the network or payment system.
+          examples:
+          - RTP-List-400-toDate
+        message:
+          type: string
+          description: A human-readable message associated with the code.
+          examples:
+          - toDate format must be YYYY-MM-DD
     PostalAddress:
       type: object
       properties:
@@ -756,6 +874,13 @@ components:
           maxLength: 210
           examples:
           - 123 SIM ST,STE W123
+    Account:
+      type: object
+      properties:
+        accountNumber:
+          type: string
+          description: Account number of the party.
+          maxLength: 20
     RTPListTransaction:
       type: object
       description: Contains the response payload for RTP inquiries.
@@ -820,152 +945,6 @@ components:
           $ref: '#/components/schemas/PartySummary'
         beneficiary:
           $ref: '#/components/schemas/PartySummary'
-    Amount0To1B:
-      description: Amount between 0 and 1,000,000,000 inclusive. Accepts a JSON number or a string. If a string is used, commas are allowed as thousands separators. Decimal precision must be at most 2 decimal places.
-      oneOf:
-      - title: AmountAsNumber
-        type: number
-        format: double
-        minimum: 0
-        maximum: 1000000000
-        multipleOf: 0.01
-        description: Amount between 0 and 1 billion.  Decimals are optional.  If present, must contain 1 or 2 digits (e.g., 2433.0, 3939.2, 100.25).
-      - title: AmountAsString
-        type: string
-        description: 'String amount may include commas. If commas are used, they must be valid thousands separators (e.g., 1,234,567). Must be 0..1,000,000,000 inclusive. Decimals are optional; if present, must be 1 or 2 digits (e.g., 2433.0, 3939.2, 100.25). Note: 1,000,000,000 may only be whole dollars or with a decimal value of .0/.00.'
-        pattern: ^(?:(?:1(?:,000){3}|1000000000)(?:\.0{1,2})?|(?:0|[1-9]\d{0,8}|[1-9]\d{0,2}(?:,\d{3}){1,2})(?:\.\d{1,2})?|\.\d{1,2})$
-      examples:
-      - 0.25
-      - 100
-      - 100.0
-      - 2433.0
-      - 3939.2
-      - '.25'
-      - '100'
-      - '100.0'
-      - '100.25'
-      - 75,020.52
-      - 1,000,000,000
-      - 1,000,000,000.00
-    OriginatorPartyDetail:
-      description: Originator party representation returned in detail results.
-      allOf:
-      - $ref: '#/components/schemas/PartyDetail'
-      - type: object
-        properties:
-          originalName:
-            type: string
-            description: Contains the original origination customer name
-            maxLength: 255
-            examples:
-            - Raul Wilson
-    AccountExtended:
-      allOf:
-      - $ref: '#/components/schemas/Account'
-      - type: object
-        properties:
-          virtualAccountNumber:
-            type: string
-            description: Account number for the virtual account (VAM).
-            maxLength: 20
-            examples:
-            - '95312346654532'
-    Message:
-      type: object
-      description: Informational code and message from the server.
-      properties:
-        code:
-          type: string
-          description: Static code assigned by the network or payment system.
-          examples:
-          - RTP-List-400-toDate
-        message:
-          type: string
-          description: A human-readable message associated with the code.
-          examples:
-          - toDate format must be YYYY-MM-DD
-    BeneficiaryPartyDetail:
-      description: Beneficiary party representation returned in detail results.
-      allOf:
-      - $ref: '#/components/schemas/PartyDetail'
-      - type: object
-        properties:
-          ultimateName:
-            type: string
-            description: Contains the ultimate beneficiary name.
-            maxLength: 255
-            examples:
-            - Saul Wilson
-    Bank:
-      type: object
-      properties:
-        aba:
-          type: string
-          description: An ABA routing number is a nine-digit code used in the United States to identify specific financial institutions
-          examples:
-          - 012345678
-        bic:
-          type: string
-          description: Business Identifier Code (BIC) is an 8 to 11-character alphanumeric code that uniquely identifies a specific bank or financial institution worldwide
-          examples:
-          - SIMWUS01
-    Account:
-      type: object
-      properties:
-        accountNumber:
-          type: string
-          description: Account number of the party.
-          maxLength: 20
-    PartySummary:
-      type: object
-      description: Minimal party representation returned in list results.
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Contains the customer name
-          maxLength: 255
-          examples:
-          - Paul Wilson
-    Page:
-      type: object
-      description: Page information returned from the server.
-      properties:
-        pageNumber:
-          type: integer
-          format: int32
-          minimum: 1
-          description: The number of the page being viewed.
-          examples:
-          - 1
-        pageSize:
-          type: integer
-          format: int32
-          minimum: 1
-          description: The number of records per page.
-          examples:
-          - 500
-        totalPages:
-          type: integer
-          format: int32
-          minimum: 0
-          description: The total number of pages available.
-          examples:
-          - 3
-        totalRecords:
-          type: integer
-          format: int32
-          minimum: 0
-          description: The total number of transactions (records) available in the result set.
-          examples:
-          - 500
-        lastPage:
-          type: boolean
-          description: Indicates the last page of the total pages.
-          examples:
-          - false
-          - true
     Exception:
       type: object
       description: Contains information about errors related to the request.
@@ -1004,14 +983,35 @@ components:
           oneOf:
           - $ref: '#/components/schemas/ServiceErrorData'
           - $ref: '#/components/schemas/ConnectError'
-    PartyDetail:
-      description: Party representation returned in detail results.
+    AccountExtended:
       allOf:
-      - $ref: '#/components/schemas/PartySummary'
+      - $ref: '#/components/schemas/Account'
       - type: object
         properties:
-          postalAddress:
-            $ref: '#/components/schemas/PostalAddress'
+          virtualAccountNumber:
+            type: string
+            description: Account number for the virtual account (VAM).
+            maxLength: 20
+            examples:
+            - '95312346654532'
+    ErrorMetadata:
+      type: object
+      description: Error metadata including validation or service messages.
+      properties:
+        messages:
+          type: array
+          description: List of messages describing validation errors or other informational messages.
+          maxItems: 100
+          items:
+            $ref: '#/components/schemas/Message'
+    ConnectError:
+      type: object
+      properties:
+        ConnectError:
+          type: string
+          description: API connectivity error information, if available.
+          examples:
+          - Request could not be processed on time (GatewayTimeout), please wait a moment and resubmit the request.
   securitySchemes:
     bearerAuth:
       type: http

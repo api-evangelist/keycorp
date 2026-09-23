@@ -239,6 +239,88 @@ paths:
                     debugMessage: 'Acceptable representations: [application/json, application/*+json].'
 components:
   schemas:
+    Identifier:
+      title: Identifier
+      description: Value for a unique identifier
+      type: string
+      maxLength: 256
+    CommercialCode:
+      title: Commercial Code entity
+      description: Code for commercial transactions that retrieves the summary, account information, and related transaction codes from the treasury object. The code for a specific treasury management defined field.
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/TreasuryManagementType'
+          description: 'The source of treasury management account definition. Valid values: BAI, BTRS, ISO, SWIFT'
+        code:
+          type: string
+          description: The code of the Treasury Management defined field
+    TreasuryManagementType:
+      title: Treasury Management Type
+      description: 'Identifies the source of the treasury management account. Valid values: BAI, BTRS, ISO, SWIFT'
+      type: string
+      enum:
+      - BAI
+      - BTRS
+      - ISO
+      - SWIFT
+      example: BAI
+    PageMetadataLinks:
+      title: Page Metadata Links
+      description: Resource URLs for retrieving next or previous datasets.
+      type: object
+      properties:
+        next:
+          $ref: '#/components/schemas/HateoasLink'
+          description: Resource URL for retrieving next dataset
+        prev:
+          $ref: '#/components/schemas/HateoasLink'
+          description: Resource URL for retrieving previous dataset
+    HateoasLink:
+      title: HATEOAS Link
+      description: HATEOAS is 'Hypermedia As The Engine Of Application State,' a REST application constraint for URL addresses.
+      required:
+      - href
+      type: object
+      properties:
+        href:
+          type: string
+          format: uri-reference
+          description: URL address to invoke the action on the resource.
+          example: https://partner-api.key.com/accounts/12345
+    AccountDescriptor:
+      title: Account Descriptor entity
+      description: Basic account information including the account category, GUID, and account number.
+      type: object
+      required:
+      - accountCategory
+      discriminator:
+        propertyName: accountCategory
+      properties:
+        accountCategory:
+          $ref: '#/components/schemas/AccountCategory'
+          description: The account type. KeyBank currently supports only commercial account types.
+        accountId:
+          description: A long-term persistent identity of the account that is not the account number. This identity must be unique to the owning institution.
+          $ref: '#/components/schemas/Identifier'
+        accountNumberDisplay:
+          description: The account display number suitable for the interface provider.
+          type: string
+          example: X5678
+        accountNumber:
+          type: string
+          description: The bank account number.
+          example: 012345678
+    AccountWithDetails:
+      title: Account With Details entity
+      description: Detailed information about an authorized client account. If the BalanceAsOfDate is provided, balance summary information is also returned.
+      type: object
+      discriminator:
+        propertyName: accountCategory
+        mapping:
+          COMMERCIAL_ACCOUNT: '#/components/schemas/CommercialAccount'
+      oneOf:
+      - $ref: '#/components/schemas/CommercialAccount'
     PageMetadata:
       title: Page Metadata
       description: Page information based on the pagination controls and result set.
@@ -256,28 +338,6 @@ components:
           type: integer
           example: 3
           description: Total number of elements
-    Identifier:
-      title: Identifier
-      description: Value for a unique identifier
-      type: string
-      maxLength: 256
-    Timestamp:
-      title: Timestamp
-      description: 'Date and time format based on ISO 8601 standard. Format: ''YYYY-MM-DDThh:mm:ss.nnn'
-      type: string
-      format: date-time
-    HateoasLink:
-      title: HATEOAS Link
-      description: HATEOAS is 'Hypermedia As The Engine Of Application State,' a REST application constraint for URL addresses.
-      required:
-      - href
-      type: object
-      properties:
-        href:
-          type: string
-          format: uri-reference
-          description: URL address to invoke the action on the resource.
-          example: https://partner-api.key.com/accounts/12345
     CommercialAccount:
       title: Commercial Account entity
       description: Information related to the commercial account
@@ -325,84 +385,6 @@ components:
             description: A list of commercial accounts
             items:
               $ref: '#/components/schemas/Account'
-    Error:
-      title: Error
-      description: Contains details if there is an issue with the API or the account.
-      type: object
-      properties:
-        code:
-          type: string
-          description: Code indicates the type of error that occurred.
-        message:
-          type: string
-          description: Information associated with the code that helps you diagnose the error.
-        debugMessage:
-          type: string
-          description: Message used to debug the root cause of the error and determine what needs correction in the request. Content can change depending on the request data provided.
-    AccountDescriptor:
-      title: Account Descriptor entity
-      description: Basic account information including the account category, GUID, and account number.
-      type: object
-      required:
-      - accountCategory
-      discriminator:
-        propertyName: accountCategory
-      properties:
-        accountCategory:
-          $ref: '#/components/schemas/AccountCategory'
-          description: The account type. KeyBank currently supports only commercial account types.
-        accountId:
-          description: A long-term persistent identity of the account that is not the account number. This identity must be unique to the owning institution.
-          $ref: '#/components/schemas/Identifier'
-        accountNumberDisplay:
-          description: The account display number suitable for the interface provider.
-          type: string
-          example: X5678
-        accountNumber:
-          type: string
-          description: The bank account number.
-          example: 012345678
-    Charsets:
-      title: Character Sets
-      description: The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.
-      type: string
-      enum:
-      - UTF-8
-    TreasuryManagementType:
-      title: Treasury Management Type
-      description: 'Identifies the source of the treasury management account. Valid values: BAI, BTRS, ISO, SWIFT'
-      type: string
-      enum:
-      - BAI
-      - BTRS
-      - ISO
-      - SWIFT
-      example: BAI
-    FapiInteractionId:
-      title: FAPI Interaction ID
-      description: Universally unique identifier for this interaction, used across all API requests and responses. A valid ID must be 36 characters in length.
-      type: string
-      format: uuid
-      minLength: 36
-      maxLength: 36
-      example: c770aef3-6784-41f7-8e0e-ff5f97bddb3a
-    Account:
-      title: Account entity
-      description: Contains basic account information
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/AccountDescriptor'
-    PageMetadataLinks:
-      title: Page Metadata Links
-      description: Resource URLs for retrieving next or previous datasets.
-      type: object
-      properties:
-        next:
-          $ref: '#/components/schemas/HateoasLink'
-          description: Resource URL for retrieving next dataset
-        prev:
-          $ref: '#/components/schemas/HateoasLink'
-          description: Resource URL for retrieving previous dataset
     CommercialBalance:
       title: Commercial Balance entity
       description: A specific treasury management defined balance
@@ -417,6 +399,51 @@ components:
         memo:
           type: string
           description: Memo field for the treasury management balance amount
+    Charsets:
+      title: Character Sets
+      description: The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.
+      type: string
+      enum:
+      - UTF-8
+    Timestamp:
+      title: Timestamp
+      description: 'Date and time format based on ISO 8601 standard. Format: ''YYYY-MM-DDThh:mm:ss.nnn'
+      type: string
+      format: date-time
+    AccountCategory:
+      title: Account Category type
+      description: 'The account type for the transaction. Valid values: COMMERCIAL_ACCOUNT'
+      type: string
+      enum:
+      - COMMERCIAL_ACCOUNT
+    Account:
+      title: Account entity
+      description: Contains basic account information
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/AccountDescriptor'
+    Error:
+      title: Error
+      description: Contains details if there is an issue with the API or the account.
+      type: object
+      properties:
+        code:
+          type: string
+          description: Code indicates the type of error that occurred.
+        message:
+          type: string
+          description: Information associated with the code that helps you diagnose the error.
+        debugMessage:
+          type: string
+          description: Message used to debug the root cause of the error and determine what needs correction in the request. Content can change depending on the request data provided.
+    FapiInteractionId:
+      title: FAPI Interaction ID
+      description: Universally unique identifier for this interaction, used across all API requests and responses. A valid ID must be 36 characters in length.
+      type: string
+      format: uuid
+      minLength: 36
+      maxLength: 36
+      example: c770aef3-6784-41f7-8e0e-ff5f97bddb3a
     DateString:
       title: Date String
       description: 'Date format based on ISO 8601 standards. Format: YYYY-MM-DD'
@@ -424,23 +451,6 @@ components:
       format: date
       maxLength: 10
       example: '2025-02-15'
-    CommercialCode:
-      title: Commercial Code entity
-      description: Code for commercial transactions that retrieves the summary, account information, and related transaction codes from the treasury object. The code for a specific treasury management defined field.
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/TreasuryManagementType'
-          description: 'The source of treasury management account definition. Valid values: BAI, BTRS, ISO, SWIFT'
-        code:
-          type: string
-          description: The code of the Treasury Management defined field
-    ContentTypes:
-      title: Content Types
-      description: Types of supported document formats.
-      type: string
-      enum:
-      - application/json
     PaginatedArray:
       title: Paginated Array
       description: Page metadata and related URLs for the result set.
@@ -452,43 +462,47 @@ components:
         links:
           $ref: '#/components/schemas/PageMetadataLinks'
           description: Resource URLs for navigating result sets
-    AccountWithDetails:
-      title: Account With Details entity
-      description: Detailed information about an authorized client account. If the BalanceAsOfDate is provided, balance summary information is also returned.
-      type: object
-      discriminator:
-        propertyName: accountCategory
-        mapping:
-          COMMERCIAL_ACCOUNT: '#/components/schemas/CommercialAccount'
-      oneOf:
-      - $ref: '#/components/schemas/CommercialAccount'
-    AccountCategory:
-      title: Account Category type
-      description: 'The account type for the transaction. Valid values: COMMERCIAL_ACCOUNT'
+    ContentTypes:
+      title: Content Types
+      description: Types of supported document formats.
       type: string
       enum:
-      - COMMERCIAL_ACCOUNT
+      - application/json
   parameters:
-    FapiInteractionIdHeader:
-      name: x-fapi-interaction-id
-      in: header
-      description: Unique identifier for this interaction. A valid ID must be 36 characters in length. This is used across all API requests and responses.
+    BalanceAsOfDate:
+      name: balanceAsOf
+      in: query
+      description: 'A query option to return historical balance information from a certain date. Balance information includes opening and closed ledger balances, opening and closing available balances, and commercial balances. The date must be within 180 days of the current date. If a date is not provided, historical balance information is not returned. Format: YYYY-MM-DD'
       schema:
-        $ref: '#/components/schemas/FapiInteractionId'
-      required: true
-      example: c770aef3-6784-41f7-8e0e-ff5f97bddb3a
-    AcceptCharset:
-      name: Accept-Charset
+        $ref: '#/components/schemas/DateString'
+    Accept:
+      name: Accept
       in: header
-      description: The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.
+      description: Preferred syntax for content type. This content type should be application/json.
       schema:
-        $ref: '#/components/schemas/Charsets'
+        $ref: '#/components/schemas/ContentTypes'
       required: true
-      example: UTF-8
+      example: application/json
+    LimitQuery:
+      name: limit
+      in: query
+      description: Restrict the amount of data you receive. For accounts, the limit can be between 1 and 100. If omitted, the default is 50. For transactions, the limit can be between 1 and 500. If omitted, the default is 100.
+      schema:
+        type: integer
+        minLength: 1
+        maxLength: 500
+      example: 50
     PageKeyQuery:
       name: pageKey
       in: query
       description: A secure and flexible pagination capability to retrieve the following set of records.
+      schema:
+        type: string
+    AccountIdPath:
+      name: accountId
+      in: path
+      description: Account Identifier
+      required: true
       schema:
         type: string
     UserAgent:
@@ -499,36 +513,22 @@ components:
         type: string
       required: true
       example: Example/1.2.3 Crawler/4.3.1
-    LimitQuery:
-      name: limit
-      in: query
-      description: Restrict the amount of data you receive. For accounts, the limit can be between 1 and 100. If omitted, the default is 50. For transactions, the limit can be between 1 and 500. If omitted, the default is 100.
-      schema:
-        type: integer
-        minLength: 1
-        maxLength: 500
-      example: 50
-    AccountIdPath:
-      name: accountId
-      in: path
-      description: Account Identifier
-      required: true
-      schema:
-        type: string
-    Accept:
-      name: Accept
+    AcceptCharset:
+      name: Accept-Charset
       in: header
-      description: Preferred syntax for content type. This content type should be application/json.
+      description: The supported character set for the content. UTF-8 contains the accepted Unicode character list for standard English and Latin characters.
       schema:
-        $ref: '#/components/schemas/ContentTypes'
+        $ref: '#/components/schemas/Charsets'
       required: true
-      example: application/json
-    BalanceAsOfDate:
-      name: balanceAsOf
-      in: query
-      description: 'A query option to return historical balance information from a certain date. Balance information includes opening and closed ledger balances, opening and closing available balances, and commercial balances. The date must be within 180 days of the current date. If a date is not provided, historical balance information is not returned. Format: YYYY-MM-DD'
+      example: UTF-8
+    FapiInteractionIdHeader:
+      name: x-fapi-interaction-id
+      in: header
+      description: Unique identifier for this interaction. A valid ID must be 36 characters in length. This is used across all API requests and responses.
       schema:
-        $ref: '#/components/schemas/DateString'
+        $ref: '#/components/schemas/FapiInteractionId'
+      required: true
+      example: c770aef3-6784-41f7-8e0e-ff5f97bddb3a
   headers:
     x-fapi-interaction-id:
       description: Unique identifier for this interaction

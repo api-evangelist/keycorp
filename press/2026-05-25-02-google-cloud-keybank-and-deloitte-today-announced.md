@@ -1,7 +1,9 @@
 ---
 title: Google Cloud, KeyBank, and Deloitte today announced ...
 url: https://www.googlecloudpresscorner.com/2022-02-03-Google-Cloud-Announces-Cloud-First-Partnership-with-KeyBank
-date: '2026-05-25'
+published: '2022-02-03'
+date_basis: url-derived
+harvested: '2026-05-25'
 query: '"KeyCorp" press release artificial intelligence'
 position: 2
 source: serpapi-google

@@ -21,7 +21,7 @@ paths:
       - StopPayments
       summary: Place a stop payment
       operationId: PlaceStopPayments
-      description: Places a stop payment for an account using  an account number and check number. You can only stop a payment between the hours of 06:00 a.m. and 11:59 p.m. EST.
+      description: Places a stop payment for an account using an account number and check number. You can only stop a payment between the hours of 06:00 a.m. and 11:59 p.m. EST.
       security:
       - bearerAuth: []
       parameters:
@@ -407,12 +407,12 @@ paths:
                   ConnectError: Request could not be processed on time (GatewayTimeout), please wait a moment and resubmit the request.
 components:
   schemas:
-    ConnectError:
+    StopPaymentPlaceResponse:
       type: object
+      description: Successful response to place a stop payment.
       properties:
-        ConnectError:
-          type: string
-          description: API connectivity error information, if available.
+        stopPayments:
+          $ref: '#/components/schemas/StopPayments'
     Message:
       type: object
       description: Field-level error or informational message.
@@ -427,12 +427,6 @@ components:
           description: Human-readable message associated with the code.
           examples:
           - Successfully retrieved records.
-    StopPaymentPlaceResponse:
-      type: object
-      description: Successful response to place a stop payment.
-      properties:
-        stopPayments:
-          $ref: '#/components/schemas/StopPayments'
     ResponseMetadata:
       type: object
       description: Error metadata including validation or service messages.
@@ -443,6 +437,12 @@ components:
           description: List of messages describing validation errors or other informational messages.
           items:
             $ref: '#/components/schemas/Message'
+    ConnectError:
+      type: object
+      properties:
+        ConnectError:
+          type: string
+          description: API connectivity error information, if available.
     StopPaymentPlaceRequest:
       type: object
       description: Request to place a stop payment on an account.
@@ -484,6 +484,13 @@ components:
           type: string
           maxLength: 30
           description: A custom text field to provide a brief explanation of the stop payment request.
+    ServiceErrorData:
+      type: object
+      title: serviceErrorData
+      description: Detailed service-level error information, if available.
+      properties:
+        metadata:
+          $ref: '#/components/schemas/ResponseMetadata'
     StopPayments:
       type: object
       description: Stop payment record.
@@ -532,13 +539,6 @@ components:
           description: 'Original check issue date. Format: YYYY-MM-DD'
           pattern: ^\d{4}\-(0?[1-9]|1[0-2])\-(0?[1-9]|[1-2][0-9]|3[0-1])$
           format: date
-    ServiceErrorData:
-      type: object
-      title: serviceErrorData
-      description: Detailed service-level error information, if available.
-      properties:
-        metadata:
-          $ref: '#/components/schemas/ResponseMetadata'
     Exception:
       type: object
       description: Contains information about errors related to the request.

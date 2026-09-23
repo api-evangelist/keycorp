@@ -319,65 +319,6 @@ paths:
                   ConnectError: Request could not be processed on time (GatewayTimeout), please wait a moment and resubmit the request.
 components:
   schemas:
-    ConnectError:
-      type: object
-      properties:
-        ConnectError:
-          type: string
-          description: API connectivity error information, if available.
-    CheckImage:
-      type: object
-      description: Check image record.
-      properties:
-        accountNumber:
-          type: string
-          description: Account number related to the check holder.
-          examples:
-          - '1234567890'
-        checkNumber:
-          type: integer
-          description: Check number associated with the check image.
-          minimum: 1
-          maximum: 99999999999
-          examples:
-          - 123
-        checkAmount:
-          type: number
-          format: double
-          description: Amount of the check provided.
-          examples:
-          - 12.1
-          - 1224234
-          - 0.57
-        checkProcessDate:
-          type: string
-          format: date
-          description: Check process date (YYYY-MM-DD).
-        sequenceNumber:
-          type: integer
-          description: System generated sequence number.
-          examples:
-          - 1
-        transactionType:
-          type: string
-          description: Type of transaction for the check.
-          examples:
-          - DEBIT
-        checkRoutingNumber:
-          type: string
-          description: Routing number on the check.
-          examples:
-          - '04120704'
-        checkFrontImage:
-          type: string
-          description: The Base64 encoded string for the front image of the check.
-          examples:
-          - lUwXMGBwTm4dy/5pe8GwlRZULmMfPkzL8yZKfDxRTU7HFMW/b7DYqjBq0vyC85PxMObQ2UxtcbVe78MWsdgIBkKY7pCB4eE7GQr9QOcFRW2O7FQshj8ExEy0bmCV8cQFyxzKh04XPWIDxp71PIw/BFWy2GG+R3b1SFP/Mbj0Hdppoxn+rUxAz7Red+39BodSSz1xZteU8hu6fYvvNmbqasZmkVAEE6hS2H+3uVKqaMmnpHJ2oIie0rtowueFradOWhNGvV5pRuEhEd6j93X/7mt=
-        checkRearImage:
-          type: string
-          description: The Base64 encoded string for the back image of the check.
-          examples:
-          - 73mfoZbjXF4Gr9XuIYSieWR0o3NV2bvMcwiurzvU8Dyvy2CG+1DYdw3IyHHZRdY6CKiarVFK7mG+IgJKVaDwqA2Ma7YxopwgEIJ5oc8gS/O8BzX7zms/6hmRn9wrcZj3ZhaSUmAdOtSc3qOzp6JPLoYyJg2hQwnEtJyormF8GT5ajF8ADV6XQD+d3Ym8bKsR6rHWwGB0bmiKu+9r+33mR8QZmzmmCPIUZXzj6CXaLr0dNA4+xXszgMbWAHI00ZGhTsSfzyWp8FHYZx24fbEOkS9ApuVBRihL+Eb14ldJayOgAXI3OjLJgo2pB4EUvbQmhwu=
     Message:
       type: object
       description: Field-level error or informational message.
@@ -443,6 +384,18 @@ components:
           description: List of messages describing validation errors or other informational messages.
           items:
             $ref: '#/components/schemas/Message'
+    ConnectError:
+      type: object
+      properties:
+        ConnectError:
+          type: string
+          description: API connectivity error information, if available.
+    CheckImageListResponse:
+      type: object
+      description: Check Image list response.
+      properties:
+        checkImages:
+          $ref: '#/components/schemas/CheckImage'
     ServiceErrorData:
       type: object
       title: serviceErrorData
@@ -450,6 +403,59 @@ components:
       properties:
         metadata:
           $ref: '#/components/schemas/ResponseMetadata'
+    CheckImage:
+      type: object
+      description: Check image record.
+      properties:
+        accountNumber:
+          type: string
+          description: Account number related to the check holder.
+          examples:
+          - '1234567890'
+        checkNumber:
+          type: integer
+          description: Check number associated with the check image.
+          minimum: 1
+          maximum: 99999999999
+          examples:
+          - 123
+        checkAmount:
+          type: number
+          format: double
+          description: Amount of the check provided.
+          examples:
+          - 12.1
+          - 1224234
+          - 0.57
+        checkProcessDate:
+          type: string
+          format: date
+          description: Check process date (YYYY-MM-DD).
+        sequenceNumber:
+          type: integer
+          description: System generated sequence number.
+          examples:
+          - 1
+        transactionType:
+          type: string
+          description: Type of transaction for the check.
+          examples:
+          - DEBIT
+        checkRoutingNumber:
+          type: string
+          description: Routing number on the check.
+          examples:
+          - '04120704'
+        checkFrontImage:
+          type: string
+          description: The Base64 encoded string for the front image of the check.
+          examples:
+          - lUwXMGBwTm4dy/5pe8GwlRZULmMfPkzL8yZKfDxRTU7HFMW/b7DYqjBq0vyC85PxMObQ2UxtcbVe78MWsdgIBkKY7pCB4eE7GQr9QOcFRW2O7FQshj8ExEy0bmCV8cQFyxzKh04XPWIDxp71PIw/BFWy2GG+R3b1SFP/Mbj0Hdppoxn+rUxAz7Red+39BodSSz1xZteU8hu6fYvvNmbqasZmkVAEE6hS2H+3uVKqaMmnpHJ2oIie0rtowueFradOWhNGvV5pRuEhEd6j93X/7mt=
+        checkRearImage:
+          type: string
+          description: The Base64 encoded string for the back image of the check.
+          examples:
+          - 73mfoZbjXF4Gr9XuIYSieWR0o3NV2bvMcwiurzvU8Dyvy2CG+1DYdw3IyHHZRdY6CKiarVFK7mG+IgJKVaDwqA2Ma7YxopwgEIJ5oc8gS/O8BzX7zms/6hmRn9wrcZj3ZhaSUmAdOtSc3qOzp6JPLoYyJg2hQwnEtJyormF8GT5ajF8ADV6XQD+d3Ym8bKsR6rHWwGB0bmiKu+9r+33mR8QZmzmmCPIUZXzj6CXaLr0dNA4+xXszgMbWAHI00ZGhTsSfzyWp8FHYZx24fbEOkS9ApuVBRihL+Eb14ldJayOgAXI3OjLJgo2pB4EUvbQmhwu=
     Exception:
       type: object
       description: Contains information about errors related to the request.
@@ -478,12 +484,6 @@ components:
           oneOf:
           - $ref: '#/components/schemas/ServiceErrorData'
           - $ref: '#/components/schemas/ConnectError'
-    CheckImageListResponse:
-      type: object
-      description: Check Image list response.
-      properties:
-        checkImages:
-          $ref: '#/components/schemas/CheckImage'
   securitySchemes:
     bearerAuth:
       type: http

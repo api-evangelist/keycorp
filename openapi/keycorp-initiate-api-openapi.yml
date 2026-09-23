@@ -305,113 +305,117 @@ paths:
                   ConnectError: Request could not be processed on time (gateway timeout). Please wait a moment and resubmit the request.
 components:
   schemas:
-    foreignBankSystemType:
+    ultParty:
       type: object
       properties:
-        type:
+        name:
           type: string
-          description: The five character global routing code for a foreign financial institution.
-          enum:
-          - ATBLZ
-          - AUBSB
-          - CACPA
-          - CHBCC
-          - CHSIC
-          - CNAPS
-          - DEBLZ
-          - ESNCC
-          - GBDSC
-          - GRBIC
-          - HKNCC
-          - IENCC
-          - INFSC
-          - ITNCC
-          - JPZGN
-          - NZNCC
-          - PLKNR
-          - PTNCC
-          - RUCBC
-          - SESBA
-          - SGIBG
-          - THCBC
-          - TWNCC
-          - USABA
-          - USPID
-          - ZANCC
-        id:
-          type: string
-          description: The identification number associated with the foreign financial institution.
-    exception:
-      title: exceptionSchema
-      type: object
-      description: Contains information about the errors related to the request.
-      properties:
-        ErrorMessage:
-          type: string
-          description: A human-readable message that describes the type or source of the error.
-        TransactionId:
-          type: string
-          description: A unique transaction ID returned with the response, useful for traceability.
-        TransactionTime:
-          type: string
-          description: Date (YYYY-MM-DD) and time (HH:MM:SS) the error occurred.
-        Api-Url:
-          type: string
-          description: The API URL path of the call that generated the response.
-        ServiceError:
-          type: object
-          title: ServiceError
-          description: Detailed service-level error details, if available.
-          oneOf:
-          - $ref: '#/components/schemas/serviceErrorData'
-          - $ref: '#/components/schemas/connectError'
-    serviceErrorData:
-      title: serviceErrorData
-      required:
-      - status
-      type: object
-      description: The service error returns the same response payload as a successful response with additional details specific to the error.
-      properties:
-        status:
-          description: 'The status of the payment transaction. Valid values: IN_PROCESS, IN_REVIEW, COMPLETED, FAILED, RETURNED, ERROR, VALID'
-          $ref: '#/components/schemas/paymentStatus'
-        transactionId:
-          type: string
-          description: The unique ID number associated with the original payment request in KeyBank's payment system.
-        requestReference:
-          type: string
-          description: A unique reference value for the original request that is useful for traceability and reporting. The ID cannot exceed 32 characters.
-          minLength: 1
-          maxLength: 32
-        sendersReference:
-          type: string
-          description: Unique reference value provided by the sender. The ID cannot exceed 32 characters.
-          minLength: 1
-          maxLength: 32
-        receiversReference:
-          type: string
-          description: The sender reference value from the original request. This is useful for traceability and reporting.
+          description: Typically this is the name of the party that instructed the debit party to initiate a payment. This applies only to RTP transactions and the value cannot exceed 140 characters.
           minLength: 1
           maxLength: 140
-        debitAccountNumber:
+    noYesType:
+      type: string
+      description: This field indicates whether the transaction qualifies for Dodd-Frank.
+      enum:
+      - true
+      - false
+    party:
+      title: party
+      required:
+      - name
+      type: object
+      description: Details about the parties involved in the transaction.
+      properties:
+        name:
           type: string
-          description: The sender reference value from the original request. This is useful for traceability and reporting.
+          description: Name of the party. This can be an individual, a financial institution, or a beneficiary. The name is required for the creditParty. This cannot exceed 140 characters.
+          maxLength: 140
+        accountNumber:
+          description: Account number of the party. If this is a wire transfer, you must provide the name and address with the account number for all parties, except debitParty and debitPartyBank. This cannot exceed 34 digits.
+          type: string
           minLength: 1
           maxLength: 34
-        creditAccountNumber:
+        aba:
           type: string
-          description: The sender reference value from the original request. This is useful for traceability and reporting.
-          minLength: 1
-          maxLength: 34
-        valueDate:
+          description: The ABA or routing number of the financial institution. If this is a wire transfer, you do not need to provide other account information like address or name, unless it is for debitParty or debitPartyBank. This cannot exceed 9 digits.
+          pattern: '[0-9]{9,9}'
+          maxLength: 9
+        bic:
           type: string
-          description: The date (YYYY-MM-DD) the transferred occurred.
-        error:
-          description: Additional error information for payment transactions with the status ERROR.
-          $ref: '#/components/schemas/paymentError'
-        doddFrank:
-          description: The initial assessment of whether the transaction qualifies as a Dodd-Frank wire transaction. This value can change during the payment cycle.
-          $ref: '#/components/schemas/noYesType'
+          description: The bank identifier code (BIC) for the party. This is a combination code that identifies the bank, country, location, and possibly the bank branch.
+          pattern: '[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}'
+        txid:
+          type: string
+          description: The tax identification number for the party.
+        foreignBankSystemId:
+          description: For wire transfer to a financial institution located internationally or outside of the United States, this is the global routing number and identification number.
+          $ref: '#/components/schemas/foreignBankSystemType'
+        postalAddress:
+          type: object
+          description: The address of the party. If the address is present in the request, all fields are required.
+          properties:
+            adrTp:
+              type: string
+              description: 'Address type for the party that specifies if it is a home, business, or mailing address. Valid values: ADDR, PBOX, HOME, BIZZ, MLTO, DLVY'
+              enum:
+              - ADDR
+              - PBOX
+              - HOME
+              - BIZZ
+              - MLTO
+              - DLVY
+            dept:
+              type: string
+              description: Department of the party for the mailing address, if applicable. This field cannot exceed 70 characters.
+              minLength: 1
+              maxLength: 70
+            subDept:
+              type: string
+              description: Sub-department of the party, if applicable. This field cannot exceed 70 characters.
+              minLength: 1
+              maxLength: 70
+            strtNm:
+              type: string
+              description: Street address for the party. This field cannot exceed 70 characters.
+              minLength: 1
+              maxLength: 70
+            bldgNb:
+              type: string
+              description: Building number. This field cannot exceed 16 characters.
+              minLength: 1
+              maxLength: 16
+            pstCd:
+              type: string
+              description: The postal code or zip code for the address. This field cannot exceed 16 characters.
+              minLength: 1
+              maxLength: 16
+            twnNm:
+              type: string
+              description: Name of the town. This field cannot exceed 35 characters.
+              minLength: 1
+              maxLength: 35
+            ctrySubDvsn:
+              type: string
+              description: Name of subdivision of a country like a state, region, or county. This field cannot exceed 35 characters.
+              minLength: 1
+              maxLength: 35
+            ctry:
+              type: string
+              description: Two-character country abbreviation.
+              pattern: '[A-Z]{2,2}'
+            adrLine:
+              type: array
+              maxItems: 3
+              description: An unstructured address line. You can have up to three lines of text. Each line can be 70 characters or less.
+              items:
+                type: string
+                maxLength: 70
+    connectError:
+      type: object
+      properties:
+        ConnectError:
+          type: string
+          description: API connectivity error information, if available.
     paymentTransactionRequestV1:
       title: paymentTransactionRequestV1
       required:
@@ -520,143 +524,6 @@ components:
           pattern: ^\s*
           minLength: 0
           maxLength: 500
-    paymentError:
-      required:
-      - code
-      - title
-      type: object
-      description: Error messages related to the API and backend services.
-      properties:
-        code:
-          type: string
-          description: Status code assigned to each error type.
-        title:
-          type: string
-          description: Brief title about the error associated with the status code.
-        description:
-          type: string
-          description: Description of the error.
-        detail:
-          type: object
-          description: Additional details about the error from the payment network.
-          properties:
-            code:
-              type: string
-              description: A static code assigned by the network or payment system.
-            title:
-              type: string
-              description: Brief title about the error associated with the status code.
-            description:
-              type: string
-              description: Description of the error
-    party:
-      title: party
-      required:
-      - name
-      type: object
-      description: Details about the parties involved in the transaction.
-      properties:
-        name:
-          type: string
-          description: Name of the party. This can be an individual, a financial institution, or a beneficiary. The name is required for the creditParty. This cannot exceed 140 characters.
-          maxLength: 140
-        accountNumber:
-          description: Account number of the party. If this is a wire transfer, you must provide the name and address with the account number for all parties, except debitParty and debitPartyBank. This cannot exceed 34 digits.
-          type: string
-          minLength: 1
-          maxLength: 34
-        aba:
-          type: string
-          description: The ABA or routing number of the financial institution. If this is a wire transfer, you do not need to provide other account information like address or name, unless it is for debitParty or debitPartyBank. This cannot exceed 9 digits.
-          pattern: '[0-9]{9,9}'
-          maxLength: 9
-        bic:
-          type: string
-          description: The bank identifier code (BIC) for the party. This is a combination code that identifies the bank, country, location, and possibly the bank branch.
-          pattern: '[A-Z]{6,6}[A-Z2-9][A-NP-Z0-9]([A-Z0-9]{3,3}){0,1}'
-        txid:
-          type: string
-          description: The tax identification number for the party.
-        foreignBankSystemId:
-          description: For wire transfer to a financial institution located internationally or outside of the United States, this is the global routing number and identification number.
-          $ref: '#/components/schemas/foreignBankSystemType'
-        postalAddress:
-          type: object
-          description: The address of the party. If the address is present in the request, all fields are required.
-          properties:
-            adrTp:
-              type: string
-              description: 'Address type for the party that specifies if it is a home, business, or mailing address. Valid values: ADDR, PBOX, HOME, BIZZ, MLTO, DLVY'
-              enum:
-              - ADDR
-              - PBOX
-              - HOME
-              - BIZZ
-              - MLTO
-              - DLVY
-            dept:
-              type: string
-              description: Department of the party for the mailing address, if applicable. This field cannot exceed 70 characters.
-              minLength: 1
-              maxLength: 70
-            subDept:
-              type: string
-              description: Sub-department of the party, if applicable. This field cannot exceed 70 characters.
-              minLength: 1
-              maxLength: 70
-            strtNm:
-              type: string
-              description: Street address for the party. This field cannot exceed 70 characters.
-              minLength: 1
-              maxLength: 70
-            bldgNb:
-              type: string
-              description: Building number. This field cannot exceed 16 characters.
-              minLength: 1
-              maxLength: 16
-            pstCd:
-              type: string
-              description: The postal code or zip code for the address. This field cannot exceed 16 characters.
-              minLength: 1
-              maxLength: 16
-            twnNm:
-              type: string
-              description: Name of the town. This field cannot exceed 35 characters.
-              minLength: 1
-              maxLength: 35
-            ctrySubDvsn:
-              type: string
-              description: Name of subdivision of a country like a state, region, or county. This field cannot exceed 35 characters.
-              minLength: 1
-              maxLength: 35
-            ctry:
-              type: string
-              description: Two-character country abbreviation.
-              pattern: '[A-Z]{2,2}'
-            adrLine:
-              type: array
-              maxItems: 3
-              description: An unstructured address line. You can have up to three lines of text. Each line can be 70 characters or less.
-              items:
-                type: string
-                maxLength: 70
-    paymentStatus:
-      type: string
-      description: 'The status of the payment transaction. Valid values: IN_PROCESS, IN_REVIEW, COMPLETED, FAILED, RETURNED, ERROR, VALID'
-      enum:
-      - IN_PROCESS
-      - IN_REVIEW
-      - COMPLETED
-      - FAILED
-      - RETURNED
-      - ERROR
-      - VALID
-    connectError:
-      type: object
-      properties:
-        ConnectError:
-          type: string
-          description: API connectivity error information, if available.
     paymentTransactionResponse:
       required:
       - status
@@ -717,20 +584,153 @@ components:
           type: string
           description: A reference value for the beneficiary. This value cannot exceed 140 characters.
           maxLength: 140
-    ultParty:
+    foreignBankSystemType:
       type: object
       properties:
-        name:
+        type:
           type: string
-          description: Typically this is the name of the party that instructed the debit party to initiate a payment. This applies only to RTP transactions and the value cannot exceed 140 characters.
+          description: The five character global routing code for a foreign financial institution.
+          enum:
+          - ATBLZ
+          - AUBSB
+          - CACPA
+          - CHBCC
+          - CHSIC
+          - CNAPS
+          - DEBLZ
+          - ESNCC
+          - GBDSC
+          - GRBIC
+          - HKNCC
+          - IENCC
+          - INFSC
+          - ITNCC
+          - JPZGN
+          - NZNCC
+          - PLKNR
+          - PTNCC
+          - RUCBC
+          - SESBA
+          - SGIBG
+          - THCBC
+          - TWNCC
+          - USABA
+          - USPID
+          - ZANCC
+        id:
+          type: string
+          description: The identification number associated with the foreign financial institution.
+    exception:
+      title: exceptionSchema
+      type: object
+      description: Contains information about the errors related to the request.
+      properties:
+        ErrorMessage:
+          type: string
+          description: A human-readable message that describes the type or source of the error.
+        TransactionId:
+          type: string
+          description: A unique transaction ID returned with the response, useful for traceability.
+        TransactionTime:
+          type: string
+          description: Date (YYYY-MM-DD) and time (HH:MM:SS) the error occurred.
+        Api-Url:
+          type: string
+          description: The API URL path of the call that generated the response.
+        ServiceError:
+          type: object
+          title: ServiceError
+          description: Detailed service-level error details, if available.
+          oneOf:
+          - $ref: '#/components/schemas/serviceErrorData'
+          - $ref: '#/components/schemas/connectError'
+    paymentStatus:
+      type: string
+      description: 'The status of the payment transaction. Valid values: IN_PROCESS, IN_REVIEW, COMPLETED, FAILED, RETURNED, ERROR, VALID'
+      enum:
+      - IN_PROCESS
+      - IN_REVIEW
+      - COMPLETED
+      - FAILED
+      - RETURNED
+      - ERROR
+      - VALID
+    serviceErrorData:
+      title: serviceErrorData
+      required:
+      - status
+      type: object
+      description: The service error returns the same response payload as a successful response with additional details specific to the error.
+      properties:
+        status:
+          description: 'The status of the payment transaction. Valid values: IN_PROCESS, IN_REVIEW, COMPLETED, FAILED, RETURNED, ERROR, VALID'
+          $ref: '#/components/schemas/paymentStatus'
+        transactionId:
+          type: string
+          description: The unique ID number associated with the original payment request in KeyBank's payment system.
+        requestReference:
+          type: string
+          description: A unique reference value for the original request that is useful for traceability and reporting. The ID cannot exceed 32 characters.
+          minLength: 1
+          maxLength: 32
+        sendersReference:
+          type: string
+          description: Unique reference value provided by the sender. The ID cannot exceed 32 characters.
+          minLength: 1
+          maxLength: 32
+        receiversReference:
+          type: string
+          description: The sender reference value from the original request. This is useful for traceability and reporting.
           minLength: 1
           maxLength: 140
-    noYesType:
-      type: string
-      description: This field indicates whether the transaction qualifies for Dodd-Frank.
-      enum:
-      - true
-      - false
+        debitAccountNumber:
+          type: string
+          description: The sender reference value from the original request. This is useful for traceability and reporting.
+          minLength: 1
+          maxLength: 34
+        creditAccountNumber:
+          type: string
+          description: The sender reference value from the original request. This is useful for traceability and reporting.
+          minLength: 1
+          maxLength: 34
+        valueDate:
+          type: string
+          description: The date (YYYY-MM-DD) the transferred occurred.
+        error:
+          description: Additional error information for payment transactions with the status ERROR.
+          $ref: '#/components/schemas/paymentError'
+        doddFrank:
+          description: The initial assessment of whether the transaction qualifies as a Dodd-Frank wire transaction. This value can change during the payment cycle.
+          $ref: '#/components/schemas/noYesType'
+    paymentError:
+      required:
+      - code
+      - title
+      type: object
+      description: Error messages related to the API and backend services.
+      properties:
+        code:
+          type: string
+          description: Status code assigned to each error type.
+        title:
+          type: string
+          description: Brief title about the error associated with the status code.
+        description:
+          type: string
+          description: Description of the error.
+        detail:
+          type: object
+          description: Additional details about the error from the payment network.
+          properties:
+            code:
+              type: string
+              description: A static code assigned by the network or payment system.
+            title:
+              type: string
+              description: Brief title about the error associated with the status code.
+            description:
+              type: string
+              description: Description of the error
   securitySchemes:
     bearerAuth:
       type: http

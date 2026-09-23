@@ -291,6 +291,118 @@ paths:
       - Accounts
 components:
   schemas:
+    businessFault:
+      type: object
+      properties:
+        errorDescription:
+          type: string
+          description: Contains business system messages generated if there is an issue.
+    AOAResponse:
+      type: object
+      description: Contains the response payload for the account validation endpoint.
+      properties:
+        Result:
+          $ref: '#/components/schemas/Result'
+    Client_1:
+      type: object
+      description: Contains the client-provided date, time, and description of the inquiry request.
+      properties:
+        clientDate:
+          type: string
+          maxLength: 10
+          format: date
+          description: 'Client-provided date the inquiry request was made. Format: YYYY-MM-DD'
+        clientTime:
+          type: string
+          maxLength: 8
+          format: time
+          description: 'Client-provided time the inquiry request was made. Format: HH:MM:SS'
+        userDefined:
+          type: string
+          maxLength: 255
+          description: Client-provided descriptive text about the inquiry request. This field cannot exceed 255 characters.
+    serviceErrorData:
+      type: object
+      properties:
+        AOAResponse:
+          type: object
+          properties:
+            Result:
+              type: object
+              properties:
+                errorCode:
+                  type: string
+                  maxLength: 3
+                  description: Three-digit error code. Returns a "000" when no errors are present.
+    errorResponse:
+      type: object
+      description: Error response with related business or system fault related information.
+      properties:
+        businessFault:
+          $ref: '#/components/schemas/businessFault'
+        systemFault:
+          $ref: '#/components/schemas/systemFault'
+    accountValidationV2Request:
+      type: object
+      properties:
+        AOARequest:
+          $ref: '#/components/schemas/AOARequest'
+    accountValidationV2Response:
+      required:
+      - errorResponse
+      type: object
+      properties:
+        AOAResponse:
+          $ref: '#/components/schemas/AOAResponse'
+        errorResponse:
+          $ref: '#/components/schemas/errorResponse'
+    Result:
+      type: object
+      description: Contains the response results for the account owner inquiry
+      properties:
+        errorCode:
+          type: string
+          maxLength: 3
+          description: Three-digit error code. Returns a "000" when no errors are present.
+        systemRecordId:
+          type: string
+          minLength: 1
+          maxLength: 16
+          description: Unique, system-generated transaction ID.
+        primaryId:
+          type: string
+          minLength: 1
+          maxLength: 10
+          description: Primary client ID returned via a KeyBank lookup. This is a KeyBank ID.
+        secondaryId:
+          type: string
+          minLength: 1
+          maxLength: 10
+          description: Secondary client ID provided in the original request.
+        additionalId:
+          type: string
+          minLength: 1
+          maxLength: 10
+          description: Additional client ID, if provided in the original request. This is rarely used.
+        routingNumber:
+          type: string
+          maxLength: 9
+          description: Nine-digit routing number for the account provided in the original request.
+        accountNumber:
+          type: string
+          minLength: 1
+          maxLength: 17
+          description: Full bank account number provided in the original request.
+        feeAttrib:
+          type: string
+          maxLength: 2
+          description: Two-character code that represents how a transaction took place. Currently, the only value reported is "HH", which represents an ACH transaction.
+        AcctOwner:
+          $ref: '#/components/schemas/AcctOwner_1'
+        AcctStatus:
+          $ref: '#/components/schemas/AcctStatus'
+        Client:
+          $ref: '#/components/schemas/Client_1'
     Client:
       type: object
       description: Contains the client-provided date, time, and description of the inquiry request.
@@ -394,57 +506,13 @@ components:
           minLength: 1
           maxLength: 3
           description: 'The measure of how closely the inquiry request attributes match the actual account ownership data. This number is calculated based on the analysis of all information sent. Valid values: 0-100'
-    AOAResponse:
-      type: object
-      description: Contains the response payload for the account validation endpoint.
-      properties:
-        Result:
-          $ref: '#/components/schemas/Result'
-    accountValidationV2Request:
-      type: object
-      properties:
-        AOARequest:
-          $ref: '#/components/schemas/AOARequest'
-    Client_1:
-      type: object
-      description: Contains the client-provided date, time, and description of the inquiry request.
-      properties:
-        clientDate:
-          type: string
-          maxLength: 10
-          format: date
-          description: 'Client-provided date the inquiry request was made. Format: YYYY-MM-DD'
-        clientTime:
-          type: string
-          maxLength: 8
-          format: time
-          description: 'Client-provided time the inquiry request was made. Format: HH:MM:SS'
-        userDefined:
-          type: string
-          maxLength: 255
-          description: Client-provided descriptive text about the inquiry request. This field cannot exceed 255 characters.
-    systemFault:
-      type: object
-      properties:
-        errorDescription:
-          type: string
-          description: Descriptive error message that identifies if it is a system issue or business fault.
-    accountValidationV2Response:
+    accountValidation_POST_response:
       required:
-      - errorResponse
+      - accountValidationV2Response
       type: object
       properties:
-        AOAResponse:
-          $ref: '#/components/schemas/AOAResponse'
-        errorResponse:
-          $ref: '#/components/schemas/errorResponse'
-    accountValidation_POST_bodyParameters:
-      required:
-      - accountValidationV2Request
-      type: object
-      properties:
-        accountValidationV2Request:
-          $ref: '#/components/schemas/accountValidationV2Request'
+        accountValidationV2Response:
+          $ref: '#/components/schemas/accountValidationV2Response'
     Inquiry:
       type: object
       required:
@@ -489,84 +557,6 @@ components:
       properties:
         Inquiry:
           $ref: '#/components/schemas/Inquiry'
-    errorResponse:
-      type: object
-      description: Error response with related business or system fault related information.
-      properties:
-        businessFault:
-          $ref: '#/components/schemas/businessFault'
-        systemFault:
-          $ref: '#/components/schemas/systemFault'
-    Result:
-      type: object
-      description: Contains the response results for the account owner inquiry
-      properties:
-        errorCode:
-          type: string
-          maxLength: 3
-          description: Three-digit error code. Returns a "000" when no errors are present.
-        systemRecordId:
-          type: string
-          minLength: 1
-          maxLength: 16
-          description: Unique, system-generated transaction ID.
-        primaryId:
-          type: string
-          minLength: 1
-          maxLength: 10
-          description: Primary client ID returned via a KeyBank lookup. This is a KeyBank ID.
-        secondaryId:
-          type: string
-          minLength: 1
-          maxLength: 10
-          description: Secondary client ID provided in the original request.
-        additionalId:
-          type: string
-          minLength: 1
-          maxLength: 10
-          description: Additional client ID, if provided in the original request. This is rarely used.
-        routingNumber:
-          type: string
-          maxLength: 9
-          description: Nine-digit routing number for the account provided in the original request.
-        accountNumber:
-          type: string
-          minLength: 1
-          maxLength: 17
-          description: Full bank account number provided in the original request.
-        feeAttrib:
-          type: string
-          maxLength: 2
-          description: Two-character code that represents how a transaction took place. Currently, the only value reported is "HH", which represents an ACH transaction.
-        AcctOwner:
-          $ref: '#/components/schemas/AcctOwner_1'
-        AcctStatus:
-          $ref: '#/components/schemas/AcctStatus'
-        Client:
-          $ref: '#/components/schemas/Client_1'
-    accountValidation_POST_response:
-      required:
-      - accountValidationV2Response
-      type: object
-      properties:
-        accountValidationV2Response:
-          $ref: '#/components/schemas/accountValidationV2Response'
-    AcctStatus:
-      type: object
-      description: Contains the account status details.
-      properties:
-        primaryStatusCode:
-          type: string
-          description: Primary three-digit account status code. This is an informational response code that represents the status of an account.
-        primMessage:
-          type: string
-          description: Message associated with the primary status code.
-    connectError:
-      type: object
-      properties:
-        ConnectError:
-          type: string
-          description: API connectivity error information, if available.
     exception:
       type: object
       title: exceptionSchema
@@ -596,12 +586,16 @@ components:
           oneOf:
           - $ref: '#/components/schemas/serviceErrorData'
           - $ref: '#/components/schemas/connectError'
-    businessFault:
+    AcctStatus:
       type: object
+      description: Contains the account status details.
       properties:
-        errorDescription:
+        primaryStatusCode:
           type: string
-          description: Contains business system messages generated if there is an issue.
+          description: Primary three-digit account status code. This is an informational response code that represents the status of an account.
+        primMessage:
+          type: string
+          description: Message associated with the primary status code.
     AcctOwner:
       type: object
       description: Contains details about the account owner to for a more advanced inquiry.
@@ -734,19 +728,25 @@ components:
           maxLength: 6
           pattern: ^$|^([a-zA-Z0-9]{2}|[a-zA-Z0-9]{6})$
           description: Two-character state of issuance for the account owner's form of identification. If not a US state, enter the place of issuance. This field must be between 2-6 characters in length.
-    serviceErrorData:
+    systemFault:
       type: object
       properties:
-        AOAResponse:
-          type: object
-          properties:
-            Result:
-              type: object
-              properties:
-                errorCode:
-                  type: string
-                  maxLength: 3
-                  description: Three-digit error code. Returns a "000" when no errors are present.
+        errorDescription:
+          type: string
+          description: Descriptive error message that identifies if it is a system issue or business fault.
+    accountValidation_POST_bodyParameters:
+      required:
+      - accountValidationV2Request
+      type: object
+      properties:
+        accountValidationV2Request:
+          $ref: '#/components/schemas/accountValidationV2Request'
+    connectError:
+      type: object
+      properties:
+        ConnectError:
+          type: string
+          description: API connectivity error information, if available.
   securitySchemes:
     bearerAuth:
       type: http

@@ -7,12 +7,12 @@ servers:
 - url: https://partner-api-qv.key.com
 - url: https://partner-api.key.com
 tags:
-- name: HealthCheck
+- name: Health Check
 paths:
   /accounts/validations/v2/healthCheck:
     get:
       tags:
-      - HealthCheck
+      - Health Check
       summary: Health check
       description: Verify you can connect to the API service. A bearer token is required.
       operationId: healthCheck
@@ -42,7 +42,7 @@ paths:
   /accounts/transactions/v1/healthCheck:
     get:
       tags:
-      - HealthCheck
+      - Health Check
       summary: Health check
       description: Verify you can connect to the API service. A bearer token is required.
       operationId: healthCheck
@@ -74,7 +74,7 @@ paths:
   /ach/payments/v1/healthCheck:
     get:
       tags:
-      - HealthCheck
+      - Health Check
       summary: Health check
       description: Verify you can connect to the API service. A bearer token is required.
       operationId: healthCheck
@@ -104,7 +104,7 @@ paths:
   /commercial/checks/v1/healthCheck:
     get:
       tags:
-      - HealthCheck
+      - Health Check
       summary: Health check
       operationId: healthCheck
       description: Verify you can connect to the API service. A bearer token is required.
@@ -129,7 +129,7 @@ paths:
   /rtp/v1/healthCheck:
     get:
       tags:
-      - HealthCheck
+      - Health Check
       summary: Health check
       description: Verify you can connect to the API service. A bearer token is required.
       operationId: healthCheck
@@ -161,7 +161,7 @@ paths:
   /rtp/v1/payment/healthCheck:
     get:
       tags:
-      - HealthCheck
+      - Health Check
       summary: Health check
       description: Verify you can connect to the API service. A bearer token is required.
       operationId: healthCheckv1
@@ -192,7 +192,7 @@ paths:
   /wireInquiry/v1/healthCheck:
     get:
       tags:
-      - HealthCheck
+      - Health Check
       summary: Health check
       description: Verify you can connect to the API service. A bearer token is required.
       operationId: healthCheck

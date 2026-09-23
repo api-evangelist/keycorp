@@ -1,7 +1,9 @@
 ---
 title: 'Keycorp AI Profile: Capabilities, IP and People'
 url: https://www.index42.com/companies/Keycorp
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"KeyCorp" press release artificial intelligence'
 position: 3
 source: serpapi-google

@@ -561,86 +561,6 @@ paths:
                   ConnectError: Request could not be processed on time (gateway timeout). Please wait a moment and resubmit the request.
 components:
   schemas:
-    foreignBankSystemType:
-      type: object
-      properties:
-        type:
-          type: string
-          description: The five character global routing code for a foreign financial institution.
-          enum:
-          - ATBLZ
-          - AUBSB
-          - CACPA
-          - CHBCC
-          - CHSIC
-          - CNAPS
-          - DEBLZ
-          - ESNCC
-          - GBDSC
-          - GRBIC
-          - HKNCC
-          - IENCC
-          - INFSC
-          - ITNCC
-          - JPZGN
-          - NZNCC
-          - PLKNR
-          - PTNCC
-          - RUCBC
-          - SESBA
-          - SGIBG
-          - THCBC
-          - TWNCC
-          - USABA
-          - USPID
-          - ZANCC
-        id:
-          type: string
-          description: The identification number associated with the foreign financial institution.
-    exception:
-      title: exceptionSchema
-      type: object
-      description: Contains information about the errors related to the request.
-      properties:
-        ErrorMessage:
-          type: string
-          description: A human-readable message that describes the type or source of the error.
-        TransactionId:
-          type: string
-          description: A unique transaction ID returned with the response, useful for traceability.
-        TransactionTime:
-          type: string
-          description: Date (YYYY-MM-DD) and time (HH:MM:SS) the error occurred.
-        Api-Url:
-          type: string
-          description: The API URL path of the call that generated the response.
-        ServiceError:
-          type: object
-          title: ServiceError
-          description: Detailed service-level error details, if available.
-          oneOf:
-          - $ref: '#/components/schemas/serviceErrorData'
-          - $ref: '#/components/schemas/connectError'
-    participantListResponse:
-      required:
-      - count
-      - limit
-      - offset
-      title: participantListResponse
-      description: Contains the response body for RTP participant inquiries.
-      type: object
-      properties:
-        count:
-          type: string
-          description: The count of records that match the initial query.
-        limit:
-          type: integer
-          description: The maximum number of records returned in the response.
-        offset:
-          type: integer
-          description: The number of records skipped before the response is returned.
-        parties:
-          $ref: '#/components/schemas/party'
     paymentError:
       required:
       - code
@@ -670,6 +590,12 @@ components:
             description:
               type: string
               description: Description of the error
+    noYesType:
+      type: string
+      description: This field indicates whether the transaction qualifies for Dodd-Frank.
+      enum:
+      - true
+      - false
     party:
       title: party
       required:
@@ -761,6 +687,72 @@ components:
               items:
                 type: string
                 maxLength: 70
+    connectError:
+      type: object
+      properties:
+        ConnectError:
+          type: string
+          description: API connectivity error information, if available.
+    foreignBankSystemType:
+      type: object
+      properties:
+        type:
+          type: string
+          description: The five character global routing code for a foreign financial institution.
+          enum:
+          - ATBLZ
+          - AUBSB
+          - CACPA
+          - CHBCC
+          - CHSIC
+          - CNAPS
+          - DEBLZ
+          - ESNCC
+          - GBDSC
+          - GRBIC
+          - HKNCC
+          - IENCC
+          - INFSC
+          - ITNCC
+          - JPZGN
+          - NZNCC
+          - PLKNR
+          - PTNCC
+          - RUCBC
+          - SESBA
+          - SGIBG
+          - THCBC
+          - TWNCC
+          - USABA
+          - USPID
+          - ZANCC
+        id:
+          type: string
+          description: The identification number associated with the foreign financial institution.
+    exception:
+      title: exceptionSchema
+      type: object
+      description: Contains information about the errors related to the request.
+      properties:
+        ErrorMessage:
+          type: string
+          description: A human-readable message that describes the type or source of the error.
+        TransactionId:
+          type: string
+          description: A unique transaction ID returned with the response, useful for traceability.
+        TransactionTime:
+          type: string
+          description: Date (YYYY-MM-DD) and time (HH:MM:SS) the error occurred.
+        Api-Url:
+          type: string
+          description: The API URL path of the call that generated the response.
+        ServiceError:
+          type: object
+          title: ServiceError
+          description: Detailed service-level error details, if available.
+          oneOf:
+          - $ref: '#/components/schemas/serviceErrorData'
+          - $ref: '#/components/schemas/connectError'
     paymentStatus:
       type: string
       description: 'The status of the payment transaction. Valid values: IN_PROCESS, IN_REVIEW, COMPLETED, FAILED, RETURNED, ERROR, VALID'
@@ -772,12 +764,6 @@ components:
       - RETURNED
       - ERROR
       - VALID
-    connectError:
-      type: object
-      properties:
-        ConnectError:
-          type: string
-          description: API connectivity error information, if available.
     serviceErrorData:
       title: serviceErrorData
       required:
@@ -825,12 +811,26 @@ components:
         doddFrank:
           description: The initial assessment of whether the transaction qualifies as a Dodd-Frank wire transaction. This value can change during the payment cycle.
           $ref: '#/components/schemas/noYesType'
-    noYesType:
-      type: string
-      description: This field indicates whether the transaction qualifies for Dodd-Frank.
-      enum:
-      - true
-      - false
+    participantListResponse:
+      required:
+      - count
+      - limit
+      - offset
+      title: participantListResponse
+      description: Contains the response body for RTP participant inquiries.
+      type: object
+      properties:
+        count:
+          type: string
+          description: The count of records that match the initial query.
+        limit:
+          type: integer
+          description: The maximum number of records returned in the response.
+        offset:
+          type: integer
+          description: The number of records skipped before the response is returned.
+        parties:
+          $ref: '#/components/schemas/party'
   securitySchemes:
     bearerAuth:
       type: http
