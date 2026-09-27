@@ -555,34 +555,13 @@ paths:
                       message: An unexpected error occurred.  Please try again later or contact support if the problem persists.
 components:
   schemas:
-    PartyList:
+    ServiceErrorData:
       type: object
-      description: Contains the customer identification number and company name.
+      title: serviceErrorData
+      description: Detailed service-level error information, if available.
       properties:
-        customerIdentificationNumber:
-          type: string
-          description: The unique identification number associated with the customer.
-          examples:
-          - 099999999
-        companyName:
-          type: string
-          description: The name of the corporation or institution making the request.
-          examples:
-          - VENDOR
-    Message:
-      type: object
-      description: Informational code and message from the server.
-      properties:
-        code:
-          type: string
-          description: Static code assigned by the network or payment system.
-          examples:
-          - Wire-List-400-toDate
-        message:
-          type: string
-          description: A human-readable message associated with the code.
-          examples:
-          - toDate format must be YYYY-MM-DD
+        metadata:
+          $ref: '#/components/schemas/ErrorMetadata'
     AchListTransaction:
       type: object
       description: Results from ACH transaction account search.
@@ -700,6 +679,20 @@ components:
           description: The unique parNumber of the settlement batch tied to the transaction.
           examples:
           - '23218003015954'
+    ConnectError:
+      type: object
+      properties:
+        ConnectError:
+          type: string
+          description: API connectivity error information, if available.
+          examples:
+          - Request could not be processed on time (GatewayTimeout), please wait a moment and resubmit the request.
+    PageMetadata:
+      type: object
+      description: Data information returned as a message or page information retrieved from the server.
+      properties:
+        page:
+          $ref: '#/components/schemas/Page'
     AccountDetail:
       type: object
       description: Contains details about the account like number, bank number, and routing number.
@@ -719,6 +712,123 @@ components:
           description: Nine-digit routing number for the account provided in the original request.
           examples:
           - '123456789'
+    PartyList:
+      type: object
+      description: Contains the customer identification number and company name.
+      properties:
+        customerIdentificationNumber:
+          type: string
+          description: The unique identification number associated with the customer.
+          examples:
+          - 099999999
+        companyName:
+          type: string
+          description: The name of the corporation or institution making the request.
+          examples:
+          - VENDOR
+    Exception:
+      type: object
+      description: Contains information about errors related to the request.
+      title: exceptionSchema
+      properties:
+        ErrorMessage:
+          type: string
+          description: A human-readable message that describes the type or source of the error.
+          examples:
+          - Error received from backend service
+        TransactionId:
+          type: string
+          description: A unique transaction ID returned with the response, useful for traceability.
+          examples:
+          - 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+        X-CorrelationId:
+          type: string
+          description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          examples:
+          - 929618f2-6163-bf73-51b0-6c54a8533c74
+        TransactionTime:
+          type: string
+          format: date-time
+          description: Date and time the error occurred.
+          examples:
+          - '2021-06-11T16:31:34.041Z'
+        Api-Url:
+          type: string
+          description: The API URL path of the call that generated the response.
+          examples:
+          - /wireInquiry/v1/transactions/list
+        ServiceError:
+          type: object
+          title: ServiceError
+          description: Detailed service-level error details, if available.
+          oneOf:
+          - $ref: '#/components/schemas/ServiceErrorData'
+          - $ref: '#/components/schemas/ConnectError'
+    NotificationOfChange:
+      type: object
+      description: Contains change details and corrected data.
+      properties:
+        changeCode:
+          type: string
+          description: The three-character change code begins with the letter 'C'. This code is applied to all NOCs to indicate the information that is being changed.
+          maxLength: 50
+          examples:
+          - C02
+        changeDescription:
+          type: string
+          description: The description associated with the change code.
+          maxLength: 255
+          examples:
+          - Incorrect transit/routing number
+        correctedData:
+          type: string
+          description: The corrected data per the correction change code.
+          maxLength: 50
+          examples:
+          - '1234567890'
+    Message:
+      type: object
+      description: Informational code and message from the server.
+      properties:
+        code:
+          type: string
+          description: Static code assigned by the network or payment system.
+          examples:
+          - Wire-List-400-toDate
+        message:
+          type: string
+          description: A human-readable message associated with the code.
+          examples:
+          - toDate format must be YYYY-MM-DD
+    PartyDetail:
+      type: object
+      description: Contains details about the party like ID number, company name, and the customer name.
+      properties:
+        customerIdentificationNumber:
+          type: string
+          description: The unique identification number associated with the customer.
+          examples:
+          - '1234567'
+        companyName:
+          type: string
+          description: The name of the corporation or institution making the request.
+          examples:
+          - COMPANY NAME 1
+        customerName:
+          type: string
+          description: The name of the customer.
+          examples:
+          - TEST CUSTOMER1
+    ErrorMetadata:
+      type: object
+      description: Error metadata including validation or service messages.
+      properties:
+        messages:
+          type: array
+          maxItems: 100
+          description: List of messages describing validation errors or other informational messages.
+          items:
+            $ref: '#/components/schemas/Message'
     Page:
       type: object
       description: Page information returned from the server.
@@ -757,33 +867,6 @@ components:
           examples:
           - false
           - true
-    ErrorMetadata:
-      type: object
-      description: Error metadata including validation or service messages.
-      properties:
-        messages:
-          type: array
-          maxItems: 100
-          description: List of messages describing validation errors or other informational messages.
-          items:
-            $ref: '#/components/schemas/Message'
-    AccountList:
-      type: object
-      description: Contains details about the account like account number.
-      properties:
-        accountNumber:
-          type: string
-          description: Bank account number.
-          examples:
-          - '3123456789'
-    ConnectError:
-      type: object
-      properties:
-        ConnectError:
-          type: string
-          description: API connectivity error information, if available.
-          examples:
-          - Request could not be processed on time (GatewayTimeout), please wait a moment and resubmit the request.
     AchDetailTransaction:
       type: object
       description: Contains transaction details associated with the queried parNumber.
@@ -940,120 +1023,15 @@ components:
           description: Applicable change notifications associated with the ACH transaction.
           items:
             $ref: '#/components/schemas/NotificationOfChange'
-    NotificationOfChange:
+    AccountList:
       type: object
-      description: Contains change details and corrected data.
+      description: Contains details about the account like account number.
       properties:
-        changeCode:
+        accountNumber:
           type: string
-          description: The three-character change code begins with the letter 'C'. This code is applied to all NOCs to indicate the information that is being changed.
-          maxLength: 50
+          description: Bank account number.
           examples:
-          - C02
-        changeDescription:
-          type: string
-          description: The description associated with the change code.
-          maxLength: 255
-          examples:
-          - Incorrect transit/routing number
-        correctedData:
-          type: string
-          description: The corrected data per the correction change code.
-          maxLength: 50
-          examples:
-          - '1234567890'
-    ServiceErrorData:
-      type: object
-      title: serviceErrorData
-      description: Detailed service-level error information, if available.
-      properties:
-        metadata:
-          $ref: '#/components/schemas/ErrorMetadata'
-    Addendum:
-      type: object
-      description: Contains addenda record information.
-      properties:
-        sequenceNumber:
-          type: integer
-          description: The addenda record item number in order of sequence. Number cannot exceed 4 digits.
-          maximum: 9999
-          examples:
-          - 1
-        entryDetailSequenceNumber:
-          type: string
-          description: The entry number in order of sequence. Number cannot exceed 7 digits.
-          maxLength: 7
-          examples:
-          - '188'
-        paymentRelatedInformation:
-          type: string
-          description: The related payment information from the addenda records. The maximum character limit is 255.
-          maxLength: 255
-          examples:
-          - Addenda Record (Applies to CCD, CTX, PPD, and WEB entries)
-    PartyDetail:
-      type: object
-      description: Contains details about the party like ID number, company name, and the customer name.
-      properties:
-        customerIdentificationNumber:
-          type: string
-          description: The unique identification number associated with the customer.
-          examples:
-          - '1234567'
-        companyName:
-          type: string
-          description: The name of the corporation or institution making the request.
-          examples:
-          - COMPANY NAME 1
-        customerName:
-          type: string
-          description: The name of the customer.
-          examples:
-          - TEST CUSTOMER1
-    Exception:
-      type: object
-      description: Contains information about errors related to the request.
-      title: exceptionSchema
-      properties:
-        ErrorMessage:
-          type: string
-          description: A human-readable message that describes the type or source of the error.
-          examples:
-          - Error received from backend service
-        TransactionId:
-          type: string
-          description: A unique transaction ID returned with the response, useful for traceability.
-          examples:
-          - 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
-        X-CorrelationId:
-          type: string
-          description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
-          examples:
-          - 929618f2-6163-bf73-51b0-6c54a8533c74
-        TransactionTime:
-          type: string
-          format: date-time
-          description: Date and time the error occurred.
-          examples:
-          - '2021-06-11T16:31:34.041Z'
-        Api-Url:
-          type: string
-          description: The API URL path of the call that generated the response.
-          examples:
-          - /wireInquiry/v1/transactions/list
-        ServiceError:
-          type: object
-          title: ServiceError
-          description: Detailed service-level error details, if available.
-          oneOf:
-          - $ref: '#/components/schemas/ServiceErrorData'
-          - $ref: '#/components/schemas/ConnectError'
-    PageMetadata:
-      type: object
-      description: Data information returned as a message or page information retrieved from the server.
-      properties:
-        page:
-          $ref: '#/components/schemas/Page'
+          - '3123456789'
     AchSettledTransaction:
       type: object
       description: Results from ACH transaction where the status is "SETTLED" or "RETURNED".
@@ -1155,6 +1133,28 @@ components:
           description: The unique parNumber of the settlement batch tied to the transaction.
           examples:
           - '23218003015954'
+    Addendum:
+      type: object
+      description: Contains addenda record information.
+      properties:
+        sequenceNumber:
+          type: integer
+          description: The addenda record item number in order of sequence. Number cannot exceed 4 digits.
+          maximum: 9999
+          examples:
+          - 1
+        entryDetailSequenceNumber:
+          type: string
+          description: The entry number in order of sequence. Number cannot exceed 7 digits.
+          maxLength: 7
+          examples:
+          - '188'
+        paymentRelatedInformation:
+          type: string
+          description: The related payment information from the addenda records. The maximum character limit is 255.
+          maxLength: 255
+          examples:
+          - Addenda Record (Applies to CCD, CTX, PPD, and WEB entries)
   securitySchemes:
     bearerAuth:
       type: http

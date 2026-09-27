@@ -492,6 +492,221 @@ paths:
                       message: An unexpected error occurred.  Please try again later or contact support if the problem persists.
 components:
   schemas:
+    IntermediaryBank:
+      allOf:
+      - $ref: '#/components/schemas/Bank'
+      - type: object
+        properties:
+          name:
+            type: string
+            description: Name.
+            examples:
+            - SIMW1 BANK
+          addressLine:
+            type: string
+            description: Address line.
+            examples:
+            - 0123 INT2W1 ST
+    Amount0To1B:
+      description: Amount between 0 and 1,000,000,000 inclusive. Accepts a JSON number or a string. If a string is used, commas are allowed as thousands separators. Decimal precision must be at most 2 decimal places.
+      oneOf:
+      - title: AmountAsNumber
+        type: number
+        format: double
+        minimum: 0
+        maximum: 1000000000
+        multipleOf: 0.01
+        description: Amount between 0 and 1 billion.  Decimals are optional.  If present, must contain 1 or 2 digits (e.g., 2433.0, 3939.2, 100.25).
+      - title: AmountAsString
+        type: string
+        description: 'String amount may include commas. If commas are used, they must be valid thousands separators (e.g., 1,234,567). Must be 0..1,000,000,000 inclusive. Decimals are optional; if present, must be 1 or 2 digits (e.g., 2433.0, 3939.2, 100.25). Note: 1,000,000,000 may only be whole dollars or with a decimal value of .0/.00.'
+        pattern: ^(?:(?:1(?:,000){3}|1000000000)(?:\.0{1,2})?|(?:0|[1-9]\d{0,8}|[1-9]\d{0,2}(?:,\d{3}){1,2})(?:\.\d{1,2})?|\.\d{1,2})$
+      examples:
+      - 0.25
+      - 100
+      - 100.0
+      - 2433.0
+      - 3939.2
+      - '.25'
+      - '100'
+      - '100.0'
+      - '100.25'
+      - 75,020.52
+      - 1,000,000,000
+      - 1,000,000,000.00
+    Exception:
+      type: object
+      description: Contains information about errors related to the request.
+      title: exceptionSchema
+      properties:
+        ErrorMessage:
+          type: string
+          description: A human-readable message that describes the type or source of the error.
+          examples:
+          - Error received from backend service
+        TransactionId:
+          type: string
+          description: A unique transaction ID returned with the response, useful for traceability.
+          examples:
+          - 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
+        X-CorrelationId:
+          type: string
+          description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+          examples:
+          - 929618f2-6163-bf73-51b0-6c54a8533c74
+        TransactionTime:
+          type: string
+          format: date-time
+          description: Date and time the error occurred.
+          examples:
+          - '2021-06-11T16:31:34.041Z'
+        Api-Url:
+          type: string
+          description: The API URL path of the call that generated the response.
+          examples:
+          - /rtp/v1/transactions/list
+        ServiceError:
+          type: object
+          title: ServiceError
+          description: Detailed service-level error details, if available.
+          oneOf:
+          - $ref: '#/components/schemas/ServiceErrorData'
+          - $ref: '#/components/schemas/ConnectError'
+    OriginatorPartyDetail:
+      description: Originator party representation returned in detail results.
+      allOf:
+      - $ref: '#/components/schemas/PartyDetail'
+      - type: object
+        properties:
+          originalName:
+            type: string
+            description: Contains the original origination customer name
+            maxLength: 255
+            examples:
+            - Raul Wilson
+    ErrorMetadata:
+      type: object
+      description: Error metadata including validation or service messages.
+      properties:
+        messages:
+          type: array
+          description: List of messages describing validation errors or other informational messages.
+          maxItems: 100
+          items:
+            $ref: '#/components/schemas/Message'
+    PartyDetail:
+      description: Party representation returned in detail results.
+      allOf:
+      - $ref: '#/components/schemas/PartySummary'
+      - type: object
+        properties:
+          postalAddress:
+            $ref: '#/components/schemas/PostalAddress'
+    ServiceErrorData:
+      type: object
+      title: serviceErrorData
+      description: Detailed service-level error information, if available.
+      properties:
+        metadata:
+          $ref: '#/components/schemas/ErrorMetadata'
+    BeneficiaryPartyDetail:
+      description: Beneficiary party representation returned in detail results.
+      allOf:
+      - $ref: '#/components/schemas/PartyDetail'
+      - type: object
+        properties:
+          ultimateName:
+            type: string
+            description: Contains the ultimate beneficiary name.
+            maxLength: 255
+            examples:
+            - Saul Wilson
+    ConnectError:
+      type: object
+      properties:
+        ConnectError:
+          type: string
+          description: API connectivity error information, if available.
+          examples:
+          - Request could not be processed on time (GatewayTimeout), please wait a moment and resubmit the request.
+    Message:
+      type: object
+      description: Informational code and message from the server.
+      properties:
+        code:
+          type: string
+          description: Static code assigned by the network or payment system.
+          examples:
+          - RTP-List-400-toDate
+        message:
+          type: string
+          description: A human-readable message associated with the code.
+          examples:
+          - toDate format must be YYYY-MM-DD
+    RTPListTransaction:
+      type: object
+      description: Contains the response payload for RTP inquiries.
+      properties:
+        transactionId:
+          type: string
+          description: The unique ID number associated with the original payment request
+          maxLength: 100
+          examples:
+          - US99999000999999
+        transactionStatus:
+          type: string
+          enum:
+          - CANCELLED
+          - COMPLETED
+          - FAILED
+          - IN PROCESS
+          - IN REVIEW
+          - RETURNED
+          description: 'The status of the RTP transfer. Valid values: CANCELLED, COMPLETED, FAILED, IN PROCESS, IN REVIEW, RETURNED'
+          maxLength: 50
+        transactionStatusTimestamp:
+          type: string
+          pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$
+          description: Timestamp for the most recent status change on the transaction.
+          examples:
+          - '2026-01-12T12:18:01'
+        transactionDate:
+          type: string
+          format: date
+          description: 'Date the transfer occurred. Format: YYYY-MM-DD'
+          examples:
+          - '2026-01-12'
+        transactionAmount:
+          type: number
+          format: double
+          description: The dollar amount of the transaction.
+          examples:
+          - 32772.63
+          - 32.1
+        requestReference:
+          type: string
+          description: A reference value for the original request that is useful for traceability and reporting. The ID cannot exceed 32 characters.
+          maxLength: 32
+          examples:
+          - '1122334455'
+        sendersReference:
+          type: string
+          description: A reference value provided by the sender. For outbound payments, this value is the same as the transaction ID. The ID cannot exceed 35 characters.
+          maxLength: 35
+          examples:
+          - US99999000999999
+        creditor:
+          $ref: '#/components/schemas/PartySummary'
+        creditorAccount:
+          $ref: '#/components/schemas/Account'
+        debtor:
+          $ref: '#/components/schemas/PartySummary'
+        debtorAccount:
+          $ref: '#/components/schemas/Account'
+        originator:
+          $ref: '#/components/schemas/PartySummary'
+        beneficiary:
+          $ref: '#/components/schemas/PartySummary'
     Bank:
       type: object
       properties:
@@ -505,24 +720,25 @@ components:
           description: Business Identifier Code (BIC) is an 8 to 11-character alphanumeric code that uniquely identifies a specific bank or financial institution worldwide
           examples:
           - SIMWUS01
-    OriginatorPartyDetail:
-      description: Originator party representation returned in detail results.
-      allOf:
-      - $ref: '#/components/schemas/PartyDetail'
-      - type: object
-        properties:
-          originalName:
-            type: string
-            description: Contains the original origination customer name
-            maxLength: 255
-            examples:
-            - Raul Wilson
-    PageMetadata:
+    Account:
       type: object
-      description: Data information returned as a message or page information retrieved from the server.
       properties:
-        page:
-          $ref: '#/components/schemas/Page'
+        accountNumber:
+          type: string
+          description: Account number of the party.
+          maxLength: 20
+    PartySummary:
+      type: object
+      description: Minimal party representation returned in list results.
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Contains the customer name
+          maxLength: 255
+          examples:
+          - Paul Wilson
     RtpDetailTransaction:
       type: object
       description: Contains the response payload with details about an RTP transaction.
@@ -646,33 +862,50 @@ components:
           $ref: '#/components/schemas/Bank'
         failureReasons:
           $ref: '#/components/schemas/FailureReasons'
-    Amount0To1B:
-      description: Amount between 0 and 1,000,000,000 inclusive. Accepts a JSON number or a string. If a string is used, commas are allowed as thousands separators. Decimal precision must be at most 2 decimal places.
-      oneOf:
-      - title: AmountAsNumber
-        type: number
-        format: double
-        minimum: 0
-        maximum: 1000000000
-        multipleOf: 0.01
-        description: Amount between 0 and 1 billion.  Decimals are optional.  If present, must contain 1 or 2 digits (e.g., 2433.0, 3939.2, 100.25).
-      - title: AmountAsString
-        type: string
-        description: 'String amount may include commas. If commas are used, they must be valid thousands separators (e.g., 1,234,567). Must be 0..1,000,000,000 inclusive. Decimals are optional; if present, must be 1 or 2 digits (e.g., 2433.0, 3939.2, 100.25). Note: 1,000,000,000 may only be whole dollars or with a decimal value of .0/.00.'
-        pattern: ^(?:(?:1(?:,000){3}|1000000000)(?:\.0{1,2})?|(?:0|[1-9]\d{0,8}|[1-9]\d{0,2}(?:,\d{3}){1,2})(?:\.\d{1,2})?|\.\d{1,2})$
-      examples:
-      - 0.25
-      - 100
-      - 100.0
-      - 2433.0
-      - 3939.2
-      - '.25'
-      - '100'
-      - '100.0'
-      - '100.25'
-      - 75,020.52
-      - 1,000,000,000
-      - 1,000,000,000.00
+    PageMetadata:
+      type: object
+      description: Data information returned as a message or page information retrieved from the server.
+      properties:
+        page:
+          $ref: '#/components/schemas/Page'
+    AccountExtended:
+      allOf:
+      - $ref: '#/components/schemas/Account'
+      - type: object
+        properties:
+          virtualAccountNumber:
+            type: string
+            description: Account number for the virtual account (VAM).
+            maxLength: 20
+            examples:
+            - '95312346654532'
+    FailureReasons:
+      type: object
+      properties:
+        initiatingFailureReasonCode:
+          type: string
+          description: Reason code for initiating failure
+          maxLength: 32
+          examples:
+          - KEY-9998
+        initiatingFailureReasonTitle:
+          type: string
+          description: Reason description for initiating failure
+          maxLength: 256
+          examples:
+          - Unauthorized for account
+        networkFailureReasonCode:
+          type: string
+          description: Reason code for network failure
+          maxLength: 32
+          examples:
+          - '123'
+        networkFailureReasonTitle:
+          type: string
+          description: Reason description for network failure
+          maxLength: 256
+          examples:
+          - Network Failure
     Page:
       type: object
       description: Page information returned from the server.
@@ -711,101 +944,6 @@ components:
           examples:
           - false
           - true
-    BeneficiaryPartyDetail:
-      description: Beneficiary party representation returned in detail results.
-      allOf:
-      - $ref: '#/components/schemas/PartyDetail'
-      - type: object
-        properties:
-          ultimateName:
-            type: string
-            description: Contains the ultimate beneficiary name.
-            maxLength: 255
-            examples:
-            - Saul Wilson
-    ServiceErrorData:
-      type: object
-      title: serviceErrorData
-      description: Detailed service-level error information, if available.
-      properties:
-        metadata:
-          $ref: '#/components/schemas/ErrorMetadata'
-    PartyDetail:
-      description: Party representation returned in detail results.
-      allOf:
-      - $ref: '#/components/schemas/PartySummary'
-      - type: object
-        properties:
-          postalAddress:
-            $ref: '#/components/schemas/PostalAddress'
-    IntermediaryBank:
-      allOf:
-      - $ref: '#/components/schemas/Bank'
-      - type: object
-        properties:
-          name:
-            type: string
-            description: Name.
-            examples:
-            - SIMW1 BANK
-          addressLine:
-            type: string
-            description: Address line.
-            examples:
-            - 0123 INT2W1 ST
-    PartySummary:
-      type: object
-      description: Minimal party representation returned in list results.
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Contains the customer name
-          maxLength: 255
-          examples:
-          - Paul Wilson
-    FailureReasons:
-      type: object
-      properties:
-        initiatingFailureReasonCode:
-          type: string
-          description: Reason code for initiating failure
-          maxLength: 32
-          examples:
-          - KEY-9998
-        initiatingFailureReasonTitle:
-          type: string
-          description: Reason description for initiating failure
-          maxLength: 256
-          examples:
-          - Unauthorized for account
-        networkFailureReasonCode:
-          type: string
-          description: Reason code for network failure
-          maxLength: 32
-          examples:
-          - '123'
-        networkFailureReasonTitle:
-          type: string
-          description: Reason description for network failure
-          maxLength: 256
-          examples:
-          - Network Failure
-    Message:
-      type: object
-      description: Informational code and message from the server.
-      properties:
-        code:
-          type: string
-          description: Static code assigned by the network or payment system.
-          examples:
-          - RTP-List-400-toDate
-        message:
-          type: string
-          description: A human-readable message associated with the code.
-          examples:
-          - toDate format must be YYYY-MM-DD
     PostalAddress:
       type: object
       properties:
@@ -874,144 +1012,6 @@ components:
           maxLength: 210
           examples:
           - 123 SIM ST,STE W123
-    Account:
-      type: object
-      properties:
-        accountNumber:
-          type: string
-          description: Account number of the party.
-          maxLength: 20
-    RTPListTransaction:
-      type: object
-      description: Contains the response payload for RTP inquiries.
-      properties:
-        transactionId:
-          type: string
-          description: The unique ID number associated with the original payment request
-          maxLength: 100
-          examples:
-          - US99999000999999
-        transactionStatus:
-          type: string
-          enum:
-          - CANCELLED
-          - COMPLETED
-          - FAILED
-          - IN PROCESS
-          - IN REVIEW
-          - RETURNED
-          description: 'The status of the RTP transfer. Valid values: CANCELLED, COMPLETED, FAILED, IN PROCESS, IN REVIEW, RETURNED'
-          maxLength: 50
-        transactionStatusTimestamp:
-          type: string
-          pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$
-          description: Timestamp for the most recent status change on the transaction.
-          examples:
-          - '2026-01-12T12:18:01'
-        transactionDate:
-          type: string
-          format: date
-          description: 'Date the transfer occurred. Format: YYYY-MM-DD'
-          examples:
-          - '2026-01-12'
-        transactionAmount:
-          type: number
-          format: double
-          description: The dollar amount of the transaction.
-          examples:
-          - 32772.63
-          - 32.1
-        requestReference:
-          type: string
-          description: A reference value for the original request that is useful for traceability and reporting. The ID cannot exceed 32 characters.
-          maxLength: 32
-          examples:
-          - '1122334455'
-        sendersReference:
-          type: string
-          description: A reference value provided by the sender. For outbound payments, this value is the same as the transaction ID. The ID cannot exceed 35 characters.
-          maxLength: 35
-          examples:
-          - US99999000999999
-        creditor:
-          $ref: '#/components/schemas/PartySummary'
-        creditorAccount:
-          $ref: '#/components/schemas/Account'
-        debtor:
-          $ref: '#/components/schemas/PartySummary'
-        debtorAccount:
-          $ref: '#/components/schemas/Account'
-        originator:
-          $ref: '#/components/schemas/PartySummary'
-        beneficiary:
-          $ref: '#/components/schemas/PartySummary'
-    Exception:
-      type: object
-      description: Contains information about errors related to the request.
-      title: exceptionSchema
-      properties:
-        ErrorMessage:
-          type: string
-          description: A human-readable message that describes the type or source of the error.
-          examples:
-          - Error received from backend service
-        TransactionId:
-          type: string
-          description: A unique transaction ID returned with the response, useful for traceability.
-          examples:
-          - 84293235-5d2c-42ba-afc3-a5d4afc5f88e27097
-        X-CorrelationId:
-          type: string
-          description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
-          examples:
-          - 929618f2-6163-bf73-51b0-6c54a8533c74
-        TransactionTime:
-          type: string
-          format: date-time
-          description: Date and time the error occurred.
-          examples:
-          - '2021-06-11T16:31:34.041Z'
-        Api-Url:
-          type: string
-          description: The API URL path of the call that generated the response.
-          examples:
-          - /rtp/v1/transactions/list
-        ServiceError:
-          type: object
-          title: ServiceError
-          description: Detailed service-level error details, if available.
-          oneOf:
-          - $ref: '#/components/schemas/ServiceErrorData'
-          - $ref: '#/components/schemas/ConnectError'
-    AccountExtended:
-      allOf:
-      - $ref: '#/components/schemas/Account'
-      - type: object
-        properties:
-          virtualAccountNumber:
-            type: string
-            description: Account number for the virtual account (VAM).
-            maxLength: 20
-            examples:
-            - '95312346654532'
-    ErrorMetadata:
-      type: object
-      description: Error metadata including validation or service messages.
-      properties:
-        messages:
-          type: array
-          description: List of messages describing validation errors or other informational messages.
-          maxItems: 100
-          items:
-            $ref: '#/components/schemas/Message'
-    ConnectError:
-      type: object
-      properties:
-        ConnectError:
-          type: string
-          description: API connectivity error information, if available.
-          examples:
-          - Request could not be processed on time (GatewayTimeout), please wait a moment and resubmit the request.
   securitySchemes:
     bearerAuth:
       type: http

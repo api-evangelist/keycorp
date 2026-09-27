@@ -43,7 +43,7 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/keycorp.pn
 tags:
   - Banking
   - Commercial Banking
-  - Financial-Services
+  - Financial Services
   - Fortune 500
   - Payments
   - United States
@@ -66,6 +66,7 @@ tags_raw:
   - ACH
   - Real-Time Payments
   - Wire Transfer
+  - Financial-Services
 url: https://raw.githubusercontent.com/api-evangelist/keycorp/refs/heads/main/apis.yml
 created: '2026-03-21'
 modified: '2026-07-23'

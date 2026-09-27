@@ -407,26 +407,19 @@ paths:
                   ConnectError: Request could not be processed on time (GatewayTimeout), please wait a moment and resubmit the request.
 components:
   schemas:
-    StopPaymentPlaceResponse:
+    ServiceErrorData:
       type: object
-      description: Successful response to place a stop payment.
+      title: serviceErrorData
+      description: Detailed service-level error information, if available.
       properties:
-        stopPayments:
-          $ref: '#/components/schemas/StopPayments'
-    Message:
+        metadata:
+          $ref: '#/components/schemas/ResponseMetadata'
+    ConnectError:
       type: object
-      description: Field-level error or informational message.
       properties:
-        code:
+        ConnectError:
           type: string
-          description: Machine-readable code.
-          examples:
-          - IMAGE-Check-200-Success
-        message:
-          type: string
-          description: Human-readable message associated with the code.
-          examples:
-          - Successfully retrieved records.
+          description: API connectivity error information, if available.
     ResponseMetadata:
       type: object
       description: Error metadata including validation or service messages.
@@ -437,12 +430,6 @@ components:
           description: List of messages describing validation errors or other informational messages.
           items:
             $ref: '#/components/schemas/Message'
-    ConnectError:
-      type: object
-      properties:
-        ConnectError:
-          type: string
-          description: API connectivity error information, if available.
     StopPaymentPlaceRequest:
       type: object
       description: Request to place a stop payment on an account.
@@ -484,13 +471,6 @@ components:
           type: string
           maxLength: 30
           description: A custom text field to provide a brief explanation of the stop payment request.
-    ServiceErrorData:
-      type: object
-      title: serviceErrorData
-      description: Detailed service-level error information, if available.
-      properties:
-        metadata:
-          $ref: '#/components/schemas/ResponseMetadata'
     StopPayments:
       type: object
       description: Stop payment record.
@@ -567,6 +547,26 @@ components:
           oneOf:
           - $ref: '#/components/schemas/ServiceErrorData'
           - $ref: '#/components/schemas/ConnectError'
+    Message:
+      type: object
+      description: Field-level error or informational message.
+      properties:
+        code:
+          type: string
+          description: Machine-readable code.
+          examples:
+          - IMAGE-Check-200-Success
+        message:
+          type: string
+          description: Human-readable message associated with the code.
+          examples:
+          - Successfully retrieved records.
+    StopPaymentPlaceResponse:
+      type: object
+      description: Successful response to place a stop payment.
+      properties:
+        stopPayments:
+          $ref: '#/components/schemas/StopPayments'
   securitySchemes:
     bearerAuth:
       type: http

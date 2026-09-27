@@ -45,7 +45,7 @@ paths:
       - Health Check
       summary: Health check
       description: Verify you can connect to the API service. A bearer token is required.
-      operationId: healthCheck
+      operationId: getAccountsTransactionsV1HealthCheck
       security:
       - bearerAuth: []
       responses:
@@ -66,6 +66,8 @@ paths:
                 Timestamp: '2022-09-15T04:49:03'
                 ClientIp: 192.0.2.1
                 X-Forwarded-For: '[192.0.2.1]'
+      x-operation-id-source: normalized
+      x-operation-id-original: healthCheck
     servers:
     - url: https://partner-api-qv.key.com
       description: Non-Production environment (QV)
@@ -77,7 +79,7 @@ paths:
       - Health Check
       summary: Health check
       description: Verify you can connect to the API service. A bearer token is required.
-      operationId: healthCheck
+      operationId: getAchPaymentsV1HealthCheck
       security:
       - bearerAuth: []
       responses:
@@ -98,6 +100,8 @@ paths:
                 Timestamp: '2022-09-15T04:49:03'
                 ClientIp: 156.77.111.28
                 X-Forwarded-For: '[156.77.111.28]'
+      x-operation-id-source: normalized
+      x-operation-id-original: healthCheck
     servers:
     - url: https://partner-api-qv.key.com
     - url: https://partner-api.key.com
@@ -106,7 +110,7 @@ paths:
       tags:
       - Health Check
       summary: Health check
-      operationId: healthCheck
+      operationId: getCommercialChecksV1HealthCheck
       description: Verify you can connect to the API service. A bearer token is required.
       security:
       - bearerAuth: []
@@ -123,6 +127,8 @@ paths:
                 Timestamp: '2022-09-15T04:49:03'
                 ClientIp: 192.0.2.1
                 X-Forwarded-For: '[192.0.2.1]'
+      x-operation-id-source: normalized
+      x-operation-id-original: healthCheck
     servers:
     - url: https://partner-api-qv.key.com
     - url: https://partner-api.key.com
@@ -132,7 +138,7 @@ paths:
       - Health Check
       summary: Health check
       description: Verify you can connect to the API service. A bearer token is required.
-      operationId: healthCheck
+      operationId: getRtpV1HealthCheck
       security:
       - bearerAuth: []
       responses:
@@ -153,6 +159,8 @@ paths:
                 Timestamp: '2022-09-15T04:49:03'
                 ClientIp: 192.0.2.1
                 X-Forwarded-For: '[192.0.2.1]'
+      x-operation-id-source: normalized
+      x-operation-id-original: healthCheck
     servers:
     - url: https://partner-api-qv.key.com
       description: Non-Production environment (QV)
@@ -195,7 +203,7 @@ paths:
       - Health Check
       summary: Health check
       description: Verify you can connect to the API service. A bearer token is required.
-      operationId: healthCheck
+      operationId: getWireInquiryV1HealthCheck
       security:
       - bearerAuth: []
       responses:
@@ -216,6 +224,8 @@ paths:
                 Timestamp: '2022-09-15T04:49:03'
                 ClientIp: 192.0.2.1
                 X-Forwarded-For: '[192.0.2.1]'
+      x-operation-id-source: normalized
+      x-operation-id-original: healthCheck
     servers:
     - url: https://partner-api-qv.key.com
       description: Non-Production environment (QV)

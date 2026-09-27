@@ -504,15 +504,6 @@ paths:
                   ConnectError: Please verify your payment status UUID and send the request again. The request could not be processed on time (GatewayTimeout).
 components:
   schemas:
-    detailStatusResponseEnvelopeDetailStatusResponse:
-      type: object
-      description: Contains ACH payment response status and details.
-      properties:
-        details:
-          type: array
-          description: List of details record.
-          items:
-            $ref: '#/components/schemas/detailStatusResponse'
     addendaStatusResponseEnvelope:
       type: object
       description: Contains the response parameters for the addenda status request.
@@ -543,24 +534,21 @@ components:
           description: List of addenda records.
           items:
             $ref: '#/components/schemas/baseAddendaDetailResponse'
-    baseAddendaDetailResponse:
+    connectError:
       type: object
-      description: Contains the code, sequence number, and related payment information for returned addenda records.
       properties:
-        addendaTypeCode:
+        ConnectError:
           type: string
-          description: The type code for the addenda. The value is '05'.
-          example: 5
-        addendaSequenceNumber:
-          type: string
-          description: The sequence number of the addenda. The number cannot exceed 4 digits.
-          maxLength: 4
-          example: 1
-        paymentRelatedInformation:
-          type: string
-          description: The related payment information from the addenda records. The maximum character limit is 80.
-          maxLength: 80
-          example: Undo
+          description: Error information of the connectivity with downstream service.
+    detailStatusRequestEnvelopePaymentInquiryDetailRequest:
+      type: object
+      description: Contains for ACH payment request status and details.
+      properties:
+        detailStatus:
+          type: array
+          description: Contains ACH payment status and details.
+          items:
+            $ref: '#/components/schemas/paymentInquiryDetailRequest'
     paymentInquiryDetailRequest:
       required:
       - uuid
@@ -571,18 +559,34 @@ components:
           description: A custom value used to identify each transaction. It is required to undo a payment. The ID must not exceed 45 alphanumeric characters.
           maxLength: 45
           example: qas220517x-49eb-47664-b94rhd1-e52e2re13001
-    detailMessage:
+    detailStatusResponseEnvelopeDetailStatusResponse:
       type: object
-      description: Contains the code and message with details about the response.
+      description: Contains ACH payment response status and details.
       properties:
-        code:
+        details:
+          type: array
+          description: List of details record.
+          items:
+            $ref: '#/components/schemas/detailStatusResponse'
+    addendaStatusRequestEnvelope:
+      required:
+      - uuid
+      type: object
+      description: Contains the unique transaction ID and pagination controls.
+      properties:
+        uuid:
           type: string
-          description: A static status code assigned by the network or payment system.
-          example: 1006040-65I
-        moreInfo:
+          description: A custom value used to identify each transaction. It is required to undo a payment. The ID must not exceed 45 alphanumeric characters.
+          maxLength: 45
+          example: qas220517x-49eb-47664-b94rhd1-e52e2re13001
+        pageSize:
           type: string
-          description: Detailed descriptive message.
-          example: Effective date assigned 220411
+          description: The number of records to be returned in the pagination search.
+          example: 10
+        startAddendaSequenceNumber:
+          type: string
+          description: The starting number for the addenda record sequence.
+          example: '0001'
     exception:
       type: object
       title: ExceptionSchema
@@ -609,40 +613,6 @@ components:
           oneOf:
           - $ref: '#/components/schemas/detailMessage'
           - $ref: '#/components/schemas/connectError'
-    addendaStatusRequestEnvelope:
-      required:
-      - uuid
-      type: object
-      description: Contains the unique transaction ID and pagination controls.
-      properties:
-        uuid:
-          type: string
-          description: A custom value used to identify each transaction. It is required to undo a payment. The ID must not exceed 45 alphanumeric characters.
-          maxLength: 45
-          example: qas220517x-49eb-47664-b94rhd1-e52e2re13001
-        pageSize:
-          type: string
-          description: The number of records to be returned in the pagination search.
-          example: 10
-        startAddendaSequenceNumber:
-          type: string
-          description: The starting number for the addenda record sequence.
-          example: '0001'
-    detailStatusRequestEnvelopePaymentInquiryDetailRequest:
-      type: object
-      description: Contains for ACH payment request status and details.
-      properties:
-        detailStatus:
-          type: array
-          description: Contains ACH payment status and details.
-          items:
-            $ref: '#/components/schemas/paymentInquiryDetailRequest'
-    connectError:
-      type: object
-      properties:
-        ConnectError:
-          type: string
-          description: Error information of the connectivity with downstream service.
     detailStatusResponse:
       required:
       - uuid
@@ -840,6 +810,36 @@ components:
           description: The file ID modifier to control the totals with a single alphanumeric value.
           maxLength: 1
           example: A
+    detailMessage:
+      type: object
+      description: Contains the code and message with details about the response.
+      properties:
+        code:
+          type: string
+          description: A static status code assigned by the network or payment system.
+          example: 1006040-65I
+        moreInfo:
+          type: string
+          description: Detailed descriptive message.
+          example: Effective date assigned 220411
+    baseAddendaDetailResponse:
+      type: object
+      description: Contains the code, sequence number, and related payment information for returned addenda records.
+      properties:
+        addendaTypeCode:
+          type: string
+          description: The type code for the addenda. The value is '05'.
+          example: 5
+        addendaSequenceNumber:
+          type: string
+          description: The sequence number of the addenda. The number cannot exceed 4 digits.
+          maxLength: 4
+          example: 1
+        paymentRelatedInformation:
+          type: string
+          description: The related payment information from the addenda records. The maximum character limit is 80.
+          maxLength: 80
+          example: Undo
   securitySchemes:
     bearerAuth:
       type: http
