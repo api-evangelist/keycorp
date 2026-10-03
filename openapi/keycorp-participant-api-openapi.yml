@@ -561,59 +561,6 @@ paths:
                   ConnectError: Request could not be processed on time (gateway timeout). Please wait a moment and resubmit the request.
 components:
   schemas:
-    foreignBankSystemType:
-      type: object
-      properties:
-        type:
-          type: string
-          description: The five character global routing code for a foreign financial institution.
-          enum:
-          - ATBLZ
-          - AUBSB
-          - CACPA
-          - CHBCC
-          - CHSIC
-          - CNAPS
-          - DEBLZ
-          - ESNCC
-          - GBDSC
-          - GRBIC
-          - HKNCC
-          - IENCC
-          - INFSC
-          - ITNCC
-          - JPZGN
-          - NZNCC
-          - PLKNR
-          - PTNCC
-          - RUCBC
-          - SESBA
-          - SGIBG
-          - THCBC
-          - TWNCC
-          - USABA
-          - USPID
-          - ZANCC
-        id:
-          type: string
-          description: The identification number associated with the foreign financial institution.
-    connectError:
-      type: object
-      properties:
-        ConnectError:
-          type: string
-          description: API connectivity error information, if available.
-    paymentStatus:
-      type: string
-      description: 'The status of the payment transaction. Valid values: IN_PROCESS, IN_REVIEW, COMPLETED, FAILED, RETURNED, ERROR, VALID'
-      enum:
-      - IN_PROCESS
-      - IN_REVIEW
-      - COMPLETED
-      - FAILED
-      - RETURNED
-      - ERROR
-      - VALID
     serviceErrorData:
       title: serviceErrorData
       required:
@@ -661,12 +608,6 @@ components:
         doddFrank:
           description: The initial assessment of whether the transaction qualifies as a Dodd-Frank wire transaction. This value can change during the payment cycle.
           $ref: '#/components/schemas/noYesType'
-    noYesType:
-      type: string
-      description: This field indicates whether the transaction qualifies for Dodd-Frank.
-      enum:
-      - true
-      - false
     exception:
       title: exceptionSchema
       type: object
@@ -691,6 +632,35 @@ components:
           oneOf:
           - $ref: '#/components/schemas/serviceErrorData'
           - $ref: '#/components/schemas/connectError'
+    paymentError:
+      required:
+      - code
+      - title
+      type: object
+      description: Error messages related to the API and backend services.
+      properties:
+        code:
+          type: string
+          description: Status code assigned to each error type.
+        title:
+          type: string
+          description: Brief title about the error associated with the status code.
+        description:
+          type: string
+          description: Description of the error.
+        detail:
+          type: object
+          description: Additional details about the error from the payment network.
+          properties:
+            code:
+              type: string
+              description: A static code assigned by the network or payment system.
+            title:
+              type: string
+              description: Brief title about the error associated with the status code.
+            description:
+              type: string
+              description: Description of the error
     participantListResponse:
       required:
       - count
@@ -802,35 +772,65 @@ components:
               items:
                 type: string
                 maxLength: 70
-    paymentError:
-      required:
-      - code
-      - title
+    noYesType:
+      type: string
+      description: This field indicates whether the transaction qualifies for Dodd-Frank.
+      enum:
+      - 'YES'
+      - 'NO'
+    connectError:
       type: object
-      description: Error messages related to the API and backend services.
       properties:
-        code:
+        ConnectError:
           type: string
-          description: Status code assigned to each error type.
-        title:
+          description: API connectivity error information, if available.
+    paymentStatus:
+      type: string
+      description: 'The status of the payment transaction. Valid values: IN_PROCESS, IN_REVIEW, COMPLETED, FAILED, RETURNED, ERROR, VALID'
+      enum:
+      - IN_PROCESS
+      - IN_REVIEW
+      - COMPLETED
+      - FAILED
+      - RETURNED
+      - ERROR
+      - VALID
+    foreignBankSystemType:
+      type: object
+      properties:
+        type:
           type: string
-          description: Brief title about the error associated with the status code.
-        description:
+          description: The five character global routing code for a foreign financial institution.
+          enum:
+          - ATBLZ
+          - AUBSB
+          - CACPA
+          - CHBCC
+          - CHSIC
+          - CNAPS
+          - DEBLZ
+          - ESNCC
+          - GBDSC
+          - GRBIC
+          - HKNCC
+          - IENCC
+          - INFSC
+          - ITNCC
+          - JPZGN
+          - NZNCC
+          - PLKNR
+          - PTNCC
+          - RUCBC
+          - SESBA
+          - SGIBG
+          - THCBC
+          - TWNCC
+          - USABA
+          - USPID
+          - ZANCC
+        id:
           type: string
-          description: Description of the error.
-        detail:
-          type: object
-          description: Additional details about the error from the payment network.
-          properties:
-            code:
-              type: string
-              description: A static code assigned by the network or payment system.
-            title:
-              type: string
-              description: Brief title about the error associated with the status code.
-            description:
-              type: string
-              description: Description of the error
+          description: The identification number associated with the foreign financial institution.
   securitySchemes:
     bearerAuth:
       type: http

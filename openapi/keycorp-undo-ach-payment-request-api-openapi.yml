@@ -244,12 +244,6 @@ paths:
                   ConnectError: Please verify your payment status UUID and send the request again. The request could not be processed on time (GatewayTimeout).
 components:
   schemas:
-    connectError:
-      type: object
-      properties:
-        ConnectError:
-          type: string
-          description: Error information of the connectivity with downstream service.
     detailUndoRequestEnvelope:
       required:
       - uuid
@@ -286,6 +280,24 @@ components:
           oneOf:
           - $ref: '#/components/schemas/detailMessage'
           - $ref: '#/components/schemas/connectError'
+    detailMessage:
+      type: object
+      description: Contains the code and message with details about the response.
+      properties:
+        code:
+          type: string
+          description: A static status code assigned by the network or payment system.
+          example: 1006040-65I
+        moreInfo:
+          type: string
+          description: Detailed descriptive message.
+          example: Effective date assigned 220411
+    connectError:
+      type: object
+      properties:
+        ConnectError:
+          type: string
+          description: Error information of the connectivity with downstream service.
     baseDetailResponse:
       required:
       - uuid
@@ -315,18 +327,6 @@ components:
           description: The unique number for the ACH transaction. Record this number for possible ACH inquiry requests.
           maxLength: 15
           example: 041001030008013
-    detailMessage:
-      type: object
-      description: Contains the code and message with details about the response.
-      properties:
-        code:
-          type: string
-          description: A static status code assigned by the network or payment system.
-          example: 1006040-65I
-        moreInfo:
-          type: string
-          description: Detailed descriptive message.
-          example: Effective date assigned 220411
   securitySchemes:
     bearerAuth:
       type: http

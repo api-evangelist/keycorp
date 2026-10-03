@@ -1574,7 +1574,39 @@ paths:
                   ConnectError: Please verify your payment status UUID and send the request again. The request could not be processed on time (GatewayTimeout).
 components:
   schemas:
-    batchRequestTELDetailRequest:
+    acceptedDetailResponse:
+      required:
+      - uuid
+      type: object
+      description: Contains the details for an accepted response.
+      properties:
+        uuid:
+          type: string
+          description: A custom value used to identify each transaction. It is required to undo a payment. The ID must not exceed 45 alphanumeric characters.
+          maxLength: 45
+          example: qas220517x-49eb-47664-b94rhd1-e52e2re13001
+        status:
+          type: string
+          description: The overall status of the addenda can be accepted or rejected.
+        errorMessages:
+          type: array
+          description: List of error messages.
+          items:
+            $ref: '#/components/schemas/detailMessage'
+        informationMessages:
+          type: array
+          description: List of informational messages.
+          items:
+            $ref: '#/components/schemas/detailMessage'
+        traceNumber:
+          type: string
+          description: The unique number for the ACH transaction. Record this number for possible ACH inquiry requests.
+          example: '41001030009002'
+        requestAcceptedUTCTime:
+          type: string
+          description: 'The date and time the request was accepted in UTC time. Format: YYYY-MM-DDTHH:MM:SSZ'
+          example: '2022-05-25T16:33:46Z'
+    batchRequestWEBDetailRequest:
       required:
       - collectionApplicationId
       - point
@@ -1582,7 +1614,7 @@ components:
       - uuid
       - companyEntryDescription
       type: object
-      description: Contains batch request details for a TEL transaction.
+      description: Contains batch request details for a WEB transaction.
       properties:
         uuid:
           type: string
@@ -1603,7 +1635,7 @@ components:
           maxLength: 6
         secCode:
           type: string
-          description: Standard Entry Class Code. Length must be exactly 3 alphabetical characters and adhere to Nacha rules.
+          description: 'The three-digit Standard Entry Class code based on Nacha rules. Valid values: CCD, CTX, PPD, TEL, WEB.'
           maxLength: 3
         effectiveDate:
           type: string
@@ -1621,159 +1653,7 @@ components:
           type: array
           description: List of Details data.
           items:
-            $ref: '#/components/schemas/telDetailRequest'
-      example:
-        collectionApplicationId: QASTEST01
-        point: APITEST
-        secCode: TEL
-        uuid: qas22523-4d3338-4c6f-bcd6fehdd0-41000
-        collectionApplicationType: ''
-        effectiveDate: '220411'
-        companyDescriptiveDate: '220411'
-        companyEntryDescription: Payroll
-        details:
-          DFIAccountNumber: '123456789'
-          accountType: C
-          amount: '5963.88'
-          checkDigit: '0'
-          creditDebitCode: D
-          individualName: QASTest014
-          receivingDFIId: '04100103'
-          transactionType: L
-          uuid: qas22523-f76-44eb-a7014041001
-          individualIdentificationNumber: 099999999
-          paymentTypeCode: R
-    baseAddendaRequest:
-      required:
-      - paymentRelatedInformation
-      type: object
-      description: Contains payment related information.
-      properties:
-        paymentRelatedInformation:
-          type: string
-          description: The related payment information for the addenda records. The limit is 80 characters.
-          maxLength: 80
-          example: 'Test Addenda #1'
-    acceptedAddendaResponseEnvelope:
-      type: object
-      description: Contains the response payload for the submitted request.
-      properties:
-        uuid:
-          type: string
-          description: A custom value used to identify each transaction. It is required to undo a payment. The ID must not exceed 45 alphanumeric characters.
-          maxLength: 45
-          example: qas220517x-49eb-47664-b94rhd1-e52e2re13001
-        status:
-          type: string
-          description: The overall status of the addenda request can be accepted or rejected.
-          example: accepted
-        traceNumber:
-          type: string
-          description: The unique number for the ACH transaction. Record this number for possible ACH inquiry requests.
-          example: '41001030008011'
-        informationMessages:
-          type: array
-          description: List of informational messages.
-          items:
-            $ref: '#/components/schemas/detailMessage'
-        errorMessages:
-          type: array
-          description: List of error messages.
-          items:
-            $ref: '#/components/schemas/detailMessage'
-        addenda:
-          type: array
-          description: List of addenda records.
-          items:
-            $ref: '#/components/schemas/addendaResponse'
-        requestAcceptedUTCTime:
-          type: string
-          description: 'The date and time the request was accepted in UTC time. Format: YYYY-MM-DDTHH:MM:SSZ'
-          example: '2022-05-25T16:33:46Z'
-    telDetailRequest:
-      type: object
-      description: Parameters for additional details about the TEL request.
-      required:
-      - uuid
-      - accountType
-      - creditDebitCode
-      - transactionType
-      - receivingDFIId
-      - checkDigit
-      - DFIAccountNumber
-      - amount
-      - individualName
-      properties:
-        uuid:
-          type: string
-          description: A custom value used to identify each transaction. It is required to undo a payment. The ID must not exceed 45 alphanumeric characters.
-          maxLength: 45
-          example: qas220517x-49eb-47664-b94rhd1-e52e2re13001
-        accountType:
-          type: string
-          description: 'The account type can be checking (C) or savings (S). Valid values: C, S.'
-          enum:
-          - C
-          - S
-        creditDebitCode:
-          type: string
-          description: 'One-character field indicates if the ACH transaction is a credit (C) or debit (D). Valid values: C, D.'
-          enum:
-          - C
-          - D
-        transactionType:
-          type: string
-          description: 'Nacha-defined transaction types can be live (L), prenote (P), or zero (Z). Valid values: L, P, Z.'
-          enum:
-          - L
-          - P
-          - Z
-        receivingDFIId:
-          type: string
-          description: The bank routing number (ABA number) of the receiving designated financial institution. The number can be a maximum of 8 digits.
-          maxLength: 8
-        checkDigit:
-          type: string
-          description: The final character of a routing number that can be used to validate a specific routing number. This is a single digit.
-          maxLength: 1
-        DFIAccountNumber:
-          type: string
-          description: The recipient account number at the designated financial institution. The account number can be a maximum of 17 characters.
-          maxLength: 17
-        amount:
-          type: string
-          description: The transaction amount in valid currency format. The amount can have up to 8 digits before the decimal and 2 digits after the decimal.
-          maxLength: 11
-        individualIdentificationNumber:
-          type: string
-          description: The ID number for the individual. This cannot exceed 15 characters.
-          maxLength: 15
-        individualName:
-          type: string
-          description: The name of the individual. This cannot exceed 22 characters.
-          maxLength: 22
-        paymentTypeCode:
-          type: string
-          description: The code is a maximum of two characters. The code is two empty spaces if the code is not provided by the client.
-          maxLength: 4
-      example:
-        DFIAccountNumber: '123456789'
-        accountType: C
-        amount: '5963.88'
-        checkDigit: '0'
-        creditDebitCode: D
-        individualName: QASTest014
-        receivingDFIId: '04100103'
-        transactionType: L
-        uuid: qas22523-f76-44eb-a7014041001
-        individualIdentificationNumber: 099999999
-        paymentTypeCode: R
-    connectError:
-      type: object
-      properties:
-        ConnectError:
-          type: string
-          description: Error information of the connectivity with downstream service.
+            $ref: '#/components/schemas/webDetailRequest'
     addendaResponse:
       type: object
       description: Contains status and additional information about the returned addenda records.
@@ -1792,40 +1672,6 @@ components:
           description: List of informational messages.
           items:
             $ref: '#/components/schemas/detailMessage'
-    batchResponseEnvelopeAccepted:
-      required:
-      - batch
-      type: object
-      description: Contains information for a successful ACH transaction.
-      properties:
-        batch:
-          $ref: '#/components/schemas/acceptedBatchResponseAcceptedDetailResponse'
-    exception:
-      type: object
-      title: ExceptionSchema
-      properties:
-        ErrorMessage:
-          type: string
-          description: Error message related to system generating this error.
-        TransactionId:
-          type: string
-          description: Unique functional identifier from the data to identify a message.
-        X-CorrelationId:
-          type: string
-          description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
-        TransactionTime:
-          type: string
-          description: Time of the occurrence of the error of the message.
-        Api-Url:
-          type: string
-          description: The API URL path of the call that generated the response.
-        ServiceError:
-          type: object
-          title: ServiceError
-          description: Indicates the service error details, if available.
-          oneOf:
-          - $ref: '#/components/schemas/detailMessage'
-          - $ref: '#/components/schemas/connectError'
     cTXDetailRequest:
       required:
       - DFIAccountNumber
@@ -1919,6 +1765,224 @@ components:
         discretionaryData: AK
         addenda:
           paymentRelatedInformation: QASTest05.01
+    telDetailRequest:
+      type: object
+      description: Parameters for additional details about the TEL request.
+      required:
+      - uuid
+      - accountType
+      - creditDebitCode
+      - transactionType
+      - receivingDFIId
+      - checkDigit
+      - DFIAccountNumber
+      - amount
+      - individualName
+      properties:
+        uuid:
+          type: string
+          description: A custom value used to identify each transaction. It is required to undo a payment. The ID must not exceed 45 alphanumeric characters.
+          maxLength: 45
+          example: qas220517x-49eb-47664-b94rhd1-e52e2re13001
+        accountType:
+          type: string
+          description: 'The account type can be checking (C) or savings (S). Valid values: C, S.'
+          enum:
+          - C
+          - S
+        creditDebitCode:
+          type: string
+          description: 'One-character field indicates if the ACH transaction is a credit (C) or debit (D). Valid values: C, D.'
+          enum:
+          - C
+          - D
+        transactionType:
+          type: string
+          description: 'Nacha-defined transaction types can be live (L), prenote (P), or zero (Z). Valid values: L, P, Z.'
+          enum:
+          - L
+          - P
+          - Z
+        receivingDFIId:
+          type: string
+          description: The bank routing number (ABA number) of the receiving designated financial institution. The number can be a maximum of 8 digits.
+          maxLength: 8
+        checkDigit:
+          type: string
+          description: The final character of a routing number that can be used to validate a specific routing number. This is a single digit.
+          maxLength: 1
+        DFIAccountNumber:
+          type: string
+          description: The recipient account number at the designated financial institution. The account number can be a maximum of 17 characters.
+          maxLength: 17
+        amount:
+          type: string
+          description: The transaction amount in valid currency format. The amount can have up to 8 digits before the decimal and 2 digits after the decimal.
+          maxLength: 11
+        individualIdentificationNumber:
+          type: string
+          description: The ID number for the individual. This cannot exceed 15 characters.
+          maxLength: 15
+        individualName:
+          type: string
+          description: The name of the individual. This cannot exceed 22 characters.
+          maxLength: 22
+        paymentTypeCode:
+          type: string
+          description: The code is a maximum of two characters. The code is two empty spaces if the code is not provided by the client.
+          maxLength: 4
+      example:
+        DFIAccountNumber: '123456789'
+        accountType: C
+        amount: '5963.88'
+        checkDigit: '0'
+        creditDebitCode: D
+        individualName: QASTest014
+        receivingDFIId: '04100103'
+        transactionType: L
+        uuid: qas22523-f76-44eb-a7014041001
+        individualIdentificationNumber: 099999999
+        paymentTypeCode: R
+    batchRequestEnvelopeBatchRequestPPDDetailRequest:
+      required:
+      - batch
+      type: object
+      properties:
+        batch:
+          description: Batch request components for ACH transaction by SEC code.
+          $ref: '#/components/schemas/batchRequestPPDDetailRequest'
+        customData:
+          type: string
+          description: The values for custom data is defined by the client. This free-form text field can contain up to 500 alphanumeric characters. Custom information stays with the transaction through its lifecycle.
+          minLength: 0
+          maxLength: 500
+    connectError:
+      type: object
+      properties:
+        ConnectError:
+          type: string
+          description: Error information of the connectivity with downstream service.
+    batchRequestEnvelopeBatchRequestWEBDetailRequest:
+      required:
+      - batch
+      type: object
+      properties:
+        batch:
+          description: Batch request components for ACH transaction by SEC code.
+          $ref: '#/components/schemas/batchRequestWEBDetailRequest'
+        customData:
+          type: string
+          description: The values for custom data is defined by the client. This free-form text field can contain up to 500 alphanumeric characters. Custom information stays with the transaction through its lifecycle.
+          minLength: 0
+          maxLength: 500
+    batchRequestTELDetailRequest:
+      required:
+      - collectionApplicationId
+      - point
+      - secCode
+      - uuid
+      - companyEntryDescription
+      type: object
+      description: Contains batch request details for a TEL transaction.
+      properties:
+        uuid:
+          type: string
+          description: A custom value used to identify each transaction. It is required to undo a payment. The ID must not exceed 45 alphanumeric characters.
+          maxLength: 45
+          example: qas220517x-49eb-47664-b94rhd1-e52e2re13001
+        point:
+          type: string
+          description: A short name specific to your company provided by KeyBank. This is included in the file name and improves security  for file transfers.
+          maxLength: 9
+        collectionApplicationId:
+          type: string
+          description: This ID is provided by KeyBank and cannot exceed the maximum of 9 alphanumeric characters.
+          maxLength: 9
+        collectionApplicationType:
+          type: string
+          description: A subset of the collection application parameters. This is not commonly used and by default, left blank. If there is a collection application type, the value is provided by KeyBank during onboarding and cannot exceed 6 characters.
+          maxLength: 6
+        secCode:
+          type: string
+          description: Standard Entry Class Code. Length must be exactly 3 alphabetical characters and adhere to Nacha rules.
+          maxLength: 3
+        effectiveDate:
+          type: string
+          description: 'The date the transaction is posted. This date must be within 31 days of the current date. Format: YYMMDD'
+          maxLength: 6
+        companyDescriptiveDate:
+          type: string
+          description: 'Company descriptive date. Format: YYMMDD'
+        companyEntryDescription:
+          type: string
+          description: 'Provides the receiver a description of the payment purpose. The value cannot exceed 10 characters and cannot be blank. Possible values: ''REVERSAL'', ''RETURN FEE'', ''RECLAIM'', ''REDEPCHECK'' for RCK entries, ''HCCLAIMPMT'' for Health Care EFTs, or ''ACCTVERIFY'' for clients sending in a micro-entry as a type of ACH entry.'
+          maxLength: 10
+          example: Payroll
+        details:
+          type: array
+          description: List of Details data.
+          items:
+            $ref: '#/components/schemas/telDetailRequest'
+      example:
+        collectionApplicationId: QASTEST01
+        point: APITEST
+        secCode: TEL
+        uuid: qas22523-4d3338-4c6f-bcd6fehdd0-41000
+        collectionApplicationType: ''
+        effectiveDate: '220411'
+        companyDescriptiveDate: '220411'
+        companyEntryDescription: Payroll
+        details:
+          DFIAccountNumber: '123456789'
+          accountType: C
+          amount: '5963.88'
+          checkDigit: '0'
+          creditDebitCode: D
+          individualName: QASTest014
+          receivingDFIId: '04100103'
+          transactionType: L
+          uuid: qas22523-f76-44eb-a7014041001
+          individualIdentificationNumber: 099999999
+          paymentTypeCode: R
+    exception:
+      type: object
+      title: ExceptionSchema
+      properties:
+        ErrorMessage:
+          type: string
+          description: Error message related to system generating this error.
+        TransactionId:
+          type: string
+          description: Unique functional identifier from the data to identify a message.
+        X-CorrelationId:
+          type: string
+          description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+        TransactionTime:
+          type: string
+          description: Time of the occurrence of the error of the message.
+        Api-Url:
+          type: string
+          description: The API URL path of the call that generated the response.
+        ServiceError:
+          type: object
+          title: ServiceError
+          description: Indicates the service error details, if available.
+          oneOf:
+          - $ref: '#/components/schemas/detailMessage'
+          - $ref: '#/components/schemas/connectError'
+    batchRequestEnvelopeBatchRequestCTXDetailRequest:
+      required:
+      - batch
+      type: object
+      properties:
+        batch:
+          description: Batch request components for ACH transaction by SEC code.
+          $ref: '#/components/schemas/batchRequestCTXDetailRequest'
+        customData:
+          type: string
+          description: The values for custom data is defined by the client. This free-form text field can contain up to 500 alphanumeric characters. Custom information stays with the transaction through its lifecycle.
+          minLength: 0
+          maxLength: 500
     cCDDetailRequest:
       required:
       - DFIAccountNumber
@@ -2003,33 +2067,6 @@ components:
         uuid: qas220517x-49eb-47664-b94rhd1-e52e2re11001
         identificationNumber: 517220101A
         discretionaryData: AB
-    batchRequestEnvelopeBatchRequestWEBDetailRequest:
-      required:
-      - batch
-      type: object
-      properties:
-        batch:
-          description: Batch request components for ACH transaction by SEC code.
-          $ref: '#/components/schemas/batchRequestWEBDetailRequest'
-        customData:
-          type: string
-          description: The values for custom data is defined by the client. This free-form text field can contain up to 500 alphanumeric characters. Custom information stays with the transaction through its lifecycle.
-          minLength: 0
-          maxLength: 500
-    batchRequestEnvelopeBatchRequestCCDDetailRequest:
-      required:
-      - batch
-      type: object
-      description: Contains the request payload for the submitted request.
-      properties:
-        batch:
-          description: Batch request components for ACH transaction by SEC code.
-          $ref: '#/components/schemas/batchRequestCCDDetailRequest'
-        customData:
-          type: string
-          description: The values for custom data is defined by the client. This free-form text field can contain up to 500 alphanumeric characters. Custom information stays with the transaction through its lifecycle.
-          minLength: 0
-          maxLength: 500
     webDetailRequest:
       required:
       - DFIAccountNumber
@@ -2102,12 +2139,20 @@ components:
           description: List of addenda records.
           items:
             $ref: '#/components/schemas/baseAddendaRequest'
-    acceptedBatchResponseAcceptedDetailResponse:
+    baseAddendaRequest:
       required:
-      - uuid
-      - status
+      - paymentRelatedInformation
       type: object
-      description: Contains response details for accepted ACH transactions.
+      description: Contains payment related information.
+      properties:
+        paymentRelatedInformation:
+          type: string
+          description: The related payment information for the addenda records. The limit is 80 characters.
+          maxLength: 80
+          example: 'Test Addenda #1'
+    acceptedAddendaResponseEnvelope:
+      type: object
+      description: Contains the response payload for the submitted request.
       properties:
         uuid:
           type: string
@@ -2116,16 +2161,12 @@ components:
           example: qas220517x-49eb-47664-b94rhd1-e52e2re13001
         status:
           type: string
-          description: The status of the batch can be accepted or rejected.
+          description: The overall status of the addenda request can be accepted or rejected.
           example: accepted
-        requestAcceptedUTCTime:
+        traceNumber:
           type: string
-          description: 'The date and time the request was accepted in UTC time. Format: YYYY-MM-DDTHH:MM:SSZ'
-          example: '2022-05-25T16:33:46Z'
-        effectiveDate:
-          type: string
-          description: 'The date the transaction is posted. This date must be within 31 days of the current date. Format: YYMMDD'
-          example: '220411'
+          description: The unique number for the ACH transaction. Record this number for possible ACH inquiry requests.
+          example: '41001030008011'
         informationMessages:
           type: array
           description: List of informational messages.
@@ -2136,11 +2177,15 @@ components:
           description: List of error messages.
           items:
             $ref: '#/components/schemas/detailMessage'
-        details:
+        addenda:
           type: array
-          description: Details for the ACH transaction by UUID.
+          description: List of addenda records.
           items:
-            $ref: '#/components/schemas/acceptedDetailResponse'
+            $ref: '#/components/schemas/addendaResponse'
+        requestAcceptedUTCTime:
+          type: string
+          description: 'The date and time the request was accepted in UTC time. Format: YYYY-MM-DDTHH:MM:SSZ'
+          example: '2022-05-25T16:33:46Z'
     addendaRequest:
       required:
       - addendaSequenceNumber
@@ -2158,162 +2203,19 @@ components:
           type: string
           description: The sequence number of the addenda. The number cannot exceed 4 digits.
           example: '003'
-    acceptedDetailResponse:
+    batchRequestEnvelopeBatchRequestTELDetailRequest:
       required:
-      - uuid
+      - batch
       type: object
-      description: Contains the details for an accepted response.
       properties:
-        uuid:
+        batch:
+          description: Batch request components for ACH transaction by SEC code.
+          $ref: '#/components/schemas/batchRequestTELDetailRequest'
+        customData:
           type: string
-          description: A custom value used to identify each transaction. It is required to undo a payment. The ID must not exceed 45 alphanumeric characters.
-          maxLength: 45
-          example: qas220517x-49eb-47664-b94rhd1-e52e2re13001
-        status:
-          type: string
-          description: The overall status of the addenda can be accepted or rejected.
-        errorMessages:
-          type: array
-          description: List of error messages.
-          items:
-            $ref: '#/components/schemas/detailMessage'
-        informationMessages:
-          type: array
-          description: List of informational messages.
-          items:
-            $ref: '#/components/schemas/detailMessage'
-        traceNumber:
-          type: string
-          description: The unique number for the ACH transaction. Record this number for possible ACH inquiry requests.
-          example: '41001030009002'
-        requestAcceptedUTCTime:
-          type: string
-          description: 'The date and time the request was accepted in UTC time. Format: YYYY-MM-DDTHH:MM:SSZ'
-          example: '2022-05-25T16:33:46Z'
-    batchRequestWEBDetailRequest:
-      required:
-      - collectionApplicationId
-      - point
-      - secCode
-      - uuid
-      - companyEntryDescription
-      type: object
-      description: Contains batch request details for a WEB transaction.
-      properties:
-        uuid:
-          type: string
-          description: A custom value used to identify each transaction. It is required to undo a payment. The ID must not exceed 45 alphanumeric characters.
-          maxLength: 45
-          example: qas220517x-49eb-47664-b94rhd1-e52e2re13001
-        point:
-          type: string
-          description: A short name specific to your company provided by KeyBank. This is included in the file name and improves security  for file transfers.
-          maxLength: 9
-        collectionApplicationId:
-          type: string
-          description: This ID is provided by KeyBank and cannot exceed the maximum of 9 alphanumeric characters.
-          maxLength: 9
-        collectionApplicationType:
-          type: string
-          description: A subset of the collection application parameters. This is not commonly used and by default, left blank. If there is a collection application type, the value is provided by KeyBank during onboarding and cannot exceed 6 characters.
-          maxLength: 6
-        secCode:
-          type: string
-          description: 'The three-digit Standard Entry Class code based on Nacha rules. Valid values: CCD, CTX, PPD, TEL, WEB.'
-          maxLength: 3
-        effectiveDate:
-          type: string
-          description: 'The date the transaction is posted. This date must be within 31 days of the current date. Format: YYMMDD'
-          maxLength: 6
-        companyDescriptiveDate:
-          type: string
-          description: 'Company descriptive date. Format: YYMMDD'
-        companyEntryDescription:
-          type: string
-          description: 'Provides the receiver a description of the payment purpose. The value cannot exceed 10 characters and cannot be blank. Possible values: ''REVERSAL'', ''RETURN FEE'', ''RECLAIM'', ''REDEPCHECK'' for RCK entries, ''HCCLAIMPMT'' for Health Care EFTs, or ''ACCTVERIFY'' for clients sending in a micro-entry as a type of ACH entry.'
-          maxLength: 10
-          example: Payroll
-        details:
-          type: array
-          description: List of Details data.
-          items:
-            $ref: '#/components/schemas/webDetailRequest'
-    batchRequestPPDDetailRequest:
-      required:
-      - collectionApplicationId
-      - point
-      - secCode
-      - uuid
-      - companyEntryDescription
-      type: object
-      description: Contains batch request details for a PPD transaction.
-      properties:
-        uuid:
-          type: string
-          description: A custom value used to identify each transaction. It is required to undo a payment. The ID must not exceed 45 alphanumeric characters.
-          maxLength: 45
-          example: qas220517x-49eb-47664-b94rhd1-e52e2re13001
-        point:
-          type: string
-          description: A short name specific to your company provided by KeyBank. This is included in the file name and improves security  for file transfers.
-          maxLength: 9
-          example: APITEST
-        collectionApplicationId:
-          type: string
-          description: This ID is provided by KeyBank and cannot exceed the maximum of 9 alphanumeric characters.
-          maxLength: 9
-          example: TESTING
-        collectionApplicationType:
-          type: string
-          description: A subset of the collection application parameters. This is not commonly used and by default, left blank. If there is a collection application type, the value is provided by KeyBank during onboarding and cannot exceed 6 characters.
-          maxLength: 6
-        secCode:
-          type: string
-          description: 'The three-digit Standard Entry Class code based on Nacha rules. Valid values: CCD, CTX, PPD, TEL, WEB.'
-          maxLength: 3
-          example: WEB
-        effectiveDate:
-          type: string
-          description: 'The date the transaction is posted. This date must be within 31 days of the current date. Format: YYMMDD'
-          maxLength: 6
-          example: '220411'
-        companyDescriptiveDate:
-          type: string
-          description: 'Company descriptive date. Format: YYMMDD'
-          example: '220411'
-        companyEntryDescription:
-          type: string
-          description: 'Provides the receiver a description of the payment purpose. The value cannot exceed 10 characters and cannot be blank. Possible values: ''REVERSAL'', ''RETURN FEE'', ''RECLAIM'', ''REDEPCHECK'' for RCK entries, ''HCCLAIMPMT'' for Health Care EFTs, or ''ACCTVERIFY'' for clients sending in a micro-entry as a type of ACH entry.'
-          maxLength: 10
-          example: Payroll
-        details:
-          type: array
-          description: List of detail records.
-          items:
-            $ref: '#/components/schemas/pPDDetailRequest'
-      example:
-        collectionApplicationId: QASTEST01
-        point: APITEST
-        secCode: WEB
-        uuid: qas22525-6fb5-438c-undo132000
-        collectionApplicationType: ''
-        effectiveDate: '220411'
-        companyDescriptiveDate: '220411'
-        companyEntryDescription: Payroll
-        details:
-          DFIAccountNumber: '123456789'
-          accountType: S
-          amount: '0.00'
-          checkDigit: '0'
-          creditDebitCode: C
-          individualName: QASTest011
-          receivingDFIId: '04100103'
-          transactionType: P
-          uuid: qas22525-6fb5-undo0132001
-          individualIdentificationNumber: 099999999
-          paymentTypeCode: R
-          addenda:
-            paymentRelatedInformation: Undo WEB PAYMENT GOOD ITEM
+          description: The values for custom data is defined by the client. This free-form text field can contain up to 500 alphanumeric characters. Custom information stays with the transaction through its lifecycle.
+          minLength: 0
+          maxLength: 500
     batchRequestCTXDetailRequest:
       required:
       - collectionApplicationId
@@ -2467,74 +2369,53 @@ components:
         paymentTypeCode: R
         addenda:
           paymentRelatedInformation: Undo WEB PAYMENT GOOD ITEM
-    batchRequestEnvelopeBatchRequestCTXDetailRequest:
+    acceptedBatchResponseAcceptedDetailResponse:
       required:
-      - batch
-      type: object
-      properties:
-        batch:
-          description: Batch request components for ACH transaction by SEC code.
-          $ref: '#/components/schemas/batchRequestCTXDetailRequest'
-        customData:
-          type: string
-          description: The values for custom data is defined by the client. This free-form text field can contain up to 500 alphanumeric characters. Custom information stays with the transaction through its lifecycle.
-          minLength: 0
-          maxLength: 500
-    batchRequestEnvelopeBatchRequestPPDDetailRequest:
-      required:
-      - batch
-      type: object
-      properties:
-        batch:
-          description: Batch request components for ACH transaction by SEC code.
-          $ref: '#/components/schemas/batchRequestPPDDetailRequest'
-        customData:
-          type: string
-          description: The values for custom data is defined by the client. This free-form text field can contain up to 500 alphanumeric characters. Custom information stays with the transaction through its lifecycle.
-          minLength: 0
-          maxLength: 500
-    batchRequestEnvelopeBatchRequestTELDetailRequest:
-      required:
-      - batch
-      type: object
-      properties:
-        batch:
-          description: Batch request components for ACH transaction by SEC code.
-          $ref: '#/components/schemas/batchRequestTELDetailRequest'
-        customData:
-          type: string
-          description: The values for custom data is defined by the client. This free-form text field can contain up to 500 alphanumeric characters. Custom information stays with the transaction through its lifecycle.
-          minLength: 0
-          maxLength: 500
-    addendaRequestEnvelope:
-      required:
-      - addenda
       - uuid
+      - status
       type: object
-      description: Contains the parameters to request a list of addenda records by the UUID.
+      description: Contains response details for accepted ACH transactions.
       properties:
-        addenda:
-          type: array
-          description: List of addenda records.
-          items:
-            $ref: '#/components/schemas/addendaRequest'
         uuid:
           type: string
           description: A custom value used to identify each transaction. It is required to undo a payment. The ID must not exceed 45 alphanumeric characters.
           maxLength: 45
           example: qas220517x-49eb-47664-b94rhd1-e52e2re13001
-    detailMessage:
+        status:
+          type: string
+          description: The status of the batch can be accepted or rejected.
+          example: accepted
+        requestAcceptedUTCTime:
+          type: string
+          description: 'The date and time the request was accepted in UTC time. Format: YYYY-MM-DDTHH:MM:SSZ'
+          example: '2022-05-25T16:33:46Z'
+        effectiveDate:
+          type: string
+          description: 'The date the transaction is posted. This date must be within 31 days of the current date. Format: YYMMDD'
+          example: '220411'
+        informationMessages:
+          type: array
+          description: List of informational messages.
+          items:
+            $ref: '#/components/schemas/detailMessage'
+        errorMessages:
+          type: array
+          description: List of error messages.
+          items:
+            $ref: '#/components/schemas/detailMessage'
+        details:
+          type: array
+          description: Details for the ACH transaction by UUID.
+          items:
+            $ref: '#/components/schemas/acceptedDetailResponse'
+    batchResponseEnvelopeAccepted:
+      required:
+      - batch
       type: object
-      description: Contains the code and message with details about the response.
+      description: Contains information for a successful ACH transaction.
       properties:
-        code:
-          type: string
-          description: A static status code assigned by the network or payment system.
-          example: 1006040-65I
-        moreInfo:
-          type: string
-          description: Detailed descriptive message.
-          example: Effective date assigned 220411
+        batch:
+          $ref: '#/components/schemas/acceptedBatchResponseAcceptedDetailResponse'
     batchRequestCCDDetailRequest:
       required:
       - collectionApplicationId
@@ -2589,6 +2470,125 @@ components:
           description: List of detail records.
           items:
             $ref: '#/components/schemas/cCDDetailRequest'
+    detailMessage:
+      type: object
+      description: Contains the code and message with details about the response.
+      properties:
+        code:
+          type: string
+          description: A static status code assigned by the network or payment system.
+          example: 1006040-65I
+        moreInfo:
+          type: string
+          description: Detailed descriptive message.
+          example: Effective date assigned 220411
+    batchRequestEnvelopeBatchRequestCCDDetailRequest:
+      required:
+      - batch
+      type: object
+      description: Contains the request payload for the submitted request.
+      properties:
+        batch:
+          description: Batch request components for ACH transaction by SEC code.
+          $ref: '#/components/schemas/batchRequestCCDDetailRequest'
+        customData:
+          type: string
+          description: The values for custom data is defined by the client. This free-form text field can contain up to 500 alphanumeric characters. Custom information stays with the transaction through its lifecycle.
+          minLength: 0
+          maxLength: 500
+    addendaRequestEnvelope:
+      required:
+      - addenda
+      - uuid
+      type: object
+      description: Contains the parameters to request a list of addenda records by the UUID.
+      properties:
+        addenda:
+          type: array
+          description: List of addenda records.
+          items:
+            $ref: '#/components/schemas/addendaRequest'
+        uuid:
+          type: string
+          description: A custom value used to identify each transaction. It is required to undo a payment. The ID must not exceed 45 alphanumeric characters.
+          maxLength: 45
+          example: qas220517x-49eb-47664-b94rhd1-e52e2re13001
+    batchRequestPPDDetailRequest:
+      required:
+      - collectionApplicationId
+      - point
+      - secCode
+      - uuid
+      - companyEntryDescription
+      type: object
+      description: Contains batch request details for a PPD transaction.
+      properties:
+        uuid:
+          type: string
+          description: A custom value used to identify each transaction. It is required to undo a payment. The ID must not exceed 45 alphanumeric characters.
+          maxLength: 45
+          example: qas220517x-49eb-47664-b94rhd1-e52e2re13001
+        point:
+          type: string
+          description: A short name specific to your company provided by KeyBank. This is included in the file name and improves security  for file transfers.
+          maxLength: 9
+          example: APITEST
+        collectionApplicationId:
+          type: string
+          description: This ID is provided by KeyBank and cannot exceed the maximum of 9 alphanumeric characters.
+          maxLength: 9
+          example: TESTING
+        collectionApplicationType:
+          type: string
+          description: A subset of the collection application parameters. This is not commonly used and by default, left blank. If there is a collection application type, the value is provided by KeyBank during onboarding and cannot exceed 6 characters.
+          maxLength: 6
+        secCode:
+          type: string
+          description: 'The three-digit Standard Entry Class code based on Nacha rules. Valid values: CCD, CTX, PPD, TEL, WEB.'
+          maxLength: 3
+          example: WEB
+        effectiveDate:
+          type: string
+          description: 'The date the transaction is posted. This date must be within 31 days of the current date. Format: YYMMDD'
+          maxLength: 6
+          example: '220411'
+        companyDescriptiveDate:
+          type: string
+          description: 'Company descriptive date. Format: YYMMDD'
+          example: '220411'
+        companyEntryDescription:
+          type: string
+          description: 'Provides the receiver a description of the payment purpose. The value cannot exceed 10 characters and cannot be blank. Possible values: ''REVERSAL'', ''RETURN FEE'', ''RECLAIM'', ''REDEPCHECK'' for RCK entries, ''HCCLAIMPMT'' for Health Care EFTs, or ''ACCTVERIFY'' for clients sending in a micro-entry as a type of ACH entry.'
+          maxLength: 10
+          example: Payroll
+        details:
+          type: array
+          description: List of detail records.
+          items:
+            $ref: '#/components/schemas/pPDDetailRequest'
+      example:
+        collectionApplicationId: QASTEST01
+        point: APITEST
+        secCode: WEB
+        uuid: qas22525-6fb5-438c-undo132000
+        collectionApplicationType: ''
+        effectiveDate: '220411'
+        companyDescriptiveDate: '220411'
+        companyEntryDescription: Payroll
+        details:
+          DFIAccountNumber: '123456789'
+          accountType: S
+          amount: '0.00'
+          checkDigit: '0'
+          creditDebitCode: C
+          individualName: QASTest011
+          receivingDFIId: '04100103'
+          transactionType: P
+          uuid: qas22525-6fb5-undo0132001
+          individualIdentificationNumber: 099999999
+          paymentTypeCode: R
+          addenda:
+            paymentRelatedInformation: Undo WEB PAYMENT GOOD ITEM
   securitySchemes:
     bearerAuth:
       type: http

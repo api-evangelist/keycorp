@@ -504,70 +504,6 @@ paths:
                   ConnectError: Please verify your payment status UUID and send the request again. The request could not be processed on time (GatewayTimeout).
 components:
   schemas:
-    addendaStatusResponseEnvelope:
-      type: object
-      description: Contains the response parameters for the addenda status request.
-      properties:
-        uuid:
-          type: string
-          description: A custom value used to identify each transaction. It is required to undo a payment. The ID must not exceed 45 alphanumeric characters.
-          maxLength: 45
-          example: qas220517x-49eb-47664-b94rhd1-e52e2re13001
-        status:
-          type: string
-          description: The status of the batch can be accepted or rejected.
-        errorMessages:
-          type: array
-          description: List of error messages.
-          items:
-            $ref: '#/components/schemas/detailMessage'
-        traceNumber:
-          type: string
-          description: The unique number for the ACH transaction. Record this number for possible ACH inquiry requests.
-        informationMessages:
-          type: array
-          description: List of informational messages.
-          items:
-            $ref: '#/components/schemas/detailMessage'
-        addenda:
-          type: array
-          description: List of addenda records.
-          items:
-            $ref: '#/components/schemas/baseAddendaDetailResponse'
-    connectError:
-      type: object
-      properties:
-        ConnectError:
-          type: string
-          description: Error information of the connectivity with downstream service.
-    detailStatusRequestEnvelopePaymentInquiryDetailRequest:
-      type: object
-      description: Contains for ACH payment request status and details.
-      properties:
-        detailStatus:
-          type: array
-          description: Contains ACH payment status and details.
-          items:
-            $ref: '#/components/schemas/paymentInquiryDetailRequest'
-    paymentInquiryDetailRequest:
-      required:
-      - uuid
-      type: object
-      properties:
-        uuid:
-          type: string
-          description: A custom value used to identify each transaction. It is required to undo a payment. The ID must not exceed 45 alphanumeric characters.
-          maxLength: 45
-          example: qas220517x-49eb-47664-b94rhd1-e52e2re13001
-    detailStatusResponseEnvelopeDetailStatusResponse:
-      type: object
-      description: Contains ACH payment response status and details.
-      properties:
-        details:
-          type: array
-          description: List of details record.
-          items:
-            $ref: '#/components/schemas/detailStatusResponse'
     addendaStatusRequestEnvelope:
       required:
       - uuid
@@ -587,32 +523,6 @@ components:
           type: string
           description: The starting number for the addenda record sequence.
           example: '0001'
-    exception:
-      type: object
-      title: ExceptionSchema
-      properties:
-        ErrorMessage:
-          type: string
-          description: Error message related to system generating this error.
-        TransactionId:
-          type: string
-          description: Unique functional identifier from the data to identify a message.
-        X-CorrelationId:
-          type: string
-          description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
-        TransactionTime:
-          type: string
-          description: Time of the occurrence of the error of the message.
-        Api-Url:
-          type: string
-          description: The API URL path of the call that generated the response.
-        ServiceError:
-          type: object
-          title: ServiceError
-          description: Indicates the service error details, if available.
-          oneOf:
-          - $ref: '#/components/schemas/detailMessage'
-          - $ref: '#/components/schemas/connectError'
     detailStatusResponse:
       required:
       - uuid
@@ -810,6 +720,32 @@ components:
           description: The file ID modifier to control the totals with a single alphanumeric value.
           maxLength: 1
           example: A
+    exception:
+      type: object
+      title: ExceptionSchema
+      properties:
+        ErrorMessage:
+          type: string
+          description: Error message related to system generating this error.
+        TransactionId:
+          type: string
+          description: Unique functional identifier from the data to identify a message.
+        X-CorrelationId:
+          type: string
+          description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+        TransactionTime:
+          type: string
+          description: Time of the occurrence of the error of the message.
+        Api-Url:
+          type: string
+          description: The API URL path of the call that generated the response.
+        ServiceError:
+          type: object
+          title: ServiceError
+          description: Indicates the service error details, if available.
+          oneOf:
+          - $ref: '#/components/schemas/detailMessage'
+          - $ref: '#/components/schemas/connectError'
     detailMessage:
       type: object
       description: Contains the code and message with details about the response.
@@ -822,6 +758,30 @@ components:
           type: string
           description: Detailed descriptive message.
           example: Effective date assigned 220411
+    detailStatusResponseEnvelopeDetailStatusResponse:
+      type: object
+      description: Contains ACH payment response status and details.
+      properties:
+        details:
+          type: array
+          description: List of details record.
+          items:
+            $ref: '#/components/schemas/detailStatusResponse'
+    detailStatusRequestEnvelopePaymentInquiryDetailRequest:
+      type: object
+      description: Contains for ACH payment request status and details.
+      properties:
+        detailStatus:
+          type: array
+          description: Contains ACH payment status and details.
+          items:
+            $ref: '#/components/schemas/paymentInquiryDetailRequest'
+    connectError:
+      type: object
+      properties:
+        ConnectError:
+          type: string
+          description: Error information of the connectivity with downstream service.
     baseAddendaDetailResponse:
       type: object
       description: Contains the code, sequence number, and related payment information for returned addenda records.
@@ -840,6 +800,46 @@ components:
           description: The related payment information from the addenda records. The maximum character limit is 80.
           maxLength: 80
           example: Undo
+    addendaStatusResponseEnvelope:
+      type: object
+      description: Contains the response parameters for the addenda status request.
+      properties:
+        uuid:
+          type: string
+          description: A custom value used to identify each transaction. It is required to undo a payment. The ID must not exceed 45 alphanumeric characters.
+          maxLength: 45
+          example: qas220517x-49eb-47664-b94rhd1-e52e2re13001
+        status:
+          type: string
+          description: The status of the batch can be accepted or rejected.
+        errorMessages:
+          type: array
+          description: List of error messages.
+          items:
+            $ref: '#/components/schemas/detailMessage'
+        traceNumber:
+          type: string
+          description: The unique number for the ACH transaction. Record this number for possible ACH inquiry requests.
+        informationMessages:
+          type: array
+          description: List of informational messages.
+          items:
+            $ref: '#/components/schemas/detailMessage'
+        addenda:
+          type: array
+          description: List of addenda records.
+          items:
+            $ref: '#/components/schemas/baseAddendaDetailResponse'
+    paymentInquiryDetailRequest:
+      required:
+      - uuid
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: A custom value used to identify each transaction. It is required to undo a payment. The ID must not exceed 45 alphanumeric characters.
+          maxLength: 45
+          example: qas220517x-49eb-47664-b94rhd1-e52e2re13001
   securitySchemes:
     bearerAuth:
       type: http

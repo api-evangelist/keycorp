@@ -319,13 +319,34 @@ paths:
                   ConnectError: Request could not be processed on time (GatewayTimeout), please wait a moment and resubmit the request.
 components:
   schemas:
-    ServiceErrorData:
+    Exception:
       type: object
-      title: serviceErrorData
-      description: Detailed service-level error information, if available.
+      description: Contains information about errors related to the request.
+      title: exceptionSchema
       properties:
-        metadata:
-          $ref: '#/components/schemas/ResponseMetadata'
+        ErrorMessage:
+          type: string
+          description: A human-readable message that describes the type or source of the error.
+        TransactionId:
+          type: string
+          description: A unique transaction ID returned with the response, useful for traceability.
+        X-CorrelationId:
+          type: string
+          description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+        TransactionTime:
+          type: string
+          format: date-time
+          description: Date and time the error occurred.
+        Api-Url:
+          type: string
+          description: The API URL path of the call that generated the response.
+        ServiceError:
+          type: object
+          title: ServiceError
+          description: Detailed service-level error details, if available.
+          oneOf:
+          - $ref: '#/components/schemas/ServiceErrorData'
+          - $ref: '#/components/schemas/ConnectError'
     CheckImageListRequest:
       type: object
       description: Request to retrieve check image records for an account.
@@ -367,64 +388,19 @@ components:
           - JPEG
           - TIFG_4
           description: 'Indicates the output format of the check images. If no format is defined, no image is returned. Valid values: BMP, JPEG, PNG, TIF, TIFF, TIFG_4'
-    ConnectError:
+    ServiceErrorData:
       type: object
+      title: serviceErrorData
+      description: Detailed service-level error information, if available.
       properties:
-        ConnectError:
-          type: string
-          description: API connectivity error information, if available.
-    ResponseMetadata:
+        metadata:
+          $ref: '#/components/schemas/ResponseMetadata'
+    CheckImageListResponse:
       type: object
-      description: Error metadata including validation or service messages.
+      description: Check Image list response.
       properties:
-        messages:
-          type: array
-          maxItems: 100
-          description: List of messages describing validation errors or other informational messages.
-          items:
-            $ref: '#/components/schemas/Message'
-    Exception:
-      type: object
-      description: Contains information about errors related to the request.
-      title: exceptionSchema
-      properties:
-        ErrorMessage:
-          type: string
-          description: A human-readable message that describes the type or source of the error.
-        TransactionId:
-          type: string
-          description: A unique transaction ID returned with the response, useful for traceability.
-        X-CorrelationId:
-          type: string
-          description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
-        TransactionTime:
-          type: string
-          format: date-time
-          description: Date and time the error occurred.
-        Api-Url:
-          type: string
-          description: The API URL path of the call that generated the response.
-        ServiceError:
-          type: object
-          title: ServiceError
-          description: Detailed service-level error details, if available.
-          oneOf:
-          - $ref: '#/components/schemas/ServiceErrorData'
-          - $ref: '#/components/schemas/ConnectError'
-    Message:
-      type: object
-      description: Field-level error or informational message.
-      properties:
-        code:
-          type: string
-          description: Machine-readable code.
-          examples:
-          - IMAGE-Check-200-Success
-        message:
-          type: string
-          description: Human-readable message associated with the code.
-          examples:
-          - Successfully retrieved records.
+        checkImages:
+          $ref: '#/components/schemas/CheckImage'
     CheckImage:
       type: object
       description: Check image record.
@@ -478,12 +454,36 @@ components:
           description: The Base64 encoded string for the back image of the check.
           examples:
           - 73mfoZbjXF4Gr9XuIYSieWR0o3NV2bvMcwiurzvU8Dyvy2CG+1DYdw3IyHHZRdY6CKiarVFK7mG+IgJKVaDwqA2Ma7YxopwgEIJ5oc8gS/O8BzX7zms/6hmRn9wrcZj3ZhaSUmAdOtSc3qOzp6JPLoYyJg2hQwnEtJyormF8GT5ajF8ADV6XQD+d3Ym8bKsR6rHWwGB0bmiKu+9r+33mR8QZmzmmCPIUZXzj6CXaLr0dNA4+xXszgMbWAHI00ZGhTsSfzyWp8FHYZx24fbEOkS9ApuVBRihL+Eb14ldJayOgAXI3OjLJgo2pB4EUvbQmhwu=
-    CheckImageListResponse:
+    Message:
       type: object
-      description: Check Image list response.
+      description: Field-level error or informational message.
       properties:
-        checkImages:
-          $ref: '#/components/schemas/CheckImage'
+        code:
+          type: string
+          description: Machine-readable code.
+          examples:
+          - IMAGE-Check-200-Success
+        message:
+          type: string
+          description: Human-readable message associated with the code.
+          examples:
+          - Successfully retrieved records.
+    ConnectError:
+      type: object
+      properties:
+        ConnectError:
+          type: string
+          description: API connectivity error information, if available.
+    ResponseMetadata:
+      type: object
+      description: Error metadata including validation or service messages.
+      properties:
+        messages:
+          type: array
+          maxItems: 100
+          description: List of messages describing validation errors or other informational messages.
+          items:
+            $ref: '#/components/schemas/Message'
   securitySchemes:
     bearerAuth:
       type: http
