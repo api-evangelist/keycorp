@@ -407,6 +407,118 @@ paths:
                   ConnectError: Request could not be processed on time (GatewayTimeout), please wait a moment and resubmit the request.
 components:
   schemas:
+    StopPaymentPlaceRequest:
+      type: object
+      description: Request to place a stop payment on an account.
+      required:
+      - accountNumber
+      - checkNumberStart
+      properties:
+        accountNumber:
+          type: string
+          description: The account number to place the stop payment. This is a numeric ID and should not exceed 16 characters.
+          maxLength: 16
+          pattern: ^\d+$
+        checkAmount:
+          type: number
+          format: double
+          description: The amount of the check to stop. Must be a valid monetary value with no more than two decimal places.
+          examples:
+          - 12.1
+          - 1224234
+          - 0.57
+        issueDate:
+          type: string
+          description: 'The original check issue date. This must be a valid calendar date in the correct format. Format: YYYY-MM-DD'
+          pattern: ^\d{4}\-(0?[1-9]|1[0-2])\-(0?[1-9]|[1-2][0-9]|3[0-1])$
+          format: date
+        checkNumberStart:
+          type: integer
+          format: int64
+          description: The starting (lowest) check number in the range for which a stop payment is requested.
+          minimum: 1
+          maximum: 99999999999
+        checkNumberEnd:
+          type: integer
+          format: int64
+          description: The last (hightest) check number in the range for which a stop payment is requested. If the number is not specified, it will default to the same value as checkNumberStart.
+          minimum: 1
+          maximum: 99999999999
+        description:
+          type: string
+          maxLength: 30
+          description: A custom text field to provide a brief explanation of the stop payment request.
+    ResponseMetadata:
+      type: object
+      description: Error metadata including validation or service messages.
+      properties:
+        messages:
+          type: array
+          maxItems: 100
+          description: List of messages describing validation errors or other informational messages.
+          items:
+            $ref: '#/components/schemas/Message'
+    Exception:
+      type: object
+      description: Contains information about errors related to the request.
+      title: exceptionSchema
+      properties:
+        ErrorMessage:
+          type: string
+          description: A human-readable message that describes the type or source of the error.
+        TransactionId:
+          type: string
+          description: A unique transaction ID returned with the response, useful for traceability.
+        X-CorrelationId:
+          type: string
+          description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+        TransactionTime:
+          type: string
+          format: date-time
+          description: Date and time the error occurred.
+        Api-Url:
+          type: string
+          description: The API URL path of the call that generated the response.
+        ServiceError:
+          type: object
+          title: ServiceError
+          description: Detailed service-level error details, if available.
+          oneOf:
+          - $ref: '#/components/schemas/ServiceErrorData'
+          - $ref: '#/components/schemas/ConnectError'
+    Message:
+      type: object
+      description: Field-level error or informational message.
+      properties:
+        code:
+          type: string
+          description: Machine-readable code.
+          examples:
+          - IMAGE-Check-200-Success
+        message:
+          type: string
+          description: Human-readable message associated with the code.
+          examples:
+          - Successfully retrieved records.
+    ConnectError:
+      type: object
+      properties:
+        ConnectError:
+          type: string
+          description: API connectivity error information, if available.
+    StopPaymentPlaceResponse:
+      type: object
+      description: Successful response to place a stop payment.
+      properties:
+        stopPayments:
+          $ref: '#/components/schemas/StopPayments'
+    ServiceErrorData:
+      type: object
+      title: serviceErrorData
+      description: Detailed service-level error information, if available.
+      properties:
+        metadata:
+          $ref: '#/components/schemas/ResponseMetadata'
     StopPayments:
       type: object
       description: Stop payment record.
@@ -455,118 +567,6 @@ components:
           description: 'Original check issue date. Format: YYYY-MM-DD'
           pattern: ^\d{4}\-(0?[1-9]|1[0-2])\-(0?[1-9]|[1-2][0-9]|3[0-1])$
           format: date
-    Exception:
-      type: object
-      description: Contains information about errors related to the request.
-      title: exceptionSchema
-      properties:
-        ErrorMessage:
-          type: string
-          description: A human-readable message that describes the type or source of the error.
-        TransactionId:
-          type: string
-          description: A unique transaction ID returned with the response, useful for traceability.
-        X-CorrelationId:
-          type: string
-          description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
-        TransactionTime:
-          type: string
-          format: date-time
-          description: Date and time the error occurred.
-        Api-Url:
-          type: string
-          description: The API URL path of the call that generated the response.
-        ServiceError:
-          type: object
-          title: ServiceError
-          description: Detailed service-level error details, if available.
-          oneOf:
-          - $ref: '#/components/schemas/ServiceErrorData'
-          - $ref: '#/components/schemas/ConnectError'
-    ServiceErrorData:
-      type: object
-      title: serviceErrorData
-      description: Detailed service-level error information, if available.
-      properties:
-        metadata:
-          $ref: '#/components/schemas/ResponseMetadata'
-    Message:
-      type: object
-      description: Field-level error or informational message.
-      properties:
-        code:
-          type: string
-          description: Machine-readable code.
-          examples:
-          - IMAGE-Check-200-Success
-        message:
-          type: string
-          description: Human-readable message associated with the code.
-          examples:
-          - Successfully retrieved records.
-    ConnectError:
-      type: object
-      properties:
-        ConnectError:
-          type: string
-          description: API connectivity error information, if available.
-    StopPaymentPlaceRequest:
-      type: object
-      description: Request to place a stop payment on an account.
-      required:
-      - accountNumber
-      - checkNumberStart
-      properties:
-        accountNumber:
-          type: string
-          description: The account number to place the stop payment. This is a numeric ID and should not exceed 16 characters.
-          maxLength: 16
-          pattern: ^\d+$
-        checkAmount:
-          type: number
-          format: double
-          description: The amount of the check to stop. Must be a valid monetary value with no more than two decimal places.
-          examples:
-          - 12.1
-          - 1224234
-          - 0.57
-        issueDate:
-          type: string
-          description: 'The original check issue date. This must be a valid calendar date in the correct format. Format: YYYY-MM-DD'
-          pattern: ^\d{4}\-(0?[1-9]|1[0-2])\-(0?[1-9]|[1-2][0-9]|3[0-1])$
-          format: date
-        checkNumberStart:
-          type: integer
-          format: int64
-          description: The starting (lowest) check number in the range for which a stop payment is requested.
-          minimum: 1
-          maximum: 99999999999
-        checkNumberEnd:
-          type: integer
-          format: int64
-          description: The last (hightest) check number in the range for which a stop payment is requested. If the number is not specified, it will default to the same value as checkNumberStart.
-          minimum: 1
-          maximum: 99999999999
-        description:
-          type: string
-          maxLength: 30
-          description: A custom text field to provide a brief explanation of the stop payment request.
-    StopPaymentPlaceResponse:
-      type: object
-      description: Successful response to place a stop payment.
-      properties:
-        stopPayments:
-          $ref: '#/components/schemas/StopPayments'
-    ResponseMetadata:
-      type: object
-      description: Error metadata including validation or service messages.
-      properties:
-        messages:
-          type: array
-          maxItems: 100
-          description: List of messages describing validation errors or other informational messages.
-          items:
-            $ref: '#/components/schemas/Message'
   securitySchemes:
     bearerAuth:
       type: http

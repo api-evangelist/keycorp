@@ -319,6 +319,16 @@ paths:
                   ConnectError: Request could not be processed on time (GatewayTimeout), please wait a moment and resubmit the request.
 components:
   schemas:
+    ResponseMetadata:
+      type: object
+      description: Error metadata including validation or service messages.
+      properties:
+        messages:
+          type: array
+          maxItems: 100
+          description: List of messages describing validation errors or other informational messages.
+          items:
+            $ref: '#/components/schemas/Message'
     Exception:
       type: object
       description: Contains information about errors related to the request.
@@ -388,6 +398,32 @@ components:
           - JPEG
           - TIFG_4
           description: 'Indicates the output format of the check images. If no format is defined, no image is returned. Valid values: BMP, JPEG, PNG, TIF, TIFF, TIFG_4'
+    CheckImageListResponse:
+      type: object
+      description: Check Image list response.
+      properties:
+        checkImages:
+          $ref: '#/components/schemas/CheckImage'
+    Message:
+      type: object
+      description: Field-level error or informational message.
+      properties:
+        code:
+          type: string
+          description: Machine-readable code.
+          examples:
+          - IMAGE-Check-200-Success
+        message:
+          type: string
+          description: Human-readable message associated with the code.
+          examples:
+          - Successfully retrieved records.
+    ConnectError:
+      type: object
+      properties:
+        ConnectError:
+          type: string
+          description: API connectivity error information, if available.
     ServiceErrorData:
       type: object
       title: serviceErrorData
@@ -395,12 +431,6 @@ components:
       properties:
         metadata:
           $ref: '#/components/schemas/ResponseMetadata'
-    CheckImageListResponse:
-      type: object
-      description: Check Image list response.
-      properties:
-        checkImages:
-          $ref: '#/components/schemas/CheckImage'
     CheckImage:
       type: object
       description: Check image record.
@@ -454,36 +484,6 @@ components:
           description: The Base64 encoded string for the back image of the check.
           examples:
           - 73mfoZbjXF4Gr9XuIYSieWR0o3NV2bvMcwiurzvU8Dyvy2CG+1DYdw3IyHHZRdY6CKiarVFK7mG+IgJKVaDwqA2Ma7YxopwgEIJ5oc8gS/O8BzX7zms/6hmRn9wrcZj3ZhaSUmAdOtSc3qOzp6JPLoYyJg2hQwnEtJyormF8GT5ajF8ADV6XQD+d3Ym8bKsR6rHWwGB0bmiKu+9r+33mR8QZmzmmCPIUZXzj6CXaLr0dNA4+xXszgMbWAHI00ZGhTsSfzyWp8FHYZx24fbEOkS9ApuVBRihL+Eb14ldJayOgAXI3OjLJgo2pB4EUvbQmhwu=
-    Message:
-      type: object
-      description: Field-level error or informational message.
-      properties:
-        code:
-          type: string
-          description: Machine-readable code.
-          examples:
-          - IMAGE-Check-200-Success
-        message:
-          type: string
-          description: Human-readable message associated with the code.
-          examples:
-          - Successfully retrieved records.
-    ConnectError:
-      type: object
-      properties:
-        ConnectError:
-          type: string
-          description: API connectivity error information, if available.
-    ResponseMetadata:
-      type: object
-      description: Error metadata including validation or service messages.
-      properties:
-        messages:
-          type: array
-          maxItems: 100
-          description: List of messages describing validation errors or other informational messages.
-          items:
-            $ref: '#/components/schemas/Message'
   securitySchemes:
     bearerAuth:
       type: http

@@ -314,114 +314,17 @@ paths:
                   ConnectError: Request could not be processed on time (gateway timeout). Please wait a moment and resubmit the request.
 components:
   schemas:
-    ultParty:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Typically this is the name of the party that instructed the debit party to initiate a payment. This applies only to RTP transactions and the value cannot exceed 140 characters.
-          minLength: 1
-          maxLength: 140
-    serviceErrorData:
-      title: serviceErrorData
-      required:
-      - status
-      type: object
-      description: The service error returns the same response payload as a successful response with additional details specific to the error.
-      properties:
-        status:
-          description: 'The status of the payment transaction. Valid values: IN_PROCESS, IN_REVIEW, COMPLETED, FAILED, RETURNED, ERROR, VALID'
-          $ref: '#/components/schemas/paymentStatus'
-        transactionId:
-          type: string
-          description: The unique ID number associated with the original payment request in KeyBank's payment system.
-        requestReference:
-          type: string
-          description: A unique reference value for the original request that is useful for traceability and reporting. The ID cannot exceed 32 characters.
-          minLength: 1
-          maxLength: 32
-        sendersReference:
-          type: string
-          description: Unique reference value provided by the sender. The ID cannot exceed 32 characters.
-          minLength: 1
-          maxLength: 32
-        receiversReference:
-          type: string
-          description: The sender reference value from the original request. This is useful for traceability and reporting.
-          minLength: 1
-          maxLength: 140
-        debitAccountNumber:
-          type: string
-          description: The sender reference value from the original request. This is useful for traceability and reporting.
-          minLength: 1
-          maxLength: 34
-        creditAccountNumber:
-          type: string
-          description: The sender reference value from the original request. This is useful for traceability and reporting.
-          minLength: 1
-          maxLength: 34
-        valueDate:
-          type: string
-          description: The date (YYYY-MM-DD) the transferred occurred.
-        error:
-          description: Additional error information for payment transactions with the status ERROR.
-          $ref: '#/components/schemas/paymentError'
-        doddFrank:
-          description: The initial assessment of whether the transaction qualifies as a Dodd-Frank wire transaction. This value can change during the payment cycle.
-          $ref: '#/components/schemas/noYesType'
-    exception:
-      title: exceptionSchema
-      type: object
-      description: Contains information about the errors related to the request.
-      properties:
-        ErrorMessage:
-          type: string
-          description: A human-readable message that describes the type or source of the error.
-        TransactionId:
-          type: string
-          description: A unique transaction ID returned with the response, useful for traceability.
-        TransactionTime:
-          type: string
-          description: Date (YYYY-MM-DD) and time (HH:MM:SS) the error occurred.
-        Api-Url:
-          type: string
-          description: The API URL path of the call that generated the response.
-        ServiceError:
-          type: object
-          title: ServiceError
-          description: Detailed service-level error details, if available.
-          oneOf:
-          - $ref: '#/components/schemas/serviceErrorData'
-          - $ref: '#/components/schemas/connectError'
-    paymentError:
-      required:
-      - code
-      - title
-      type: object
-      description: Error messages related to the API and backend services.
-      properties:
-        code:
-          type: string
-          description: Status code assigned to each error type.
-        title:
-          type: string
-          description: Brief title about the error associated with the status code.
-        description:
-          type: string
-          description: Description of the error.
-        detail:
-          type: object
-          description: Additional details about the error from the payment network.
-          properties:
-            code:
-              type: string
-              description: A static code assigned by the network or payment system.
-            title:
-              type: string
-              description: Brief title about the error associated with the status code.
-            description:
-              type: string
-              description: Description of the error
+    paymentStatus:
+      type: string
+      description: 'The status of the payment transaction. Valid values: IN_PROCESS, IN_REVIEW, COMPLETED, FAILED, RETURNED, ERROR, VALID'
+      enum:
+      - IN_PROCESS
+      - IN_REVIEW
+      - COMPLETED
+      - FAILED
+      - RETURNED
+      - ERROR
+      - VALID
     party:
       title: party
       required:
@@ -513,6 +416,133 @@ components:
               items:
                 type: string
                 maxLength: 70
+    exception:
+      title: exceptionSchema
+      type: object
+      description: Contains information about the errors related to the request.
+      properties:
+        ErrorMessage:
+          type: string
+          description: A human-readable message that describes the type or source of the error.
+        TransactionId:
+          type: string
+          description: A unique transaction ID returned with the response, useful for traceability.
+        TransactionTime:
+          type: string
+          description: Date (YYYY-MM-DD) and time (HH:MM:SS) the error occurred.
+        Api-Url:
+          type: string
+          description: The API URL path of the call that generated the response.
+        ServiceError:
+          type: object
+          title: ServiceError
+          description: Detailed service-level error details, if available.
+          oneOf:
+          - $ref: '#/components/schemas/serviceErrorData'
+          - $ref: '#/components/schemas/connectError'
+    ultParty:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Typically this is the name of the party that instructed the debit party to initiate a payment. This applies only to RTP transactions and the value cannot exceed 140 characters.
+          minLength: 1
+          maxLength: 140
+    paymentError:
+      required:
+      - code
+      - title
+      type: object
+      description: Error messages related to the API and backend services.
+      properties:
+        code:
+          type: string
+          description: Status code assigned to each error type.
+        title:
+          type: string
+          description: Brief title about the error associated with the status code.
+        description:
+          type: string
+          description: Description of the error.
+        detail:
+          type: object
+          description: Additional details about the error from the payment network.
+          properties:
+            code:
+              type: string
+              description: A static code assigned by the network or payment system.
+            title:
+              type: string
+              description: Brief title about the error associated with the status code.
+            description:
+              type: string
+              description: Description of the error
+    paymentTransactionResponse:
+      required:
+      - status
+      type: object
+      description: Contains the response body with payment transaction details.
+      properties:
+        status:
+          description:
+            description: 'The status of the payment transaction. Valid values: IN PROCESS, IN REVIEW, COMPLETED, FAILED, RETURNED, ERROR, VALID'
+          $ref: '#/components/schemas/paymentStatus'
+        transactionId:
+          type: string
+          description: The unique ID number associated with the original payment request in KeyBank's payment system.
+        requestReference:
+          type: string
+          description: A unique reference value for the original request that is useful for traceability and reporting. The ID cannot exceed 32 characters.
+          minLength: 1
+          maxLength: 32
+        sendersReference:
+          type: string
+          description: Unique reference value provided by the sender. The ID cannot exceed 32 characters.
+          minLength: 1
+          maxLength: 32
+        receiversReference:
+          type: string
+          description: A reference value for the beneficiary. This value cannot exceed 140 characters.
+          minLength: 1
+          maxLength: 140
+        debitAccountNumber:
+          type: string
+          description: Debit account number. This cannot exceed 34 digits.
+          maxLength: 34
+        creditAccountNumber:
+          type: string
+          description: Credit account number. This cannot exceed 34 digits.
+          maxLength: 34
+        valueDate:
+          type: string
+          description: The date (YYYY-MM-DD) the transfer occurred.
+        transferAmount:
+          type: number
+          format: double
+          description: Amount of money to transfer in the correct currency format.
+          maximum: 999999999999999999
+          examples:
+          - 101.5
+          - 101
+          - 101.5
+        transferCurrency:
+          type: string
+          description: Currency code for the transfer amount. Must be USD.
+        error:
+          $ref: '#/components/schemas/paymentError'
+        doddFrank:
+          description: The initial assessment of whether the transaction qualifies as a Dodd-Frank wire transaction. This value can change during the payment cycle.
+          $ref: '#/components/schemas/noYesType'
+        clearingSystemReference:
+          type: string
+          description: A reference value for the beneficiary. This value cannot exceed 140 characters.
+          maxLength: 140
+    connectError:
+      type: object
+      properties:
+        ConnectError:
+          type: string
+          description: API connectivity error information, if available.
     paymentTransactionRequestV1:
       title: paymentTransactionRequestV1
       required:
@@ -627,32 +657,15 @@ components:
       enum:
       - 'YES'
       - 'NO'
-    connectError:
-      type: object
-      properties:
-        ConnectError:
-          type: string
-          description: API connectivity error information, if available.
-    paymentStatus:
-      type: string
-      description: 'The status of the payment transaction. Valid values: IN_PROCESS, IN_REVIEW, COMPLETED, FAILED, RETURNED, ERROR, VALID'
-      enum:
-      - IN_PROCESS
-      - IN_REVIEW
-      - COMPLETED
-      - FAILED
-      - RETURNED
-      - ERROR
-      - VALID
-    paymentTransactionResponse:
+    serviceErrorData:
+      title: serviceErrorData
       required:
       - status
       type: object
-      description: Contains the response body with payment transaction details.
+      description: The service error returns the same response payload as a successful response with additional details specific to the error.
       properties:
         status:
-          description:
-            description: 'The status of the payment transaction. Valid values: IN PROCESS, IN REVIEW, COMPLETED, FAILED, RETURNED, ERROR, VALID'
+          description: 'The status of the payment transaction. Valid values: IN_PROCESS, IN_REVIEW, COMPLETED, FAILED, RETURNED, ERROR, VALID'
           $ref: '#/components/schemas/paymentStatus'
         transactionId:
           type: string
@@ -669,41 +682,28 @@ components:
           maxLength: 32
         receiversReference:
           type: string
-          description: A reference value for the beneficiary. This value cannot exceed 140 characters.
+          description: The sender reference value from the original request. This is useful for traceability and reporting.
           minLength: 1
           maxLength: 140
         debitAccountNumber:
           type: string
-          description: Debit account number. This cannot exceed 34 digits.
+          description: The sender reference value from the original request. This is useful for traceability and reporting.
+          minLength: 1
           maxLength: 34
         creditAccountNumber:
           type: string
-          description: Credit account number. This cannot exceed 34 digits.
+          description: The sender reference value from the original request. This is useful for traceability and reporting.
+          minLength: 1
           maxLength: 34
         valueDate:
           type: string
-          description: The date (YYYY-MM-DD) the transfer occurred.
-        transferAmount:
-          type: number
-          format: double
-          description: Amount of money to transfer in the correct currency format.
-          maximum: 999999999999999999
-          examples:
-          - 101.5
-          - 101
-          - 101.5
-        transferCurrency:
-          type: string
-          description: Currency code for the transfer amount. Must be USD.
+          description: The date (YYYY-MM-DD) the transferred occurred.
         error:
+          description: Additional error information for payment transactions with the status ERROR.
           $ref: '#/components/schemas/paymentError'
         doddFrank:
           description: The initial assessment of whether the transaction qualifies as a Dodd-Frank wire transaction. This value can change during the payment cycle.
           $ref: '#/components/schemas/noYesType'
-        clearingSystemReference:
-          type: string
-          description: A reference value for the beneficiary. This value cannot exceed 140 characters.
-          maxLength: 140
     foreignBankSystemType:
       type: object
       properties:
