@@ -620,6 +620,12 @@ apis:
   - type: Documentation
     url: https://developer.key.com/docs/webhooks
 common:
+  - type: Plans
+    url: plans/keycorp-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/keycorp-rate-limits.yml
+  - type: FinOps
+    url: finops/keycorp-finops.yml
   - type: CapabilityMap
     url: capabilities/keycorp-capability-edges.yml
     name: KeyCorp Business Capability Map
