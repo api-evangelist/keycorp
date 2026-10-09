@@ -2,7 +2,7 @@
 name: Send an RTP or Wire payment
 description: Validate a counterparty, initiate an instant RTP or high-value wire payment, and confirm its delivery.
 api: openapi/keycorp-rtp-wire-payments-openapi.yml
-operations: [healthCheck, participant, participantList, Payment-Validate, Payment-Initiate]
+operations: [getWireInquiryV1HealthCheck, participant, participantList, Payment-Validate, Payment-Initiate]
 ---
 
 # Send an RTP or Wire payment

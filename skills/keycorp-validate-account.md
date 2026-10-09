@@ -2,7 +2,7 @@
 name: Validate an account before payment
 description: Verify account details and ownership against the National Shared Database Resource before originating a payment.
 api: openapi/keycorp-account-validation-openapi.yml
-operations: [healthCheck, verifyAccount]
+operations: [getWireInquiryV1HealthCheck, verifyAccount]
 ---
 
 # Validate an account before payment

@@ -2,7 +2,7 @@
 name: Originate and track an ACH payment
 description: Submit an ACH credit or debit from a commercial KeyBank account, then confirm and, if needed, cancel it.
 api: openapi/keycorp-ach-originations-openapi.yml
-operations: [healthCheck, achPaymentCCD, achPaymentPPD, achPaymentCTX, achPaymentTEL, achPaymentWEB, achPaymentStatus, achPaymentAddendasStatus, achPaymentUndo]
+operations: [getWireInquiryV1HealthCheck, achPaymentCCD, achPaymentPPD, achPaymentCTX, achPaymentTEL, achPaymentWEB, achPaymentStatus, achPaymentAddendasStatus, achPaymentUndo]
 ---
 
 # Originate and track an ACH payment

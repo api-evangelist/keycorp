@@ -1,4 +1,4 @@
-generated: '2026-09-16'
+generated: '2026-09-23'
 method: generated
 source: openapi/keycorp-account-information-api-openapi.yml, openapi/keycorp-account-transactions-api-openapi.yml,
   openapi/keycorp-accounts-api-openapi.yml, openapi/keycorp-ach-api-openapi.yml, openapi/keycorp-ach-payment-origination-api-openapi.yml,
@@ -14,12 +14,12 @@ description: Recommended x-agentic-access execution contracts, classified heuris
 summary:
   operations: 37
   by_action_class:
-    connected: 17
-    acting: 20
+    connected: 20
+    acting: 17
   by_consequence:
-    read: 17
-    write: 3
-    physical: 16
+    read: 20
+    write: 1
+    physical: 15
     safety-critical: 1
   human_in_the_loop_required: 1
 operations:
@@ -255,18 +255,12 @@ operations:
   method: post
   operationId: searchAchTransactions
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /accounts/transactions/v1/ach/settled/{settlementTransactionId}
   method: get
   operationId: searchAchSettledTransactions
@@ -351,18 +345,12 @@ operations:
   method: post
   operationId: CheckImageListRequest
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /rtp/v1/payment/initiate
   method: post
   operationId: Payment-Initiate
@@ -405,20 +393,12 @@ operations:
   method: post
   operationId: searchRtpTransactions
   x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /rtp/v1/transactions/detail/{transactionId}
   method: get
   operationId: searchRtpTransaction
