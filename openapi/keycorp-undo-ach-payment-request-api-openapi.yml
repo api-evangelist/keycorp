@@ -244,32 +244,6 @@ paths:
                   ConnectError: Please verify your payment status UUID and send the request again. The request could not be processed on time (GatewayTimeout).
 components:
   schemas:
-    exception:
-      type: object
-      title: ExceptionSchema
-      properties:
-        ErrorMessage:
-          type: string
-          description: Error message related to system generating this error.
-        TransactionId:
-          type: string
-          description: Unique functional identifier from the data to identify a message.
-        X-CorrelationId:
-          type: string
-          description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
-        TransactionTime:
-          type: string
-          description: Time of the occurrence of the error of the message.
-        Api-Url:
-          type: string
-          description: The API URL path of the call that generated the response.
-        ServiceError:
-          type: object
-          title: ServiceError
-          description: Indicates the service error details, if available.
-          oneOf:
-          - $ref: '#/components/schemas/detailMessage'
-          - $ref: '#/components/schemas/connectError'
     connectError:
       type: object
       properties:
@@ -327,6 +301,32 @@ components:
           type: string
           description: Detailed descriptive message.
           example: Effective date assigned 220411
+    exception:
+      type: object
+      title: ExceptionSchema
+      properties:
+        ErrorMessage:
+          type: string
+          description: Error message related to system generating this error.
+        TransactionId:
+          type: string
+          description: Unique functional identifier from the data to identify a message.
+        X-CorrelationId:
+          type: string
+          description: A unique identifier generated for each transaction that remains with the transaction through the chain of API operations.
+        TransactionTime:
+          type: string
+          description: Time of the occurrence of the error of the message.
+        Api-Url:
+          type: string
+          description: The API URL path of the call that generated the response.
+        ServiceError:
+          type: object
+          title: ServiceError
+          description: Indicates the service error details, if available.
+          oneOf:
+          - $ref: '#/components/schemas/detailMessage'
+          - $ref: '#/components/schemas/connectError'
   securitySchemes:
     bearerAuth:
       type: http

@@ -555,6 +555,39 @@ paths:
                       message: An unexpected error occurred.  Please try again later or contact support if the problem persists.
 components:
   schemas:
+    PartyDetail:
+      type: object
+      description: Contains details about the party like ID number, company name, and the customer name.
+      properties:
+        customerIdentificationNumber:
+          type: string
+          description: The unique identification number associated with the customer.
+          examples:
+          - '1234567'
+        companyName:
+          type: string
+          description: The name of the corporation or institution making the request.
+          examples:
+          - COMPANY NAME 1
+        customerName:
+          type: string
+          description: The name of the customer.
+          examples:
+          - TEST CUSTOMER1
+    Message:
+      type: object
+      description: Informational code and message from the server.
+      properties:
+        code:
+          type: string
+          description: Static code assigned by the network or payment system.
+          examples:
+          - Wire-List-400-toDate
+        message:
+          type: string
+          description: A human-readable message associated with the code.
+          examples:
+          - toDate format must be YYYY-MM-DD
     Exception:
       type: object
       description: Contains information about errors related to the request.
@@ -593,269 +626,6 @@ components:
           oneOf:
           - $ref: '#/components/schemas/ServiceErrorData'
           - $ref: '#/components/schemas/ConnectError'
-    AchSettledTransaction:
-      type: object
-      description: Results from ACH transaction where the status is "SETTLED" or "RETURNED".
-      properties:
-        parNumber:
-          type: string
-          description: The unique parNumber assigned to the transaction by the ACH processor.
-          examples:
-          - '22018007665985'
-        transactionStatus:
-          type: string
-          description: 'The status of the ACH transaction. Valid values: RETURNED, SETTLED'
-          examples:
-          - RETURNED
-          - SETTLED
-        traceNumber:
-          type: string
-          description: The trace number provided in the detail record of the originators Nacha file.
-          examples:
-          - 043000090716192
-        transactionAmount:
-          type: number
-          format: double
-          description: The dollar amount of the transaction.
-          examples:
-          - 50.0
-        collectionDate:
-          type: string
-          format: date
-          description: 'The date the transaction collection occurred. Format: YYYY-MM-DD'
-          examples:
-          - '2024-02-11'
-        settlementDate:
-          type: string
-          format: date
-          description: 'The date the transaction settlement occurred. Format: YYYY-MM-DD'
-          examples:
-          - '2024-02-01'
-        transactionCode:
-          type: string
-          description: Two-digit code identifying the account type at the receiving financial institution.  Defined by Nacha rules to indicate the type of transaction  based on the account.
-          examples:
-          - '26'
-        transactionDescription:
-          type: string
-          description: Company Entry Description provided by the originator.  Defined by Nacha specifications as a batch level description.
-          examples:
-          - CUST TRANS
-        authorizedCustomerName:
-          type: string
-          description: Authorized customer name
-          examples:
-          - TEST CUSTOMER2
-        standardEntryClassCode:
-          type: string
-          description: The three-digit Standard Entry Class code based on Nacha rules.
-          examples:
-          - CCD
-        receivingAccount:
-          allOf:
-          - $ref: '#/components/schemas/AccountList'
-          description: Details about the account receiving the funds.
-        receivingParty:
-          allOf:
-          - $ref: '#/components/schemas/PartyList'
-          description: Details about the party receiving the funds.
-        originatingAccount:
-          allOf:
-          - $ref: '#/components/schemas/AccountList'
-          description: Details about the originating account.
-        originatingParty:
-          allOf:
-          - $ref: '#/components/schemas/PartyList'
-          description: Details about the originating party.
-        returnDate:
-          type: string
-          format: date
-          description: 'Date of the returned transaction to the ACH system. Format: YYYY-MM-DD'
-          examples:
-          - '2024-02-01'
-        returnReasonCode:
-          type: string
-          description: 'The code associated with the reason for returning the ACH transaction. The code is the letter ''R'' for reason followed by a two-digit numeric code. Format: R00'
-          examples:
-          - R01
-        returnReasonDescription:
-          type: string
-          description: Description as to why the ACH transaction is returned.
-          examples:
-          - Insufficient Funds
-        settlementAmount:
-          type: number
-          format: double
-          description: The dollar amount of the settlement.
-          examples:
-          - 50.0
-        settlementTransactionId:
-          type: string
-          description: The unique parNumber of the settlement batch tied to the transaction.
-          examples:
-          - '23218003015954'
-    AchListTransaction:
-      type: object
-      description: Results from ACH transaction account search.
-      properties:
-        parNumber:
-          type: string
-          description: The unique parNumber assigned to the transaction by the ACH processor.
-          examples:
-          - '22018007665985'
-        transactionStatus:
-          type: string
-          description: 'The status of the ACH transaction. Valid values: COLLECTED, RETURNED, SETTLED'
-          examples:
-          - COLLECTED
-          - RETURNED
-          - SETTLED
-        traceNumber:
-          type: string
-          description: The trace number provided in the detail record of the originators Nacha file.
-          examples:
-          - 043000090716192
-        transactionAmount:
-          type: number
-          format: double
-          description: The dollar amount of the transaction.
-          examples:
-          - 10.01
-        collectionDate:
-          type: string
-          format: date
-          description: 'The date the transaction collection occurred. Format: YYYY-MM-DD'
-          examples:
-          - '2024-02-11'
-        settlementDate:
-          type: string
-          format: date
-          description: 'The date the transaction settlement occurred. Format: YYYY-MM-DD'
-          examples:
-          - '2024-02-01'
-        transactionCode:
-          type: string
-          description: Two-digit code identifying the account type at the receiving financial institution.  Defined by Nacha rules to indicate the type of transaction  based on the account.
-          examples:
-          - '22'
-        transactionDescription:
-          type: string
-          description: Company Entry Description provided by the originator.  Defined by Nacha specifications as a batch level description.
-          examples:
-          - DEPOSIT
-        authorizedCustomerName:
-          type: string
-          description: Authorized customer name
-          examples:
-          - TEST CUSTOMER1
-        standardEntryClassCode:
-          type: string
-          description: The three-digit Standard Entry Class code based on Nacha rules.
-          examples:
-          - CCD
-        receivingAccount:
-          allOf:
-          - $ref: '#/components/schemas/AccountList'
-          description: Details about the account receiving the funds.
-        receivingParty:
-          allOf:
-          - $ref: '#/components/schemas/PartyList'
-          description: Details about the party receiving the funds.
-        originatingAccount:
-          allOf:
-          - $ref: '#/components/schemas/AccountList'
-          description: Details about the originating account.
-        originatingParty:
-          allOf:
-          - $ref: '#/components/schemas/PartyList'
-          description: Details about the originating party.
-        returnDate:
-          type: string
-          format: date
-          description: 'Date of the returned transaction to the ACH system. Format: YYYY-MM-DD'
-          examples:
-          - '2024-02-01'
-        returnReasonCode:
-          type: string
-          description: 'The code associated with the reason for returning the ACH transaction. The code is the letter ''R'' for reason followed by a two-digit numeric code. Format: R00'
-          examples:
-          - R02
-        returnReasonDescription:
-          type: string
-          description: Description as to why the ACH transaction is returned.
-          examples:
-          - Account Closed
-        addendaCount:
-          type: integer
-          description: Count of addenda records.
-          examples:
-          - 1
-        notificationOfChangeAddendaCount:
-          type: integer
-          description: Count of change notifications records.
-          examples:
-          - 0
-        internationalAddendaCount:
-          type: integer
-          description: Count of international addenda records.
-          examples:
-          - 0
-        settlementAmount:
-          type: number
-          format: double
-          description: The dollar amount of the settlement.
-          examples:
-          - 123.45
-        settlementTransactionId:
-          type: string
-          description: The unique parNumber of the settlement batch tied to the transaction.
-          examples:
-          - '23218003015954'
-    AccountList:
-      type: object
-      description: Contains details about the account like account number.
-      properties:
-        accountNumber:
-          type: string
-          description: Bank account number.
-          examples:
-          - '3123456789'
-    NotificationOfChange:
-      type: object
-      description: Contains change details and corrected data.
-      properties:
-        changeCode:
-          type: string
-          description: The three-character change code begins with the letter 'C'. This code is applied to all NOCs to indicate the information that is being changed.
-          maxLength: 50
-          examples:
-          - C02
-        changeDescription:
-          type: string
-          description: The description associated with the change code.
-          maxLength: 255
-          examples:
-          - Incorrect transit/routing number
-        correctedData:
-          type: string
-          description: The corrected data per the correction change code.
-          maxLength: 50
-          examples:
-          - '1234567890'
-    Message:
-      type: object
-      description: Informational code and message from the server.
-      properties:
-        code:
-          type: string
-          description: Static code assigned by the network or payment system.
-          examples:
-          - Wire-List-400-toDate
-        message:
-          type: string
-          description: A human-readable message associated with the code.
-          examples:
-          - toDate format must be YYYY-MM-DD
     AchDetailTransaction:
       type: object
       description: Contains transaction details associated with the queried parNumber.
@@ -1012,6 +782,193 @@ components:
           description: Applicable change notifications associated with the ACH transaction.
           items:
             $ref: '#/components/schemas/NotificationOfChange'
+    NotificationOfChange:
+      type: object
+      description: Contains change details and corrected data.
+      properties:
+        changeCode:
+          type: string
+          description: The three-character change code begins with the letter 'C'. This code is applied to all NOCs to indicate the information that is being changed.
+          maxLength: 50
+          examples:
+          - C02
+        changeDescription:
+          type: string
+          description: The description associated with the change code.
+          maxLength: 255
+          examples:
+          - Incorrect transit/routing number
+        correctedData:
+          type: string
+          description: The corrected data per the correction change code.
+          maxLength: 50
+          examples:
+          - '1234567890'
+    ServiceErrorData:
+      type: object
+      title: serviceErrorData
+      description: Detailed service-level error information, if available.
+      properties:
+        metadata:
+          $ref: '#/components/schemas/ErrorMetadata'
+    ErrorMetadata:
+      type: object
+      description: Error metadata including validation or service messages.
+      properties:
+        messages:
+          type: array
+          maxItems: 100
+          description: List of messages describing validation errors or other informational messages.
+          items:
+            $ref: '#/components/schemas/Message'
+    AchSettledTransaction:
+      type: object
+      description: Results from ACH transaction where the status is "SETTLED" or "RETURNED".
+      properties:
+        parNumber:
+          type: string
+          description: The unique parNumber assigned to the transaction by the ACH processor.
+          examples:
+          - '22018007665985'
+        transactionStatus:
+          type: string
+          description: 'The status of the ACH transaction. Valid values: RETURNED, SETTLED'
+          examples:
+          - RETURNED
+          - SETTLED
+        traceNumber:
+          type: string
+          description: The trace number provided in the detail record of the originators Nacha file.
+          examples:
+          - 043000090716192
+        transactionAmount:
+          type: number
+          format: double
+          description: The dollar amount of the transaction.
+          examples:
+          - 50.0
+        collectionDate:
+          type: string
+          format: date
+          description: 'The date the transaction collection occurred. Format: YYYY-MM-DD'
+          examples:
+          - '2024-02-11'
+        settlementDate:
+          type: string
+          format: date
+          description: 'The date the transaction settlement occurred. Format: YYYY-MM-DD'
+          examples:
+          - '2024-02-01'
+        transactionCode:
+          type: string
+          description: Two-digit code identifying the account type at the receiving financial institution.  Defined by Nacha rules to indicate the type of transaction  based on the account.
+          examples:
+          - '26'
+        transactionDescription:
+          type: string
+          description: Company Entry Description provided by the originator.  Defined by Nacha specifications as a batch level description.
+          examples:
+          - CUST TRANS
+        authorizedCustomerName:
+          type: string
+          description: Authorized customer name
+          examples:
+          - TEST CUSTOMER2
+        standardEntryClassCode:
+          type: string
+          description: The three-digit Standard Entry Class code based on Nacha rules.
+          examples:
+          - CCD
+        receivingAccount:
+          allOf:
+          - $ref: '#/components/schemas/AccountList'
+          description: Details about the account receiving the funds.
+        receivingParty:
+          allOf:
+          - $ref: '#/components/schemas/PartyList'
+          description: Details about the party receiving the funds.
+        originatingAccount:
+          allOf:
+          - $ref: '#/components/schemas/AccountList'
+          description: Details about the originating account.
+        originatingParty:
+          allOf:
+          - $ref: '#/components/schemas/PartyList'
+          description: Details about the originating party.
+        returnDate:
+          type: string
+          format: date
+          description: 'Date of the returned transaction to the ACH system. Format: YYYY-MM-DD'
+          examples:
+          - '2024-02-01'
+        returnReasonCode:
+          type: string
+          description: 'The code associated with the reason for returning the ACH transaction. The code is the letter ''R'' for reason followed by a two-digit numeric code. Format: R00'
+          examples:
+          - R01
+        returnReasonDescription:
+          type: string
+          description: Description as to why the ACH transaction is returned.
+          examples:
+          - Insufficient Funds
+        settlementAmount:
+          type: number
+          format: double
+          description: The dollar amount of the settlement.
+          examples:
+          - 50.0
+        settlementTransactionId:
+          type: string
+          description: The unique parNumber of the settlement batch tied to the transaction.
+          examples:
+          - '23218003015954'
+    AccountDetail:
+      type: object
+      description: Contains details about the account like number, bank number, and routing number.
+      properties:
+        accountNumber:
+          type: string
+          description: Bank account number of the ACH originator or receiver.
+          examples:
+          - '3123456789'
+        bankNumber:
+          type: string
+          description: Bank number associated with the account number.
+          examples:
+          - '0000'
+        routingNumber:
+          type: string
+          description: Nine-digit routing number for the account provided in the original request.
+          examples:
+          - '123456789'
+    PageMetadata:
+      type: object
+      description: Data information returned as a message or page information retrieved from the server.
+      properties:
+        page:
+          $ref: '#/components/schemas/Page'
+    Addendum:
+      type: object
+      description: Contains addenda record information.
+      properties:
+        sequenceNumber:
+          type: integer
+          description: The addenda record item number in order of sequence. Number cannot exceed 4 digits.
+          maximum: 9999
+          examples:
+          - 1
+        entryDetailSequenceNumber:
+          type: string
+          description: The entry number in order of sequence. Number cannot exceed 7 digits.
+          maxLength: 7
+          examples:
+          - '188'
+        paymentRelatedInformation:
+          type: string
+          description: The related payment information from the addenda records. The maximum character limit is 255.
+          maxLength: 255
+          examples:
+          - Addenda Record (Applies to CCD, CTX, PPD, and WEB entries)
     PartyList:
       type: object
       description: Contains the customer identification number and company name.
@@ -1026,16 +983,140 @@ components:
           description: The name of the corporation or institution making the request.
           examples:
           - VENDOR
-    ErrorMetadata:
+    AchListTransaction:
       type: object
-      description: Error metadata including validation or service messages.
+      description: Results from ACH transaction account search.
       properties:
-        messages:
-          type: array
-          maxItems: 100
-          description: List of messages describing validation errors or other informational messages.
-          items:
-            $ref: '#/components/schemas/Message'
+        parNumber:
+          type: string
+          description: The unique parNumber assigned to the transaction by the ACH processor.
+          examples:
+          - '22018007665985'
+        transactionStatus:
+          type: string
+          description: 'The status of the ACH transaction. Valid values: COLLECTED, RETURNED, SETTLED'
+          examples:
+          - COLLECTED
+          - RETURNED
+          - SETTLED
+        traceNumber:
+          type: string
+          description: The trace number provided in the detail record of the originators Nacha file.
+          examples:
+          - 043000090716192
+        transactionAmount:
+          type: number
+          format: double
+          description: The dollar amount of the transaction.
+          examples:
+          - 10.01
+        collectionDate:
+          type: string
+          format: date
+          description: 'The date the transaction collection occurred. Format: YYYY-MM-DD'
+          examples:
+          - '2024-02-11'
+        settlementDate:
+          type: string
+          format: date
+          description: 'The date the transaction settlement occurred. Format: YYYY-MM-DD'
+          examples:
+          - '2024-02-01'
+        transactionCode:
+          type: string
+          description: Two-digit code identifying the account type at the receiving financial institution.  Defined by Nacha rules to indicate the type of transaction  based on the account.
+          examples:
+          - '22'
+        transactionDescription:
+          type: string
+          description: Company Entry Description provided by the originator.  Defined by Nacha specifications as a batch level description.
+          examples:
+          - DEPOSIT
+        authorizedCustomerName:
+          type: string
+          description: Authorized customer name
+          examples:
+          - TEST CUSTOMER1
+        standardEntryClassCode:
+          type: string
+          description: The three-digit Standard Entry Class code based on Nacha rules.
+          examples:
+          - CCD
+        receivingAccount:
+          allOf:
+          - $ref: '#/components/schemas/AccountList'
+          description: Details about the account receiving the funds.
+        receivingParty:
+          allOf:
+          - $ref: '#/components/schemas/PartyList'
+          description: Details about the party receiving the funds.
+        originatingAccount:
+          allOf:
+          - $ref: '#/components/schemas/AccountList'
+          description: Details about the originating account.
+        originatingParty:
+          allOf:
+          - $ref: '#/components/schemas/PartyList'
+          description: Details about the originating party.
+        returnDate:
+          type: string
+          format: date
+          description: 'Date of the returned transaction to the ACH system. Format: YYYY-MM-DD'
+          examples:
+          - '2024-02-01'
+        returnReasonCode:
+          type: string
+          description: 'The code associated with the reason for returning the ACH transaction. The code is the letter ''R'' for reason followed by a two-digit numeric code. Format: R00'
+          examples:
+          - R02
+        returnReasonDescription:
+          type: string
+          description: Description as to why the ACH transaction is returned.
+          examples:
+          - Account Closed
+        addendaCount:
+          type: integer
+          description: Count of addenda records.
+          examples:
+          - 1
+        notificationOfChangeAddendaCount:
+          type: integer
+          description: Count of change notifications records.
+          examples:
+          - 0
+        internationalAddendaCount:
+          type: integer
+          description: Count of international addenda records.
+          examples:
+          - 0
+        settlementAmount:
+          type: number
+          format: double
+          description: The dollar amount of the settlement.
+          examples:
+          - 123.45
+        settlementTransactionId:
+          type: string
+          description: The unique parNumber of the settlement batch tied to the transaction.
+          examples:
+          - '23218003015954'
+    AccountList:
+      type: object
+      description: Contains details about the account like account number.
+      properties:
+        accountNumber:
+          type: string
+          description: Bank account number.
+          examples:
+          - '3123456789'
+    ConnectError:
+      type: object
+      properties:
+        ConnectError:
+          type: string
+          description: API connectivity error information, if available.
+          examples:
+          - Request could not be processed on time (GatewayTimeout), please wait a moment and resubmit the request.
     Page:
       type: object
       description: Page information returned from the server.
@@ -1074,87 +1155,6 @@ components:
           examples:
           - false
           - true
-    Addendum:
-      type: object
-      description: Contains addenda record information.
-      properties:
-        sequenceNumber:
-          type: integer
-          description: The addenda record item number in order of sequence. Number cannot exceed 4 digits.
-          maximum: 9999
-          examples:
-          - 1
-        entryDetailSequenceNumber:
-          type: string
-          description: The entry number in order of sequence. Number cannot exceed 7 digits.
-          maxLength: 7
-          examples:
-          - '188'
-        paymentRelatedInformation:
-          type: string
-          description: The related payment information from the addenda records. The maximum character limit is 255.
-          maxLength: 255
-          examples:
-          - Addenda Record (Applies to CCD, CTX, PPD, and WEB entries)
-    ConnectError:
-      type: object
-      properties:
-        ConnectError:
-          type: string
-          description: API connectivity error information, if available.
-          examples:
-          - Request could not be processed on time (GatewayTimeout), please wait a moment and resubmit the request.
-    ServiceErrorData:
-      type: object
-      title: serviceErrorData
-      description: Detailed service-level error information, if available.
-      properties:
-        metadata:
-          $ref: '#/components/schemas/ErrorMetadata'
-    AccountDetail:
-      type: object
-      description: Contains details about the account like number, bank number, and routing number.
-      properties:
-        accountNumber:
-          type: string
-          description: Bank account number of the ACH originator or receiver.
-          examples:
-          - '3123456789'
-        bankNumber:
-          type: string
-          description: Bank number associated with the account number.
-          examples:
-          - '0000'
-        routingNumber:
-          type: string
-          description: Nine-digit routing number for the account provided in the original request.
-          examples:
-          - '123456789'
-    PageMetadata:
-      type: object
-      description: Data information returned as a message or page information retrieved from the server.
-      properties:
-        page:
-          $ref: '#/components/schemas/Page'
-    PartyDetail:
-      type: object
-      description: Contains details about the party like ID number, company name, and the customer name.
-      properties:
-        customerIdentificationNumber:
-          type: string
-          description: The unique identification number associated with the customer.
-          examples:
-          - '1234567'
-        companyName:
-          type: string
-          description: The name of the corporation or institution making the request.
-          examples:
-          - COMPANY NAME 1
-        customerName:
-          type: string
-          description: The name of the customer.
-          examples:
-          - TEST CUSTOMER1
   securitySchemes:
     bearerAuth:
       type: http

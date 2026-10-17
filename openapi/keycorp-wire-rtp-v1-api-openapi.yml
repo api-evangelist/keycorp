@@ -86,7 +86,7 @@ components:
             alertRecievedDateAndTime: 2021-11-19 10:31:12+00:00
             eapAlertGUID: 5163dee6-0b2b-4901-9f6a-4b3997ee8d77
             message: Successfully submitted the request
-    alertInvalidInputResponse:
+    alertFailureResponse:
       type: object
       properties:
         alertNotificationResponse:
@@ -121,8 +121,8 @@ components:
             alertStatus: FAILURE
             confirmationGUID: 5f0ada5b-056f-483c-98ae-ac6ccab269c1
             alertRecievedDateAndTime: 2021-11-19 10:31:12+00:00
-            eapAlertGUID: ce816009-4aa9-47c7-b2ee-bacf9f0872d0
-            message: 'Required parameter(s) not found: [fieldName(s)]'
+            eapAlertGUID: 3eecd293-8c45-40ba-be09-d8570c5665ed
+            message: Internal Error
     alertNotificationAL00901Request:
       type: object
       properties:
@@ -423,7 +423,7 @@ components:
               orgntngIpAddrLine3: 'null'
               crVirtualNum: '953456789'
               dbVirtualNum: '953654321'
-    alertFailureResponse:
+    alertInvalidInputResponse:
       type: object
       properties:
         alertNotificationResponse:
@@ -458,5 +458,5 @@ components:
             alertStatus: FAILURE
             confirmationGUID: 5f0ada5b-056f-483c-98ae-ac6ccab269c1
             alertRecievedDateAndTime: 2021-11-19 10:31:12+00:00
-            eapAlertGUID: 3eecd293-8c45-40ba-be09-d8570c5665ed
-            message: Internal Error
+            eapAlertGUID: ce816009-4aa9-47c7-b2ee-bacf9f0872d0
+            message: 'Required parameter(s) not found: [fieldName(s)]'

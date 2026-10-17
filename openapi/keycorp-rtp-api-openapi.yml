@@ -492,18 +492,6 @@ paths:
                       message: An unexpected error occurred.  Please try again later or contact support if the problem persists.
 components:
   schemas:
-    BeneficiaryPartyDetail:
-      description: Beneficiary party representation returned in detail results.
-      allOf:
-      - $ref: '#/components/schemas/PartyDetail'
-      - type: object
-        properties:
-          ultimateName:
-            type: string
-            description: Contains the ultimate beneficiary name.
-            maxLength: 255
-            examples:
-            - Saul Wilson
     Bank:
       type: object
       properties:
@@ -517,114 +505,6 @@ components:
           description: Business Identifier Code (BIC) is an 8 to 11-character alphanumeric code that uniquely identifies a specific bank or financial institution worldwide
           examples:
           - SIMWUS01
-    RTPListTransaction:
-      type: object
-      description: Contains the response payload for RTP inquiries.
-      properties:
-        transactionId:
-          type: string
-          description: The unique ID number associated with the original payment request
-          maxLength: 100
-          examples:
-          - US99999000999999
-        transactionStatus:
-          type: string
-          enum:
-          - CANCELLED
-          - COMPLETED
-          - FAILED
-          - IN PROCESS
-          - IN REVIEW
-          - RETURNED
-          description: 'The status of the RTP transfer. Valid values: CANCELLED, COMPLETED, FAILED, IN PROCESS, IN REVIEW, RETURNED'
-          maxLength: 50
-        transactionStatusTimestamp:
-          type: string
-          pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$
-          description: Timestamp for the most recent status change on the transaction.
-          examples:
-          - '2026-01-12T12:18:01'
-        transactionDate:
-          type: string
-          format: date
-          description: 'Date the transfer occurred. Format: YYYY-MM-DD'
-          examples:
-          - '2026-01-12'
-        transactionAmount:
-          type: number
-          format: double
-          description: The dollar amount of the transaction.
-          examples:
-          - 32772.63
-          - 32.1
-        requestReference:
-          type: string
-          description: A reference value for the original request that is useful for traceability and reporting. The ID cannot exceed 32 characters.
-          maxLength: 32
-          examples:
-          - '1122334455'
-        sendersReference:
-          type: string
-          description: A reference value provided by the sender. For outbound payments, this value is the same as the transaction ID. The ID cannot exceed 35 characters.
-          maxLength: 35
-          examples:
-          - US99999000999999
-        creditor:
-          $ref: '#/components/schemas/PartySummary'
-        creditorAccount:
-          $ref: '#/components/schemas/Account'
-        debtor:
-          $ref: '#/components/schemas/PartySummary'
-        debtorAccount:
-          $ref: '#/components/schemas/Account'
-        originator:
-          $ref: '#/components/schemas/PartySummary'
-        beneficiary:
-          $ref: '#/components/schemas/PartySummary'
-    Message:
-      type: object
-      description: Informational code and message from the server.
-      properties:
-        code:
-          type: string
-          description: Static code assigned by the network or payment system.
-          examples:
-          - RTP-List-400-toDate
-        message:
-          type: string
-          description: A human-readable message associated with the code.
-          examples:
-          - toDate format must be YYYY-MM-DD
-    Account:
-      type: object
-      properties:
-        accountNumber:
-          type: string
-          description: Account number of the party.
-          maxLength: 20
-    IntermediaryBank:
-      allOf:
-      - $ref: '#/components/schemas/Bank'
-      - type: object
-        properties:
-          name:
-            type: string
-            description: Name.
-            examples:
-            - SIMW1 BANK
-          addressLine:
-            type: string
-            description: Address line.
-            examples:
-            - 0123 INT2W1 ST
-    PartyDetail:
-      description: Party representation returned in detail results.
-      allOf:
-      - $ref: '#/components/schemas/PartySummary'
-      - type: object
-        properties:
-          postalAddress:
-            $ref: '#/components/schemas/PostalAddress'
     Exception:
       type: object
       description: Contains information about errors related to the request.
@@ -663,101 +543,48 @@ components:
           oneOf:
           - $ref: '#/components/schemas/ServiceErrorData'
           - $ref: '#/components/schemas/ConnectError'
-    PostalAddress:
+    IntermediaryBank:
+      allOf:
+      - $ref: '#/components/schemas/Bank'
+      - type: object
+        properties:
+          name:
+            type: string
+            description: Name.
+            examples:
+            - SIMW1 BANK
+          addressLine:
+            type: string
+            description: Address line.
+            examples:
+            - 0123 INT2W1 ST
+    FailureReasons:
       type: object
       properties:
-        type:
+        initiatingFailureReasonCode:
           type: string
-          description: 'Address type for the party that specifies if it is a home, business, or mailing address. Valid values: ADDR, PBOX, HOME, BIZZ, MLTO, DLVY'
+          description: Reason code for initiating failure
+          maxLength: 32
           examples:
-          - ADDR
-          - PBOX
-          - HOME
-          - BIZZ
-          - MLTO
-          - DLVY
-        department:
+          - KEY-9998
+        initiatingFailureReasonTitle:
           type: string
-          description: Department of the party for the mailing address, if applicable. This field cannot exceed 70 characters.
-          maxLength: 70
+          description: Reason description for initiating failure
+          maxLength: 256
           examples:
-          - Financial
-        subDepartment:
+          - Unauthorized for account
+        networkFailureReasonCode:
           type: string
-          description: Sub-department of the party, if applicable. This field cannot exceed 70 characters.
-          maxLength: 70
+          description: Reason code for network failure
+          maxLength: 32
           examples:
-          - SIMW1
-        street:
+          - '123'
+        networkFailureReasonTitle:
           type: string
-          description: Street address for the party. This field cannot exceed 70 characters.
-          maxLength: 70
+          description: Reason description for network failure
+          maxLength: 256
           examples:
-          - SIM ST
-        buildingNumber:
-          type: string
-          description: Building number. This field cannot exceed 16 characters.
-          maxLength: 16
-          examples:
-          - 123
-        postalCode:
-          type: string
-          description: The postal code or zip code for the address. This field cannot exceed 16 characters.
-          maxLength: 16
-          examples:
-          - '43240'
-        city:
-          type: string
-          description: Name of the town. This field cannot exceed 35 characters.
-          maxLength: 35
-          examples:
-          - SIMCITY
-        region:
-          type: string
-          description: Name of subdivision of a country like a state, region, or county. This field cannot exceed 35 characters.
-          maxLength: 35
-          examples:
-          - OH
-        countryCode:
-          type: string
-          description: Two-character country abbreviation.
-          maxLength: 2
-          pattern: ^[A-Z]{2}$
-          examples:
-          - US
-        addressLine:
-          type: string
-          description: An unstructured address line.
-          maxLength: 210
-          examples:
-          - 123 SIM ST,STE W123
-    Amount0To1B:
-      description: Amount between 0 and 1,000,000,000 inclusive. Accepts a JSON number or a string. If a string is used, commas are allowed as thousands separators. Decimal precision must be at most 2 decimal places.
-      oneOf:
-      - title: AmountAsNumber
-        type: number
-        format: double
-        minimum: 0
-        maximum: 1000000000
-        multipleOf: 0.01
-        description: Amount between 0 and 1 billion.  Decimals are optional.  If present, must contain 1 or 2 digits (e.g., 2433.0, 3939.2, 100.25).
-      - title: AmountAsString
-        type: string
-        description: 'String amount may include commas. If commas are used, they must be valid thousands separators (e.g., 1,234,567). Must be 0..1,000,000,000 inclusive. Decimals are optional; if present, must be 1 or 2 digits (e.g., 2433.0, 3939.2, 100.25). Note: 1,000,000,000 may only be whole dollars or with a decimal value of .0/.00.'
-        pattern: ^(?:(?:1(?:,000){3}|1000000000)(?:\.0{1,2})?|(?:0|[1-9]\d{0,8}|[1-9]\d{0,2}(?:,\d{3}){1,2})(?:\.\d{1,2})?|\.\d{1,2})$
-      examples:
-      - 0.25
-      - 100
-      - 100.0
-      - 2433.0
-      - 3939.2
-      - '.25'
-      - '100'
-      - '100.0'
-      - '100.25'
-      - 75,020.52
-      - 1,000,000,000
-      - 1,000,000,000.00
+          - Network Failure
     RtpDetailTransaction:
       type: object
       description: Contains the response payload with details about an RTP transaction.
@@ -881,67 +708,107 @@ components:
           $ref: '#/components/schemas/Bank'
         failureReasons:
           $ref: '#/components/schemas/FailureReasons'
-    OriginatorPartyDetail:
-      description: Originator party representation returned in detail results.
-      allOf:
-      - $ref: '#/components/schemas/PartyDetail'
-      - type: object
-        properties:
-          originalName:
-            type: string
-            description: Contains the original origination customer name
-            maxLength: 255
-            examples:
-            - Raul Wilson
-    FailureReasons:
+    PageMetadata:
+      type: object
+      description: Data information returned as a message or page information retrieved from the server.
+      properties:
+        page:
+          $ref: '#/components/schemas/Page'
+    PostalAddress:
       type: object
       properties:
-        initiatingFailureReasonCode:
+        type:
           type: string
-          description: Reason code for initiating failure
-          maxLength: 32
+          description: 'Address type for the party that specifies if it is a home, business, or mailing address. Valid values: ADDR, PBOX, HOME, BIZZ, MLTO, DLVY'
           examples:
-          - KEY-9998
-        initiatingFailureReasonTitle:
+          - ADDR
+          - PBOX
+          - HOME
+          - BIZZ
+          - MLTO
+          - DLVY
+        department:
           type: string
-          description: Reason description for initiating failure
-          maxLength: 256
+          description: Department of the party for the mailing address, if applicable. This field cannot exceed 70 characters.
+          maxLength: 70
           examples:
-          - Unauthorized for account
-        networkFailureReasonCode:
+          - Financial
+        subDepartment:
           type: string
-          description: Reason code for network failure
-          maxLength: 32
+          description: Sub-department of the party, if applicable. This field cannot exceed 70 characters.
+          maxLength: 70
           examples:
-          - '123'
-        networkFailureReasonTitle:
+          - SIMW1
+        street:
           type: string
-          description: Reason description for network failure
-          maxLength: 256
+          description: Street address for the party. This field cannot exceed 70 characters.
+          maxLength: 70
           examples:
-          - Network Failure
-    PartySummary:
-      type: object
-      description: Minimal party representation returned in list results.
-      required:
-      - name
-      properties:
-        name:
+          - SIM ST
+        buildingNumber:
           type: string
-          description: Contains the customer name
-          maxLength: 255
+          description: Building number. This field cannot exceed 16 characters.
+          maxLength: 16
           examples:
-          - Paul Wilson
-    ErrorMetadata:
-      type: object
-      description: Error metadata including validation or service messages.
-      properties:
-        messages:
-          type: array
-          description: List of messages describing validation errors or other informational messages.
-          maxItems: 100
-          items:
-            $ref: '#/components/schemas/Message'
+          - 123
+        postalCode:
+          type: string
+          description: The postal code or zip code for the address. This field cannot exceed 16 characters.
+          maxLength: 16
+          examples:
+          - '43240'
+        city:
+          type: string
+          description: Name of the town. This field cannot exceed 35 characters.
+          maxLength: 35
+          examples:
+          - SIMCITY
+        region:
+          type: string
+          description: Name of subdivision of a country like a state, region, or county. This field cannot exceed 35 characters.
+          maxLength: 35
+          examples:
+          - OH
+        countryCode:
+          type: string
+          description: Two-character country abbreviation.
+          maxLength: 2
+          pattern: ^[A-Z]{2}$
+          examples:
+          - US
+        addressLine:
+          type: string
+          description: An unstructured address line.
+          maxLength: 210
+          examples:
+          - 123 SIM ST,STE W123
+    Amount0To1B:
+      description: Amount between 0 and 1,000,000,000 inclusive. Accepts a JSON number or a string. If a string is used, commas are allowed as thousands separators. Decimal precision must be at most 2 decimal places.
+      oneOf:
+      - title: AmountAsNumber
+        type: number
+        format: double
+        minimum: 0
+        maximum: 1000000000
+        multipleOf: 0.01
+        description: Amount between 0 and 1 billion.  Decimals are optional.  If present, must contain 1 or 2 digits (e.g., 2433.0, 3939.2, 100.25).
+      - title: AmountAsString
+        type: string
+        description: 'String amount may include commas. If commas are used, they must be valid thousands separators (e.g., 1,234,567). Must be 0..1,000,000,000 inclusive. Decimals are optional; if present, must be 1 or 2 digits (e.g., 2433.0, 3939.2, 100.25). Note: 1,000,000,000 may only be whole dollars or with a decimal value of .0/.00.'
+        pattern: ^(?:(?:1(?:,000){3}|1000000000)(?:\.0{1,2})?|(?:0|[1-9]\d{0,8}|[1-9]\d{0,2}(?:,\d{3}){1,2})(?:\.\d{1,2})?|\.\d{1,2})$
+      examples:
+      - 0.25
+      - 100
+      - 100.0
+      - 2433.0
+      - 3939.2
+      - '.25'
+      - '100'
+      - '100.0'
+      - '100.25'
+      - 75,020.52
+      - 1,000,000,000
+      - 1,000,000,000.00
     Page:
       type: object
       description: Page information returned from the server.
@@ -980,27 +847,18 @@ components:
           examples:
           - false
           - true
-    ConnectError:
-      type: object
-      properties:
-        ConnectError:
-          type: string
-          description: API connectivity error information, if available.
-          examples:
-          - Request could not be processed on time (GatewayTimeout), please wait a moment and resubmit the request.
-    ServiceErrorData:
-      type: object
-      title: serviceErrorData
-      description: Detailed service-level error information, if available.
-      properties:
-        metadata:
-          $ref: '#/components/schemas/ErrorMetadata'
-    PageMetadata:
-      type: object
-      description: Data information returned as a message or page information retrieved from the server.
-      properties:
-        page:
-          $ref: '#/components/schemas/Page'
+    OriginatorPartyDetail:
+      description: Originator party representation returned in detail results.
+      allOf:
+      - $ref: '#/components/schemas/PartyDetail'
+      - type: object
+        properties:
+          originalName:
+            type: string
+            description: Contains the original origination customer name
+            maxLength: 255
+            examples:
+            - Raul Wilson
     AccountExtended:
       allOf:
       - $ref: '#/components/schemas/Account'
@@ -1012,6 +870,148 @@ components:
             maxLength: 20
             examples:
             - '95312346654532'
+    PartyDetail:
+      description: Party representation returned in detail results.
+      allOf:
+      - $ref: '#/components/schemas/PartySummary'
+      - type: object
+        properties:
+          postalAddress:
+            $ref: '#/components/schemas/PostalAddress'
+    ErrorMetadata:
+      type: object
+      description: Error metadata including validation or service messages.
+      properties:
+        messages:
+          type: array
+          description: List of messages describing validation errors or other informational messages.
+          maxItems: 100
+          items:
+            $ref: '#/components/schemas/Message'
+    Account:
+      type: object
+      properties:
+        accountNumber:
+          type: string
+          description: Account number of the party.
+          maxLength: 20
+    PartySummary:
+      type: object
+      description: Minimal party representation returned in list results.
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Contains the customer name
+          maxLength: 255
+          examples:
+          - Paul Wilson
+    ConnectError:
+      type: object
+      properties:
+        ConnectError:
+          type: string
+          description: API connectivity error information, if available.
+          examples:
+          - Request could not be processed on time (GatewayTimeout), please wait a moment and resubmit the request.
+    Message:
+      type: object
+      description: Informational code and message from the server.
+      properties:
+        code:
+          type: string
+          description: Static code assigned by the network or payment system.
+          examples:
+          - RTP-List-400-toDate
+        message:
+          type: string
+          description: A human-readable message associated with the code.
+          examples:
+          - toDate format must be YYYY-MM-DD
+    RTPListTransaction:
+      type: object
+      description: Contains the response payload for RTP inquiries.
+      properties:
+        transactionId:
+          type: string
+          description: The unique ID number associated with the original payment request
+          maxLength: 100
+          examples:
+          - US99999000999999
+        transactionStatus:
+          type: string
+          enum:
+          - CANCELLED
+          - COMPLETED
+          - FAILED
+          - IN PROCESS
+          - IN REVIEW
+          - RETURNED
+          description: 'The status of the RTP transfer. Valid values: CANCELLED, COMPLETED, FAILED, IN PROCESS, IN REVIEW, RETURNED'
+          maxLength: 50
+        transactionStatusTimestamp:
+          type: string
+          pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$
+          description: Timestamp for the most recent status change on the transaction.
+          examples:
+          - '2026-01-12T12:18:01'
+        transactionDate:
+          type: string
+          format: date
+          description: 'Date the transfer occurred. Format: YYYY-MM-DD'
+          examples:
+          - '2026-01-12'
+        transactionAmount:
+          type: number
+          format: double
+          description: The dollar amount of the transaction.
+          examples:
+          - 32772.63
+          - 32.1
+        requestReference:
+          type: string
+          description: A reference value for the original request that is useful for traceability and reporting. The ID cannot exceed 32 characters.
+          maxLength: 32
+          examples:
+          - '1122334455'
+        sendersReference:
+          type: string
+          description: A reference value provided by the sender. For outbound payments, this value is the same as the transaction ID. The ID cannot exceed 35 characters.
+          maxLength: 35
+          examples:
+          - US99999000999999
+        creditor:
+          $ref: '#/components/schemas/PartySummary'
+        creditorAccount:
+          $ref: '#/components/schemas/Account'
+        debtor:
+          $ref: '#/components/schemas/PartySummary'
+        debtorAccount:
+          $ref: '#/components/schemas/Account'
+        originator:
+          $ref: '#/components/schemas/PartySummary'
+        beneficiary:
+          $ref: '#/components/schemas/PartySummary'
+    ServiceErrorData:
+      type: object
+      title: serviceErrorData
+      description: Detailed service-level error information, if available.
+      properties:
+        metadata:
+          $ref: '#/components/schemas/ErrorMetadata'
+    BeneficiaryPartyDetail:
+      description: Beneficiary party representation returned in detail results.
+      allOf:
+      - $ref: '#/components/schemas/PartyDetail'
+      - type: object
+        properties:
+          ultimateName:
+            type: string
+            description: Contains the ultimate beneficiary name.
+            maxLength: 255
+            examples:
+            - Saul Wilson
   securitySchemes:
     bearerAuth:
       type: http
