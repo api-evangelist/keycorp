@@ -1,5 +1,5 @@
 generated: '2026-10-12'
-method: none
+method: searched
 source:
 - https://zapier.com/apps/keycorp/integrations
 - https://n8n.io/integrations/keycorp/
@@ -10,7 +10,42 @@ checked:
 - https://monid.ai/tools/keycorp
 - https://n8n.io/integrations/keycorp/
 - https://zapier.com/apps/keycorp/integrations
+- https://api.fdic.gov/banks/history
+- https://api.fdic.gov/banks/institutions?filters=ACTIVE:1&fields=NAME,WEBADDR,CERT,ASSET,STALP
+- https://www.ncua.gov/files/publications/analysis/call-report-data-2025-06.zip
+- https://www.ncua.gov/files/publications/analysis/federally-insured-credit-union-list-june-2025.zip
 summary: null
 marketplace_apps: []
-edges: []
+edges:
+- partner_name: FDIC BankFind insured institutions
+  partner: null
+  partner_match: register
+  type: register
+  channel: regulator-register
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://api.fdic.gov/banks/institutions?filters=ACTIVE:1&fields=NAME,WEBADDR,CERT,ASSET,STALP
+  category: US FDIC-insured depository institution charter
+  contract_reference:
+    register: FDIC BankFind insured institutions
+    spec_file: null
+    standard: null
+    role: insured-depository-institution
+    registrations:
+    - registered_name: KeyBank National Association
+      register_status: active
+      register_country: US
+      register_id: '17534'
+      matched_domain: key.com
+      matched_by: domain+local-verified
+      licences:
+      - FDIC-insured institution (CERT 17534)
+      evidence_url: https://banks.data.fdic.gov/bankfind-suite/bankfind/details/17534
+      state: OH
+    signal_note: 'participation only: a federal deposit-insurance charter on a regulator register; no API conformance
+      is published by this register'
+    detected_by: sweep-us-bank-credit-union-registers.py
+    detected: '2026-10-22'
+  detected_by: sweep-us-bank-credit-union-registers.py
+  first_seen: '2026-10-22'
 templates: []
