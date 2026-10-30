@@ -1,4 +1,4 @@
-# KeyCorp (keycorp)
+# KeyCorp
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,241 +64,172 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-KeyCorp is one of the nation's largest bank-based financial services companies, providing deposit, lending, cash management, and investment services to individuals, small businesses, and middle-market companies. The KeyBank Developer Portal exposes commercial banking APIs for account information, payments, inquiry, and check services.
+KeyCorp (KeyBank) is one of the nation's largest bank-based financial services companies and a super-regional commercial bank headquartered in Cleveland, Ohio, providing deposit, lending, cash management, treasury, and investment services to individuals, small businesses, and middle-market companies. The KeyBank Developer Portal at developer.key.com publishes a self-service catalog of commercial and embedded-banking APIs covering account information reporting, ACH origination, RTP and wire payments, account validation, ACH/wire/RTP inquiry, check services, and payment event webhooks. Each product ships a downloadable OpenAPI 3.1 definition and is secured with OAuth2 bearer tokens, mutual TLS client certificates, and FAPI-style interaction-id headers.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/keycorp/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/keycorp/refs/heads/main/apis.yml)
+**Areas:** Banking · Commercial Banking · Financial Services · Fortune 500 · Payments · United States · Super-Regional Bank · Treasury Management · Embedded Banking · ACH · Real-Time Payments · Wire Transfers
 
-## Scope
+## KeyCorp on APIs.io
 
-- **Type:** Index
+Everything profiled for KeyCorp is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/keycorp/](https://apis.io/providers/keycorp/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (18)
 
-- Banking
-- Commercial Banking
-- Financial Services
-- Fortune 500
-- Payments
+- [KeyCorp Account Information API](https://apis.io/apis/keycorp/keycorp-account-information-api/) — The Account Information API from KeyCorp — 2 operation(s) for account information.
+- [KeyCorp Account Transactions API](https://apis.io/apis/keycorp/keycorp-account-transactions-api/) — The Account Transactions API from KeyCorp — 2 operation(s) for account transactions.
+- [KeyCorp Accounts API](https://apis.io/apis/keycorp/keycorp-accounts-api/) — The Accounts API from KeyCorp — 1 operation(s) for accounts.
+- [KeyCorp ACH API](https://apis.io/apis/keycorp/keycorp-ach-api/) — The ACH API from KeyCorp — 1 operation(s) for ach.
+- [KeyCorp ACH Payment Origination API](https://apis.io/apis/keycorp/keycorp-ach-payment-origination-api/) — The ACH Payment Origination API from KeyCorp — 6 operation(s) for ach payment origination.
+- [KeyCorp ACH Payment Request Inquiry API](https://apis.io/apis/keycorp/keycorp-ach-payment-request-inquiry-api/) — The ACH Payment Request Inquiry API from KeyCorp — 2 operation(s) for ach payment request inquiry.
+- [KeyCorp ACH Transactions API](https://apis.io/apis/keycorp/keycorp-ach-transactions-api/) — ACH Inquiry functions to list and retrieve ACH transaction details
+- [KeyCorp Image Check API](https://apis.io/apis/keycorp/keycorp-imagecheck-api/) — List check images
+- [KeyCorp Initiate API](https://apis.io/apis/keycorp/keycorp-initiate-api/) — Send a payment.
+- [KeyCorp Participant API](https://apis.io/apis/keycorp/keycorp-participant-api/) — Look up a RTP participating banks.
+- [KeyCorp RTP API](https://apis.io/apis/keycorp/keycorp-rtp-api/) — RTP functions to list and retrieve real-time payment details
+- [KeyCorp Stop Payments API](https://apis.io/apis/keycorp/keycorp-stoppayments-api/) — Place new stop payments
+- [KeyCorp Undo ACH Payment Request API](https://apis.io/apis/keycorp/keycorp-undo-ach-payment-request-api/) — The Undo ACH Payment Request API from KeyCorp — 1 operation(s) for undo ach payment request.
+- [KeyCorp Validate API](https://apis.io/apis/keycorp/keycorp-validate-api/) — Perform validation checks for a payment transaction.
+- [KeyCorp Wire API](https://apis.io/apis/keycorp/keycorp-wire-api/) — Wire Inquiry functions to list wires and retrieve wire details
+- [KeyCorp Wire/RTP v1 API](https://apis.io/apis/keycorp/keycorp-wire-rtp-v1-api/) — The Wire/RTP v1 API from KeyCorp — 1 operation(s) for wire/rtp v1.
+- [KeyCorp Wire/RTP v2 API](https://apis.io/apis/keycorp/keycorp-wire-rtp-v2-api/) — The Wire/RTP v2 API from KeyCorp — 1 operation(s) for wire/rtp v2.
+- [KeyCorp Health Check API](https://apis.io/apis/keycorp/keycorp-health-check-api/) — The Health Check API from KeyCorp — 7 operation(s) for health check.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-21
-- **Modified:** 2026-04-28
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### AsyncAPI (1)
 
-### KeyBank Account Information API
+Event-driven and webhook contracts.
 
-Provides real-time account insights and transaction details for commercial KeyBank accounts.
+- [Keycorp Payment Alerts Webhooks](https://apis.io/asyncapis/keycorp/keycorp-payment-alerts-webhooks/)
 
-- **Human URL:** [https://developer.key.com/](https://developer.key.com/)
+#### MCP servers (1)
 
-#### Tags
+Model Context Protocol servers that expose the API to agents.
 
-- Account Information
-- Commercial Banking
+- [keycorp](https://apis.io/servers/keycorp/keycorp/)
 
-#### Properties
+#### Agentic access (1)
 
-- [Documentation](https://developer.key.com/)
-- [Postman Collection](collections/keycorp.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/keycorp.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Which operations an agent can call, which act, and which need a human in the loop.
 
-### KeyBank ACH Origination API
+- [Keycorp Agentic Access](https://apis.io/agentic-access/keycorp/keycorp-agentic-access/)
 
-Enables secure, automated ACH fund transfers from commercial KeyBank accounts.
+#### Collections (10)
 
-- **Human URL:** [https://developer.key.com/](https://developer.key.com/)
+Postman and Open Collection request collections.
 
-#### Tags
+- [KeyBank Commercial Banking APIs](https://apis.io/collections/keycorp/open-keycorp/)
+- [Account Validation v2 API](https://apis.io/collections/keycorp/open-keycorp-account-validation/)
+- [ACH Inquiry](https://apis.io/collections/keycorp/open-keycorp-ach-inquiry/)
+- [ACH Origination](https://apis.io/collections/keycorp/open-keycorp-ach-originations/)
+- [Check Services](https://apis.io/collections/keycorp/open-keycorp-check-services/)
+- [Commercial Accounts Reporting](https://apis.io/collections/keycorp/open-keycorp-commercial-accounts-reporting/)
+- [RTP Inquiry API](https://apis.io/collections/keycorp/open-keycorp-rtp-inquiry/)
+- [RTP and Wire Payments API](https://apis.io/collections/keycorp/open-keycorp-rtp-wire-payments/)
+- [Webhooks](https://apis.io/collections/keycorp/open-keycorp-webhooks/)
+- [Wire Inquiry](https://apis.io/collections/keycorp/open-keycorp-wire-inquiry/)
 
-- ACH
-- Payments
+#### Overlays (9)
 
-#### Properties
+OpenAPI overlays, including conversational phrasing for each operation.
 
-- [Documentation](https://developer.key.com/)
-- [Postman Collection](collections/keycorp.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/keycorp.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Keycorp Account Validation Overlay](https://apis.io/overlays/keycorp/keycorp-account-validation-overlay/)
+- [Keycorp Ach Inquiry Overlay](https://apis.io/overlays/keycorp/keycorp-ach-inquiry-overlay/)
+- [Keycorp Ach Originations Overlay](https://apis.io/overlays/keycorp/keycorp-ach-originations-overlay/)
+- [Keycorp Check Services Overlay](https://apis.io/overlays/keycorp/keycorp-check-services-overlay/)
+- [Keycorp Commercial Accounts Reporting Overlay](https://apis.io/overlays/keycorp/keycorp-commercial-accounts-reporting-overlay/)
+- [Keycorp Rtp Inquiry Overlay](https://apis.io/overlays/keycorp/keycorp-rtp-inquiry-overlay/)
+- [Keycorp Rtp Wire Payments Overlay](https://apis.io/overlays/keycorp/keycorp-rtp-wire-payments-overlay/)
+- [Keycorp Webhooks Overlay](https://apis.io/overlays/keycorp/keycorp-webhooks-overlay/)
+- [Keycorp Wire Inquiry Overlay](https://apis.io/overlays/keycorp/keycorp-wire-inquiry-overlay/)
 
-### KeyBank Wire Transfer API
+#### Security (2)
 
-Facilitates high-value wire transfer payments through KeyBank's commercial payments platform.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://developer.key.com/](https://developer.key.com/)
+- [Keycorp Authentication](https://apis.io/security/keycorp/keycorp-authentication/)
+- [Keycorp Domain Security](https://apis.io/security/keycorp/keycorp-domain-security/)
 
-#### Tags
+#### Plans and pricing (1)
 
-- Payments
-- Wire Transfer
+Published plans, tiers and prices.
 
-#### Properties
+- [Keycorp Plans Pricing](https://apis.io/plans/keycorp/keycorp-plans-pricing/)
 
-- [Documentation](https://developer.key.com/)
-- [Postman Collection](collections/keycorp.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/keycorp.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Rate limits (1)
 
-### KeyBank RTP Send Payment API
+Published request limits.
 
-Initiates instant payments over the Real-Time Payments network from commercial KeyBank accounts.
+- [Keycorp Rate Limits](https://apis.io/rate-limits/keycorp/keycorp-rate-limits/)
 
-- **Human URL:** [https://developer.key.com/](https://developer.key.com/)
+#### FinOps (1)
 
-#### Tags
+What the API costs to run, by operation.
 
-- Payments
-- Real-Time Payments
+- [Keycorp Finops](https://apis.io/finops/keycorp/keycorp-finops/)
 
-#### Properties
+## Where to find this API
 
-- [Documentation](https://developer.key.com/)
-- [Postman Collection](collections/keycorp.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/keycorp.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-### KeyBank Account Validation API
-
-Verifies account details and ownership before initiating commercial payments and transfers.
-
-- **Human URL:** [https://developer.key.com/](https://developer.key.com/)
-
-#### Tags
-
-- Account Validation
-- Payments
-
-#### Properties
-
-- [Documentation](https://developer.key.com/)
-- [Postman Collection](collections/keycorp.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/keycorp.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### KeyBank ACH Inquiry API
-
-Checks the status of ACH transactions originated through the KeyBank Developer Portal.
-
-- **Human URL:** [https://developer.key.com/](https://developer.key.com/)
-
-#### Tags
-
-- ACH
-- Inquiry
-
-#### Properties
-
-- [Documentation](https://developer.key.com/)
-- [Postman Collection](collections/keycorp.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/keycorp.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### KeyBank Wire Inquiry API
-
-Tracks the status and delivery of wire transfers initiated through KeyBank.
-
-- **Human URL:** [https://developer.key.com/](https://developer.key.com/)
-
-#### Tags
-
-- Inquiry
-- Wire Transfer
-
-#### Properties
-
-- [Documentation](https://developer.key.com/)
-- [Postman Collection](collections/keycorp.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/keycorp.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### KeyBank RTP Inquiry API
-
-Confirms delivery and status of Real-Time Payments sent through KeyBank.
-
-- **Human URL:** [https://developer.key.com/](https://developer.key.com/)
-
-#### Tags
-
-- Inquiry
-- Real-Time Payments
-
-#### Properties
-
-- [Documentation](https://developer.key.com/)
-- [Postman Collection](collections/keycorp.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/keycorp.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### KeyBank Previous Day API
-
-Reviews prior-day financial activity and reporting for commercial KeyBank accounts.
-
-- **Human URL:** [https://developer.key.com/](https://developer.key.com/)
-
-#### Tags
-
-- Account Information
-- Reporting
-
-#### Properties
-
-- [Documentation](https://developer.key.com/)
-- [Postman Collection](collections/keycorp.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/keycorp.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### KeyBank Intraday API
-
-Monitors same-day transaction updates and intraday activity across commercial KeyBank accounts.
-
-- **Human URL:** [https://developer.key.com/](https://developer.key.com/)
-
-#### Tags
-
-- Account Information
-- Reporting
-
-#### Properties
-
-- [Documentation](https://developer.key.com/)
-- [Postman Collection](collections/keycorp.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/keycorp.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### KeyBank Check Services API
-
-Manages check stops, retrieval, and related check services for commercial KeyBank accounts.
-
-- **Human URL:** [https://developer.key.com/](https://developer.key.com/)
-
-#### Tags
-
-- Check Services
-- Commercial Banking
-
-#### Properties
-
-- [Documentation](https://developer.key.com/)
-- [Postman Collection](collections/keycorp.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/keycorp.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### KeyBank Webhooks
-
-Delivers real-time payment event notifications to subscribed consumer applications.
-
-- **Human URL:** [https://developer.key.com/](https://developer.key.com/)
-
-#### Tags
-
-- Events
-- Webhooks
-
-#### Properties
-
-- [Documentation](https://developer.key.com/)
-- [Postman Collection](collections/keycorp.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/keycorp.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [LinkedIn](https://www.linkedin.com/company/keybank)
 - [Website](https://www.key.com/)
-- [Developer  Portal](https://developer.key.com/)
-- [Corporate  Website](https://www.keycorp.com/)
+- [Documentation](https://developer.key.com/docs/commercial/accounts)
+- [Getting started](https://developer.key.com/guides/getting-started)
+- [Support](https://developer.key.com/support)
+- [Terms of service](https://developer.key.com/tos)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 40.5** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 78.6 |
+| Contract quality | 62.9 |
+| Contract governance | 4.5 |
+| Operational transparency | 13.2 |
+| Developer ergonomics | 47.0 |
+| Access clarity | 28.9 |
+
+**Agent readiness 35.0** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | verified |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | derived (partial credit) |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | — |
+
+**Regulatory alignment 21.3** — Banking & Open Finance
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/keycorp/](https://apis.io/providers/keycorp/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for KeyCorp: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/keycorp/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
